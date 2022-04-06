@@ -26,7 +26,7 @@ public class CsdlQLQVT {
     private Connection conn = FrmMain.conn;
 
     public ResultSet selectAllQuetVanTay(Frame f) {
-        String sql = "SELECT *FROM V_KHACHQUETVANTAY oder by STT DESC";
+        String sql = "SELECT *FROM V_KHACHQUETVANTAY order by STT DESC";
         ResultSet rs = null;
         try {
             PreparedStatement pst = conn.prepareStatement(sql);

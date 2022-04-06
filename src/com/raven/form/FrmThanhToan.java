@@ -432,12 +432,7 @@ public class FrmThanhToan extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Phiếu Đăng Kí Đã Hết Hạn Không Thể Thanh Toán");
             return;
         }
-//        if (soThangConNo == 0) {
-//            JOptionPane.showMessageDialog(this, "Khách Đã Thanh Toán Xong");
-//            txtGhiChu.setEditable(false);
-//            btnThanhToan.setEnabled(false);
-//            return;
-//        }
+
 
         Vector vec = new Vector();
         vec.add(csdlTT.getMaPTT());
@@ -451,7 +446,7 @@ public class FrmThanhToan extends javax.swing.JFrame {
         if (csdlTT.insertPTT(vec)) {
             JOptionPane.showMessageDialog(this, "Thanh Toán thành công !");
             getThongTinThanhToan();
-            //DungChung.fillTable(com.raven.form.Form2.dtblPDK, DKDV.csdlDKDV.selectAllPDK());
+            DungChung.fillTable(com.raven.form.Form2.dtblPDK, DKDV.csdlDKDV.selectAllPDK());
             DungChung.fillTable(dtblPTT, csdlTT.selectAllPTT(maPDK));
         }
        

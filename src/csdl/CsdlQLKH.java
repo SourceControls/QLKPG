@@ -155,9 +155,14 @@ public class CsdlQLKH {
         try {
             PreparedStatement sql = conn.prepareStatement(insertKhachHang);
             for (int i = 1; i <= 10; i++) {
+               
                 sql.setObject(i, vec.get(i - 1));
-                System.out.println(vec.get(i-1));
+
             }
+            if(vec.get(5).toString().isEmpty())
+                     sql.setNull(6, java.sql.Types.NVARCHAR);
+            if(vec.get(4).toString().isEmpty())
+                    sql.setNull(5, java.sql.Types.DATE);
             return sql.executeUpdate() > 0;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(f, ex.getMessage());

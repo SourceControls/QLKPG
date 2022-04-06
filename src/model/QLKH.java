@@ -136,10 +136,7 @@ public class QLKH {
             JOptionPane.showMessageDialog(f, "Email không đúng định dạng");
             return false;
         }
-        if (!DungChung.checkDateFormat(txtNgaySinh.getText())) {
-            JOptionPane.showMessageDialog(f, "Ngày Sinh Không Đúng Định Dạng(YYYY/MM/DD)");
-            return false;
-        }
+
         return true;
     }
 
@@ -303,7 +300,6 @@ public class QLKH {
 
     public void btnThemMoiKhachClicked() {
         txtMaKhachHang.setText(getAutoMaKH());
-        txtHangKhachHang.setText("THƯỜNG");
         unlockPanelBtnLuu();
         Form1.themMoi = true;
     }

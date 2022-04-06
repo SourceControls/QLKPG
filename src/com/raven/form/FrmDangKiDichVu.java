@@ -600,6 +600,11 @@ public class FrmDangKiDichVu extends javax.swing.JFrame {
         String ghiChu = jGhichu.getText();
         String thue = txtThue.getValue().toString();
         String maPDK = csdlDK.maPDKtuTang();
+        if(Integer.parseInt(txtSoNgaySuDung.getText()) < 30 && !rbtnDaThanhToan.isSelected()) //dưới 30 ngày bắt buộc thanh toán luôn
+        {
+            JOptionPane.showMessageDialog(f, "Phiếu đăng kí dưới 30 ngày phải được thanh toán trước");
+            return;
+        }
         if (csdlDK.insertPDK(maPDK, ngayDK, tongTien, ghiChu, maKH, FrmMain.maNV, maDV, thue));
         {
             if (rbtnDaThanhToan.isSelected()) {

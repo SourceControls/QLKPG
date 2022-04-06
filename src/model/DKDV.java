@@ -84,35 +84,6 @@ public class DKDV {
         return null;
     }
 
-//    public void txtTimKiemValueChanged() {
-//        if (tblDSKH.getSelectedRow() >= 0) {
-//            try {
-//                Statement st = conn.createStatement();
-//                ResultSet rs = st.executeQuery("select * from khachhang where makh='" + tblDSKH.getValueAt(tblDSKH.getSelectedRow(), 0).toString() + "'");
-//                rs.next();
-//                File l = new File(rs.getString(10));
-//                lbHinhAnhKhach.setIcon(new ImageIcon(l.getAbsolutePath()));
-//
-//                txtMaKhachHang.setText(rs.getString(1));
-//                txtHoTen.setText(rs.getString(2));
-//                txtCMND.setText(rs.getString(3));
-//                txtEmail.setText(rs.getString(7));
-//                txtSDT.setText(rs.getString(6));
-//                txtDiaChi.setText(rs.getString(8));
-//                txtHangKhachHang.setText(rs.getString(9));
-//
-//                if (rs.getString(4).equals("NAM")) {
-//                    rbtnNam.setSelected(true);
-//                } else {
-//                    rbtnNu.setSelected(true);
-//                }
-//                txtNgaySinh.setText(rs.getString(5));
-//
-//            } catch (SQLException ex) {
-//                JOptionPane.showMessageDialog(f, ex.getMessage());
-//            }
-//        }
-//    }
 
     public void dumpDataFromTblPDKToFields() {
         int row = tblPDK.getSelectedRow();
