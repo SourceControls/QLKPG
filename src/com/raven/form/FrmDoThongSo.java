@@ -5,6 +5,7 @@
  */
 package com.raven.form;
 
+import com.raven.chart.ModelChart;
 import csdl.CsdlDTS;
 import java.awt.BorderLayout;
 import java.sql.Connection;
@@ -23,6 +24,7 @@ import java.util.Date;
 import static com.raven.form.FrmDoThongSo.dtblThongSo;
 import java.util.Vector;
 import static com.raven.form.FrmDoThongSo.dtblThongSo;
+import java.awt.Color;
 
 /**
  *
@@ -55,18 +57,35 @@ public class FrmDoThongSo extends javax.swing.JFrame {
         lbSDT.setText(SDT);
 
         DungChung.readImg(this, lbHinhAnhKhach, imgURL);
-        dtblThongSo = (DefaultTableModel) tblThongSo.getModel();
+        //dtblThongSo = (DefaultTableModel) tblThongSo.getModel();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setVisible(true);
         ResultSet rs = csdlDTS.selectAllThongSo(this, maKH);
-        try {
-            while (rs.next()) {
-                dtblThongSo.addRow(new Object[]{rs.getObject(2), rs.getObject(3), rs.getObject(4), rs.getObject(5), rs.getObject(6)});
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
+//        try {
+//            while (rs.next()) {
+//                dtblThongSo.addRow(new Object[]{rs.getObject(2), rs.getObject(3), rs.getObject(4), rs.getObject(5), rs.getObject(6)});
+//            }
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(this, ex.getMessage());
+//        }
+        lineChart.addLegend("Income", new Color(12, 84, 175), new Color(0, 108, 247));
+        lineChart.addLegend("Expense", new Color(54, 4, 143), new Color(104, 49, 200));
+        lineChart.addLegend("Profit", new Color(5, 125, 0), new Color(95, 209, 69));
+        lineChart.addLegend("Cost", new Color(186, 37, 37), new Color(241, 100, 120));
 
+        lineChart.addData(new ModelChart("January", new double[]{500, 200, 80, 89}));
+        lineChart.addData(new ModelChart("February", new double[]{600, 750, 90, 150}));
+        lineChart.addData(new ModelChart("March", new double[]{200, 350, 460, 900}));
+        lineChart.addData(new ModelChart("April", new double[]{480, 150, 750, 700}));
+        lineChart.addData(new ModelChart("May", new double[]{350, 540, 300, 150}));
+        lineChart.addData(new ModelChart("June", new double[]{190, 280, 81, 200}));
+        lineChart.addData(new ModelChart("June", new double[]{110, 220, 81, 260}));
+        lineChart.addData(new ModelChart("March", new double[]{200, 350, 460, 900}));
+        lineChart.addData(new ModelChart("April", new double[]{480, 150, 750, 700}));
+        lineChart.addData(new ModelChart("May", new double[]{350, 540, 300, 150}));
+        lineChart.addData(new ModelChart("June", new double[]{190, 280, 81, 200}));
+        lineChart.addData(new ModelChart("June", new double[]{110, 220, 81, 260}));
+        lineChart.start();
     }
 
     /**
@@ -78,9 +97,6 @@ public class FrmDoThongSo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        scrollBar1 = new com.raven.swing.ScrollBar();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblThongSo = new com.raven.swing.TableColumn();
         panelRound1 = new com.raven.swing.PanelRound();
         txtTiLeNuoc = new com.raven.swing.TextFieldRound();
         jLabel1 = new javax.swing.JLabel();
@@ -104,34 +120,11 @@ public class FrmDoThongSo extends javax.swing.JFrame {
         btnInLichSu = new com.raven.swing.KButton();
         jButton1 = new com.raven.swing.KButton();
         jLabel12 = new javax.swing.JLabel();
+        panelRound2 = new com.raven.swing.PanelRound();
+        lineChart = new com.raven.chart.LineChart();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-
-        scrollBar1.setBackground(new java.awt.Color(245, 245, 245));
-
-        jScrollPane1.setBackground(new java.awt.Color(245, 245, 245));
-        jScrollPane1.setBorder(null);
-
-        tblThongSo.setBackground(new java.awt.Color(255, 255, 255));
-        tblThongSo.setForeground(new java.awt.Color(255, 255, 255));
-        tblThongSo.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Ngày đo", "Chiều cao", "Cân nặng", "Tỉ lệ mỡ", "Tỉ lệ nước"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, true, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tblThongSo);
 
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -271,7 +264,7 @@ public class FrmDoThongSo extends javax.swing.JFrame {
                         .addComponent(jLabel12)))
                 .addGap(122, 122, 122)
                 .addComponent(lbHinhAnhKhach, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,6 +327,25 @@ public class FrmDoThongSo extends javax.swing.JFrame {
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
+        panelRound2.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
+        panelRound2.setLayout(panelRound2Layout);
+        panelRound2Layout.setHorizontalGroup(
+            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lineChart, javax.swing.GroupLayout.PREFERRED_SIZE, 1194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelRound2Layout.setVerticalGroup(
+            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lineChart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -341,24 +353,17 @@ public class FrmDoThongSo extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(scrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(panelRound1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(scrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -369,11 +374,11 @@ public class FrmDoThongSo extends javax.swing.JFrame {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.0");
            txtNgayDo.setText(formatter.format(new Date()));
            btnLuu.setEnabled(true);
-           if (dtblThongSo.getRowCount() == 0) {
-               doLanDau();
-           } else {
+//           if (dtblThongSo.getRowCount() == 0) {
+//               doLanDau();
+//           } else {
                doLanTiepTheo();
-           }        
+           //}        
     }//GEN-LAST:event_btnBatDauDoActionPerformed
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
@@ -407,15 +412,17 @@ public class FrmDoThongSo extends javax.swing.JFrame {
     }
 
     public void doLanTiepTheo() {
-        double ChieuCao = Double.parseDouble(tblThongSo.getValueAt(tblThongSo.getRowCount() - 1, 1).toString());
-        double canNang = Double.parseDouble(tblThongSo.getValueAt(tblThongSo.getRowCount() - 1, 2).toString());
-        double tiLeMo = Double.parseDouble(tblThongSo.getValueAt(tblThongSo.getRowCount() - 1, 3).toString());
-        double tiLeNuoc = Double.parseDouble(tblThongSo.getValueAt(tblThongSo.getRowCount() - 1, 4).toString());
-
-        txtCanNang.setText(getRand(canNang - canNang * 0.02, canNang + canNang * 0.05));
-        txtTiLeMo.setText(getRand(tiLeMo - tiLeMo * 0.03, tiLeMo));
-        txtTiLeNuoc.setText(getRand(tiLeNuoc - tiLeNuoc * 0.02, tiLeNuoc + tiLeNuoc * 0.03));
-        txtChieuCao.setText(getRand(ChieuCao - ChieuCao * 0.005, ChieuCao + ChieuCao * 0.005));
+//        double ChieuCao = Double.parseDouble(tblThongSo.getValueAt(tblThongSo.getRowCount() - 1, 1).toString());
+//        double canNang = Double.parseDouble(tblThongSo.getValueAt(tblThongSo.getRowCount() - 1, 2).toString());
+//        double tiLeMo = Double.parseDouble(tblThongSo.getValueAt(tblThongSo.getRowCount() - 1, 3).toString());
+//        double tiLeNuoc = Double.parseDouble(tblThongSo.getValueAt(tblThongSo.getRowCount() - 1, 4).toString());
+//
+//        txtCanNang.setText(getRand(canNang - canNang * 0.02, canNang + canNang * 0.05));
+//        txtTiLeMo.setText(getRand(tiLeMo - tiLeMo * 0.03, tiLeMo));
+//        txtTiLeNuoc.setText(getRand(tiLeNuoc - tiLeNuoc * 0.02, tiLeNuoc + tiLeNuoc * 0.03));
+//        txtChieuCao.setText(getRand(ChieuCao - ChieuCao * 0.005, ChieuCao + ChieuCao * 0.005));
+        
+        System.out.println("aấ");
     }
 
     public String getRand(int max, int min) {
@@ -477,14 +484,13 @@ public class FrmDoThongSo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbHinhAnhKhach;
     private javax.swing.JLabel lbHoTen;
     private javax.swing.JLabel lbMaKhachHang;
     private javax.swing.JLabel lbSDT;
+    private com.raven.chart.LineChart lineChart;
     private com.raven.swing.PanelRound panelRound1;
-    private com.raven.swing.ScrollBar scrollBar1;
-    private com.raven.swing.TableColumn tblThongSo;
+    private com.raven.swing.PanelRound panelRound2;
     private com.raven.swing.TextFieldRound txtCanNang;
     private com.raven.swing.TextFieldRound txtChieuCao;
     private com.raven.swing.TextFieldRound txtNgayDo;

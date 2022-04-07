@@ -20,7 +20,9 @@ import java.awt.event.MouseEvent;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 /**
  *
@@ -49,10 +51,11 @@ public class KButton extends JButton {
     public int kIndicatorThickness = 2;
     public Color kIndicatorColor = Color.white;
     public boolean kAllowTab = false;
-    public boolean isOn = true;
     public Color kEnableFalseColor =new Color(189, 195, 199);
+    ImageIcon img=null;
     public boolean iskAllowTab() {
         return kAllowTab;
+        
     }
 
     public void setkAllowTab(boolean kAllowTab) {
@@ -204,7 +207,14 @@ public class KButton extends JButton {
     public void setkEnableFalseColor(Color enableFalseColor) {
         this.kEnableFalseColor = enableFalseColor;
     }
+    public ImageIcon getImg() {
+        return img;
+    }
 
+    public void setImg(ImageIcon img) {
+        this.img = img;
+        setIcon(img);
+    }
     public KButton() {
         
         setFont(new Font("sansserif", 1, 12));
@@ -244,13 +254,10 @@ public class KButton extends JButton {
         addMouseListener(mouseAdapter);
     }
 
-    public void setIsOn(boolean isOn) {
-        this.isOn = isOn;
-    }
+  
 
-    public boolean isIsOn() {
-        return isOn;
-    }
+    
+
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -259,9 +266,7 @@ public class KButton extends JButton {
         super.setContentAreaFilled(false);
         
         Graphics2D g2 = (Graphics2D) g.create();
-        if(!isOn) {
-            return;
-        }
+        
         g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
@@ -330,7 +335,13 @@ public class KButton extends JButton {
         // The drawString(string) must be put after the setPaint(gradient)
         g2.setPaint(Color.BLACK);
         
-        centerString(g, new Rectangle(getWidth(), getHeight()), getText(), getFont());
+//        if(img!=null){
+//            JLabel lb= new JLabel();
+//            lb.setSize((int)(0.7*getHeight()),(int)(0.7*getHeight()));
+//            lb.setIcon(img);
+//            
+//        }else
+        centerString(g, new Rectangle(getWidth(), getHeight()), getText(), getFont(),false);
 
         // draw account
 //        try {
@@ -344,7 +355,7 @@ public class KButton extends JButton {
     }
 
     public void centerString(Graphics g, Rectangle r, String s,
-            Font font) {
+            Font font,boolean hasImg) {
         FontRenderContext frc
                 = new FontRenderContext(null, true, true);
 
@@ -358,7 +369,10 @@ public class KButton extends JButton {
         int b = (r.height / 2) - (rHeight / 2) - rY;
 
         g.setFont(font);
-        g.drawString(s, r.x + a, r.y + b);
+        if(!hasImg)
+            g.drawString(s, r.x + a, r.y + b);
+        else 
+            g.drawString(s, r.x + a, r.y + b);
     }
 
     public void drawIcons(Graphics g, Rectangle r) {

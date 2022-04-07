@@ -11,6 +11,7 @@ import model.DKDV;
 import model.QLKH;
 import model.QLQVT;
 import com.raven.form.*;
+import javax.swing.ImageIcon;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import model.DungChung;
@@ -46,10 +47,10 @@ public class Form1 extends javax.swing.JPanel {
     //dùng để đăng nhập
 
     public Form1() {
+        
         initComponents();
         setOpaque(false);
         init();
-
     }
 
     private void init() {
@@ -584,7 +585,7 @@ public class Form1 extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(272, Short.MAX_VALUE))
+                .addContainerGap(261, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
