@@ -52,12 +52,13 @@ public class CsdlDTS {
 
     }
 
-     public ResultSet getBMI(Frame f,String maKH){
-        String selectALLThongSo = "EXEC SP_LAY_BMI_CUA_KH ?";
+     public ResultSet getBMI(Frame f,String maKH, String nam){
+        String selectALLThongSo = "EXEC SP_LAY_BMI_CUA_KH_GROUP_BY_THANG ?,?";
 
         try {
             PreparedStatement sql = conn.prepareStatement(selectALLThongSo);
             sql.setObject(1, maKH);
+            sql.setObject(2, nam);
             ResultSet rs = sql.executeQuery();
             return rs;
         } catch (SQLException ex) {
