@@ -52,4 +52,18 @@ public class CsdlDTS {
 
     }
 
+     public ResultSet getBMI(Frame f,String maKH){
+        String selectALLThongSo = "EXEC SP_LAY_BMI_CUA_KH ?";
+
+        try {
+            PreparedStatement sql = conn.prepareStatement(selectALLThongSo);
+            sql.setObject(1, maKH);
+            ResultSet rs = sql.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(f, ex.getMessage());
+        }
+        return null;         
+     }
+          
 }
