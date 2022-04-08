@@ -65,5 +65,20 @@ public class CsdlDTS {
         }
         return null;         
      }
+          public ResultSet getBMI(Frame f,String maKH,int thang, int nam){
+        String selectALLThongSo = "EXEC SP_LAY_BMI_CUA_KH_GROUP_BY_TUAN ?,?,?";
+
+        try {
+            PreparedStatement sql = conn.prepareStatement(selectALLThongSo);
+            sql.setObject(1, maKH);
+            sql.setObject(2, thang);
+            sql.setObject(3, nam);
+            ResultSet rs = sql.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(f, ex.getMessage());
+        }
+        return null;         
+     }
           
 }
