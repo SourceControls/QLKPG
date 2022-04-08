@@ -2,3 +2,18 @@
 *.ini
 *.class
 
+build/classes/com/raven/chart/blankchart/BlankPlotChart$1.class
+build/classes/com/raven/chart/blankchart/BlankPlotChart$1.class
+build/classes/com/raven/chart/Chart$2.class
+build/classes/com/raven/chart/GaugeChart$1.class
+build/classes/com/raven/chart/GaugeChart.class
+build/classes/com/raven/chart/LineChart.class
+*.class
+build/classes/com/raven/chart/Chart$2.class
+build/classes/com/raven/chart/GaugeChart$1.class
+build/classes/com/raven/chart/GaugeChart.class
+build/classes/com/raven/chart/LineChart$1.class
+build/classes/com/raven/chart/LineChart$2.class
+build/classes/com/raven/chart/LineChart.class
+build/classes/com/raven/form/FrmDoThongSo$6.class
+build/classes/view/FrmDoThongSo.class
