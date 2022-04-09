@@ -21,6 +21,7 @@ public class NiceScale {
         tickSpacing = niceNum(range / (maxTicks - 1), true);
         niceMin = Math.floor(min / tickSpacing) * tickSpacing;
         niceMax = Math.ceil(max / tickSpacing) * tickSpacing;
+       // System.out.println(niceMin+ " "+niceMax);
     }
 
     private double niceNum(final double RANGE, final boolean ROUND) {
