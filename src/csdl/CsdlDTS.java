@@ -36,7 +36,7 @@ public class CsdlDTS {
         }
         return null;
     }
-          public boolean insertThongSo(Frame f, Vector vec) {
+    public boolean insertThongSo(Frame f, Vector vec) {
         String insertThongSo = "INSERT INTO DOTHONGSOCOTHE VALUES(?,?,?,?,?,?)";
 
         try {
@@ -47,6 +47,20 @@ public class CsdlDTS {
             return sql.executeUpdate() > 0;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(f, "Lưu thất bại! " + ex.getMessage());
+        }
+        return false;
+
+    }
+    public boolean dolaiThongso(Frame f, String makh,String ngay) {
+        String insertThongSo = "delete DOTHONGSOCOTHE where makh=? and ngay=?";
+        try {
+            PreparedStatement sql = conn.prepareStatement(insertThongSo);
+            sql.setObject(1, makh);
+            sql.setObject(2, ngay);
+
+            return sql.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(f, "xóa kết quả trước thất bại !\n " + ex.getMessage());
         }
         return false;
 

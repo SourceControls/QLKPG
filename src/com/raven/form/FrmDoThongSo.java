@@ -25,6 +25,10 @@ import static com.raven.form.FrmDoThongSo.dtblThongSo;
 import java.util.Vector;
 import static com.raven.form.FrmDoThongSo.dtblThongSo;
 import java.awt.Color;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -55,39 +59,46 @@ public class FrmDoThongSo extends javax.swing.JFrame {
         lbMaKhachHang.setText(maKH);
         lbHoTen.setText(hoTen);
         lbSDT.setText(SDT);
+        
 
         DungChung.readImg(this, lbHinhAnhKhach, imgURL);
-        //dtblThongSo = (DefaultTableModel) tblThongSo.getModel();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setVisible(true);
-        ResultSet rs = csdlDTS.selectAllThongSo(this, maKH);
-//        try {
-//            while (rs.next()) {
-//                dtblThongSo.addRow(new Object[]{rs.getObject(2), rs.getObject(3), rs.getObject(4), rs.getObject(5), rs.getObject(6)});
-//            }
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(this, ex.getMessage());
-//        }
-        lineChart.addLegend("Income", new Color(12, 84, 175), new Color(0, 108, 247));
-        lineChart.addLegend("Expense", new Color(54, 4, 143), new Color(104, 49, 200));
-        lineChart.addLegend("Profit", new Color(5, 125, 0), new Color(95, 209, 69));
-        lineChart.addLegend("Cost", new Color(186, 37, 37), new Color(241, 100, 120));
+        
 
-        lineChart.addData(new ModelChart("January", new double[]{500, 200, 80, 89}));
-        lineChart.addData(new ModelChart("February", new double[]{600, 750, 90, 150}));
-        lineChart.addData(new ModelChart("March", new double[]{200, 350, 460, 900}));
-        lineChart.addData(new ModelChart("April", new double[]{480, 150, 750, 700}));
-        lineChart.addData(new ModelChart("May", new double[]{350, 540, 300, 150}));
-        lineChart.addData(new ModelChart("June", new double[]{190, 280, 81, 200}));
-        lineChart.addData(new ModelChart("June", new double[]{110, 220, 81, 260}));
-        lineChart.addData(new ModelChart("March", new double[]{200, 350, 460, 900}));
-        lineChart.addData(new ModelChart("April", new double[]{480, 150, 750, 700}));
-        lineChart.addData(new ModelChart("May", new double[]{350, 540, 300, 150}));
-        lineChart.addData(new ModelChart("June", new double[]{190, 280, 81, 200}));
-        lineChart.addData(new ModelChart("June", new double[]{110, 220, 81, 260}));
-        lineChart.start();
+        lineChart.addLegend("BMI", new Color(12, 84, 175), new Color(0, 108, 247));
+        startLineChart("tháng");
+           
+        
     }
-
+    public void startLineChart(String mode){
+        if(mode.equals("năm")){
+            ResultSet rs = csdlDTS.getBMI(this, maKH);
+            lineChart.clear();
+            try {
+                while(rs.next()){
+                    Double chiso= Double.parseDouble(rs.getString(2));
+                    lineChart.addData(new ModelChart("Tháng "+rs.getString(1), new double[]{chiso}));
+                }
+                lineChart.start();
+            } catch (SQLException ex) {
+                Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            ResultSet rs = csdlDTS.getBMI(this, maKH);
+            lineChart.clear();
+            try {
+                while(rs.next()){
+                    Double chiso= Double.parseDouble(rs.getString(2));
+                    lineChart.addData(new ModelChart("Tháng "+rs.getString(1), new double[]{chiso}));
+                }
+                lineChart.start();
+            } catch (SQLException ex) {
+                Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -184,6 +195,7 @@ public class FrmDoThongSo extends javax.swing.JFrame {
         });
 
         btnLuu.setText("Lưu");
+        btnLuu.setEnabled(false);
         btnLuu.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -264,7 +276,7 @@ public class FrmDoThongSo extends javax.swing.JFrame {
                         .addComponent(jLabel12)))
                 .addGap(122, 122, 122)
                 .addComponent(lbHinhAnhKhach, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(295, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -333,17 +345,11 @@ public class FrmDoThongSo extends javax.swing.JFrame {
         panelRound2.setLayout(panelRound2Layout);
         panelRound2Layout.setHorizontalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lineChart, javax.swing.GroupLayout.PREFERRED_SIZE, 1194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(lineChart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panelRound2Layout.setVerticalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lineChart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(lineChart, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -371,14 +377,38 @@ public class FrmDoThongSo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBatDauDoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatDauDoActionPerformed
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.0");
-           txtNgayDo.setText(formatter.format(new Date()));
-           btnLuu.setEnabled(true);
-//           if (dtblThongSo.getRowCount() == 0) {
-//               doLanDau();
-//           } else {
-               doLanTiepTheo();
-           //}        
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
+        LocalDateTime now = LocalDateTime.now();  
+        
+        txtNgayDo.setText(formatter.format(new Date()));
+        btnLuu.setEnabled(true);
+        ResultSet rs = csdlDTS.selectAllThongSo(this, maKH);
+        try {
+            while(rs.next()){
+                if(rs.getString(2).equals(dtf.format(now).toString())){
+                    if(JOptionPane.showConfirmDialog(this, "Hôm nay đã đo 1 lần,ấn yes để đo lại ")==JOptionPane.YES_OPTION){
+                        csdlDTS.dolaiThongso(this,maKH,dtf.format(now));
+                        startLineChart("tháng");
+                    }else {
+                        //btnBatDauDo.setEnabled(false);
+                        btnLuu.setEnabled(false);
+                        return;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        rs = csdlDTS.selectAllThongSo(this, maKH);
+        try {
+            if(rs.next()){ 
+                doLanTiepTheo(rs);
+            }else doLanDau();
+            btnLuu.setEnabled(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
+        }     
     }//GEN-LAST:event_btnBatDauDoActionPerformed
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
@@ -390,8 +420,10 @@ public class FrmDoThongSo extends javax.swing.JFrame {
         vec.add(txtTiLeMo.getText());
         vec.add(txtTiLeNuoc.getText());
         if (csdlDTS.insertThongSo(this, vec)) {
+            JOptionPane.showMessageDialog(this, "Lưu thành công !");
+            btnLuu.setEnabled(false);
             vec.remove(0);
-            dtblThongSo.addRow(vec);
+            startLineChart("tháng");
         }
     }//GEN-LAST:event_btnLuuActionPerformed
 
@@ -402,27 +434,38 @@ public class FrmDoThongSo extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.setVisible(false);        //f.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-    public void doLanDau() {
 
+    private void cbHangKHItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbHangKHItemStateChanged
+       
+    }//GEN-LAST:event_cbHangKHItemStateChanged
+    public void doLanDau() {
         txtCanNang.setText(getRand(40, 100));
         txtTiLeMo.setText(getRand(10, 50));
         txtTiLeNuoc.setText(getRand(50, 80));
         txtChieuCao.setText(getRand(140, 200));
-
     }
 
-    public void doLanTiepTheo() {
-//        double ChieuCao = Double.parseDouble(tblThongSo.getValueAt(tblThongSo.getRowCount() - 1, 1).toString());
-//        double canNang = Double.parseDouble(tblThongSo.getValueAt(tblThongSo.getRowCount() - 1, 2).toString());
-//        double tiLeMo = Double.parseDouble(tblThongSo.getValueAt(tblThongSo.getRowCount() - 1, 3).toString());
-//        double tiLeNuoc = Double.parseDouble(tblThongSo.getValueAt(tblThongSo.getRowCount() - 1, 4).toString());
-//
-//        txtCanNang.setText(getRand(canNang - canNang * 0.02, canNang + canNang * 0.05));
-//        txtTiLeMo.setText(getRand(tiLeMo - tiLeMo * 0.03, tiLeMo));
-//        txtTiLeNuoc.setText(getRand(tiLeNuoc - tiLeNuoc * 0.02, tiLeNuoc + tiLeNuoc * 0.03));
-//        txtChieuCao.setText(getRand(ChieuCao - ChieuCao * 0.005, ChieuCao + ChieuCao * 0.005));
+    public void doLanTiepTheo(ResultSet rs) {
         
-        System.out.println("aấ");
+        double ChieuCao=0;
+        double canNang=0;
+        double tiLeMo=0;
+        double tiLeNuoc=0;
+        try {
+            while(rs.next()){
+                ChieuCao = Double.parseDouble(rs.getString(3));
+                canNang = Double.parseDouble(rs.getString(4));
+                tiLeMo = Double.parseDouble(rs.getString(5));
+                tiLeNuoc = Double.parseDouble(rs.getString(6));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        txtCanNang.setText(getRand(canNang - canNang * 0.02, canNang + canNang * 0.05));
+        txtTiLeMo.setText(getRand(tiLeMo - tiLeMo * 0.03, tiLeMo));
+        txtTiLeNuoc.setText(getRand(tiLeNuoc - tiLeNuoc * 0.02, tiLeNuoc + tiLeNuoc * 0.03));
+        txtChieuCao.setText(getRand(ChieuCao - ChieuCao * 0.005, ChieuCao + ChieuCao * 0.005));
     }
 
     public String getRand(int max, int min) {
@@ -474,6 +517,7 @@ public class FrmDoThongSo extends javax.swing.JFrame {
     private com.raven.swing.KButton btnBatDauDo;
     private com.raven.swing.KButton btnInLichSu;
     private com.raven.swing.KButton btnLuu;
+    private com.raven.swing.ComboBoxSuggestion cbHangKH;
     private com.raven.swing.KButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
