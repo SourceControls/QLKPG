@@ -72,9 +72,9 @@ public class LineChart extends javax.swing.JPanel {
                 for (int i = 0; i < legends.size(); i++) {
                     double seriesValues = chart.getSeriesValuesOf(model.get(index).getValues()[i], size.getHeight()) * animate;
                     if (index == 0) {
-                        gra.get(i).moveTo(size.getX() + x + ss, size.getY() + size.getHeight() - seriesValues);
+                        gra.get(i).moveTo(size.getX() + x + ss, size.getY() + size.getHeight()- seriesValues+675);
                     } else {
-                        gra.get(i).lineTo(size.getX() + x + ss, size.getY() + size.getHeight() - seriesValues);
+                        gra.get(i).lineTo(size.getX() + x + ss, size.getY() + size.getHeight() - seriesValues+675);
                     }
                     x += seriesSpace + seriesSize;
                 }
@@ -84,10 +84,10 @@ public class LineChart extends javax.swing.JPanel {
                     int space = 3;
                     int spaceTop = 0;
                     g2.setColor(new Color(30, 30, 30));
-                    g2.fillRoundRect(labelLocation.x - s.width / 2 - 3, labelLocation.y - s.height - space * 2 - spaceTop, s.width + space * 2, s.height + space * 2, 10, 10);
+                    g2.fillRoundRect(labelLocation.x - s.width / 2 - 3, labelLocation.y - s.height - space * 2 - spaceTop+678, s.width + space * 2, s.height + space * 2, 10, 10);
                     g2.setColor(new Color(200, 200, 200));
                     g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
-                    g2.drawString(showLabel, labelLocation.x - s.width / 2, labelLocation.y - spaceTop - space * 2);
+                    g2.drawString(showLabel, labelLocation.x - s.width / 2, labelLocation.y - spaceTop - space * 2+678);
                 }
                 g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
             }

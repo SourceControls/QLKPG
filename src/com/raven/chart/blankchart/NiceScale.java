@@ -11,17 +11,16 @@ public class NiceScale {
     private double niceMax;
 
     public NiceScale(final double MIN, final double MAX) {
-        min = MIN;
+        min =MIN;
         max = MAX;
         calculate();
     }
 
     private void calculate() {
         range = niceNum(max - min, false);
-        tickSpacing = niceNum(range / (maxTicks - 1), true);
+        tickSpacing = niceNum(range / (maxTicks - 1), true);//0.5
         niceMin = Math.floor(min / tickSpacing) * tickSpacing;
         niceMax = Math.ceil(max / tickSpacing) * tickSpacing;
-       // System.out.println(niceMin+ " "+niceMax);
     }
 
     private double niceNum(final double RANGE, final boolean ROUND) {

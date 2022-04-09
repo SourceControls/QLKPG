@@ -17,7 +17,15 @@ import javax.swing.JComponent;
 import javax.swing.border.EmptyBorder;
 
 public class BlankPlotChart extends JComponent {
-
+    public double minY=15;
+    public double maxY=20;
+    private final DecimalFormat format = new DecimalFormat("#,##0.##");
+    private NiceScale niceScale;
+    private double maxValues;
+    private double minValues;
+    private int labelCount;
+    private String valuesFormat = "#,##0.##";
+    private BlankPlotChatRender blankPlotChatRender;
     public BlankPlotChatRender getBlankPlotChatRender() {
         return blankPlotChatRender;
     }
@@ -57,13 +65,6 @@ public class BlankPlotChart extends JComponent {
         format.applyPattern(valuesFormat);
     }
 
-    private final DecimalFormat format = new DecimalFormat("#,##0.##");
-    private NiceScale niceScale;
-    private double maxValues;
-    private double minValues;
-    private int labelCount;
-    private String valuesFormat = "#,##0.##";
-    private BlankPlotChatRender blankPlotChatRender;
 
     public BlankPlotChart() {
         setBackground(Color.WHITE);
@@ -74,7 +75,7 @@ public class BlankPlotChart extends JComponent {
     }
 
     private void init() {
-        initValues(0, 10);
+        initValues(minY, maxY);
         addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseMoved(MouseEvent me) {
@@ -173,9 +174,10 @@ public class BlankPlotChart extends JComponent {
             double height = getHeight() - insets.top - insets.bottom - textHeight;
             double space = width / labelCount;
             double locationX = insets.left + textWidth + spaceText;
-            for (int i = 0; i < labelCount; i++) {
-                blankPlotChatRender.renderSeries(this, g2, getRectangle(i, height, space, locationX, insets.top), i);
-            }
+            
+//            for (int i = 0; i < labelCount; i++) {
+//                blankPlotChatRender.renderSeries(this, g2, getRectangle(i, height, space, locationX, insets.top), i);
+//            }
             List<Path2D.Double> gra = initGra(blankPlotChatRender.getMaxLegend());
             for (int i = 0; i < labelCount; i++) {
                 blankPlotChatRender.renderSeries(this, g2, getRectangle(i, height, space, locationX, insets.top), i, gra);
@@ -247,9 +249,10 @@ public class BlankPlotChart extends JComponent {
     }
 
     public double getSeriesValuesOf(double values, double height) {
-        double max = niceScale.getTickSpacing() * niceScale.getMaxTicks();
-        double percentValues = values * 100d / max;
-        return height * percentValues / 100d;
+        //val = 15.88   height=  5.0226.0
+        double max = niceScale.getTickSpacing() * niceScale.getMaxTicks();//0.5*10=5  //bt 20
+        double percentValues = values * 100d / (max); //317.6070851668245 
+        return (height * percentValues / (100d)); //-675 //717.7920124770234
     }
 
     public NiceScale getNiceScale() {

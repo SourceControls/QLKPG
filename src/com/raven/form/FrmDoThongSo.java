@@ -67,36 +67,24 @@ public class FrmDoThongSo extends javax.swing.JFrame {
         
 
         lineChart.addLegend("BMI", new Color(12, 84, 175), new Color(0, 108, 247));
-        startLineChart("tháng");
+        startLineChart();
            
         
     }
-    public void startLineChart(String mode){
-        if(mode.equals("năm")){
-            ResultSet rs = csdlDTS.getBMI(this, maKH);
-            lineChart.clear();
-            try {
-                while(rs.next()){
-                    Double chiso= Double.parseDouble(rs.getString(2));
-                    lineChart.addData(new ModelChart("Tháng "+rs.getString(1), new double[]{chiso}));
-                }
-                lineChart.start();
-            } catch (SQLException ex) {
-                Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
+    public void startLineChart(){
+   
+        ResultSet rs = csdlDTS.getBMI(this, maKH);
+        lineChart.clear();
+        try {
+            while(rs.next()){
+                Double chiso= Double.parseDouble(rs.getString(2));
+                lineChart.addData(new ModelChart("Tháng "+rs.getString(1), new double[]{chiso}));
             }
-        }else{
-            ResultSet rs = csdlDTS.getBMI(this, maKH);
-            lineChart.clear();
-            try {
-                while(rs.next()){
-                    Double chiso= Double.parseDouble(rs.getString(2));
-                    lineChart.addData(new ModelChart("Tháng "+rs.getString(1), new double[]{chiso}));
-                }
-                lineChart.start();
-            } catch (SQLException ex) {
-                Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            lineChart.start();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         
     }
     /**
@@ -389,7 +377,7 @@ public class FrmDoThongSo extends javax.swing.JFrame {
                 if(rs.getString(2).equals(dtf.format(now).toString())){
                     if(JOptionPane.showConfirmDialog(this, "Hôm nay đã đo 1 lần,ấn yes để đo lại ")==JOptionPane.YES_OPTION){
                         csdlDTS.dolaiThongso(this,maKH,dtf.format(now));
-                        startLineChart("tháng");
+                        startLineChart();
                     }else {
                         //btnBatDauDo.setEnabled(false);
                         btnLuu.setEnabled(false);
@@ -423,7 +411,7 @@ public class FrmDoThongSo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Lưu thành công !");
             btnLuu.setEnabled(false);
             vec.remove(0);
-            startLineChart("tháng");
+            startLineChart();
         }
     }//GEN-LAST:event_btnLuuActionPerformed
 
