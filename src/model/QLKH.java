@@ -59,7 +59,7 @@ public class QLKH {
                 String id = (String) tblDSKH.getValueAt(row, 0);
                 rs = csdlQLKH.selectKhachHang(f, id);
                 if (rs.next()) {
-                    txtMaKhachHang.setText(rs.getString("MAKH"));
+                    txtMaKhachHang.setText(rs.getString("MAKH").trim());
                     txtCMND.setText(rs.getString("CMND"));
                     txtHoTen.setText(rs.getString("HOTEN"));
                     String gt = rs.getString("GIOITINH");
@@ -140,6 +140,13 @@ public class QLKH {
         return true;
     }
 
+    public String getLinkHinhAnh() {
+        if (lbLinkHinhAnh.getText().contains(":")) {  //nếu là đường dẫn đi từ gốc thì set lại link
+            return "/anhKH/" + txtMaKhachHang.getText() + lbLinkHinhAnh.getText().substring(lbLinkHinhAnh.getText().indexOf("."));
+        }
+        return lbLinkHinhAnh.getText();
+    }
+
     public void addKhachHang() {
 
         if (!inputThongTinKhachHangHopLe() | !inputThemKhachHangHopLe()) {
@@ -159,7 +166,8 @@ public class QLKH {
         vec.add(txtEmail.getText());
         vec.add(txtDiaChi.getText());
         vec.add(txtHangKhachHang.getText()); //hạng khách hàng
-        vec.add(lbLinkHinhAnh.getText());
+
+        vec.add(getLinkHinhAnh());
 
         if (csdlQLKH.insertKhachHang(f, vec)) {
             DungChung.fillTable(Form1.dtblDSKH, csdlQLKH.selectAllKhachHang(f));
@@ -177,8 +185,9 @@ public class QLKH {
 
     public void saveImg() {
         //copy img vào project
-        if(!lbLinkHinhAnh.getText().contains(":"))
+        if (!lbLinkHinhAnh.getText().contains(":")) {
             return;
+        }
         FileInputStream is = null;
         FileOutputStream os = null;
         try {
@@ -251,7 +260,7 @@ public class QLKH {
         vec.add(txtSDT.getText());
         vec.add(txtEmail.getText());
         vec.add(txtDiaChi.getText());
-        vec.add(lbLinkHinhAnh.getText());
+        vec.add(getLinkHinhAnh());
         vec.add(txtMaKhachHang.getText());
         if (csdlQLKH.updateKhachHang(f, vec)) {
             saveImg();
@@ -270,7 +279,7 @@ public class QLKH {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("EXEC get_ID 'KHACHHANG'");
             if (rs.next()) {
-                return rs.getString(1);
+                return rs.getString(1).trim();
             }
 
         } catch (NumberFormatException | SQLException ex) {
