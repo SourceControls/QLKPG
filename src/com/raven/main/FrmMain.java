@@ -24,7 +24,7 @@ import com.raven.form.FrmDangKiDichVu;
 import com.raven.form.FrmDoThongSo;
 import static com.raven.main.FrmMain.conn;
 import com.raven.form.FrmThanhToan;
-import model.ModelUser;
+import model.ModelNV;
 public class FrmMain extends javax.swing.JFrame {
    
     private Menu menu ;
@@ -41,26 +41,21 @@ public class FrmMain extends javax.swing.JFrame {
 
     public static Connection conn;
     public static Frame f; //new FrmDangNhap();
-
-
-  
-    public static DefaultTableModel dtblLSQVT;
-
     public FrmDoThongSo frmDoThongSo = null;
     public FrmDangKiDichVu frmDangKiDichVu = null;
     public FrmThanhToan frmThanhToan = null;
 
-    public static String hoTenNV = "";
-    public static String maNV = "NV01";
-    public static boolean quanLy;
-    public static ModelUser modelNV;
+//    public static String hoTenNV = "";
+//    public static String maNV = "NV01";
+//    public static boolean quanLy;
+    
+    public static ModelNV modelNV;
 
-    public FrmMain(ModelUser modelNV) {
+    public FrmMain(ModelNV modelNV) {
         this.modelNV =  modelNV;
         initComponents();
         devInit();
         init();
-       
     }
      public void devInit() {
         showData();
@@ -69,6 +64,7 @@ public class FrmMain extends javax.swing.JFrame {
         form1.showData();
         form2.showData();
         form3.showData();
+        form4.showData();
     }
     private void init() {
         this.setMinimumSize(new Dimension(1509,700));
@@ -112,8 +108,8 @@ public class FrmMain extends javax.swing.JFrame {
         menu.addMenu(new ModelMenu("Khách hàng", new ImageIcon(getClass().getResource("/com/raven/icon/user.png"))));
         menu.addMenu(new ModelMenu("Thẻ đăng kí", new ImageIcon(getClass().getResource("/com/raven/icon/card.png"))));
         menu.addMenu(new ModelMenu("Quản lí vào ra", new ImageIcon(getClass().getResource("/com/raven/icon/door.png"))));
-        menu.addMenu(new ModelMenu("Thống kê", new ImageIcon(getClass().getResource("/com/raven/icon/report.png"))));
-        menu.addMenu(new ModelMenu("Đo thông số cơ thể", new ImageIcon(getClass().getResource("/com/raven/icon/scale.png"))));
+        if(modelNV.isQuanli())
+            menu.addMenu(new ModelMenu("Nhân viên", new ImageIcon(getClass().getResource("/com/raven/icon/staff.png"))));
         menu.addMenu(new ModelMenu("Cài đặt", new ImageIcon(getClass().getResource("/com/raven/icon/setting.png"))));
         body.add(menu, "w 50!");
         body.add(main, "w 100%");
@@ -153,11 +149,11 @@ public class FrmMain extends javax.swing.JFrame {
 
     }
 
-    public static ModelUser getModelNV() {
+    public static ModelNV getModelNV() {
         return modelNV;
     }
 
-    public void setModelNV(ModelUser modelNV) {
+    public void setModelNV(ModelNV modelNV) {
         this.modelNV = modelNV;
     }
     public void thoat(){

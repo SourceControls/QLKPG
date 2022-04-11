@@ -45,6 +45,8 @@
                           <Component id="panelRound1" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="txtTimKiemKhachHang" min="-2" pref="259" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                              <Component id="btnLamMoi" min="-2" pref="113" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
@@ -70,6 +72,7 @@
                   <Component id="txtTimKiemKhachHang" min="-2" pref="36" max="-2" attributes="0"/>
                   <Component id="jLabel11" min="-2" pref="28" max="-2" attributes="0"/>
                   <Component id="cbHangKH" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="btnLamMoi" min="-2" pref="31" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" max="32767" attributes="0"/>
@@ -348,6 +351,7 @@
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNgaySinhActionPerformed"/>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNgaySinhKeyPressed"/>
               </Events>
             </Component>
@@ -761,5 +765,19 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="com.raven.swing.KButton" name="btnLamMoi">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="L&#xe0;m m&#x1edb;i"/>
+        <Property name="kEndColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="e0" green="6d" red="68" type="rgb"/>
+        </Property>
+        <Property name="kStartColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ea" green="5e" red="a5" type="rgb"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLamMoiActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

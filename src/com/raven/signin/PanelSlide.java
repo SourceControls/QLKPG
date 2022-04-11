@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import model.ModelUser;
+import model.ModelNV;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
@@ -129,28 +129,22 @@ public class PanelSlide extends javax.swing.JLayeredPane {
             public void run() {
                 try {
                     Thread.sleep(1000);
-//                    String sql = "EXEC SP_NV_DANGNHAP ?, ?";
-//                    
-//                    PreparedStatement p = FrmMain.conn.prepareStatement(sql);
-//                    p.setString(1, userName);
-//                    p.setString(2, password);
-//                    ResultSet r = p.executeQuery();
                     ResultSet r=CsdlDN.dangNhap(userName, password);
                     if (r.next()) {
                         String ten = (String) r.getObject(1);
                         String chucvu;
-                        boolean cv = (boolean) r.getObject(2);
-                        if(cv) chucvu= "Quản lí" ;
-                        else chucvu= "Nhân viên";
+                        boolean quanli =  r.getBoolean(2);
+//                        if(cv) chucvu= "Quản lí" ;
+//                        else chucvu= "Nhân viên";
                         Icon profile;
                         try{
-                            profile = new ImageIcon(getClass().getResource("/anhNV/"+r.getString(3)));
+                            profile = new ImageIcon(getClass().getResource(r.getString(3)));
                         }catch(Exception ex){
                             System.out.println("Nhân viên chưa có hình ảnh !");
                             profile = new ImageIcon(getClass().getResource("/anhNV/nv.png"));
                         }
                         
-                        ModelUser data = new ModelUser(ten, chucvu, profile);
+                        ModelNV data = new ModelNV(userName,ten, quanli, profile);
                         loading.doneLogin(data);
                     } else {
                         loading.showError("Sai tên đăng nhập hoặc mật khẩu !");

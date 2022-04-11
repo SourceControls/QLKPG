@@ -442,7 +442,7 @@ public class FrmThanhToan extends javax.swing.JFrame {
         vec.add(txtHanLanToi.getText());
         vec.add(txtGhiChu.getText());
         vec.add(maPDK);
-        vec.add(com.raven.main.FrmMain.maNV);
+        vec.add(com.raven.main.FrmMain.modelNV.getManv());
         if (csdlTT.insertPTT(vec)) {
             JOptionPane.showMessageDialog(this, "Thanh Toán thành công !");
             getThongTinThanhToan();

@@ -22,19 +22,11 @@ public class Form1 extends javax.swing.JPanel {
     int hoveredColumn;
 
     public static final int DAY_PER_MONTH = 30;
-
+    
     public static Connection conn;
     public static Frame f;
-    public static view.FrmDangNhap frmDangNhap = null; //new FrmDangNhap();
-
-    private QLQVT qlqvt;
     private QLKH qlkh;
-    private DKDV dkdv;
-
     public static DefaultTableModel dtblDSKH;
-    public static DefaultTableModel dtblPDK;
-    public static DefaultTableModel dtblLSQVT;
-
     public FrmDoThongSo frmDoThongSo = null;
     public FrmDangKiDichVu frmDangKiDichVu = null;
     public FrmThanhToan frmThanhToan = null;
@@ -156,6 +148,7 @@ public class Form1 extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDSKH = new com.raven.swing.TableColumn();
         scrollBar1 = new com.raven.swing.ScrollBar();
+        btnLamMoi = new com.raven.swing.KButton();
 
         dateChooser1.setTextRefernce(txtNgaySinh);
 
@@ -234,6 +227,11 @@ public class Form1 extends javax.swing.JPanel {
         jLabel1.setText("Họ tên");
 
         txtNgaySinh.setEnabled(false);
+        txtNgaySinh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNgaySinhActionPerformed(evt);
+            }
+        });
         txtNgaySinh.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtNgaySinhKeyPressed(evt);
@@ -565,6 +563,15 @@ public class Form1 extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        btnLamMoi.setText("Làm mới");
+        btnLamMoi.setkEndColor(new java.awt.Color(104, 109, 224));
+        btnLamMoi.setkStartColor(new java.awt.Color(165, 94, 234));
+        btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLamMoiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -577,6 +584,8 @@ public class Form1 extends javax.swing.JPanel {
                             .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtTimKiemKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(56, 56, 56)
+                                .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel11)
                                 .addGap(10, 10, 10)
@@ -594,7 +603,8 @@ public class Form1 extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtTimKiemKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbHangKH, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbHangKH, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(13, 13, 13)
@@ -736,7 +746,7 @@ public class Form1 extends javax.swing.JPanel {
     private void btnHuyDangKiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyDangKiActionPerformed
         qlkh.lockPanelBtnLuu();
         btnThemMoi.setEnabled(true);
-        if (tblDSKH.getSelectedRow() > 0) {
+        if (tblDSKH.getSelectedRow() >= 0) {
             btnDoThongSo.setEnabled(true);
         }
         qlkh.lamTrangTextKH();
@@ -759,13 +769,22 @@ public class Form1 extends javax.swing.JPanel {
     }//GEN-LAST:event_txtDiaChiActionPerformed
 
     private void txtNgaySinhKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNgaySinhKeyPressed
-        dateChooser1.showPopup();
+//        dateChooser1.showPopup();
     }//GEN-LAST:event_txtNgaySinhKeyPressed
+
+    private void txtNgaySinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNgaySinhActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNgaySinhActionPerformed
+
+    private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
+        qlkh.getDataForTbDanhSachKhachHang();
+    }//GEN-LAST:event_btnLamMoiActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.raven.swing.KButton btnChonAnh;
     private com.raven.swing.KButton btnDoThongSo;
     private com.raven.swing.KButton btnHuyDangKi;
+    private com.raven.swing.KButton btnLamMoi;
     private com.raven.swing.KButton btnLuu;
     private com.raven.swing.KButton btnThemMoi;
     private javax.swing.ButtonGroup buttonGroup1;

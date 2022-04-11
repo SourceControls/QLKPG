@@ -4,6 +4,7 @@
  */
 package model;
 
+import com.raven.form.Form3;
 import csdl.*;
 import java.awt.Frame;
 import java.awt.HeadlessException;
@@ -69,8 +70,8 @@ public class QLQVT {
     }
 
     public void getDataForTblLichSuQuetVanTay() {
-        FrmMain.dtblLSQVT = (DefaultTableModel) tblLSQVT.getModel();
-        DungChung.fillTable(FrmMain.dtblLSQVT, csdlQLQVT.selectAllQuetVanTay(f));
+        Form3.dtblLSQVT = (DefaultTableModel) tblLSQVT.getModel();
+        DungChung.fillTable(Form3.dtblLSQVT, csdlQLQVT.selectAllQuetVanTay(f));
     }
 
     public void getDataForLabelThongTinKhachHang() {
@@ -132,8 +133,8 @@ public class QLQVT {
         }
         JOptionPane.showMessageDialog(f, "Có " + count + " người quẹt vân tay!");
         if (count != 0) {
-            FrmMain.dtblLSQVT.setRowCount(0);
-            DungChung.fillTable(FrmMain.dtblLSQVT, csdlQLQVT.selectAllQuetVanTay(f));
+            Form3.dtblLSQVT.setRowCount(0);
+            DungChung.fillTable(Form3.dtblLSQVT, csdlQLQVT.selectAllQuetVanTay(f));
         }
     }
 
@@ -151,7 +152,7 @@ public class QLQVT {
             btnLoc.setText("Lọc");
             txtTuNgay.setText("");
             txtDenNgay.setText("");
-            DungChung.fillTable(FrmMain.dtblLSQVT, csdlQLQVT.selectAllQuetVanTay(f));
+            DungChung.fillTable(Form3.dtblLSQVT, csdlQLQVT.selectAllQuetVanTay(f));
             return;
         }
         String tuNgay = txtTuNgay.getText();
@@ -160,13 +161,13 @@ public class QLQVT {
             JOptionPane.showMessageDialog(f, "Các Field Ngày Không Được Để Trống!");
             return;
         }
-        if (!DungChung.checkDateFormat(denNgay) | !DungChung.checkDateFormat(tuNgay)) {
-            JOptionPane.showMessageDialog(f, "Sai Định Dạng 'YYYY/MM/DD'!");
-            return;
-        }
+//        if (!DungChung.checkDateFormat(denNgay) | !DungChung.checkDateFormat(tuNgay)) {
+//            JOptionPane.showMessageDialog(f, "Sai Định Dạng 'YYYY/MM/DD'!");
+//            return;
+//        }
         btnLoc.setText("Hủy Lọc");
-        DungChung.fillTable(FrmMain.dtblLSQVT, csdlQLQVT.selectKhachQuetVanTayTrongKhoang(f, tuNgay, denNgay));
-
+        DungChung.fillTable(Form3.dtblLSQVT, csdlQLQVT.selectKhachQuetVanTayTrongKhoang(f, tuNgay, denNgay));
+       
     }
 
     private Connection conn;

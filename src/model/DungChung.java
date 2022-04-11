@@ -36,7 +36,7 @@ public class DungChung {
         int width = 190;
         int height = 255;
         if(imgURL.isEmpty())
-            imgURL = "/anhKH/default.png";
+           imgURL = "/anhKH/default.png";
         try {
             BufferedImage img;
             if (imgURL.contains(":")) //nếu là đường dẫn từ gốc, tức là chọn mới hình ảnh 

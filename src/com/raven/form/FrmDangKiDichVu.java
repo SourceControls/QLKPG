@@ -605,7 +605,7 @@ public class FrmDangKiDichVu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(f, "Phiếu đăng kí dưới 30 ngày phải được thanh toán trước");
             return;
         }
-        if (csdlDK.insertPDK(maPDK, ngayDK, tongTien, ghiChu, maKH, FrmMain.maNV, maDV, thue));
+        if (csdlDK.insertPDK(maPDK, ngayDK, tongTien, ghiChu, maKH, FrmMain.modelNV.getManv(), maDV, thue));
         {
             if (rbtnDaThanhToan.isSelected()) {
                 Vector vec = new Vector();
@@ -616,11 +616,10 @@ public class FrmDangKiDichVu extends javax.swing.JFrame {
                 vec.add("");
                 vec.add(ghiChu);
                 vec.add(maPDK);
-                vec.add(FrmMain.maNV);
+                vec.add(FrmMain.modelNV.getManv());
                 if (FrmThanhToan.csdlTT.insertPTT(vec)) {
                     JOptionPane.showMessageDialog(this, "Đăng Kí Và Lập Phiếu Thanh Toán Thành Công");
                     DungChung.fillTable(com.raven.form.Form2.dtblPDK, DKDV.csdlDKDV.selectAllPDK());
-
                 } else {
                     JOptionPane.showMessageDialog(this, "Đăng Kí Thành Công, Lập Phiếu Thanh Toán Thất Bại");
                 }

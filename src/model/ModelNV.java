@@ -2,14 +2,16 @@ package model;
 
 import javax.swing.Icon;
 
-public class ModelUser {
+public class ModelNV {
+    private String manv;
     private String ten;
-    private String chucvu;
+    private boolean quanli;
     private Icon anh;
     
-    public ModelUser(String ten, String chucvu, Icon anh) {
+    public ModelNV(String manv,String ten, boolean quanli, Icon anh) {
+        this.manv=manv;
         this.ten = ten;
-        this.chucvu = chucvu;
+        this.quanli = quanli;
         this.anh = anh;
     }
 
@@ -22,14 +24,13 @@ public class ModelUser {
         this.ten = ten;
     }
 
-    public String getChucvu() {
-        return chucvu;
+    public boolean isQuanli() {
+        return quanli;
     }
 
-    public void setChucvu(String chucvu) {
-        this.chucvu = chucvu;
+    public void setQuanli(boolean quanli) {
+        this.quanli = quanli;
     }
-
     public Icon getAnh() {
         return anh;
     }
@@ -38,7 +39,15 @@ public class ModelUser {
         this.anh = anh;
     }
 
-    public ModelUser() {
+    public String getManv() {
+        return manv;
+    }
+
+    public void setManv(String manv) {
+        this.manv = manv;
+    }
+
+    public ModelNV() {
     }
 
   

@@ -1,7 +1,7 @@
 package com.raven.component;
 
 import com.raven.main.FrmMain;
-import model.ModelUser;
+import model.ModelNV;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -25,9 +25,9 @@ public class Bottom extends javax.swing.JPanel {
         setData();
     }
     public void setData(){
-        ModelUser user =FrmMain.getModelNV();
+        ModelNV user =FrmMain.getModelNV();
         lbTen.setText(user.getTen());
-        lbChucvu.setText(user.getChucvu());
+        lbChucvu.setText(user.isQuanli()==true ? "Quản lí":"Nhân viên");
         lbHinh.setIcon(user.getAnh());
     }
     

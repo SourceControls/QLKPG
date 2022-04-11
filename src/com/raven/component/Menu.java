@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import model.ModelUser;
+import model.ModelNV;
 import net.miginfocom.swing.MigLayout;
 
 public class Menu extends javax.swing.JPanel {

@@ -46,7 +46,7 @@ public class CsdlDTS {
             }
             return sql.executeUpdate() > 0;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(f, "Lưu thất bại! " + ex.getMessage());
+            JOptionPane.showMessageDialog(f, "Mỗi lần đo cách nhau ít nhất 1 phút");
         }
         return false;
 

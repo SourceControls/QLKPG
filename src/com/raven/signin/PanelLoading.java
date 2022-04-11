@@ -14,14 +14,14 @@ import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
-import model.ModelUser;
+import model.ModelNV;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 public class PanelLoading extends javax.swing.JLayeredPane {
 
-    public ModelUser getData() {
+    public ModelNV getData() {
         return data;
     }
 
@@ -29,7 +29,7 @@ public class PanelLoading extends javax.swing.JLayeredPane {
     private boolean slideLeft;
     private float animate;
     private boolean isMessage;
-    private ModelUser data;
+    private ModelNV data;
 
     public PanelLoading() {
         initComponents();
@@ -77,7 +77,7 @@ public class PanelLoading extends javax.swing.JLayeredPane {
         cmdContinue.addActionListener(event);
     }
 
-    public void doneLogin(ModelUser data) {
+    public void doneLogin(ModelNV data) {
         isMessage = false;
         this.data = data;
         pic.setIcon(data.getAnh());
@@ -106,7 +106,6 @@ public class PanelLoading extends javax.swing.JLayeredPane {
         cmdCancel1 = new com.raven.swing.Button();
         cmdContinue = new com.raven.swing.Button();
         pic = new com.raven.swing.ImageAvatar();
-        cmdEdit = new com.raven.swing.EditButton();
         loading = new com.raven.swing.PanelTransparent();
         cmdCancel = new com.raven.swing.Button();
         jLabel1 = new javax.swing.JLabel();
@@ -125,16 +124,6 @@ public class PanelLoading extends javax.swing.JLayeredPane {
         cmdContinue.setForeground(new java.awt.Color(255, 255, 255));
         cmdContinue.setText("Tiếp tục");
         cmdContinue.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-
-        cmdEdit.setBackground(new java.awt.Color(55, 55, 55));
-        cmdEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/edit.png"))); // NOI18N
-        cmdEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdEditActionPerformed(evt);
-            }
-        });
-        pic.add(cmdEdit);
-        cmdEdit.setBounds(90, 90, 40, 40);
 
         javax.swing.GroupLayout profileLayout = new javax.swing.GroupLayout(profile);
         profile.setLayout(profileLayout);
@@ -234,39 +223,6 @@ public class PanelLoading extends javax.swing.JLayeredPane {
         add(message, "card2");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmdEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEditActionPerformed
-        JFileChooser ch = new JFileChooser();
-        ch.setFileFilter(new FileFilter() {
-            @Override
-            public boolean accept(File file) {
-                String name = file.getName().toLowerCase();
-                return file.isDirectory() || name.endsWith(".png") || name.endsWith(".jpg");
-            }
-
-            @Override
-            public String getDescription() {
-                return "Image File";
-            }
-        });
-        int option = ch.showOpenDialog(this);
-        if (option == JFileChooser.APPROVE_OPTION) {
-            File file = ch.getSelectedFile();
-            ImageIcon icon = new ImageIcon(file.getAbsolutePath());
-            pic.setIcon(icon);
-            repaint();
-            try {
-                String sql = "update `user` set `Profile`=? where UserID=? limit 1";
-                PreparedStatement p = FrmMain.conn.prepareStatement(sql);
-                p.setBinaryStream(1, Files.newInputStream(file.toPath()));
-                p.setString(2, data.getTen());
-                p.execute();
-                data.setAnh(icon);
-            } catch (IOException | SQLException e) {
-                System.err.println(e);
-            }
-        }
-    }//GEN-LAST:event_cmdEditActionPerformed
-
     @Override
     public void paint(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs.create();
@@ -317,7 +273,6 @@ public class PanelLoading extends javax.swing.JLayeredPane {
     private com.raven.swing.Button cmdCancel1;
     private com.raven.swing.Button cmdCancel2;
     private com.raven.swing.Button cmdContinue;
-    private com.raven.swing.EditButton cmdEdit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lbMessage;
     private com.raven.swing.PanelTransparent loading;

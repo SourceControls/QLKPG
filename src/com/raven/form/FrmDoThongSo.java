@@ -365,29 +365,29 @@ public class FrmDoThongSo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBatDauDoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatDauDoActionPerformed
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.0");
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
         LocalDateTime now = LocalDateTime.now();  
         
         txtNgayDo.setText(formatter.format(new Date()));
         btnLuu.setEnabled(true);
         ResultSet rs = csdlDTS.selectAllThongSo(this, maKH);
-        try {
-            while(rs.next()){
-                if(rs.getString(2).equals(dtf.format(now).toString())){
-                    if(JOptionPane.showConfirmDialog(this, "Hôm nay đã đo 1 lần,ấn yes để đo lại ")==JOptionPane.YES_OPTION){
-                        csdlDTS.dolaiThongso(this,maKH,dtf.format(now));
-                        startLineChart();
-                    }else {
-                        //btnBatDauDo.setEnabled(false);
-                        btnLuu.setEnabled(false);
-                        return;
-                    }
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            while(rs.next()){
+//                if(rs.getString(2).equals(dtf.format(now).toString())){
+//                    if(JOptionPane.showConfirmDialog(this, "Hôm nay đã đo 1 lần,ấn yes để đo lại ")==JOptionPane.YES_OPTION){
+//                        csdlDTS.dolaiThongso(this,maKH,dtf.format(now));
+//                        startLineChart();
+//                    }else {
+//                        //btnBatDauDo.setEnabled(false);
+//                        btnLuu.setEnabled(false);
+//                        return;
+//                    }
+//                }
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         rs = csdlDTS.selectAllThongSo(this, maKH);
         try {
             if(rs.next()){ 

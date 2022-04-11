@@ -10,6 +10,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
@@ -53,10 +54,19 @@ public class TableCell extends JLabel {
         this.setText(text);
         if (obj != null) {
             setText(obj.toString());
+            if(obj.toString().equals("false")){
+                setIcon(new ImageIcon("src/com/raven/icon/daux.png"));
+                setText("");
+            }
+            if(obj.toString().equals("true")){
+                setIcon(new ImageIcon("src/com/raven/icon/dauok.png"));
+                setText("");
+            }
         }
         
         setBorder(new EmptyBorder(10, 10, 10, 10));
         setForeground(new Color(80, 80, 80));
+        
     }
     public TableCell(Object obj, boolean selected, CellType cellType,int col) {
         
@@ -66,6 +76,14 @@ public class TableCell extends JLabel {
         
         if (obj != null) {
             setText(obj.toString());
+            if(obj.toString().equals("false")){
+                setIcon(new ImageIcon("src/com/raven/icon/daux.png"));
+                setText("");
+            }
+            if(obj.toString().equals("true")){
+                setIcon(new ImageIcon("src/com/raven/icon/dauok.png"));
+                setText("");
+            }
         }
         
         setBorder(new EmptyBorder(10, 10, 10, 10));

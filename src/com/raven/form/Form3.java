@@ -505,7 +505,7 @@ public class Form3 extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLocQLQVTActionPerformed
 
     private void txtTuNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTuNgayActionPerformed
-       
+        
     }//GEN-LAST:event_txtTuNgayActionPerformed
 
     private void txtDenNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDenNgayActionPerformed
@@ -517,11 +517,11 @@ public class Form3 extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTuNgayMouseClicked
 
     private void txtTuNgayMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTuNgayMousePressed
-        dateChooserTuNgay.showPopup();
+        if(btnLocQLQVT.getText().equals("Lọc")) dateChooserTuNgay.showPopup();
     }//GEN-LAST:event_txtTuNgayMousePressed
 
     private void txtDenNgayMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDenNgayMousePressed
-        dateChooserDenNgay.showPopup();
+        if(btnLocQLQVT.getText().equals("Lọc")) dateChooserDenNgay.showPopup();
     }//GEN-LAST:event_txtDenNgayMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
