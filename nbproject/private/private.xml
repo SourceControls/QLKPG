@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< Updated upstream
             <file>file:/D:/study/nam%203/hocki2/cong%20nghe%20phan%20mem/QLKPG/src/model/QLKH.java</file>
             <file>file:/D:/study/nam%203/hocki2/cong%20nghe%20phan%20mem/QLKPG/src/com/raven/swing/TableCell.java</file>
             <file>file:/D:/study/nam%203/hocki2/cong%20nghe%20phan%20mem/QLKPG/src/view/NewJFrame.java</file>
@@ -17,6 +18,19 @@
             <file>file:/D:/study/nam%203/hocki2/cong%20nghe%20phan%20mem/QLKPG/src/com/raven/form/Form4.java</file>
             <file>file:/D:/study/nam%203/hocki2/cong%20nghe%20phan%20mem/QLKPG/src/com/raven/form/Form2.java</file>
             <file>file:/D:/study/nam%203/hocki2/cong%20nghe%20phan%20mem/QLKPG/src/model/QLNV.java</file>
+=======
+            <file>file:/G:/My%20Drive/All%20Tai%20Lieu/CNPM-Project/QLKPG/src/com/raven/form/FrmDangKiDichVu.java</file>
+            <file>file:/G:/My%20Drive/All%20Tai%20Lieu/CNPM-Project/QLKPG/src/com/raven/form/Form2.java</file>
+            <file>file:/G:/My%20Drive/All%20Tai%20Lieu/CNPM-Project/QLKPG/src/PDF/testFunct.java</file>
+            <file>file:/G:/My%20Drive/All%20Tai%20Lieu/CNPM-Project/QLKPG/src/com/raven/main/FrmMain.java</file>
+            <file>file:/G:/My%20Drive/All%20Tai%20Lieu/CNPM-Project/QLKPG/src/model/QLKH.java</file>
+            <file>file:/G:/My%20Drive/All%20Tai%20Lieu/CNPM-Project/QLKPG/src/csdl/CsdlDTS.java</file>
+            <file>file:/G:/My%20Drive/All%20Tai%20Lieu/CNPM-Project/QLKPG/src/PDF/PhieuDangKi.java</file>
+            <file>file:/G:/My%20Drive/All%20Tai%20Lieu/CNPM-Project/QLKPG/src/csdl/CsdlDK.java</file>
+            <file>file:/G:/My%20Drive/All%20Tai%20Lieu/CNPM-Project/QLKPG/src/PDF/PDF.java</file>
+            <file>file:/G:/My%20Drive/All%20Tai%20Lieu/CNPM-Project/QLKPG/src/csdl/CsdlTT.java</file>
+            <file>file:/G:/My%20Drive/All%20Tai%20Lieu/CNPM-Project/QLKPG/src/com/raven/form/Form1.java</file>
+>>>>>>> Stashed changes
         </group>
     </open-files>
 </project-private>

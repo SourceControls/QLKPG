@@ -73,15 +73,15 @@ public class QLKH {
                     txtDiaChi.setText(rs.getString("DIACHI"));
                     txtEmail.setText(rs.getString("EMAIL"));
                     txtHangKhachHang.setText(rs.getString("HANGKH"));
-
+                    
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(Form1.class.getName()).log(Level.SEVERE, null, ex);
                 return;
             }
             try {
-                String imgURL = rs.getString("HINHANH");
-                DungChung.readImg(f, lbHinhAnhKhachQLKH, imgURL);
+                DungChung.readImg(f, lbHinhAnhKhachQLKH, rs.getString("HINHANH"));
+                lbLinkHinhAnh.setText(rs.getString("HINHANH"));
             } catch (Exception ex) {
                 lbHinhAnhKhachQLKH.removeAll();
                 lbLinkHinhAnh.setText("");
@@ -401,8 +401,7 @@ public class QLKH {
                     JOptionPane.showMessageDialog(f, "Khách hàng đã có phiếu đăng kí hợp lệ trước đó");
                     return;
                 }
-
-                frmDangKiDichVu = new FrmDangKiDichVu(tblDSKH.getValueAt(row, 0).toString());
+                    frmDangKiDichVu = new FrmDangKiDichVu(tblDSKH.getValueAt(row, 0).toString());
 
             } catch (SQLException ex) {
                 Logger.getLogger(DKDV.class.getName()).log(Level.SEVERE, null, ex);

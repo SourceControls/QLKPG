@@ -36,7 +36,6 @@ public class Login extends javax.swing.JFrame {
         } catch (Exception ex) {
             System.out.println("connectDatabase: "+ex.toString());
         }
-       
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

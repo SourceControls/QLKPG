@@ -32,11 +32,11 @@ public class FrmMain extends javax.swing.JFrame {
     private MigLayout layout;
     private Animator animator;
     private boolean menuShow;
-    Form1 form1=new Form1();
-    Form2 form2=new Form2();
-    Form3 form3=new Form3();
-    Form4 form4=new Form4();
-    Form5 form5=new Form5();
+    public Form1 form1=new Form1();
+    public Form2 form2=new Form2();
+    public Form3 form3=new Form3();
+    public Form4 form4=new Form4();
+    public Form5 form5=new Form5();
     public static final int DAY_PER_MONTH = 30;
 
     public static Connection conn;

@@ -60,7 +60,7 @@ public class CsdlTT {
             }
             return pst.executeUpdate() > 0;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(FrmThanhToan.f, ex.getMessage());
+            System.out.println(ex.getMessage());
         }
 
         return false;

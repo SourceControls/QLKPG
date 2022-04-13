@@ -5,11 +5,6 @@
 package view;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.util.Calendar;
-import java.util.Date;
-import org.apache.pdfbox.pdmodel.*;
 
 /**
  *
@@ -21,17 +16,9 @@ public class testFunct {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        // TODO code application logic here
-
+        PDF pdf = new PDF();
     }
 
-    public static void savePDF() throws IOException {
-        //create and save pdf
-        PDDocument document = new PDDocument();
-        PDPage page = new PDPage();
-        document.addPage(page);
-        document.save("G:\\My Drive\\All Tai Lieu\\CNPM-Project\\QLKPG\\testPDF.pdf");
-        document.close();
-    }
+ 
 
 }
