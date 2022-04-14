@@ -24,7 +24,6 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 public class PanelSlide extends javax.swing.JLayeredPane {
-
     public void setFram(JFrame fram) {
         this.fram = fram;
     }

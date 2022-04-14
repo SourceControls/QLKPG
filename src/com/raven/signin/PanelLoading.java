@@ -18,7 +18,6 @@ import model.ModelNV;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
-
 public class PanelLoading extends javax.swing.JLayeredPane {
 
     public ModelNV getData() {
