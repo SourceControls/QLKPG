@@ -24,7 +24,9 @@ import com.raven.form.FrmDangKiDichVu;
 import com.raven.form.FrmDoThongSo;
 import static com.raven.main.FrmMain.conn;
 import com.raven.form.FrmThanhToan;
+import javax.swing.JFrame;
 import model.ModelNV;
+import static sun.audio.AudioDevice.device;
 public class FrmMain extends javax.swing.JFrame {
    
     private Menu menu ;
@@ -59,6 +61,7 @@ public class FrmMain extends javax.swing.JFrame {
     }
      public void devInit() {
         showData();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
     public void showData() {
         form1.showData();
@@ -180,30 +183,9 @@ public class FrmMain extends javax.swing.JFrame {
         body.setMinimumSize(new java.awt.Dimension(1080, 660));
         body.setName(""); // NOI18N
         body.setPreferredSize(new java.awt.Dimension(1350, 661));
-
-        javax.swing.GroupLayout bodyLayout = new javax.swing.GroupLayout(body);
-        body.setLayout(bodyLayout);
-        bodyLayout.setHorizontalGroup(
-            bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1746, Short.MAX_VALUE)
-        );
-        bodyLayout.setVerticalGroup(
-            bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 759, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(body, javax.swing.GroupLayout.PREFERRED_SIZE, 1746, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, 759, Short.MAX_VALUE)
-        );
+        body.setLayout(new javax.swing.BoxLayout(body, javax.swing.BoxLayout.LINE_AXIS));
+        getContentPane().add(body, java.awt.BorderLayout.CENTER);
+        body.getAccessibleContext().setAccessibleParent(body);
 
         pack();
         setLocationRelativeTo(null);

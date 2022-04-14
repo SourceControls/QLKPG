@@ -23,7 +23,6 @@ import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
-
 public class PanelSlide extends javax.swing.JLayeredPane {
 
     public void setFram(JFrame fram) {
@@ -141,7 +140,7 @@ public class PanelSlide extends javax.swing.JLayeredPane {
                             profile = new ImageIcon(getClass().getResource(r.getString(3)));
                         }catch(Exception ex){
                             System.out.println("Nhân viên chưa có hình ảnh !");
-                            profile = new ImageIcon(getClass().getResource("/anhNV/nv.png"));
+                            profile = new ImageIcon(getClass().getResource("/anhNV/default.png"));
                         }
                         
                         ModelNV data = new ModelNV(userName,ten, quanli, profile);

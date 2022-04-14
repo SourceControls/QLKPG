@@ -1,4 +1,7 @@
-
 *.ini
-/QLKPG/nbproject/
-/QLKPG/build/
+*.class
+/QLKPG/nbproject/*
+*.form
+*.class
+*.xml
+*.properties
