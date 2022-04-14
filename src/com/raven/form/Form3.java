@@ -425,11 +425,11 @@ public class Form3 extends javax.swing.JPanel {
 
             },
             new String [] {
-                "STT", "Ngày giờ", "Họ tên", "Trạng thái"
+                "STT", "Ngày giờ", "Họ tên", "Tên DV", "Trạng thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, false
+                true, false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
