@@ -32,10 +32,9 @@ import javax.swing.table.DefaultTableModel;
 public class DungChung {
 
     public static void readImg(Frame f, JLabel lbHinhAnh, String imgURL) {
-
         int width = 190;
         int height = 255;
-        if(imgURL.isEmpty())
+        if(imgURL.isEmpty() || imgURL ==null)
            imgURL = "/anhKH/default.png";
         try {
             BufferedImage img;

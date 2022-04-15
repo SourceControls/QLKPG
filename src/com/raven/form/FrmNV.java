@@ -557,6 +557,9 @@ public class FrmNV extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblNVMouseClicked(evt);
             }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblNVMouseReleased(evt);
+            }
         });
         jScrollPane3.setViewportView(tblNV);
 
@@ -696,7 +699,7 @@ public class FrmNV extends javax.swing.JPanel {
     }//GEN-LAST:event_rbtnKhongQuanLiActionPerformed
 
     private void btnChonAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonAnhActionPerformed
-      
+        qlnv.selectImg();
     }//GEN-LAST:event_btnChonAnhActionPerformed
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
@@ -726,7 +729,7 @@ public class FrmNV extends javax.swing.JPanel {
         btnSua.setEnabled(false);
         rbtnNghilam.setEnabled(false);
         DungChung.readImg(f, lbHinhAnhNV, "");
-        lbLinkHinhAnh.setText("/anhKH/default.png");
+        lbLinkHinhAnh.setText("/anhNV/default.png");
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tblNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNVMouseClicked
@@ -745,6 +748,11 @@ public class FrmNV extends javax.swing.JPanel {
         // TODO add your handling code here:
        qlnv.capTaiKhoan();
     }//GEN-LAST:event_btnCapTaiKhoanActionPerformed
+    private void tblNVMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNVMouseReleased
+        if (btnLuu.isEnabled()) {
+            qlnv.lockPanelBtnLuu();
+        }
+    }//GEN-LAST:event_tblNVMouseReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.raven.swing.KButton btnCapTaiKhoan;

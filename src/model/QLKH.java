@@ -81,6 +81,7 @@ public class QLKH {
             }
             try {
                 String imgURL = rs.getString("HINHANH");
+                lbLinkHinhAnh.setText(imgURL);
                 DungChung.readImg(f, lbHinhAnhKhachQLKH, imgURL);
             } catch (Exception ex) {
                 lbHinhAnhKhachQLKH.removeAll();

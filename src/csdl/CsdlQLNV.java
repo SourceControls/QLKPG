@@ -153,23 +153,22 @@ public class CsdlQLNV {
     }
 
     public boolean insertNhanVien(Frame f, Vector vec) {
-        String insertKhachHang = "Insert into NHANVIEN VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        String insertNV = "Insert into NHANVIEN VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
-            PreparedStatement sql = conn.prepareStatement(insertKhachHang);
-            for (int i = 1; i <= vec.size(); i++) {
-
+            PreparedStatement sql = conn.prepareStatement(insertNV);
+            for (int i = 1; i <= 12; i++) {
+               
                 sql.setObject(i, vec.get(i - 1));
 
             }
-            if (vec.get(5).toString().isEmpty()) {
-                sql.setNull(6, java.sql.Types.NVARCHAR);
-            }
-            if (vec.get(4).toString().isEmpty()) {
-                sql.setNull(5, java.sql.Types.DATE);
-            }
+            if(vec.get(3).toString().isEmpty()||vec.get(5).toString().isEmpty())
+                     sql.setNull(6, java.sql.Types.NVARCHAR);
+            if(vec.get(4).toString().isEmpty())
+                    sql.setNull(5, java.sql.Types.DATE);
             return sql.executeUpdate() > 0;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(f, ex.getMessage());
+            JOptionPane.showMessageDialog(f, ex.toString());
+             Logger.getLogger(Form4.class.getName()).log(Level.SEVERE, null, ex);
 
         }
         return false;

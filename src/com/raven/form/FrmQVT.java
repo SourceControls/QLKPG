@@ -417,6 +417,7 @@ public class FrmQVT extends javax.swing.JPanel {
         jScrollPane1.setBorder(null);
         jScrollPane1.setVerticalScrollBar(scrollBar1);
 
+        tblLSQVT.setAutoCreateRowSorter(true);
         tblLSQVT.setBackground(new java.awt.Color(240, 240, 240));
         tblLSQVT.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tblLSQVT.setForeground(new java.awt.Color(255, 255, 255));
