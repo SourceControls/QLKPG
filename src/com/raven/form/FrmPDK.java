@@ -13,13 +13,13 @@ import javax.swing.event.ListSelectionListener;
 import model.QLKH;
 import model.DKDV;
 import model.QLQVT;
-public class Form2 extends javax.swing.JPanel {
+public class FrmPDK extends javax.swing.JPanel {
     public static DefaultTableModel dtblPDK;
     private QLQVT qlqvt;
     private QLKH qlkh;
     private DKDV dkdv;
     public com.raven.form.FrmThanhToan frmThanhToan = null;
-    public Form2() {
+    public FrmPDK() {
         initComponents();
         setOpaque(false);
         init();

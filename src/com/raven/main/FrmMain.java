@@ -27,18 +27,20 @@ import com.raven.form.FrmThanhToan;
 import javax.swing.JFrame;
 import model.ModelNV;
 import static sun.audio.AudioDevice.device;
+
 public class FrmMain extends javax.swing.JFrame {
-   
-    private Menu menu ;
+
+    private Menu menu;
     private JPanel main = new JPanel();
     private MigLayout layout;
     private Animator animator;
     private boolean menuShow;
-    Form1 form1=new Form1();
-    Form2 form2=new Form2();
-    Form3 form3=new Form3();
-    Form4 form4=new Form4();
-    Form5 form5=new Form5();
+    FrmKH form1 = new FrmKH();
+    FrmPDK form2 = new FrmPDK();
+    FrmQVT form3 = new FrmQVT();
+    FrmNV form4 = new FrmNV();
+    FrmTK form5 = new FrmTK();
+    FrmDoiMatKhau frmDoiMK;
     public static final int DAY_PER_MONTH = 30;
 
     public static Connection conn;
@@ -48,29 +50,32 @@ public class FrmMain extends javax.swing.JFrame {
     public FrmThanhToan frmThanhToan = null;
 
 //    public static String hoTenNV = "";
-//    public static String maNV = "NV01";
+    public static String maNV = "NV01";
 //    public static boolean quanLy;
-    
     public static ModelNV modelNV;
 
     public FrmMain(ModelNV modelNV) {
-        this.modelNV =  modelNV;
+        this.modelNV = modelNV;
         initComponents();
         devInit();
         init();
     }
-     public void devInit() {
+
+    public void devInit() {
         showData();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
     }
+
     public void showData() {
         form1.showData();
         form2.showData();
         form3.showData();
         form4.showData();
     }
+
     private void init() {
-        this.setMinimumSize(new Dimension(1509,700));
+        this.setMinimumSize(new Dimension(1509, 700));
         layout = new MigLayout("fill", "0[]10[]5", "0[fill]0");
         body.setLayout(layout);
         main.setOpaque(false);
@@ -101,18 +106,20 @@ public class FrmMain extends javax.swing.JFrame {
                     showForm(form3);
                 } else if (index == 3) {
                     showForm(form4);
-                } else if (index == 4){
+                } else if (index == 4) {
                     showForm(form5);
                 }
 
             }
         });
-     
+
         menu.addMenu(new ModelMenu("Khách hàng", new ImageIcon(getClass().getResource("/com/raven/icon/user.png"))));
         menu.addMenu(new ModelMenu("Thẻ đăng kí", new ImageIcon(getClass().getResource("/com/raven/icon/card.png"))));
         menu.addMenu(new ModelMenu("Quản lí vào ra", new ImageIcon(getClass().getResource("/com/raven/icon/door.png"))));
-        if(modelNV.isQuanli())
+        if (modelNV.isQuanli()) {
             menu.addMenu(new ModelMenu("Nhân viên", new ImageIcon(getClass().getResource("/com/raven/icon/staff.png"))));
+            menu.addMenu(new ModelMenu("Đổi Mật Khẩu", new ImageIcon(getClass().getResource("/com/raven/icon/changePass.png"))));
+        }
         menu.addMenu(new ModelMenu("Cài đặt", new ImageIcon(getClass().getResource("/com/raven/icon/setting.png"))));
         body.add(menu, "w 50!");
         body.add(main, "w 100%");
@@ -141,7 +148,9 @@ public class FrmMain extends javax.swing.JFrame {
         animator.setAcceleration(0.5f);
         animator.setDeceleration(0.5f);
         showForm(form1);
-    
+
+        FrmDoiMatKhau dmk = new FrmDoiMatKhau();
+        dmk.setVisible(true);
     }
 
     public void showForm(Component com) {
@@ -159,10 +168,12 @@ public class FrmMain extends javax.swing.JFrame {
     public void setModelNV(ModelNV modelNV) {
         this.modelNV = modelNV;
     }
-    public void thoat(){
+
+    public void thoat() {
         new Login(conn).setVisible(true);
         this.dispose();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -192,7 +203,7 @@ public class FrmMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
-        
+
     }//GEN-LAST:event_formComponentResized
 
     public static void main(String args[]) {
@@ -220,7 +231,6 @@ public class FrmMain extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
 
-        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);

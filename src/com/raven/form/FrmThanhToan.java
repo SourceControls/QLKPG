@@ -446,7 +446,7 @@ public class FrmThanhToan extends javax.swing.JFrame {
         if (csdlTT.insertPTT(vec)) {
             JOptionPane.showMessageDialog(this, "Thanh Toán thành công !");
             getThongTinThanhToan();
-            DungChung.fillTable(com.raven.form.Form2.dtblPDK, DKDV.csdlDKDV.selectAllPDK());
+            DungChung.fillTable(com.raven.form.FrmPDK.dtblPDK, DKDV.csdlDKDV.selectAllPDK());
             DungChung.fillTable(dtblPTT, csdlTT.selectAllPTT(maPDK));
         }
        

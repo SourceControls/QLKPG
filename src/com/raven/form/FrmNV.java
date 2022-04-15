@@ -1,6 +1,6 @@
 package com.raven.form;
 import com.raven.chart.ModelChart;
-import static com.raven.form.Form1.f;
+import static com.raven.form.FrmKH.f;
 import com.raven.swing.ScrollBarCustom;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,7 +15,7 @@ import javax.swing.event.ListSelectionListener;
 import model.DungChung;
 import model.QLNV;
 
-public class Form4 extends javax.swing.JPanel {
+public class FrmNV extends javax.swing.JPanel {
     
     int hoveredRow;
     int hoveredColumn;
@@ -34,7 +34,7 @@ public class Form4 extends javax.swing.JPanel {
     public static boolean quanLy = false;
 
     public static boolean themMoi = false;
-    public Form4() {
+    public FrmNV() {
         initComponents();
         setOpaque(false);
         init();
@@ -50,6 +50,7 @@ public class Form4 extends javax.swing.JPanel {
             }
         });
     }
+
     public void showData(){
         dtblDSNV = (DefaultTableModel) tblNV.getModel();
         qlnv = new QLNV(tblNV, txtMaNhanVien, txtHoTen, txtCMND, rbtnNu, rbtnNam, txtNgaySinh, txtSDT, 
@@ -131,6 +132,7 @@ public class Form4 extends javax.swing.JPanel {
         panelMainBtnQLNV = new javax.swing.JPanel();
         btnThem = new com.raven.swing.KButton();
         btnSua = new com.raven.swing.KButton();
+        btnCapTaiKhoan = new com.raven.swing.KButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblNV = new com.raven.swing.TableColumn();
         jPanel1 = new javax.swing.JPanel();
@@ -443,6 +445,13 @@ public class Form4 extends javax.swing.JPanel {
             }
         });
 
+        btnCapTaiKhoan.setText("Cấp Tài Khoản");
+        btnCapTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapTaiKhoanActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelMainBtnQLNVLayout = new javax.swing.GroupLayout(panelMainBtnQLNV);
         panelMainBtnQLNV.setLayout(panelMainBtnQLNVLayout);
         panelMainBtnQLNVLayout.setHorizontalGroup(
@@ -450,18 +459,24 @@ public class Form4 extends javax.swing.JPanel {
             .addGroup(panelMainBtnQLNVLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelMainBtnQLNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSua, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnThem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnThem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSua, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
+            .addGroup(panelMainBtnQLNVLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnCapTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelMainBtnQLNVLayout.setVerticalGroup(
             panelMainBtnQLNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMainBtnQLNVLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addGap(18, 18, 18)
+                .addComponent(btnCapTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -471,18 +486,18 @@ public class Form4 extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelMainBtnQLNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelBtnLuuQLNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(147, 147, 147))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelMainBtnQLNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelBtnLuuQLNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelBtnLuuQLNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelMainBtnQLNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
@@ -503,9 +518,11 @@ public class Form4 extends javax.swing.JPanel {
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelMainTextFieldQLNV, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -685,6 +702,7 @@ public class Form4 extends javax.swing.JPanel {
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
             if (themMoi) {
             qlnv.addNhanvien();
+            
         } else {
             qlnv.luuChinhSuaNhanVien();
         }
@@ -706,6 +724,7 @@ public class Form4 extends javax.swing.JPanel {
         qlnv.lamTrangTextNV();
         qlnv.btnThemMoiNVClicked();
         btnSua.setEnabled(false);
+        rbtnNghilam.setEnabled(false);
         DungChung.readImg(f, lbHinhAnhNV, "");
         lbLinkHinhAnh.setText("/anhKH/default.png");
     }//GEN-LAST:event_btnThemActionPerformed
@@ -722,7 +741,13 @@ public class Form4 extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbLocNVActionPerformed
 
+    private void btnCapTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapTaiKhoanActionPerformed
+        // TODO add your handling code here:
+       qlnv.capTaiKhoan();
+    }//GEN-LAST:event_btnCapTaiKhoanActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.raven.swing.KButton btnCapTaiKhoan;
     private com.raven.swing.KButton btnChonAnh;
     private com.raven.swing.KButton btnHuy;
     private com.raven.swing.KButton btnLamMoi;

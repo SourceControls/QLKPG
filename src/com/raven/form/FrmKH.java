@@ -16,7 +16,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import model.DungChung;
 
-public class Form1 extends javax.swing.JPanel {
+public class FrmKH extends javax.swing.JPanel {
 
     int hoveredRow;
     int hoveredColumn;
@@ -38,7 +38,7 @@ public class Form1 extends javax.swing.JPanel {
     public static boolean themMoi = false;
     //dùng để đăng nhập
 
-    public Form1() {
+    public FrmKH() {
         
         initComponents();
         setOpaque(false);

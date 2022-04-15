@@ -4,7 +4,7 @@
  */
 package model;
 
-import com.raven.form.Form3;
+import com.raven.form.FrmQVT;
 import csdl.*;
 import java.awt.Frame;
 import java.awt.HeadlessException;
@@ -70,8 +70,8 @@ public class QLQVT {
     }
 
     public void getDataForTblLichSuQuetVanTay() {
-        Form3.dtblLSQVT = (DefaultTableModel) tblLSQVT.getModel();
-        DungChung.fillTable(Form3.dtblLSQVT, csdlQLQVT.selectAllQuetVanTay(f));
+        FrmQVT.dtblLSQVT = (DefaultTableModel) tblLSQVT.getModel();
+        DungChung.fillTable(FrmQVT.dtblLSQVT, csdlQLQVT.selectAllQuetVanTay(f));
     }
 
     public void getDataForLabelThongTinKhachHang() {
@@ -133,8 +133,8 @@ public class QLQVT {
         }
         JOptionPane.showMessageDialog(f, "Có " + count + " người quẹt vân tay!");
         if (count != 0) {
-            Form3.dtblLSQVT.setRowCount(0);
-            DungChung.fillTable(Form3.dtblLSQVT, csdlQLQVT.selectAllQuetVanTay(f));
+            FrmQVT.dtblLSQVT.setRowCount(0);
+            DungChung.fillTable(FrmQVT.dtblLSQVT, csdlQLQVT.selectAllQuetVanTay(f));
         }
     }
 
@@ -152,7 +152,7 @@ public class QLQVT {
             btnLoc.setText("Lọc");
             txtTuNgay.setText("");
             txtDenNgay.setText("");
-            DungChung.fillTable(Form3.dtblLSQVT, csdlQLQVT.selectAllQuetVanTay(f));
+            DungChung.fillTable(FrmQVT.dtblLSQVT, csdlQLQVT.selectAllQuetVanTay(f));
             return;
         }
         String tuNgay = txtTuNgay.getText();
@@ -166,7 +166,7 @@ public class QLQVT {
 //            return;
 //        }
         btnLoc.setText("Hủy Lọc");
-        DungChung.fillTable(Form3.dtblLSQVT, csdlQLQVT.selectKhachQuetVanTayTrongKhoang(f, tuNgay, denNgay));
+        DungChung.fillTable(FrmQVT.dtblLSQVT, csdlQLQVT.selectKhachQuetVanTayTrongKhoang(f, tuNgay, denNgay));
        
     }
 

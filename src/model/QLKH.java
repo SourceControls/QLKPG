@@ -1,6 +1,6 @@
 package model;
 
-import com.raven.form.Form1;
+import com.raven.form.FrmKH;
 import csdl.*;
 import java.awt.Component;
 import java.awt.Frame;
@@ -48,7 +48,7 @@ public class QLKH {
     private Frame f = FrmMain.f;
 
     public void getDataForTbDanhSachKhachHang() {
-        DungChung.fillTable(Form1.dtblDSKH, csdlQLKH.selectAllKhachHang(f));
+        DungChung.fillTable(FrmKH.dtblDSKH, csdlQLKH.selectAllKhachHang(f));
     }
 
     public void dumpDataFromTblDSKHToFields() {
@@ -76,7 +76,7 @@ public class QLKH {
 
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(Form1.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FrmKH.class.getName()).log(Level.SEVERE, null, ex);
                 return;
             }
             try {
@@ -169,9 +169,9 @@ public class QLKH {
         vec.add(getLinkHinhAnh());
 
         if (csdlQLKH.insertKhachHang(f, vec)) {
-            DungChung.fillTable(Form1.dtblDSKH, csdlQLKH.selectAllKhachHang(f));
+            DungChung.fillTable(FrmKH.dtblDSKH, csdlQLKH.selectAllKhachHang(f));
             saveImg();
-            Form1.themMoi = false;
+            FrmKH.themMoi = false;
             lockPanelBtnLuu();
             lamTrangTextKH();
 
@@ -303,13 +303,13 @@ public class QLKH {
     public void txtTimKiemKhachHangKeyReleased() {
 
         lamTrangTextKH();
-        DungChung.fillTable(Form1.dtblDSKH, csdlQLKH.findByKey(f, txtTimKiemKhachHang.getText()));
+        DungChung.fillTable(FrmKH.dtblDSKH, csdlQLKH.findByKey(f, txtTimKiemKhachHang.getText()));
     }
 
     public void btnThemMoiKhachClicked() {
         txtMaKhachHang.setText(getAutoMaKH());
         unlockPanelBtnLuu();
-        Form1.themMoi = true;
+        FrmKH.themMoi = true;
     }
 
     public void openDoThongSo(FrmDoThongSo frmDoThongSo) {
@@ -385,7 +385,7 @@ public class QLKH {
             getDataForTbDanhSachKhachHang();
             return;
         }
-        DungChung.fillTable(Form1.dtblDSKH, csdlQLKH.selectKHByHang(cbHangKhachHang.getSelectedItem().toString()));
+        DungChung.fillTable(FrmKH.dtblDSKH, csdlQLKH.selectKHByHang(cbHangKhachHang.getSelectedItem().toString()));
     }
 
     public void dangKiDichVu(FrmDangKiDichVu frmDangKiDichVu) {

@@ -4,7 +4,7 @@
  */
 package csdl;
 
-import com.raven.form.Form1;
+import com.raven.form.FrmKH;
 import java.awt.Frame;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -29,7 +29,7 @@ public class CsdlQLKH {
 
     public ResultSet selectAllKhachHang(Frame f) {
         
-        Form1.dtblDSKH.setRowCount(0);
+        FrmKH.dtblDSKH.setRowCount(0);
         
         String selectAllKhachHang = "SELECT MAKH,HOTEN, SDT,GIOITINH,NGAYSINH,CMND,EMAIL,DIACHI FROM dbo.[KHACHHANG]";
         Statement st;

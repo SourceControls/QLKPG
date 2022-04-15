@@ -675,13 +675,13 @@ public class FrmDangKiDichVu extends javax.swing.JFrame {
                 vec.add(FrmMain.modelNV.getManv());
                 if (FrmThanhToan.csdlTT.insertPTT(vec)) {
                     JOptionPane.showMessageDialog(this, "Đăng Kí Và Lập Phiếu Thanh Toán Thành Công");
-                    DungChung.fillTable(com.raven.form.Form2.dtblPDK, DKDV.csdlDKDV.selectAllPDK());
+                    DungChung.fillTable(com.raven.form.FrmPDK.dtblPDK, DKDV.csdlDKDV.selectAllPDK());
                 } else {
                     JOptionPane.showMessageDialog(this, "Đăng Kí Thành Công, Lập Phiếu Thanh Toán Thất Bại");
                 }
                 this.setVisible(false);
             }
-            DungChung.fillTable(com.raven.form.Form2.dtblPDK, DKDV.csdlDKDV.selectAllPDK());
+            DungChung.fillTable(com.raven.form.FrmPDK.dtblPDK, DKDV.csdlDKDV.selectAllPDK());
             JOptionPane.showMessageDialog(this, "Đăng Kí Thành Công");
 
         }

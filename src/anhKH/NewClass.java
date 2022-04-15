@@ -8,6 +8,6 @@ package anhKH;
  *
  * @author TuanHung
  */
-public class df {
+public class NewClass {
     
 }

@@ -5,8 +5,8 @@
  */
 package csdl;
 
-import com.raven.form.Form1;
-import com.raven.form.Form4;
+import com.raven.form.FrmKH;
+import com.raven.form.FrmNV;
 import com.raven.main.FrmMain;
 import java.awt.Frame;
 import java.sql.Connection;
@@ -24,13 +24,13 @@ import javax.swing.JOptionPane;
  * @author anhtu
  */
 public class CsdlQLNV {
-    
+
     private static Connection conn = FrmMain.conn;
 
     public ResultSet selectAllNhanVien(Frame f) {
-        
-        Form4.dtblDSNV.setRowCount(0);
-        
+
+        FrmNV.dtblDSNV.setRowCount(0);
+
         String selectAllKhachHang = "SELECT MANV,HOTEN,GIOITINH,CMND,NGAYSINH,PT,QUANLY,NGHILAM FROM dbo.[NHANVIEN]";
         Statement st;
         try {
@@ -108,7 +108,8 @@ public class CsdlQLNV {
         }
         return false;
     }
-    public ResultSet selectNVByChucVu(boolean quanli){
+
+    public ResultSet selectNVByChucVu(boolean quanli) {
         String findById = " select maNV,hoten,gioitinh,cmnd,ngaysinh,pt,quanly,nghilam from  NHANVIEN WHERE quanly =?";
         try {
             PreparedStatement sql = conn.prepareStatement(findById);
@@ -119,8 +120,9 @@ public class CsdlQLNV {
 
         }
 
-        return null;        
+        return null;
     }
+
     public boolean tonTaiEmail(Frame f, String email) {
         String select = "SELECT MANV FROM NHANVIEN WHERE EMAIL=?";
         try {
@@ -140,12 +142,12 @@ public class CsdlQLNV {
         try {
             PreparedStatement sql = conn.prepareStatement(update);
             for (int i = 1; i <= 12; i++) {
-                sql.setObject(i, vec.get(i-1));
+                sql.setObject(i, vec.get(i - 1));
             }
             return sql.executeUpdate() > 0;
         } catch (SQLException ex) {
-            Logger.getLogger(Form4.class.getName()).log(Level.SEVERE, null, ex);
-        }   
+            Logger.getLogger(FrmNV.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return false;
 
     }
@@ -154,15 +156,17 @@ public class CsdlQLNV {
         String insertKhachHang = "Insert into NHANVIEN VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement sql = conn.prepareStatement(insertKhachHang);
-            for (int i = 1; i <= 10; i++) {
-               
+            for (int i = 1; i <= vec.size(); i++) {
+
                 sql.setObject(i, vec.get(i - 1));
 
             }
-            if(vec.get(5).toString().isEmpty())
-                     sql.setNull(6, java.sql.Types.NVARCHAR);
-            if(vec.get(4).toString().isEmpty())
-                    sql.setNull(5, java.sql.Types.DATE);
+            if (vec.get(5).toString().isEmpty()) {
+                sql.setNull(6, java.sql.Types.NVARCHAR);
+            }
+            if (vec.get(4).toString().isEmpty()) {
+                sql.setNull(5, java.sql.Types.DATE);
+            }
             return sql.executeUpdate() > 0;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(f, ex.getMessage());
@@ -170,6 +174,14 @@ public class CsdlQLNV {
         }
         return false;
 
+    }
+
+    public void insertTaiKhoan(String tenDangNhap, String matKhau) throws SQLException {
+        String sql = "exec sp_tao_tk_NV ?,?";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setString(1,tenDangNhap);
+        pst.setString(2,matKhau);
+        pst.execute();
     }
 
     public ResultSet selectNhanVien(Frame f, String MAKH) {
@@ -184,7 +196,7 @@ public class CsdlQLNV {
         return null;
     }
 
-    public ResultSet findByKey(Frame f, String key){
+    public ResultSet findByKey(Frame f, String key) {
         String sql = "select maNV,hoten,gioitinh,cmnd,ngaysinh,pt,quanly,nghilam from "
                 + "nhanvien where hoten like N'%" + key + "%' or sdt like '%" + key + "%'";
         try {
@@ -195,5 +207,7 @@ public class CsdlQLNV {
         }
         return null;
     }
-    
+
+
+
 }

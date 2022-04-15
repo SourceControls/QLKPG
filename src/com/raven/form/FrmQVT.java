@@ -14,10 +14,10 @@ import model.QLKH;
 import model.QLQVT;
 
 
-public class Form3 extends javax.swing.JPanel {
+public class FrmQVT extends javax.swing.JPanel {
     public static DefaultTableModel dtblLSQVT;
     private QLQVT qlqvt;
-    public Form3() {
+    public FrmQVT() {
         initComponents();
         setOpaque(false);
         init();

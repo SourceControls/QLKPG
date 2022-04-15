@@ -46,6 +46,12 @@
           <Image iconType="3" name="/com/raven/icon/logo.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="   MY GYM"/>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[200, 99]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[200, 99]"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

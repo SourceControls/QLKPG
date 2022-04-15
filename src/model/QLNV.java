@@ -5,7 +5,7 @@
  */
 package model;
 
-import com.raven.form.Form4;
+import com.raven.form.FrmNV;
 import com.raven.main.FrmMain;
 import csdl.CsdlQLNV;
 import java.awt.Component;
@@ -39,21 +39,22 @@ import javax.swing.JTextField;
  * @author anhtu
  */
 public class QLNV {
-   JTable tblNV;
-   JTextField txtMaNhanVien;
-   JTextField txtHoTen;
-   JTextField txtCMND;
-   JRadioButton rbtnNu;
-   JRadioButton rbtnNam;
-   JTextField txtNgaySinh;
-   JTextField txtSDT;
-   JTextField txtDiaChi;
-   JTextField txtEmail;
+
+    JTable tblNV;
+    JTextField txtMaNhanVien;
+    JTextField txtHoTen;
+    JTextField txtCMND;
+    JRadioButton rbtnNu;
+    JRadioButton rbtnNam;
+    JTextField txtNgaySinh;
+    JTextField txtSDT;
+    JTextField txtDiaChi;
+    JTextField txtEmail;
     JLabel lbHinhAnhNV;
     JButton btnChonAnh;
     JButton btnHuy;
     JButton btnThem;
-    JButton btnLuu; 
+    JButton btnLuu;
     JTextField txtTimKiemNhanvien;
     JComboBox cbLocNV;
     JRadioButton rbtnConLam;
@@ -66,12 +67,12 @@ public class QLNV {
     JPanel panelMainTextFieldQLNV;
     JPanel panelMainBtnQLNV;
     JPanel panelBtnLuuQLNV;
-     public static CsdlQLNV csdlQLNV = new CsdlQLNV();
+    public static CsdlQLNV csdlQLNV = new CsdlQLNV();
     private Connection conn = FrmMain.conn;
     private Frame f = FrmMain.f;
 
     public void getDataForTbDanhSachNV() {
-        DungChung.fillTable(Form4.dtblDSNV, csdlQLNV.selectAllNhanVien(f));
+        DungChung.fillTable(FrmNV.dtblDSNV, csdlQLNV.selectAllNhanVien(f));
     }
 
     public void dumpDataFromTblDSNVToFields() {
@@ -113,13 +114,16 @@ public class QLNV {
 
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(Form4.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FrmNV.class.getName()).log(Level.SEVERE, null, ex);
                 return;
             }
             try {
                 String imgURL = rs.getString("HINHANH");
-                if(imgURL !=null && !imgURL.isEmpty() ) DungChung.readImg(f, lbHinhAnhNV, imgURL);
-                else DungChung.readImg(f, lbHinhAnhNV,"/anhNV/nv.png");
+                if (imgURL != null && !imgURL.isEmpty()) {
+                    DungChung.readImg(f, lbHinhAnhNV, imgURL);
+                } else {
+                    DungChung.readImg(f, lbHinhAnhNV, "/anhNV/nv.png");
+                }
             } catch (Exception ex) {
                 lbHinhAnhNV.removeAll();
             }
@@ -190,16 +194,16 @@ public class QLNV {
         }
         Vector vec = new Vector();
         String gioiTinh = "NAM";
-        String PT="0";
-        String Quanli= "0";
+        String PT = "0";
+        String Quanli = "0";
         if (rbtnNu.isSelected()) {
             gioiTinh = "NỮ";
         }
         if (rbtnLaPT.isSelected()) {
             PT = "1";
         }
-        if(rbtnLaQuanLi.isSelected()){
-            Quanli="1";
+        if (rbtnLaQuanLi.isSelected()) {
+            Quanli = "1";
         }
         vec.add(txtMaNhanVien.getText());
         vec.add(txtHoTen.getText());
@@ -214,9 +218,10 @@ public class QLNV {
         vec.add("0");
         vec.add(getLinkHinhAnh());
         if (csdlQLNV.insertNhanVien(f, vec)) {
-            DungChung.fillTable(Form4.dtblDSNV, csdlQLNV.selectAllNhanVien(f));
+            DungChung.fillTable(FrmNV.dtblDSNV, csdlQLNV.selectAllNhanVien(f));
             saveImg();
-            Form4.themMoi = false;
+            FrmNV.themMoi = false;
+            rbtnNghilam.setEnabled(true);
             lockPanelBtnLuu();
             lamTrangTextNV();
 
@@ -285,30 +290,52 @@ public class QLNV {
 
     }
 
+    public void capTaiKhoan() {
+        int row = tblNV.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(f, "Chọn Nhân Viên ở bảng trên");
+            return;
+        }
+
+        String maNV = txtMaNhanVien.getText();
+        String matKhau = JOptionPane.showInputDialog("Nhập Mật Khẩu");
+        if (matKhau.isEmpty()) {
+            JOptionPane.showMessageDialog(f, "Mật Khẩu Không Được Để Trống");
+            return;
+        }
+        try {
+            csdlQLNV.insertTaiKhoan(maNV, matKhau);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(f, "Tạo tài khoản thất bại! \n" + ex.getMessage());
+        }
+        
+        
+    }
+
     public void luuChinhSuaNhanVien() {
 
-        if (!inputThongTinNhanvienHopLe()| !inputChinhSuaThongTinNhanVienHopLe()) {
+        if (!inputThongTinNhanvienHopLe() | !inputChinhSuaThongTinNhanVienHopLe()) {
             return;
         }
 
         Vector vec = new Vector();
         String gioiTinh = "NAM";
-        String PT="0";
-        String Quanli= "0";
-        String NghiLam="0";
+        String PT = "0";
+        String Quanli = "0";
+        String NghiLam = "0";
         if (rbtnNu.isSelected()) {
             gioiTinh = "NỮ";
         }
         if (rbtnLaPT.isSelected()) {
             PT = "1";
         }
-        if(rbtnLaQuanLi.isSelected()){
-            Quanli="1";
+        if (rbtnLaQuanLi.isSelected()) {
+            Quanli = "1";
         }
-        if(rbtnNghilam.isSelected()){
-            NghiLam="1";
+        if (rbtnNghilam.isSelected()) {
+            NghiLam = "1";
         }
-        
+
         vec.add(txtHoTen.getText());
         vec.add(txtSDT.getText());
         vec.add(txtCMND.getText());
@@ -363,15 +390,14 @@ public class QLNV {
     public void txtTimKiemNhanVienKeyReleased() {
 
         lamTrangTextNV();
-        DungChung.fillTable(Form4.dtblDSNV, csdlQLNV.findByKey(f, txtTimKiemNhanvien.getText()));
+        DungChung.fillTable(FrmNV.dtblDSNV, csdlQLNV.findByKey(f, txtTimKiemNhanvien.getText()));
     }
 
     public void btnThemMoiNVClicked() {
         txtMaNhanVien.setText(getAutoMaNV());
         unlockPanelBtnLuu();
-        Form4.themMoi = true;
+        FrmNV.themMoi = true;
     }
-
 
     public void lamTrangTextNV() {
         txtMaNhanVien.setText("");
@@ -434,12 +460,13 @@ public class QLNV {
             getDataForTbDanhSachNV();
             return;
         }
-        DungChung.fillTable(Form4.dtblDSNV, csdlQLNV.selectNVByChucVu(cbLocNV.getSelectedIndex()==1));
+        DungChung.fillTable(FrmNV.dtblDSNV, csdlQLNV.selectNVByChucVu(cbLocNV.getSelectedIndex() == 1));
     }
-    public QLNV (JTable tblNV,JTextField txtMaNhanVien,JTextField txtHoTen,JTextField txtCMND,JRadioButton rbtnNu,JRadioButton rbtnNam,JTextField txtNgaySinh,JTextField txtSDT,JTextField txtDiaChi,JTextField txtEmail,
-               JLabel lbHinhAnhNV,JButton btnChonAnh,JButton btnHuy,JButton btnThem,JButton btnLuu, JTextField txtTimKiemNhanvien,JComboBox cbLocNV
-        ,JRadioButton rbtnConLam,JRadioButton rbtnKhongPT,JRadioButton rbtnKhongQuanLi,JRadioButton rbtnLaPT,JRadioButton rbtnLaQuanLi,JRadioButton rbtnNghilam,JLabel lbLinkHinhAnh,
-        JPanel panelMainTextFieldQLNV,JPanel panelMainBtnQLNV,JPanel panelBtnLuuQLNV) {
+
+    public QLNV(JTable tblNV, JTextField txtMaNhanVien, JTextField txtHoTen, JTextField txtCMND, JRadioButton rbtnNu, JRadioButton rbtnNam, JTextField txtNgaySinh, JTextField txtSDT, JTextField txtDiaChi, JTextField txtEmail,
+            JLabel lbHinhAnhNV, JButton btnChonAnh, JButton btnHuy, JButton btnThem, JButton btnLuu, JTextField txtTimKiemNhanvien, JComboBox cbLocNV,
+             JRadioButton rbtnConLam, JRadioButton rbtnKhongPT, JRadioButton rbtnKhongQuanLi, JRadioButton rbtnLaPT, JRadioButton rbtnLaQuanLi, JRadioButton rbtnNghilam, JLabel lbLinkHinhAnh,
+            JPanel panelMainTextFieldQLNV, JPanel panelMainBtnQLNV, JPanel panelBtnLuuQLNV) {
         this.tblNV = tblNV;
         this.txtMaNhanVien = txtMaNhanVien;
         this.txtHoTen = txtHoTen;
@@ -464,9 +491,9 @@ public class QLNV {
         this.rbtnLaQuanLi = rbtnLaQuanLi;
         this.rbtnNghilam = rbtnNghilam;
         this.cbLocNV = cbLocNV;
-        this.lbLinkHinhAnh=lbLinkHinhAnh;
-        this.panelBtnLuuQLNV=panelBtnLuuQLNV;
-        this.panelMainBtnQLNV=panelMainBtnQLNV;
-        this.panelMainTextFieldQLNV=panelMainTextFieldQLNV;
+        this.lbLinkHinhAnh = lbLinkHinhAnh;
+        this.panelBtnLuuQLNV = panelBtnLuuQLNV;
+        this.panelMainBtnQLNV = panelMainBtnQLNV;
+        this.panelMainTextFieldQLNV = panelMainTextFieldQLNV;
     }
 }

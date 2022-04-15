@@ -5,9 +5,9 @@ import javax.swing.table.DefaultTableModel;
 
 import java.awt.Color;
 
-public class Form5 extends javax.swing.JPanel {
+public class FrmTK extends javax.swing.JPanel {
 
-    public Form5() {
+    public FrmTK() {
         initComponents();
         setOpaque(false);
         init();
@@ -27,7 +27,7 @@ public class Form5 extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 765, Short.MAX_VALUE)
+            .addGap(0, 237, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

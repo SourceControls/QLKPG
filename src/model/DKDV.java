@@ -34,7 +34,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import com.raven.form.FrmDangKiDichVu;
 import com.raven.main.FrmMain;
-import com.raven.form.Form2;
+import com.raven.form.FrmPDK;
 import com.raven.form.FrmThanhToan;
 import com.raven.swing.TableColumn;
 
@@ -49,7 +49,7 @@ public class DKDV {
     public static CsdlDKDV csdlDKDV = new CsdlDKDV();
 
     public void getDataForTblDangKiDichVu() {
-        DungChung.fillTable(Form2.dtblPDK, csdlDKDV.selectAllPDK());
+        DungChung.fillTable(FrmPDK.dtblPDK, csdlDKDV.selectAllPDK());
     }
 
     public void huyDangKi() {
@@ -119,7 +119,7 @@ public class DKDV {
 
     public void txtTimKiemDangKiKeyReleased() {
         lamTrangTextPDK();
-        DungChung.fillTable(Form2.dtblPDK, csdlDKDV.selectPDKByKey(txtTimKiemDangKi.getText()));
+        DungChung.fillTable(FrmPDK.dtblPDK, csdlDKDV.selectPDKByKey(txtTimKiemDangKi.getText()));
     }
 
     public void lamTrangTextPDK() {
@@ -170,7 +170,7 @@ public class DKDV {
             getDataForTblDangKiDichVu();
             return;
         }
-        DungChung.fillTable(Form2.dtblPDK, csdlDKDV.selectPDKByTrangThai(cbTrangThaiPDK.getSelectedItem().toString()));
+        DungChung.fillTable(FrmPDK.dtblPDK, csdlDKDV.selectPDKByTrangThai(cbTrangThaiPDK.getSelectedItem().toString()));
     }
     Frame f;
     
