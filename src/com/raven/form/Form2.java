@@ -180,6 +180,7 @@ public class Form2 extends javax.swing.JPanel {
         jScrollPane1.setBorder(null);
         jScrollPane1.setVerticalScrollBar(scrollBar1);
 
+        tblPDK.setAutoCreateRowSorter(true);
         tblPDK.setBackground(new java.awt.Color(240, 240, 240));
         tblPDK.setForeground(new java.awt.Color(255, 255, 255));
         tblPDK.setModel(new javax.swing.table.DefaultTableModel(

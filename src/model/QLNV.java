@@ -118,8 +118,9 @@ public class QLNV {
             }
             try {
                 String imgURL = rs.getString("HINHANH");
+                 lbLinkHinhAnh.setText(imgURL);
                 if(imgURL !=null && !imgURL.isEmpty() ) DungChung.readImg(f, lbHinhAnhNV, imgURL);
-                else DungChung.readImg(f, lbHinhAnhNV,"/anhNV/nv.png");
+                else DungChung.readImg(f, lbHinhAnhNV,"/anhNV/default.png");
             } catch (Exception ex) {
                 lbHinhAnhNV.removeAll();
             }
@@ -163,13 +164,21 @@ public class QLNV {
             return false;
         }
         String SDT = txtSDT.getText().trim();
-        if (SDT.length() != 0 & !SDT.startsWith("0")) {
-            JOptionPane.showMessageDialog(f, "Số điện thoại không đúng định dạng");
+        if ((SDT.length() != 10 || !SDT.startsWith("0"))) {
+            JOptionPane.showMessageDialog(f, "Số điện thoại không hợp lệ");
             return false;
         }
         String email = txtEmail.getText().trim();
+        if (email.length() == 0) {
+            JOptionPane.showMessageDialog(f, "Nhập email");
+            return false;
+        }
         if (email.length() != 0 && !email.matches("^(.+)@(.+)$")) {
             JOptionPane.showMessageDialog(f, "Email không đúng định dạng");
+            return false;
+        }
+        if(txtNgaySinh.getText().equals("")){
+            JOptionPane.showMessageDialog(f, "Chọn ngày sinh");
             return false;
         }
 
@@ -236,7 +245,7 @@ public class QLNV {
         FileOutputStream os = null;
         try {
             is = new FileInputStream(new File(lbLinkHinhAnh.getText()));
-            os = new FileOutputStream(new File("src/anhKH/" + txtMaNhanVien.getText() + lbLinkHinhAnh.getText().substring(lbLinkHinhAnh.getText().indexOf("."))));
+            os = new FileOutputStream(new File("src/anhNV/" + txtMaNhanVien.getText() + lbLinkHinhAnh.getText().substring(lbLinkHinhAnh.getText().indexOf("."))));
             byte[] buffer = new byte[1024];
             int length = 0;
             while ((length = is.read(buffer)) > 0) {
@@ -265,18 +274,18 @@ public class QLNV {
         String CMND = txtCMND.getText().trim();
         String SDT = txtSDT.getText().trim();
         String email = txtEmail.getText().trim();
-        String maKH = txtMaNhanVien.getText().trim();
-        if (CMND.length() != 0 & csdlQLNV.tonTaiCMNDNgoaiTru(f, CMND, maKH)) {
+        String maNV = txtMaNhanVien.getText().trim();
+        if (CMND.length() != 0 & csdlQLNV.tonTaiCMNDNgoaiTru(f, CMND, maNV)) {
             JOptionPane.showMessageDialog(f, "CMND đã được đăng kí");
             return false;
         }
 
-        if (csdlQLNV.tonTaiSDTNgoaiTru(f, SDT, maKH)) {
+        if (csdlQLNV.tonTaiSDTNgoaiTru(f, SDT, maNV)) {
             JOptionPane.showMessageDialog(f, "Số điện thoại đã được đăng kí");
             return false;
         }
 
-        if (!email.isEmpty() & csdlQLNV.tonTaiEmailNgoaiTru(f, email, maKH)) {
+        if (!email.isEmpty() & csdlQLNV.tonTaiEmailNgoaiTru(f, email, maNV)) {
             JOptionPane.showMessageDialog(f, "Email đã được đăng kí");
             return false;
         }

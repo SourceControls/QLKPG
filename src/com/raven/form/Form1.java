@@ -496,6 +496,7 @@ public class Form1 extends javax.swing.JPanel {
         jScrollPane1.setBorder(null);
         jScrollPane1.setVerticalScrollBar(scrollBar1);
 
+        tblDSKH.setAutoCreateRowSorter(true);
         tblDSKH.setBackground(new java.awt.Color(240, 240, 240));
         tblDSKH.setForeground(new java.awt.Color(255, 255, 255));
         tblDSKH.setModel(new javax.swing.table.DefaultTableModel(
@@ -657,7 +658,7 @@ public class Form1 extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
@@ -766,7 +767,6 @@ public class Form1 extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-
         if (themMoi) {
             qlkh.addKhachHang();
         } else {

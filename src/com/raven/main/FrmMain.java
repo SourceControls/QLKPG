@@ -47,10 +47,6 @@ public class FrmMain extends javax.swing.JFrame {
     public FrmDangKiDichVu frmDangKiDichVu = null;
     public FrmThanhToan frmThanhToan = null;
 
-//    public static String hoTenNV = "";
-//    public static String maNV = "NV01";
-//    public static boolean quanLy;
-    
     public static ModelNV modelNV;
 
     public FrmMain(ModelNV modelNV) {
