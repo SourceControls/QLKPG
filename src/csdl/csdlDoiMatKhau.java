@@ -18,7 +18,7 @@ public class csdlDoiMatKhau {
     public void doiMatKhau(String matKhauCu, String matKhauMoi) throws SQLException{
         String sql = "exec sp_doi_MK ?,?,?";
         PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setString(1,FrmMain.maNV);
+        pst.setString(1,FrmMain.modelNV.getManv());
         pst.setString(2,matKhauCu);
         pst.setString(3,matKhauMoi);
         

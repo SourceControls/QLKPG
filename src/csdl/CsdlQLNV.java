@@ -168,7 +168,7 @@ public class CsdlQLNV {
             return sql.executeUpdate() > 0;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(f, ex.toString());
-             Logger.getLogger(Form4.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(FrmNV.class.getName()).log(Level.SEVERE, null, ex);
 
         }
         return false;

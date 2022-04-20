@@ -81,7 +81,7 @@ public class PanelLoading extends javax.swing.JLayeredPane {
         this.data = data;
         pic.setIcon(data.getAnh());
         cmdContinue.setText("Tiếp tục với " + data.getTen());
-        FrmMain.maNV = data.getManv();
+       // FrmMain.maNV = data.getManv();
         animator.start();
     }
 

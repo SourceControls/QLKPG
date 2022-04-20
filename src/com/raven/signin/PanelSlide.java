@@ -153,7 +153,7 @@ public class PanelSlide extends javax.swing.JLayeredPane {
                     
                 } catch(Exception ex){
                     loading.showError("Lỗi kết nối database !");
-                    //Logger.getLogger(com.raven.main.Login.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(com.raven.main.Login.class.getName()).log(Level.SEVERE, null, ex);
                    //System.out.println(ex.toString());
                 }
             }

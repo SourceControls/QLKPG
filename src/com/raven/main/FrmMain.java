@@ -35,12 +35,12 @@ public class FrmMain extends javax.swing.JFrame {
     private MigLayout layout;
     private Animator animator;
     private boolean menuShow;
-    FrmKH form1 = new FrmKH();
-    FrmPDK form2 = new FrmPDK();
-    FrmQVT form3 = new FrmQVT();
-    FrmNV form4 = new FrmNV();
-    FrmTK form5 = new FrmTK();
-    FrmDoiMatKhau frmDoiMK;
+    FrmKH formKH = new FrmKH();
+    FrmPDK formPDK = new FrmPDK();
+    FrmQVT formQVT = new FrmQVT();
+    FrmNV formNV = new FrmNV();
+    FrmTK formTK = new FrmTK();
+    FrmDoiMatKhau frmDoiMK=new FrmDoiMatKhau();
     public static final int DAY_PER_MONTH = 30;
 
     public static Connection conn;
@@ -48,7 +48,7 @@ public class FrmMain extends javax.swing.JFrame {
     public FrmDoThongSo frmDoThongSo = null;
     public FrmDangKiDichVu frmDangKiDichVu = null;
     public FrmThanhToan frmThanhToan = null;
-
+    public FrmBaoCao frmBaoCao= new FrmBaoCao();
     public static ModelNV modelNV;
 
     public FrmMain(ModelNV modelNV) {
@@ -65,10 +65,10 @@ public class FrmMain extends javax.swing.JFrame {
     }
 
     public void showData() {
-        form1.showData();
-        form2.showData();
-        form3.showData();
-        form4.showData();
+        formKH.showData();
+        formPDK.showData();
+        formQVT.showData();
+        formNV.showData();
     }
 
     private void init() {
@@ -96,15 +96,17 @@ public class FrmMain extends javax.swing.JFrame {
             @Override
             public void selected(int index) {
                 if (index == 0) {
-                    showForm(form1);
+                    showForm(formKH);
                 } else if (index == 1) {
-                    showForm(form2);
+                    showForm(formPDK);
                 } else if (index == 2) {
-                    showForm(form3);
+                    showForm(formQVT);
                 } else if (index == 3) {
-                    showForm(form4);
+                    showForm(formNV);
                 } else if (index == 4) {
-                    showForm(form5);
+                    showForm(frmDoiMK);
+                }else if (index == 5) {
+                    showForm(frmBaoCao);
                 }
 
             }
@@ -115,7 +117,8 @@ public class FrmMain extends javax.swing.JFrame {
         menu.addMenu(new ModelMenu("Quản lí vào ra", new ImageIcon(getClass().getResource("/com/raven/icon/door.png"))));
         if (modelNV.isQuanli()) {
             menu.addMenu(new ModelMenu("Nhân viên", new ImageIcon(getClass().getResource("/com/raven/icon/staff.png"))));
-            menu.addMenu(new ModelMenu("Đổi Mật Khẩu", new ImageIcon(getClass().getResource("/com/raven/icon/changePass.png"))));
+            menu.addMenu(new ModelMenu("Đổi mật khẩu", new ImageIcon(getClass().getResource("/com/raven/icon/key2.png"))));
+            menu.addMenu(new ModelMenu("Báo cáo", new ImageIcon(getClass().getResource("/com/raven/icon/report2.png"))));
         }
         menu.addMenu(new ModelMenu("Cài đặt", new ImageIcon(getClass().getResource("/com/raven/icon/setting.png"))));
         body.add(menu, "w 50!");
@@ -144,10 +147,10 @@ public class FrmMain extends javax.swing.JFrame {
         animator.setResolution(0);
         animator.setAcceleration(0.5f);
         animator.setDeceleration(0.5f);
-        showForm(form1);
+        showForm(formKH);
 
-        FrmDoiMatKhau dmk = new FrmDoiMatKhau();
-        dmk.setVisible(true);
+        
+     
     }
 
     public void showForm(Component com) {
