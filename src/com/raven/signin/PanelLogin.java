@@ -29,7 +29,7 @@ public class PanelLogin extends javax.swing.JPanel {
         txtPass.setText("123");
         txtPass.setLabelText("Mật khẩu");
 
-        cmd.setBackground(new java.awt.Color(25, 182, 247));
+        cmd.setBackground(new java.awt.Color(104, 109, 224));
         cmd.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         cmd.setForeground(new java.awt.Color(255, 255, 255));
         cmd.setText("Đăng nhập");
@@ -40,7 +40,7 @@ public class PanelLogin extends javax.swing.JPanel {
             }
         });
 
-        button1.setBackground(new java.awt.Color(255, 153, 0));
+        button1.setBackground(new java.awt.Color(224, 86, 253));
         button1.setForeground(new java.awt.Color(255, 255, 255));
         button1.setText("Thoát");
         button1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N

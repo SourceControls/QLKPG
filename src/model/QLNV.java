@@ -120,8 +120,8 @@ public class QLNV {
             try {
                 String imgURL = rs.getString("HINHANH");
                  lbLinkHinhAnh.setText(imgURL);
-                if(imgURL !=null && !imgURL.isEmpty() ) DungChung.readImg(f, lbHinhAnhNV, imgURL);
-                else DungChung.readImg(f, lbHinhAnhNV,"/anhNV/default.png");
+                if(imgURL !=null && !imgURL.isEmpty() ) DungChung.readImg(lbHinhAnhNV, imgURL);
+                else DungChung.readImg(lbHinhAnhNV,"/anhNV/default.png");
             } catch (Exception ex) {
                 lbHinhAnhNV.removeAll();
             }
@@ -155,20 +155,21 @@ public class QLNV {
             JOptionPane.showMessageDialog(f, "Họ tên không được trống");
             return false;
         }
-        if (txtSDT.getText().equals("")) {
-            JOptionPane.showMessageDialog(f, "Số điện thoại không được để trống");
+        String SDT = txtSDT.getText().trim();
+        if (SDT.length() != 10  ) {
+            JOptionPane.showMessageDialog(f, "SDT có 10 số");
+            return false;
+        }
+        if ( !SDT.matches("0[0-9]{9}")) {
+            JOptionPane.showMessageDialog(f, "Số điện thoại không đúng định dạng");
             return false;
         }
         String CMND = txtCMND.getText().trim();
-        if (CMND.length() != 0 & CMND.length() != 9 & CMND.length() != 12) {
-            JOptionPane.showMessageDialog(f, "CMND có 9 hoặc 12 số");
+        if ( !CMND.matches("[0-9]{9}") && !CMND.matches("[0-9]{12}") && CMND.length()!=0) {
+            JOptionPane.showMessageDialog(f, "CMND không đúng");
             return false;
         }
-        String SDT = txtSDT.getText().trim();
-        if ((SDT.length() != 10 || !SDT.startsWith("0"))) {
-            JOptionPane.showMessageDialog(f, "Số điện thoại không hợp lệ");
-            return false;
-        }
+        
         String email = txtEmail.getText().trim();
         if (email.length() == 0) {
             JOptionPane.showMessageDialog(f, "Nhập email");
@@ -388,7 +389,7 @@ public class QLNV {
         fd.setVisible(true);
         if (fd.getFile() != null) {
             String fileName = fd.getDirectory() + fd.getFile();
-            DungChung.readImg(f, lbHinhAnhNV, fileName);
+            DungChung.readImg( lbHinhAnhNV, fileName);
             lbLinkHinhAnh.setText(fileName);
         }
     }

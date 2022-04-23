@@ -97,6 +97,14 @@ public class TableCell extends JLabel {
         this.startColorBtnSignUp = startColorBtnSignUp;
     }
 
+    public static void setEndColorBtnFix(Color endColorBtnFix) {
+        TableCell.endColorBtnFix = endColorBtnFix;
+    }
+
+    public static void setEndColorBtnSignUp(Color endColorBtnSignUp) {
+        TableCell.endColorBtnSignUp = endColorBtnSignUp;
+    }
+
     @Override
     protected void paintComponent(Graphics grphcs) {
         int width = getWidth() + 5;

@@ -22,7 +22,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import model.DungChung;
 import com.raven.form.FrmDangKiDichVu;
+import com.raven.form.FrmDangKiDichVu1;
 import com.raven.form.FrmDoThongSo;
+import com.raven.form.FrmDoThongSo1;
 import com.raven.main.FrmMain;
 import java.awt.FileDialog;
 import java.awt.image.ImageFilter;
@@ -57,23 +59,26 @@ public class QLKH {
             ResultSet rs;
             try {
                 String id = (String) tblDSKH.getValueAt(row, 0);
-                rs = csdlQLKH.selectKhachHang(f, id);
+                rs = csdlQLKH.selectKhachHang(null, id);
                 if (rs.next()) {
                     txtMaKhachHang.setText(rs.getString("MAKH").trim());
-                    txtCMND.setText(rs.getString("CMND"));
                     txtHoTen.setText(rs.getString("HOTEN"));
-                    String gt = rs.getString("GIOITINH");
+                    String gt = rs.getString("GIOITINH").trim();
                     if (!gt.equals("NAM")) {
                         rbtnNu.setSelected(true);
                     } else {
                         rbtnNam.setSelected(true);
                     }
-                    txtNgaySinh.setText(rs.getString("NGAYSINH"));
+                    if(rs.getString("NGAYSINH")!=null) txtNgaySinh.setText(rs.getString("NGAYSINH"));
+                    else  txtNgaySinh.setText("");
+                    if(rs.getString("CMND")!=null) txtCMND.setText(rs.getString("CMND"));
+                    else  txtCMND.setText("");
+                    if(rs.getString("DIACHI")!=null) txtDiaChi.setText(rs.getString("DIACHI"));
+                    else  txtDiaChi.setText("");
+                    if(rs.getString("EMAIL")!=null) txtEmail.setText(rs.getString("EMAIL"));
+                    else  txtEmail.setText("");
                     txtSDT.setText(rs.getString("SDT"));
-                    txtDiaChi.setText(rs.getString("DIACHI"));
-                    txtEmail.setText(rs.getString("EMAIL"));
                     txtHangKhachHang.setText(rs.getString("HANGKH"));
-
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(FrmKH.class.getName()).log(Level.SEVERE, null, ex);
@@ -82,7 +87,7 @@ public class QLKH {
             try {
                 String imgURL = rs.getString("HINHANH");
                 lbLinkHinhAnh.setText(imgURL);
-                DungChung.readImg(f, lbHinhAnhKhachQLKH, imgURL);
+                DungChung.readImg( lbHinhAnhKhachQLKH, imgURL);
             } catch (Exception ex) {
                 lbHinhAnhKhachQLKH.removeAll();
                 lbLinkHinhAnh.setText("");
@@ -121,22 +126,30 @@ public class QLKH {
             JOptionPane.showMessageDialog(f, "Số điện thoại không được để trống");
             return false;
         }
-        String CMND = txtCMND.getText().trim();
-        if (CMND.length() != 0 & CMND.length() != 9 & CMND.length() != 12) {
-            JOptionPane.showMessageDialog(f, "CMND có 9 hoặc 12 số");
+        String SDT = txtSDT.getText().trim();
+        if (SDT.length() != 10  ) {
+            JOptionPane.showMessageDialog(f, "SDT có 10 số");
             return false;
         }
-        String SDT = txtSDT.getText().trim();
-        if (SDT.length() != 0 & !SDT.startsWith("0")) {
+        if ( !SDT.matches("0[0-9]{9}")) {
             JOptionPane.showMessageDialog(f, "Số điện thoại không đúng định dạng");
             return false;
         }
+        String CMND = txtCMND.getText().trim();
+        if ( !CMND.matches("[0-9]{9}") && !CMND.matches("[0-9]{12}") && CMND.length()!=0) {
+            JOptionPane.showMessageDialog(f, "CMND không đúng");
+            return false;
+        } //cmnd dùng so với nhau nên ko đc bỏ trống,email cũng v
+//        if ( CMND.length() != 9 & CMND.length() != 12) {
+//            JOptionPane.showMessageDialog(f, "CMND có 9 hoặc 12 số");
+//            return false;
+//        }
+        
         String email = txtEmail.getText().trim();
-        if (email.length() != 0 && !email.matches("^(.+)@(.+)$")) {
+        if (!email.matches("^(.+)@(.+)$") && email.length()!=0) {
             JOptionPane.showMessageDialog(f, "Email không đúng định dạng");
             return false;
         }
-
         return true;
     }
 
@@ -161,8 +174,9 @@ public class QLKH {
         vec.add(txtHoTen.getText());
         vec.add(txtSDT.getText());
         vec.add(gioiTinh);
+        
         vec.add(txtNgaySinh.getText());
-        vec.add(txtCMND.getText());
+        vec.add( txtCMND.getText());
         vec.add(txtEmail.getText());
         vec.add(txtDiaChi.getText());
         vec.add(txtHangKhachHang.getText()); //hạng khách hàng
@@ -243,7 +257,7 @@ public class QLKH {
 
     public void luuChinhSuaKhachHang() {
 
-        if (!inputThongTinKhachHangHopLe() | !inputChinhSuaThongTinKhachHangHopLe()) {
+        if (!inputThongTinKhachHangHopLe() || !inputChinhSuaThongTinKhachHangHopLe()) {
             return;
         }
 
@@ -256,7 +270,7 @@ public class QLKH {
         vec.add(txtHoTen.getText());
         vec.add(txtCMND.getText());
         vec.add(gioiTinh);
-        vec.add(txtNgaySinh.getText());
+        vec.add(txtNgaySinh.getText().equals("")? null:txtNgaySinh.getText());
         vec.add(txtSDT.getText());
         vec.add(txtEmail.getText());
         vec.add(txtDiaChi.getText());
@@ -296,7 +310,7 @@ public class QLKH {
         fd.setVisible(true);
         if (fd.getFile() != null) {
             String fileName = fd.getDirectory() + fd.getFile();
-            DungChung.readImg(f, lbHinhAnhKhachQLKH, fileName);
+            DungChung.readImg(lbHinhAnhKhachQLKH, fileName);
             lbLinkHinhAnh.setText(fileName);
         }
     }
@@ -309,11 +323,12 @@ public class QLKH {
 
     public void btnThemMoiKhachClicked() {
         txtMaKhachHang.setText(getAutoMaKH());
+        txtHangKhachHang.setText("THƯỜNG");
         unlockPanelBtnLuu();
         FrmKH.themMoi = true;
     }
 
-    public void openDoThongSo(FrmDoThongSo frmDoThongSo) {
+    public void openDoThongSo() {
 
         int row = tblDSKH.getSelectedRow();
         if (row == -1) {
@@ -321,7 +336,7 @@ public class QLKH {
             return;
         }
 
-        frmDoThongSo = new FrmDoThongSo(txtMaKhachHang.getText(), txtHoTen.getText(), txtSDT.getText(), lbLinkHinhAnh.getText());
+        FrmMain.frmDoThongSo = new FrmDoThongSo1(txtMaKhachHang.getText(), txtHoTen.getText(), txtSDT.getText(), lbLinkHinhAnh.getText());
 
     }
 
@@ -389,7 +404,7 @@ public class QLKH {
         DungChung.fillTable(FrmKH.dtblDSKH, csdlQLKH.selectKHByHang(cbHangKhachHang.getSelectedItem().toString()));
     }
 
-    public void dangKiDichVu(FrmDangKiDichVu frmDangKiDichVu) {
+    public void dangKiDichVu() {
 
         int row = tblDSKH.getSelectedRow();
         if (row >= 0) {
@@ -402,8 +417,10 @@ public class QLKH {
                     JOptionPane.showMessageDialog(f, "Khách hàng đã có phiếu đăng kí hợp lệ trước đó");
                     return;
                 }
-
-                frmDangKiDichVu = new FrmDangKiDichVu(tblDSKH.getValueAt(row, 0).toString());
+                
+                    FrmMain.frmDangKiDichVu = new FrmDangKiDichVu1(tblDSKH.getValueAt(row, 0).toString());
+                
+                
 
             } catch (SQLException ex) {
                 Logger.getLogger(DKDV.class.getName()).log(Level.SEVERE, null, ex);

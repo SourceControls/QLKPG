@@ -16,22 +16,16 @@ import model.DungChung;
 import model.QLNV;
 
 public class FrmNV extends javax.swing.JPanel {
-    
-    int hoveredRow;
-    int hoveredColumn;
+//
 
-    public static final int DAY_PER_MONTH = 30;
+    //public static final int DAY_PER_MONTH = 30;
 
-    public static Connection conn;
-    public static Frame f;
-    public static view.FrmDangNhap frmDangNhap = null; //new FrmDangNhap();
-
-
+   // public static Connection conn;
     public static DefaultTableModel dtblDSNV;
     private QLNV qlnv;
-    public static String hoTenNV = "";
-    public static String maNV = "NV01";
-    public static boolean quanLy = false;
+   // public static String hoTenNV = "";
+    //public static String maNV = "NV01";
+    //public static boolean quanLy = false;
 
     public static boolean themMoi = false;
     public FrmNV() {
@@ -392,6 +386,8 @@ public class FrmNV extends javax.swing.JPanel {
 
         btnLuu.setText("Lưu");
         btnLuu.setEnabled(false);
+        btnLuu.setkEndColor(new java.awt.Color(255, 51, 255));
+        btnLuu.setkStartColor(new java.awt.Color(224, 86, 253));
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLuuActionPerformed(evt);
@@ -400,6 +396,8 @@ public class FrmNV extends javax.swing.JPanel {
 
         btnHuy.setText("Hủy");
         btnHuy.setEnabled(false);
+        btnHuy.setkEndColor(new java.awt.Color(255, 51, 255));
+        btnHuy.setkStartColor(new java.awt.Color(224, 86, 253));
         btnHuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHuyActionPerformed(evt);
@@ -432,6 +430,8 @@ public class FrmNV extends javax.swing.JPanel {
         panelMainBtnQLNV.setBackground(new java.awt.Color(255, 255, 255));
 
         btnThem.setText("Thêm");
+        btnThem.setkEndColor(new java.awt.Color(153, 153, 255));
+        btnThem.setkStartColor(new java.awt.Color(104, 109, 224));
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemActionPerformed(evt);
@@ -439,6 +439,8 @@ public class FrmNV extends javax.swing.JPanel {
         });
 
         btnSua.setText("Sửa");
+        btnSua.setkEndColor(new java.awt.Color(153, 153, 255));
+        btnSua.setkStartColor(new java.awt.Color(104, 109, 224));
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSuaActionPerformed(evt);
@@ -446,6 +448,8 @@ public class FrmNV extends javax.swing.JPanel {
         });
 
         btnCapTaiKhoan.setText("Cấp Tài Khoản");
+        btnCapTaiKhoan.setkEndColor(new java.awt.Color(153, 153, 255));
+        btnCapTaiKhoan.setkStartColor(new java.awt.Color(104, 109, 224));
         btnCapTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCapTaiKhoanActionPerformed(evt);
@@ -577,8 +581,8 @@ public class FrmNV extends javax.swing.JPanel {
         });
 
         btnLamMoi.setText("Làm mới");
-        btnLamMoi.setkEndColor(new java.awt.Color(104, 109, 224));
-        btnLamMoi.setkStartColor(new java.awt.Color(165, 94, 234));
+        btnLamMoi.setkEndColor(new java.awt.Color(153, 153, 255));
+        btnLamMoi.setkStartColor(new java.awt.Color(104, 109, 224));
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLamMoiActionPerformed(evt);
@@ -714,7 +718,7 @@ public class FrmNV extends javax.swing.JPanel {
     private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
         qlnv.lockPanelBtnLuu();
         btnThem.setEnabled(true);
-        if (tblNV.getSelectedRow() > 0) {
+        if (tblNV.getSelectedRow() > -1) {
             btnSua.setEnabled(true);
         }
         qlnv.lamTrangTextNV();
@@ -728,7 +732,7 @@ public class FrmNV extends javax.swing.JPanel {
         qlnv.btnThemMoiNVClicked();
         btnSua.setEnabled(false);
         rbtnNghilam.setEnabled(false);
-        DungChung.readImg(f, lbHinhAnhNV, "");
+        DungChung.readImg(lbHinhAnhNV, "");
         lbLinkHinhAnh.setText("/anhNV/default.png");
     }//GEN-LAST:event_btnThemActionPerformed
 

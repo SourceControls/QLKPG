@@ -71,6 +71,8 @@ public class FrmDoiMatKhau extends javax.swing.JPanel {
         jPanel1.add(txtNhapLaiMatKhauMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 244, 330, -1));
 
         btnLuu.setText("Lưu");
+        btnLuu.setkEndColor(new java.awt.Color(153, 153, 255));
+        btnLuu.setkStartColor(new java.awt.Color(104, 109, 224));
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLuuActionPerformed(evt);

@@ -4,8 +4,20 @@
  */
 package model;
 
+import PDF.DoThongSoCoThe;
+import static PDF.DoThongSoCoThe.imgURL;
+import com.raven.main.FrmMain;
+import java.awt.AWTException;
+import java.awt.Component;
+import java.awt.FileDialog;
 import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.Robot;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -18,24 +30,30 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author TuanHung
  */
 public class DungChung {
 
-    public static void readImg(Frame f, JLabel lbHinhAnh, String imgURL) {
+    public static void readImg(JLabel lbHinhAnh, String imgURL) {
         int width = 190;
         int height = 255;
-        if(imgURL.isEmpty() || imgURL ==null)
-           imgURL = "/anhKH/default.png";
+        if (imgURL.isEmpty() || imgURL == null) {
+            imgURL = "/anhKH/default.png";
+        }
         try {
             BufferedImage img;
             if (imgURL.contains(":")) //nếu là đường dẫn từ gốc, tức là chọn mới hình ảnh 
@@ -47,7 +65,7 @@ public class DungChung {
             lbHinhAnh.setIcon(new ImageIcon(img.getScaledInstance(width, height, Image.SCALE_SMOOTH)));
 
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(f, ex.getMessage());
+            JOptionPane.showMessageDialog(FrmMain.f, ex.getMessage());
         }
     }
 
@@ -104,5 +122,27 @@ public class DungChung {
             System.out.println(ex.toString());
         }
         return output;
+    }
+
+    public static void componentToImg(Component com,String targetFile) {
+        Robot robot;
+        try {
+            TimeUnit.SECONDS.sleep(1);
+            robot = new Robot();
+            Point p = com.getLocationOnScreen();
+            BufferedImage bi = robot.createScreenCapture(new Rectangle((int) p.getX(), (int) p.getY(), com.getWidth(), com.getHeight()));
+            ImageIO.write(bi, "png", new File(targetFile));
+        } catch (AWTException | IOException | InterruptedException ex) {
+            Logger.getLogger(DoThongSoCoThe.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    public static String selectTargetFile(String fileName){
+        FileDialog fd;
+        fd = new java.awt.FileDialog((java.awt.Frame) null, "Chọn Nơi Lưu Tệp", FileDialog.SAVE);
+        fd.setFile(fileName);
+        fd.setVisible(true);
+        return fd.getDirectory() + fd.getFile();
     }
 }

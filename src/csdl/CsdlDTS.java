@@ -23,7 +23,7 @@ public class CsdlDTS {
     private Connection conn = FrmMain.conn;
     
     
-       public ResultSet selectAllThongSo(Frame f, String maKH) {
+       public ResultSet selectAllThongSo( String maKH) {
         String selectALLThongSo = "SELECT * FROM DOTHONGSOCOTHE WHERE MAKH = ?";
 
         try {
@@ -32,11 +32,11 @@ public class CsdlDTS {
             ResultSet rs = sql.executeQuery();
             return rs;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(f, ex.getMessage());
+            JOptionPane.showMessageDialog(FrmMain.f, ex.getMessage());
         }
         return null;
     }
-    public boolean insertThongSo(Frame f, Vector vec) {
+    public boolean insertThongSo(Vector vec) {
         String insertThongSo = "INSERT INTO DOTHONGSOCOTHE VALUES(?,?,?,?,?,?)";
 
         try {
@@ -46,12 +46,12 @@ public class CsdlDTS {
             }
             return sql.executeUpdate() > 0;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(f, "Mỗi lần đo cách nhau ít nhất 1 phút");
+            JOptionPane.showMessageDialog(FrmMain.f, "Mỗi lần đo cách nhau ít nhất 1 phút");
         }
         return false;
 
     }
-    public boolean dolaiThongso(Frame f, String makh,String ngay) {
+    public boolean dolaiThongso( String makh,String ngay) {
         String insertThongSo = "delete DOTHONGSOCOTHE where makh=? and ngay=?";
         try {
             PreparedStatement sql = conn.prepareStatement(insertThongSo);
@@ -60,13 +60,13 @@ public class CsdlDTS {
 
             return sql.executeUpdate() > 0;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(f, "xóa kết quả trước thất bại !\n " + ex.getMessage());
+            JOptionPane.showMessageDialog(FrmMain.f, "xóa kết quả trước thất bại !\n " + ex.getMessage());
         }
         return false;
 
     }
 
-     public ResultSet getBMI(Frame f,String maKH){
+     public ResultSet getBMI(String maKH){
         String selectALLThongSo = "EXEC SP_LAY_BMI_CUA_KH_GROUP_BY_THANG ?";
 
         try {
@@ -75,7 +75,7 @@ public class CsdlDTS {
             ResultSet rs = sql.executeQuery();
             return rs;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(f, ex.getMessage());
+            JOptionPane.showMessageDialog(FrmMain.f, ex.getMessage());
         }
         return null;         
      }
@@ -90,7 +90,7 @@ public class CsdlDTS {
             ResultSet rs = sql.executeQuery();
             return rs;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(f, ex.getMessage());
+            JOptionPane.showMessageDialog(FrmMain.f, ex.getMessage());
         }
         return null;         
      }

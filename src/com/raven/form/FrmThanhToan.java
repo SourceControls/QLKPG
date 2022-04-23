@@ -31,7 +31,7 @@ public class FrmThanhToan extends javax.swing.JFrame {
     private Connection conn = FrmMain.conn;
 
     private String maPDK = "";
-    private String maKH = "";
+    public String maKH = "";
     private String trangThaiPDK = "";
 
     public static CsdlTT csdlTT = new CsdlTT();
@@ -62,8 +62,8 @@ public class FrmThanhToan extends javax.swing.JFrame {
         f = this;
         dtblPTT = (DefaultTableModel) tblLichSuThanhToan.getModel();
         this.setLocationRelativeTo(com.raven.main.FrmMain.f);
-        this.setVisible(true);
-        this.setAlwaysOnTop(true);
+//        this.setVisible(true);
+//        this.setAlwaysOnTop(true);
         DungChung.fillTable(dtblPTT, csdlTT.selectAllPTT(maPDK));
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         txtNgayThu.setText((formatter.format(new Date())));

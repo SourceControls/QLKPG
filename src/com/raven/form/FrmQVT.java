@@ -134,6 +134,8 @@ public class FrmQVT extends javax.swing.JPanel {
         lbDichVuQLQVT.setText("NULL");
 
         btnGiaLapVaoRa.setText("Giả lập vào ra");
+        btnGiaLapVaoRa.setkEndColor(new java.awt.Color(104, 109, 224));
+        btnGiaLapVaoRa.setkStartColor(new java.awt.Color(153, 153, 255));
         btnGiaLapVaoRa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGiaLapVaoRaActionPerformed(evt);
@@ -458,6 +460,7 @@ public class FrmQVT extends javax.swing.JPanel {
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel22.setText("Từ ngày:");
 
+        txtDenNgay.setBackground(new java.awt.Color(255, 255, 255));
         txtDenNgay.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 txtDenNgayMousePressed(evt);
@@ -470,6 +473,8 @@ public class FrmQVT extends javax.swing.JPanel {
         });
 
         btnLocQLQVT.setText("Lọc");
+        btnLocQLQVT.setkEndColor(new java.awt.Color(255, 51, 255));
+        btnLocQLQVT.setkStartColor(new java.awt.Color(224, 86, 253));
         btnLocQLQVT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLocQLQVTActionPerformed(evt);
@@ -479,6 +484,7 @@ public class FrmQVT extends javax.swing.JPanel {
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel23.setText("Đến ngày:");
 
+        txtTuNgay.setBackground(new java.awt.Color(255, 255, 255));
         txtTuNgay.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtTuNgayMouseClicked(evt);

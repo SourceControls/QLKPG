@@ -92,7 +92,7 @@ public class QLQVT {
                 lbEmail.setText((String) rs.getObject(7));
                 lbDiaChi.setText((String) rs.getObject(8));
                 lbHangKhachHang.setText((String) rs.getObject(9));
-                DungChung.readImg(f, lbHinhAnhKhach, (String) rs.getObject(10));
+                DungChung.readImg(lbHinhAnhKhach, (String) rs.getObject(10));
             }
         } catch (SQLException ex) {
             Logger.getLogger(QLQVT.class.getName()).log(Level.SEVERE, null, ex);

@@ -45,17 +45,21 @@ public class FrmMain extends javax.swing.JFrame {
 
     public static Connection conn;
     public static Frame f; //new FrmDangNhap();
-    public FrmDoThongSo frmDoThongSo = null;
-    public FrmDangKiDichVu frmDangKiDichVu = null;
-    public FrmThanhToan frmThanhToan = null;
+    public static FrmDoThongSo1 frmDoThongSo = null;
+    public static FrmDangKiDichVu1 frmDangKiDichVu = null;
+    public static FrmThanhToan1 frmThanhToan = null;
     public FrmBaoCao frmBaoCao= new FrmBaoCao();
     public static ModelNV modelNV;
 
+    
+    
     public FrmMain(ModelNV modelNV) {
+        f=this;
         this.modelNV = modelNV;
         initComponents();
         devInit();
         init();
+         
     }
 
     public void devInit() {
@@ -171,6 +175,9 @@ public class FrmMain extends javax.swing.JFrame {
 
     public void thoat() {
         new Login(conn).setVisible(true);
+        if(frmDoThongSo!=null) frmDoThongSo.dispose();
+        if(frmThanhToan!=null) frmThanhToan.dispose();
+        if(frmDangKiDichVu!=null) frmDangKiDichVu.dispose();
         this.dispose();
     }
 
@@ -189,7 +196,6 @@ public class FrmMain extends javax.swing.JFrame {
             }
         });
 
-        body.setBackground(new java.awt.Color(245, 245, 245));
         body.setMaximumSize(new java.awt.Dimension(1080, 660));
         body.setMinimumSize(new java.awt.Dimension(1080, 660));
         body.setName(""); // NOI18N

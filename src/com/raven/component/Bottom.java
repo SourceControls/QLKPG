@@ -21,7 +21,7 @@ public class Bottom extends javax.swing.JPanel {
     public Bottom() {
         initComponents();
         setOpaque(false);
-        setBackground(new Color(205, 132, 241));
+        setBackground(new Color(224,86,253));
         setData();
     }
     public void setData(){

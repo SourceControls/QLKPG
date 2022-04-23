@@ -36,6 +36,7 @@ import com.raven.form.FrmDangKiDichVu;
 import com.raven.main.FrmMain;
 import com.raven.form.FrmPDK;
 import com.raven.form.FrmThanhToan;
+import com.raven.form.FrmThanhToan1;
 import com.raven.swing.TableColumn;
 
 /**
@@ -90,11 +91,11 @@ public class DKDV {
         if (row != -1) {
             try {
 
-                ResultSet rs = QLKH.csdlQLKH.selectKhachHang(f, tblPDK.getValueAt(row, 1).toString());
+                ResultSet rs = QLKH.csdlQLKH.selectKhachHang(null, tblPDK.getValueAt(row, 1).toString());
 
                 if (rs.next()) {
 
-                    DungChung.readImg(f, lbHinhAnhKhachQLDK, rs.getString("HINHANH"));
+                    DungChung.readImg(lbHinhAnhKhachQLDK, rs.getString("HINHANH"));
                     lbMaKhachHang.setText(rs.getString("MAKH"));
                     lbHoTen.setText(rs.getString("HOTEN"));
                     lbCMND.setText(rs.getString("CMND"));
@@ -135,18 +136,21 @@ public class DKDV {
         lbHinhAnhKhachQLDK.setIcon(new ImageIcon(""));
     }
 
-    public void thanhToan(FrmThanhToan frmThanhToan) {
+    public void thanhToan() {
         int row = tblPDK.getSelectedRow();
         if(tblPDK.getValueAt(tblPDK.getSelectedRow(),10).toString().equals("ĐÃ HỦY")){
-            JOptionPane.showMessageDialog(frmThanhToan, "Phiếu đã hủy !");
+            JOptionPane.showMessageDialog(FrmMain.frmThanhToan, "Phiếu đã hủy !");
             return;
         }
-        System.out.println(tblPDK.getValueAt(tblPDK.getSelectedRow(),10).toString() );
         if (row != -1) {
-
-            frmThanhToan = new FrmThanhToan(tblPDK.getValueAt(row, 0).toString(),
+            if(FrmMain.frmThanhToan ==null || !FrmMain.frmThanhToan.maKH.equals(lbMaKhachHang.getText())){
+               FrmMain.frmThanhToan = new FrmThanhToan1(tblPDK.getValueAt(row, 0).toString(),
                     tblPDK.getValueAt(row, 1).toString(),
                     tblPDK.getValueAt(row, 10).toString());
+            } else {
+                FrmMain.frmThanhToan.setVisible(true);
+            }
+           
 
         }
     }

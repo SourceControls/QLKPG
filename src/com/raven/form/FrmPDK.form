@@ -85,10 +85,10 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="L&#xe0;m m&#x1edb;i"/>
             <Property name="kEndColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="e0" green="6d" red="68" type="rgb"/>
+              <Color blue="ff" green="99" red="99" type="rgb"/>
             </Property>
             <Property name="kStartColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ea" green="5e" red="a5" type="rgb"/>
+              <Color blue="e0" green="6d" red="68" type="rgb"/>
             </Property>
           </Properties>
           <Events>
@@ -180,7 +180,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="41" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="304" max="32767" attributes="0"/>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Component id="scrollBar1" alignment="1" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" alignment="0" pref="41" max="32767" attributes="0"/>
@@ -666,6 +666,12 @@
             <Component class="com.raven.swing.KButton" name="btnHuyDangKi">
               <Properties>
                 <Property name="text" type="java.lang.String" value="H&#x1ee7;y &#x111;&#x103;ng k&#xed;"/>
+                <Property name="kEndColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="33" red="ff" type="rgb"/>
+                </Property>
+                <Property name="kStartColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="fd" green="56" red="e0" type="rgb"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHuyDangKiActionPerformed"/>
@@ -674,6 +680,12 @@
             <Component class="com.raven.swing.KButton" name="btnThanhToan">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Thanh to&#xe1;n"/>
+                <Property name="kEndColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="99" red="99" type="rgb"/>
+                </Property>
+                <Property name="kStartColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="e0" green="6d" red="68" type="rgb"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThanhToanActionPerformed"/>
@@ -682,6 +694,12 @@
             <Component class="com.raven.swing.KButton" name="btnLuuGhiChuDangKi">
               <Properties>
                 <Property name="text" type="java.lang.String" value="L&#x1b0;u"/>
+                <Property name="kEndColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="99" red="99" type="rgb"/>
+                </Property>
+                <Property name="kStartColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="e0" green="6d" red="68" type="rgb"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLuuGhiChuDangKiActionPerformed"/>

@@ -77,7 +77,7 @@ public class CsdlDK {
             return pst.executeQuery();
         } catch (Exception ex) {
             System.out.println(ex.toString());
-            JOptionPane.showMessageDialog(view.FrmDangKiDichVu.f, ex.toString());
+            JOptionPane.showMessageDialog(com.raven.form.FrmDangKiDichVu.f, ex.toString());
 
         }
         return null;

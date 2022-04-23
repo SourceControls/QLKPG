@@ -50,7 +50,6 @@ public class FrmPDK extends javax.swing.JPanel {
         });
     }
     public void showData(){
-        frmThanhToan = new com.raven.form.FrmThanhToan();
         dtblPDK = (DefaultTableModel) tblPDK.getModel();
         dkdv = new DKDV(tblPDK, lbHinhAnhKhachQLDK, lbMaKhachHang, lbHoTen ,lbCMND, lbGioiTinh, lbNgaySinh, lbEmail, lbSDT,
             lbDiaChi, lbHangKhachHang, txtGhiChuQLDK, txtTimKiemDangKi, lbLinkHinhAnh,cbTrangThaiPDK);
@@ -101,8 +100,8 @@ public class FrmPDK extends javax.swing.JPanel {
         btnLuuGhiChuDangKi = new com.raven.swing.KButton();
 
         btnLamMoi.setText("Làm mới");
-        btnLamMoi.setkEndColor(new java.awt.Color(104, 109, 224));
-        btnLamMoi.setkStartColor(new java.awt.Color(165, 94, 234));
+        btnLamMoi.setkEndColor(new java.awt.Color(153, 153, 255));
+        btnLamMoi.setkStartColor(new java.awt.Color(104, 109, 224));
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLamMoiActionPerformed(evt);
@@ -230,7 +229,7 @@ public class FrmPDK extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 41, Short.MAX_VALUE)
+            .addGap(0, 304, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(scrollBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
@@ -377,6 +376,8 @@ public class FrmPDK extends javax.swing.JPanel {
         jScrollPane2.setViewportView(txtGhiChuQLDK);
 
         btnHuyDangKi.setText("Hủy đăng kí");
+        btnHuyDangKi.setkEndColor(new java.awt.Color(255, 51, 255));
+        btnHuyDangKi.setkStartColor(new java.awt.Color(224, 86, 253));
         btnHuyDangKi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHuyDangKiActionPerformed(evt);
@@ -384,6 +385,8 @@ public class FrmPDK extends javax.swing.JPanel {
         });
 
         btnThanhToan.setText("Thanh toán");
+        btnThanhToan.setkEndColor(new java.awt.Color(153, 153, 255));
+        btnThanhToan.setkStartColor(new java.awt.Color(104, 109, 224));
         btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThanhToanActionPerformed(evt);
@@ -391,6 +394,8 @@ public class FrmPDK extends javax.swing.JPanel {
         });
 
         btnLuuGhiChuDangKi.setText("Lưu");
+        btnLuuGhiChuDangKi.setkEndColor(new java.awt.Color(153, 153, 255));
+        btnLuuGhiChuDangKi.setkStartColor(new java.awt.Color(104, 109, 224));
         btnLuuGhiChuDangKi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLuuGhiChuDangKiActionPerformed(evt);
@@ -485,7 +490,8 @@ public class FrmPDK extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimKiemDangKiActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
-        dkdv.thanhToan(frmThanhToan);
+        if(tblPDK.getSelectedRow()> -1) 
+            dkdv.thanhToan();
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void tblPDKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPDKMouseClicked
@@ -493,7 +499,7 @@ public class FrmPDK extends javax.swing.JPanel {
     }//GEN-LAST:event_tblPDKMouseClicked
 
     private void btnLuuGhiChuDangKiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuGhiChuDangKiActionPerformed
-       dkdv.luuGhiChuDangKi();
+        dkdv.luuGhiChuDangKi();
     }//GEN-LAST:event_btnLuuGhiChuDangKiActionPerformed
 
     private void txtTimKiemDangKiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemDangKiKeyReleased

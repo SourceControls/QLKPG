@@ -18,6 +18,8 @@ import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import com.raven.main.FrmMain;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 
 /**
  *
@@ -172,7 +174,7 @@ public class CsdlQLKH {
 
     }
 
-    public ResultSet selectKhachHang(Frame f, String MAKH) {
+    public ResultSet selectKhachHang(JFrame f, String MAKH) {
         String findById = " select *from  KHACHHANG WHERE MAKH =?";
         try {
             PreparedStatement sql = conn.prepareStatement(findById);
