@@ -6,6 +6,7 @@
 package com.raven.form;
 
 import com.raven.chart.ModelChart;
+import com.raven.chart.blankchart.BlankPlotChart;
 import csdl.CsdlDTS;
 import java.awt.BorderLayout;
 import java.sql.Connection;
@@ -53,10 +54,27 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
         this.hoTen = hoTen;
         this.SDT = SDT;
         this.imgURL = imgURL;
+        setMinYMaxY();
         initComponents();
         
         devInit();
         this.setVisible(true);
+    }
+    public void setMinYMaxY(){
+        double minY=100;
+        double maxY=0;
+        ResultSet rs = csdlDTS.getBMI( maKH);
+        try {
+            while(rs.next()){
+                if(Double.parseDouble(rs.getString(2)) < minY) minY=Double.parseDouble(rs.getString(2));
+                if(Double.parseDouble(rs.getString(2)) > maxY) maxY=Double.parseDouble(rs.getString(2));
+            }
+            BlankPlotChart.minY=Math.floor(minY);
+            BlankPlotChart.maxY=Math.ceil(maxY);
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     public void devInit() {
 
@@ -185,7 +203,6 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
         tblThongSo = new com.raven.swing.TableColumn();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setResizable(false);
 
         panelRound2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -197,9 +214,7 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
         );
         panelRound2Layout.setVerticalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(lineChart, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE))
+            .addComponent(lineChart, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
         );
 
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
@@ -253,6 +268,8 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
 
         btnBatDauDo.setText("Bắt đầu đo");
         btnBatDauDo.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btnBatDauDo.setkEndColor(new java.awt.Color(153, 153, 255));
+        btnBatDauDo.setkStartColor(new java.awt.Color(104, 109, 224));
         btnBatDauDo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBatDauDoActionPerformed(evt);
@@ -262,6 +279,8 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
         btnLuu.setText("Lưu");
         btnLuu.setEnabled(false);
         btnLuu.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btnLuu.setkEndColor(new java.awt.Color(255, 51, 255));
+        btnLuu.setkStartColor(new java.awt.Color(224, 86, 253));
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLuuActionPerformed(evt);
@@ -270,6 +289,8 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
 
         btnInLichSu.setText("In lịch sử");
         btnInLichSu.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btnInLichSu.setkEndColor(new java.awt.Color(153, 153, 255));
+        btnInLichSu.setkStartColor(new java.awt.Color(104, 109, 224));
         btnInLichSu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInLichSuActionPerformed(evt);
@@ -278,6 +299,8 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
 
         jButton1.setText("Hủy");
         jButton1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jButton1.setkEndColor(new java.awt.Color(255, 51, 255));
+        jButton1.setkStartColor(new java.awt.Color(224, 86, 253));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

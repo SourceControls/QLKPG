@@ -54,6 +54,7 @@ public class FrmKH extends javax.swing.JPanel {
                 qlkh.dumpDataFromTblDSKHToFields();
             }
         });
+        
     }
 
     public void setEnableText(boolean a) {

@@ -5,7 +5,7 @@ public class LegendItem extends javax.swing.JPanel {
     public LegendItem(ModelLegend data) {
         initComponents();
         setOpaque(false);
-        lbColor.setBackground(data.getColor());
+        lbColor.setBackground(data.getColorLight());
         lbName.setText(data.getName());
     }
 
@@ -17,6 +17,9 @@ public class LegendItem extends javax.swing.JPanel {
         lbName = new javax.swing.JLabel();
 
         lbColor.setText("labelColor1");
+        lbColor.setMaximumSize(new java.awt.Dimension(63, 24));
+        lbColor.setMinimumSize(new java.awt.Dimension(63, 24));
+        lbColor.setPreferredSize(new java.awt.Dimension(63, 24));
 
         lbName.setForeground(new java.awt.Color(180, 180, 180));
         lbName.setText("Name");
@@ -26,8 +29,8 @@ public class LegendItem extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbColor, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addComponent(lbColor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbName)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -36,12 +39,10 @@ public class LegendItem extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbName)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(lbColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbName)
+                    .addComponent(lbColor, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

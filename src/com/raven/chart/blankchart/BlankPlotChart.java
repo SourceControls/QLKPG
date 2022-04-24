@@ -17,8 +17,8 @@ import javax.swing.JComponent;
 import javax.swing.border.EmptyBorder;
 
 public class BlankPlotChart extends JComponent {
-    public double minY=15;
-    public double maxY=20;
+    public static double minY;///Math.floor(FrmDoThongSo1.minY);
+    public static double maxY;
     private final DecimalFormat format = new DecimalFormat("#,##0.##");
     private NiceScale niceScale;
     private double maxValues;
@@ -26,6 +26,7 @@ public class BlankPlotChart extends JComponent {
     private int labelCount;
     private String valuesFormat = "#,##0.##";
     private BlankPlotChatRender blankPlotChatRender;
+    double space ;
     public BlankPlotChatRender getBlankPlotChatRender() {
         return blankPlotChatRender;
     }
@@ -63,6 +64,14 @@ public class BlankPlotChart extends JComponent {
     public void setValuesFormat(String valuesFormat) {
         this.valuesFormat = valuesFormat;
         format.applyPattern(valuesFormat);
+    }
+
+    public void setMinY(double minY) {
+        this.minY = minY;
+    }
+
+    public void setMaxY(double maxY) {
+        this.maxY = maxY;
     }
 
 
@@ -110,7 +119,7 @@ public class BlankPlotChart extends JComponent {
         Insets insets = getInsets();
         double textHeight = getLabelTextHeight(g2);
         double height = getHeight() - (insets.top + insets.bottom) - textHeight;
-        double space = height / niceScale.getMaxTicks();
+        space = height / niceScale.getMaxTicks();
         double locationY = insets.bottom + textHeight;
         double textWidth = getMaxValuesTextWidth(g2);
         double spaceText = 5;
@@ -251,8 +260,8 @@ public class BlankPlotChart extends JComponent {
     public double getSeriesValuesOf(double values, double height) {
         //val = 15.88   height=  5.0226.0
         double max = niceScale.getTickSpacing() * niceScale.getMaxTicks();//0.5*10=5  //bt 20
-        double percentValues = values * 100d / (max); //317.6070851668245 
-        return (height * percentValues / (100d)); //-675 //717.7920124770234
+       double percentValues = values  / (max); //317.6070851668245 
+        return (height * percentValues -Math.floor(minY) * space /niceScale.getTickSpacing() );//-675 //717.7920124770234
     }
 
     public NiceScale getNiceScale() {

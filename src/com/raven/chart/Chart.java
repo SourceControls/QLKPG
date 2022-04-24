@@ -85,7 +85,7 @@ public class Chart extends javax.swing.JPanel {
                 if (showLabel != null) {
                     g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.2f));
                     Dimension s = getLabelWidth(showLabel, g2);
-                    int space = 3;
+                    int space = 5;
                     int spaceTop = 5;
                     g2.setColor(new Color(30, 30, 30));
                     g2.fillRoundRect(labelLocation.x - s.width / 2 - 3, labelLocation.y - s.height - space * 2 - spaceTop, s.width + space * 2, s.height + space * 2, 10, 10);

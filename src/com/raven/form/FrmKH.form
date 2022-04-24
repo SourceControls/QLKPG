@@ -657,7 +657,7 @@
                   <Component id="jScrollPane1" alignment="0" pref="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                      <Component id="scrollBar1" pref="250" max="32767" attributes="0"/>
+                      <Component id="scrollBar1" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
