@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.raven.form;
+package old;
+
 import csdl.CsdlTT;
 import java.sql.Connection;
 import javax.swing.JFrame;
@@ -15,17 +16,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import model.DungChung;
 import model.QLKH;
-import static com.raven.form.FrmThanhToan.csdlTT;
-import static com.raven.form.FrmThanhToan.f;
+import static old.FrmThanhToan.csdlTT;
+import static old.FrmThanhToan.f;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import model.DKDV;
-import static com.raven.form.FrmThanhToan.csdlTT;
+import static old.FrmThanhToan.csdlTT;
+
 /**
  *
  * @author anhtu
  */
-public class FrmThanhToan1 extends javax.swing.JDialog {
+public class FrmThanhToan extends javax.swing.JFrame {
     private Connection conn = FrmMain.conn;
 
     private String maPDK = "";
@@ -33,30 +35,31 @@ public class FrmThanhToan1 extends javax.swing.JDialog {
     private String trangThaiPDK = "";
 
     public static CsdlTT csdlTT = new CsdlTT();
+    public static JFrame f;
     private DefaultTableModel dtblPTT;
 
     int soThangConNo;
     int soTienThanhToanToiThieu;
     /**
-     * Creates new form FrmThanhToan1
+     * Creates new form paymentForm
      */
-    public FrmThanhToan1(String maPDK, String maKH, String trangThaiPDK) {
-         
-        super(FrmMain.f, true);
-        System.out.println(maKH);
-        System.out.println("aaa");
+    public FrmThanhToan() {
+        
+        
+    }
+    public FrmThanhToan(String maPDK, String maKH, String trangThaiPDK) {
         initComponents();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         this.maPDK = maPDK;
         this.maKH = maKH;
         this.trangThaiPDK = trangThaiPDK;
-        devInit();
         this.setVisible(true);
+        devInit();
     }
     public void devInit() {
 
-        
+        f = this;
         dtblPTT = (DefaultTableModel) tblLichSuThanhToan.getModel();
         this.setLocationRelativeTo(com.raven.main.FrmMain.f);
 //        this.setVisible(true);
@@ -71,7 +74,7 @@ public class FrmThanhToan1 extends javax.swing.JDialog {
 
     public void showThongTinKhach() {
         try {
-            ResultSet rs = QLKH.csdlQLKH.selectKhachHang(null, maKH);
+            ResultSet rs = QLKH.csdlQLKH.selectKhachHang(this, maKH);
             if (rs.next()) {
                 lbMaKhachHang.setText(rs.getString(1));
             }
@@ -106,6 +109,7 @@ public class FrmThanhToan1 extends javax.swing.JDialog {
             return;
         }
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -142,7 +146,8 @@ public class FrmThanhToan1 extends javax.swing.JDialog {
         cbSoThang = new com.raven.swing.ComboBoxSuggestion();
         jLabel8 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -171,8 +176,8 @@ public class FrmThanhToan1 extends javax.swing.JDialog {
         tblLichSuThanhToan.setHasBtn(false);
         tblLichSuThanhToan.setStartColorBtnFix(new java.awt.Color(255, 180, 48));
         tblLichSuThanhToan.setStartColorBtnSignUp(new java.awt.Color(0, 243, 92));
-        tblLichSuThanhToan.setTextBTN1("");
-        tblLichSuThanhToan.setTextBTN2("");
+        tblLichSuThanhToan.setTextBTN1("Sửa");
+        tblLichSuThanhToan.setTextBTN2("ĐKDV");
         tblLichSuThanhToan.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 tblLichSuThanhToanMouseDragged(evt);
@@ -243,7 +248,7 @@ public class FrmThanhToan1 extends javax.swing.JDialog {
         jLabel34.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel34.setText("SĐT:");
 
-        jButton1.setText("Thoát");
+        jButton1.setText("Hủy");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -418,11 +423,6 @@ public class FrmThanhToan1 extends javax.swing.JDialog {
 
     }//GEN-LAST:event_tblLichSuThanhToanMouseReleased
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dispose();
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         if (trangThaiPDK.equals("ĐÃ HỦY")) {
             JOptionPane.showMessageDialog(this, "Phiếu Đăng Kí Đã Hủy Không Thể Thanh Toán");
@@ -432,6 +432,7 @@ public class FrmThanhToan1 extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Phiếu Đăng Kí Đã Hết Hạn Không Thể Thanh Toán");
             return;
         }
+
 
         Vector vec = new Vector();
         vec.add(csdlTT.getMaPTT());
@@ -448,8 +449,12 @@ public class FrmThanhToan1 extends javax.swing.JDialog {
             DungChung.fillTable(com.raven.form.FrmPDK.dtblPDK, DKDV.csdlDKDV.selectAllPDK());
             DungChung.fillTable(dtblPTT, csdlTT.selectAllPTT(maPDK));
         }
-
+       
     }//GEN-LAST:event_btnThanhToanActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cbSoThangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbSoThangItemStateChanged
         if (soThangConNo == 0 || cbSoThang.getItemCount() == 0) {
@@ -487,27 +492,21 @@ public class FrmThanhToan1 extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmThanhToan1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmThanhToan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmThanhToan1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmThanhToan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmThanhToan1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmThanhToan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmThanhToan1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmThanhToan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
-        /* Create and display the dialog */
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-//                FrmThanhToan1 dialog = new FrmThanhToan1(new javax.swing.JFrame(), true);
-//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-//                    @Override
-//                    public void windowClosing(java.awt.event.WindowEvent e) {
-//                        System.exit(0);
-//                    }
-//                });
-//                dialog.setVisible(true);
+               // new FrmThanhToan().setVisible(true);
             }
         });
     }

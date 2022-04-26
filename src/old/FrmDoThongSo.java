@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.raven.form;
+package old;
 
 import com.raven.chart.ModelChart;
-import com.raven.chart.blankchart.BlankPlotChart;
 import csdl.CsdlDTS;
 import java.awt.BorderLayout;
 import java.sql.Connection;
@@ -19,12 +18,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import model.DungChung;
-import static com.raven.form.FrmDoThongSo.dtblThongSo;
+import static old.FrmDoThongSo.dtblThongSo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import static com.raven.form.FrmDoThongSo.dtblThongSo;
+import static old.FrmDoThongSo.dtblThongSo;
 import java.util.Vector;
-import static com.raven.form.FrmDoThongSo.dtblThongSo;
+import static old.FrmDoThongSo.dtblThongSo;
 import com.raven.swing.ScrollBarCustom;
 import java.awt.Color;
 import java.time.LocalDateTime;
@@ -38,7 +37,7 @@ import javax.swing.border.EmptyBorder;
  *
  * @author anhtu
  */
-public class FrmDoThongSo1 extends javax.swing.JDialog {
+public class FrmDoThongSo extends javax.swing.JFrame {
 
     private MigLayout layout;
     public String maKH;
@@ -49,35 +48,21 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
     private static CsdlDTS csdlDTS = new CsdlDTS();
     public static DefaultTableModel dtblThongSo;
 
-    public FrmDoThongSo1(String maKH, String hoTen, String SDT, String imgURL) {
+    public FrmDoThongSo() {
+    }
 
-        super(FrmMain.f, true); //java.awt.Frame parent, boolean modal
+    public FrmDoThongSo(String maKH, String hoTen, String SDT, String imgURL) {
+
+        initComponents();
         this.maKH = maKH;
         this.hoTen = hoTen;
         this.SDT = SDT;
         this.imgURL = imgURL;
-        setMinYMaxY();
-        initComponents();
-
         devInit();
-        this.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
     }
-    public void setMinYMaxY(){
-        double minY=100;
-        double maxY=0;
-        ResultSet rs = csdlDTS.getBMI( maKH);
-        try {
-            while(rs.next()){
-                if(Double.parseDouble(rs.getString(2)) < minY) minY=Double.parseDouble(rs.getString(2));
-                if(Double.parseDouble(rs.getString(2)) > maxY) maxY=Double.parseDouble(rs.getString(2));
-            }
-            BlankPlotChart.minY=Math.floor(minY);
-            BlankPlotChart.maxY=Math.ceil(maxY);
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
+
     public void devInit() {
 
         lbMaKhachHang.setText(maKH);
@@ -87,10 +72,19 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
         dtblThongSo = (DefaultTableModel) tblThongSo.getModel();
         DungChung.readImg(lbHinhAnhKhach, imgURL);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setVisible(true);
 
         lineChart.addLegend("BMI", new Color(12, 84, 175), new Color(0, 108, 247));
         startLineChart();
-        getDataTaBle();
+
+        ResultSet rs = csdlDTS.selectAllThongSo(maKH);
+        try {
+            while (rs.next()) {
+                dtblThongSo.addRow(new Object[]{rs.getObject(2), rs.getObject(3), rs.getObject(4), rs.getObject(5), rs.getObject(6)});
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
         fixTable(jScrollPane1);
     }
 
@@ -119,70 +113,15 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
         scroll.setBorder(new EmptyBorder(5, 10, 5, 10));
     }
 
-    public void doLanDau() {
-        txtCanNang.setText(getRand(40, 100));
-        txtTiLeMo.setText(getRand(10, 50));
-        txtTiLeNuoc.setText(getRand(50, 80));
-        txtChieuCao.setText(getRand(140, 200));
-    }
-
-    public void doLanTiepTheo(ResultSet rs) {
-
-        double ChieuCao = 0;
-        double canNang = 0;
-        double tiLeMo = 0;
-        double tiLeNuoc = 0;
-        try {
-            while (rs.next()) {
-                ChieuCao = Double.parseDouble(rs.getString(3));
-                canNang = Double.parseDouble(rs.getString(4));
-                tiLeMo = Double.parseDouble(rs.getString(5));
-                tiLeNuoc = Double.parseDouble(rs.getString(6));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
-            return;
-        }
-        txtCanNang.setText(getRand(canNang - canNang * 0.02, canNang + canNang * 0.05));
-        txtTiLeMo.setText(getRand(tiLeMo - tiLeMo * 0.03, tiLeMo));
-        txtTiLeNuoc.setText(getRand(tiLeNuoc - tiLeNuoc * 0.02, tiLeNuoc + tiLeNuoc * 0.03));
-        txtChieuCao.setText(getRand(ChieuCao - ChieuCao * 0.005, ChieuCao + ChieuCao * 0.005));
-    }
-
-    public String getRand(int max, int min) {
-        return String.format("%.2f", ((Math.random()) * ((max - min) + 1)) + min);
-    }
-
-    public String getRand(double min, double max) {
-        return String.format("%.2f", ((Math.random()) * ((max - min) + 1)) + min);
-    }
-
-    public void getDataTaBle() {
-        dtblThongSo.setRowCount(0);
-        ResultSet rs = csdlDTS.selectAllThongSo(maKH);
-        try {
-            while (rs.next()) {
-                dtblThongSo.addRow(new Object[]{rs.getObject(2), rs.getObject(3), rs.getObject(4), rs.getObject(5), rs.getObject(6)});
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-    }
-
-    public void lamTrangText() {
-        txtNgayDo.setText("");
-        txtChieuCao.setText("");
-        txtCanNang.setText("");
-        txtTiLeMo.setText("");
-        txtTiLeNuoc.setText("");
-    }
-
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelRound2 = new com.raven.swing.PanelRound();
-        lineChart = new com.raven.chart.LineChart();
         panelRound1 = new com.raven.swing.PanelRound();
         txtTiLeNuoc = new com.raven.swing.TextFieldRound();
         jLabel1 = new javax.swing.JLabel();
@@ -208,21 +147,12 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
         jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblThongSo = new com.raven.swing.TableColumn();
+        panelRound2 = new com.raven.swing.PanelRound();
+        lineChart = new com.raven.chart.LineChart();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        panelRound2.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
-        panelRound2.setLayout(panelRound2Layout);
-        panelRound2Layout.setHorizontalGroup(
-            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lineChart, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        panelRound2Layout.setVerticalGroup(
-            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lineChart, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        setResizable(false);
 
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -275,8 +205,6 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
 
         btnBatDauDo.setText("Bắt đầu đo");
         btnBatDauDo.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        btnBatDauDo.setkEndColor(new java.awt.Color(153, 153, 255));
-        btnBatDauDo.setkStartColor(new java.awt.Color(104, 109, 224));
         btnBatDauDo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBatDauDoActionPerformed(evt);
@@ -286,8 +214,6 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
         btnLuu.setText("Lưu");
         btnLuu.setEnabled(false);
         btnLuu.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        btnLuu.setkEndColor(new java.awt.Color(255, 51, 255));
-        btnLuu.setkStartColor(new java.awt.Color(224, 86, 253));
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLuuActionPerformed(evt);
@@ -296,8 +222,6 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
 
         btnInLichSu.setText("In lịch sử");
         btnInLichSu.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        btnInLichSu.setkEndColor(new java.awt.Color(153, 153, 255));
-        btnInLichSu.setkStartColor(new java.awt.Color(104, 109, 224));
         btnInLichSu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInLichSuActionPerformed(evt);
@@ -306,8 +230,6 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
 
         jButton1.setText("Hủy");
         jButton1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jButton1.setkEndColor(new java.awt.Color(255, 51, 255));
-        jButton1.setkStartColor(new java.awt.Color(224, 86, 253));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -317,7 +239,6 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
         jLabel12.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel12.setText("Đo thông số");
 
-        tblThongSo.setAutoCreateRowSorter(true);
         tblThongSo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -336,9 +257,6 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
         });
         tblThongSo.setHasBtn(false);
         jScrollPane1.setViewportView(tblThongSo);
-        if (tblThongSo.getColumnModel().getColumnCount() > 0) {
-            tblThongSo.getColumnModel().getColumn(0).setMinWidth(185);
-        }
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
@@ -392,7 +310,7 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelRound1Layout.setVerticalGroup(
@@ -456,6 +374,23 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
                 .addGap(25, 25, 25))
         );
 
+        panelRound2.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
+        panelRound2.setLayout(panelRound2Layout);
+        panelRound2Layout.setHorizontalGroup(
+            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lineChart, javax.swing.GroupLayout.PREFERRED_SIZE, 1173, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        panelRound2Layout.setVerticalGroup(
+            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
+                .addGap(0, 37, Short.MAX_VALUE)
+                .addComponent(lineChart, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -481,28 +416,29 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBatDauDoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatDauDoActionPerformed
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.0");
+        SimpleDateFormat formatter = new SimpleDateFormat("2020-MM-dd HH:mm:ss.0");
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDateTime now = LocalDateTime.now();
+        ResultSet rs = csdlDTS.selectAllThongSo(maKH);
 
-        txtNgayDo.setText(formatter.format(new Date()));
+        rs = csdlDTS.selectAllThongSo(maKH);
         btnLuu.setEnabled(true);
         String date = "2020-01-01";
         for (int i = 0; i <= 12; i++) {
             txtNgayDo.setText(date + " 01:00:00");
             date = DungChung.dateAdd(date, 30);
-            ResultSet rs = csdlDTS.selectAllThongSo(maKH);
+
             try {
                 if (rs.next()) {
                     doLanTiepTheo(rs);
                 } else {
                     doLanDau();
                 }
-                      btnLuuActionPerformed(evt);
+                btnLuuActionPerformed(evt);
                 btnLuu.setEnabled(true);
             } catch (SQLException ex) {
                 Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         }
     }//GEN-LAST:event_btnBatDauDoActionPerformed
 
@@ -519,8 +455,6 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
             btnLuu.setEnabled(false);
             vec.remove(0);
             startLineChart();
-            getDataTaBle();
-            lamTrangText();
         }
     }//GEN-LAST:event_btnLuuActionPerformed
 
@@ -531,6 +465,47 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.setVisible(false);        //f.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cbHangKHItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbHangKHItemStateChanged
+
+    }//GEN-LAST:event_cbHangKHItemStateChanged
+    public void doLanDau() {
+        txtCanNang.setText(getRand(40, 100));
+        txtTiLeMo.setText(getRand(10, 50));
+        txtTiLeNuoc.setText(getRand(50, 80));
+        txtChieuCao.setText(getRand(140, 200));
+    }
+
+    public void doLanTiepTheo(ResultSet rs) {
+
+        double ChieuCao = 0;
+        double canNang = 0;
+        double tiLeMo = 0;
+        double tiLeNuoc = 0;
+        try {
+            while (rs.next()) {
+                ChieuCao = Double.parseDouble(rs.getString(3));
+                canNang = Double.parseDouble(rs.getString(4));
+                tiLeMo = Double.parseDouble(rs.getString(5));
+                tiLeNuoc = Double.parseDouble(rs.getString(6));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        txtCanNang.setText(getRand(canNang - canNang * 0.02, canNang + canNang * 0.05));
+        txtTiLeMo.setText(getRand(tiLeMo - tiLeMo * 0.03, tiLeMo));
+        txtTiLeNuoc.setText(getRand(tiLeNuoc - tiLeNuoc * 0.02, tiLeNuoc + tiLeNuoc * 0.03));
+        txtChieuCao.setText(getRand(ChieuCao - ChieuCao * 0.005, ChieuCao + ChieuCao * 0.005));
+    }
+
+    public String getRand(int max, int min) {
+        return String.format("%.2f", ((Math.random()) * ((max - min) + 1)) + min);
+    }
+
+    public String getRand(double min, double max) {
+        return String.format("%.2f", ((Math.random()) * ((max - min) + 1)) + min);
+    }
 
     /**
      * @param args the command line arguments
@@ -549,27 +524,23 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmDoThongSo1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmDoThongSo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmDoThongSo1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmDoThongSo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmDoThongSo1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmDoThongSo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmDoThongSo1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmDoThongSo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
-        /* Create and display the dialog */
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-//                FrmDoThongSo1 dialog = new FrmDoThongSo1(new javax.swing.JFrame(), true);
-//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-//                    @Override
-//                    public void windowClosing(java.awt.event.WindowEvent e) {
-//                        System.exit(0);
-//                    }
-//                });
-//                dialog.setVisible(true);
+                //new FrmDoThongSo().setVisible(true);
             }
         });
     }

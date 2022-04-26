@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import model.DKDV;
-import com.raven.form.FrmDangKiDichVu;
+import old.FrmDangKiDichVu;
 import com.raven.main.FrmMain;
 
 /**
@@ -78,7 +78,7 @@ public class CsdlDK {
             return pst.executeQuery();
         } catch (Exception ex) {
             System.out.println(ex.toString());
-            JOptionPane.showMessageDialog(com.raven.form.FrmDangKiDichVu.f, ex.toString()); 
+            JOptionPane.showMessageDialog(old.FrmDangKiDichVu.f, ex.toString()); 
 
         }
         return null;

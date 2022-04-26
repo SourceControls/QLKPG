@@ -12,7 +12,7 @@ import java.util.Vector;
 import java.sql.Types;
 import javax.swing.JOptionPane;
 import com.raven.main.FrmMain;
-import com.raven.form.FrmThanhToan;
+import old.FrmThanhToan;
 
 /**
  *

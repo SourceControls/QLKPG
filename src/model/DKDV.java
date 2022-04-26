@@ -32,11 +32,11 @@ import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import com.raven.form.FrmDangKiDichVu;
+import old.FrmDangKiDichVu;
 import com.raven.main.FrmMain;
 import com.raven.form.FrmPDK;
+import old.FrmThanhToan;
 import com.raven.form.FrmThanhToan;
-import com.raven.form.FrmThanhToan1;
 import com.raven.swing.TableColumn;
 
 /**
@@ -155,7 +155,7 @@ public class DKDV {
         int row = tblPDK.getSelectedRow();
         if (row != -1) {
             if (FrmMain.frmThanhToan == null || !FrmMain.frmThanhToan.maKH.equals(lbMaKhachHang.getText())) {
-                FrmMain.frmThanhToan = new FrmThanhToan1(tblPDK.getValueAt(row, 0).toString(),
+                FrmMain.frmThanhToan = new FrmThanhToan(tblPDK.getValueAt(row, 0).toString(),
                         tblPDK.getValueAt(row, 1).toString(),
                         tblPDK.getValueAt(row, 10).toString());
             } else {

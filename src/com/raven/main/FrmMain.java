@@ -19,11 +19,11 @@ import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
-import com.raven.form.FrmDangKiDichVu;
+import old.FrmDangKiDichVu;
 
-import com.raven.form.FrmDoThongSo;
+import old.FrmDoThongSo;
 import static com.raven.main.FrmMain.conn;
-import com.raven.form.FrmThanhToan;
+import old.FrmThanhToan;
 import com.raven.swing.MenuItem;
 import javax.swing.JFrame;
 import model.ModelNV;
@@ -45,9 +45,9 @@ public class FrmMain extends javax.swing.JFrame {
 
     public static Connection conn;
     public static Frame f; //new FrmDangNhap();
-    public static FrmDoThongSo1 frmDoThongSo = null;
-    public static FrmDangKiDichVu1 frmDangKiDichVu = null;
-    public static FrmThanhToan1 frmThanhToan = null;
+    public static FrmDoThongSo frmDoThongSo = null;
+    public static FrmDangKiDichVu frmDangKiDichVu = null;
+    public static FrmThanhToan frmThanhToan = null;
     public FrmBaoCao frmBaoCao = new FrmBaoCao();
     public static ModelNV modelNV;
 

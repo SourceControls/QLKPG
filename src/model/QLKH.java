@@ -21,10 +21,10 @@ import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import model.DungChung;
+import old.FrmDangKiDichVu;
 import com.raven.form.FrmDangKiDichVu;
-import com.raven.form.FrmDangKiDichVu1;
+import old.FrmDoThongSo;
 import com.raven.form.FrmDoThongSo;
-import com.raven.form.FrmDoThongSo1;
 import com.raven.main.FrmMain;
 import com.raven.swing.TableColumn;
 import java.awt.FileDialog;
@@ -363,7 +363,7 @@ public class QLKH {
             return;
         }
 
-        FrmMain.frmDoThongSo = new FrmDoThongSo1(txtMaKhachHang.getText(), txtHoTen.getText(), txtSDT.getText(), lbLinkHinhAnh.getText());
+        FrmMain.frmDoThongSo = new FrmDoThongSo(txtMaKhachHang.getText(), txtHoTen.getText(), txtSDT.getText(), lbLinkHinhAnh.getText());
 
     }
 
@@ -446,7 +446,7 @@ public class QLKH {
                     return;
                 }
 
-                FrmMain.frmDangKiDichVu = new FrmDangKiDichVu1(tblDSKH.getValueAt(row, 0).toString());
+                FrmMain.frmDangKiDichVu = new FrmDangKiDichVu(tblDSKH.getValueAt(row, 0).toString());
 
             } catch (SQLException ex) {
                 Logger.getLogger(DKDV.class.getName()).log(Level.SEVERE, null, ex);
