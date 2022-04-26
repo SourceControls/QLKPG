@@ -26,7 +26,9 @@ import com.raven.form.FrmDangKiDichVu1;
 import com.raven.form.FrmDoThongSo;
 import com.raven.form.FrmDoThongSo1;
 import com.raven.main.FrmMain;
+import com.raven.swing.TableColumn;
 import java.awt.FileDialog;
+import java.awt.Rectangle;
 import java.awt.image.ImageFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -69,14 +71,26 @@ public class QLKH {
                     } else {
                         rbtnNam.setSelected(true);
                     }
-                    if(rs.getString("NGAYSINH")!=null) txtNgaySinh.setText(rs.getString("NGAYSINH"));
-                    else  txtNgaySinh.setText("");
-                    if(rs.getString("CMND")!=null) txtCMND.setText(rs.getString("CMND"));
-                    else  txtCMND.setText("");
-                    if(rs.getString("DIACHI")!=null) txtDiaChi.setText(rs.getString("DIACHI"));
-                    else  txtDiaChi.setText("");
-                    if(rs.getString("EMAIL")!=null) txtEmail.setText(rs.getString("EMAIL"));
-                    else  txtEmail.setText("");
+                    if (rs.getString("NGAYSINH") != null) {
+                        txtNgaySinh.setText(rs.getString("NGAYSINH"));
+                    } else {
+                        txtNgaySinh.setText("");
+                    }
+                    if (rs.getString("CMND") != null) {
+                        txtCMND.setText(rs.getString("CMND"));
+                    } else {
+                        txtCMND.setText("");
+                    }
+                    if (rs.getString("DIACHI") != null) {
+                        txtDiaChi.setText(rs.getString("DIACHI"));
+                    } else {
+                        txtDiaChi.setText("");
+                    }
+                    if (rs.getString("EMAIL") != null) {
+                        txtEmail.setText(rs.getString("EMAIL"));
+                    } else {
+                        txtEmail.setText("");
+                    }
                     txtSDT.setText(rs.getString("SDT"));
                     txtHangKhachHang.setText(rs.getString("HANGKH"));
                 }
@@ -87,7 +101,7 @@ public class QLKH {
             try {
                 String imgURL = rs.getString("HINHANH");
                 lbLinkHinhAnh.setText(imgURL);
-                DungChung.readImg( lbHinhAnhKhachQLKH, imgURL);
+                DungChung.readImg(lbHinhAnhKhachQLKH, imgURL);
             } catch (Exception ex) {
                 lbHinhAnhKhachQLKH.removeAll();
                 lbLinkHinhAnh.setText("");
@@ -118,6 +132,7 @@ public class QLKH {
     }
 
     public boolean inputThongTinKhachHangHopLe() {
+
         if (txtHoTen.getText().equals("")) {
             JOptionPane.showMessageDialog(f, "Họ tên không được trống");
             return false;
@@ -126,27 +141,31 @@ public class QLKH {
             JOptionPane.showMessageDialog(f, "Số điện thoại không được để trống");
             return false;
         }
+        if (!txtNgaySinh.getText().equals("")) {
+            String ngaySinh = txtNgaySinh.getText();
+            int now = java.time.LocalDate.now().getYear();
+            if (now - Integer.parseInt(ngaySinh.substring(0, 4)) <= 6) {
+                JOptionPane.showMessageDialog(f, "Ngày Sinh Không Hợp Lệ, Người Đăng Kí Dịch Vụ Phải Trên 6 Tuổi!");
+                return false;
+            }
+        }
         String SDT = txtSDT.getText().trim();
-        if (SDT.length() != 10  ) {
+        if (SDT.length() != 10) {
             JOptionPane.showMessageDialog(f, "SDT có 10 số");
             return false;
         }
-        if ( !SDT.matches("0[0-9]{9}")) {
+        if (!SDT.matches("0[0-9]{9}")) {
             JOptionPane.showMessageDialog(f, "Số điện thoại không đúng định dạng");
             return false;
         }
         String CMND = txtCMND.getText().trim();
-        if ( !CMND.matches("[0-9]{9}") && !CMND.matches("[0-9]{12}") && CMND.length()!=0) {
+        if (!CMND.matches("[0-9]{9}") && !CMND.matches("[0-9]{12}") && CMND.length() != 0) {
             JOptionPane.showMessageDialog(f, "CMND không đúng");
             return false;
-        } //cmnd dùng so với nhau nên ko đc bỏ trống,email cũng v
-//        if ( CMND.length() != 9 & CMND.length() != 12) {
-//            JOptionPane.showMessageDialog(f, "CMND có 9 hoặc 12 số");
-//            return false;
-//        }
-        
+        }
+
         String email = txtEmail.getText().trim();
-        if (!email.matches("^(.+)@(.+)$") && email.length()!=0) {
+        if (!email.matches("^(.+)@(.+)$") && email.length() != 0) {
             JOptionPane.showMessageDialog(f, "Email không đúng định dạng");
             return false;
         }
@@ -174,9 +193,9 @@ public class QLKH {
         vec.add(txtHoTen.getText());
         vec.add(txtSDT.getText());
         vec.add(gioiTinh);
-        
+
         vec.add(txtNgaySinh.getText());
-        vec.add( txtCMND.getText());
+        vec.add(txtCMND.getText());
         vec.add(txtEmail.getText());
         vec.add(txtDiaChi.getText());
         vec.add(txtHangKhachHang.getText()); //hạng khách hàng
@@ -189,7 +208,8 @@ public class QLKH {
             FrmKH.themMoi = false;
             lockPanelBtnLuu();
             lamTrangTextKH();
-
+            tblDSKH.getSelectionModel().setSelectionInterval(tblDSKH.getRowCount() - 1, tblDSKH.getRowCount() - 1);
+            tblDSKH.scrollRectToVisible(new Rectangle(tblDSKH.getCellRect(tblDSKH.getRowCount() - 1, 0, true)));
             JOptionPane.showMessageDialog(f, "Thêm mới khách thành công!");
         } else {
             JOptionPane.showMessageDialog(f, "Thêm mới khách thất bại!");
@@ -260,7 +280,6 @@ public class QLKH {
         if (!inputThongTinKhachHangHopLe() || !inputChinhSuaThongTinKhachHangHopLe()) {
             return;
         }
-
         Vector vec = new Vector();
         String gioiTinh = "NAM";
         if (rbtnNu.isSelected()) {
@@ -268,10 +287,10 @@ public class QLKH {
         }
 
         vec.add(txtHoTen.getText());
-        vec.add(txtCMND.getText());
-        vec.add(gioiTinh);
-        vec.add(txtNgaySinh.getText().equals("")? null:txtNgaySinh.getText());
         vec.add(txtSDT.getText());
+        vec.add(gioiTinh);
+        vec.add(txtNgaySinh.getText());
+        vec.add(txtCMND.getText());
         vec.add(txtEmail.getText());
         vec.add(txtDiaChi.getText());
         vec.add(getLinkHinhAnh());
@@ -281,6 +300,9 @@ public class QLKH {
             getDataForTbDanhSachKhachHang();
             lockPanelBtnLuu();
             lamTrangTextKH();
+
+            tblDSKH.repaint();
+            tblDSKH.setColSelected(0);
             JOptionPane.showMessageDialog(f, "Cập nhật thành công");
         } else {
             JOptionPane.showMessageDialog(f, "Cập nhật thất bại");
@@ -322,10 +344,15 @@ public class QLKH {
     }
 
     public void btnThemMoiKhachClicked() {
+        lamTrangTextKH();
         txtMaKhachHang.setText(getAutoMaKH());
-        txtHangKhachHang.setText("THƯỜNG");
         unlockPanelBtnLuu();
         FrmKH.themMoi = true;
+        btnDoThongSo.setEnabled(false);
+        tblDSKH.clearSelection();
+        tblDSKH.repaint();
+        DungChung.readImg(lbHinhAnhKhachQLKH, "");
+        lbLinkHinhAnh.setText("/anhKH/default.png");
     }
 
     public void openDoThongSo() {
@@ -397,7 +424,8 @@ public class QLKH {
     }
 
     public void filterKH() {
-        if (cbHangKhachHang.getSelectedItem().toString().toLowerCase().equals("none")) {
+        txtTimKiemKhachHang.setText("");
+        if (cbHangKhachHang.getSelectedItem().toString().toLowerCase().equals("tất cả")) {
             getDataForTbDanhSachKhachHang();
             return;
         }
@@ -417,10 +445,8 @@ public class QLKH {
                     JOptionPane.showMessageDialog(f, "Khách hàng đã có phiếu đăng kí hợp lệ trước đó");
                     return;
                 }
-                
-                    FrmMain.frmDangKiDichVu = new FrmDangKiDichVu1(tblDSKH.getValueAt(row, 0).toString());
-                
-                
+
+                FrmMain.frmDangKiDichVu = new FrmDangKiDichVu1(tblDSKH.getValueAt(row, 0).toString());
 
             } catch (SQLException ex) {
                 Logger.getLogger(DKDV.class.getName()).log(Level.SEVERE, null, ex);
@@ -430,7 +456,7 @@ public class QLKH {
         }
     }
 
-    public QLKH(JTable tblDSKH, JTextField txtMaKhachHang, JTextField txtHoTen, JTextField txtCMND, JRadioButton rbtnNu, JRadioButton rbtnNam, JTextField txtNgaySinh, JTextField txtSDT, JTextField txtDiaChi, JTextField txtEmail, JTextField txtHangKhachHang, JLabel lbLinkHinhAnh, JLabel lbHinhAnhKhachQLKH, JButton btnLuuChinhSua, JButton btnHuyChinhSua, JButton btnThemMoi, JButton btnDoThongSo, JButton btnChonAnh, JPanel panelMainTextFieldQLKH, JPanel panelMainBtnQLKH, JPanel panelBtnLuuQLKH, JTextField txtTimKiemKhachHang, JComboBox cbHangKhachHang) {
+    public QLKH(TableColumn tblDSKH, JTextField txtMaKhachHang, JTextField txtHoTen, JTextField txtCMND, JRadioButton rbtnNu, JRadioButton rbtnNam, JTextField txtNgaySinh, JTextField txtSDT, JTextField txtDiaChi, JTextField txtEmail, JTextField txtHangKhachHang, JLabel lbLinkHinhAnh, JLabel lbHinhAnhKhachQLKH, JButton btnLuuChinhSua, JButton btnHuyChinhSua, JButton btnThemMoi, JButton btnDoThongSo, JButton btnChonAnh, JPanel panelMainTextFieldQLKH, JPanel panelMainBtnQLKH, JPanel panelBtnLuuQLKH, JTextField txtTimKiemKhachHang, JComboBox cbHangKhachHang) {
         this.tblDSKH = tblDSKH;
         this.txtMaKhachHang = txtMaKhachHang;
         this.txtHoTen = txtHoTen;
@@ -458,7 +484,7 @@ public class QLKH {
         this.cbHangKhachHang = cbHangKhachHang;
     }
 
-    JTable tblDSKH;
+    TableColumn tblDSKH;
     JTextField txtMaKhachHang;
     JTextField txtHoTen;
     JTextField txtCMND;

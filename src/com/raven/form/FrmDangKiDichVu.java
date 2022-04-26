@@ -35,22 +35,25 @@ public class FrmDangKiDichVu extends javax.swing.JFrame {
      */
     private Connection conn = FrmMain.conn;
     private static CsdlQLKH csdlQLKH = new CsdlQLKH();
-    private static CsdlDK csdlDK= new CsdlDK();
+    private static CsdlDK csdlDK = new CsdlDK();
     public static JFrame f;
     public String maKH = "";
     private Vector<String> vecMaDV = new Vector<>();
     private Vector<String> vecSoNgaySuDungDV = new Vector<>();
     private Vector<String> vecGia = new Vector<>();
-    public FrmDangKiDichVu(){
+
+    public FrmDangKiDichVu() {
     }
+
     public FrmDangKiDichVu(String maKH) {
         initComponents();
         rootPane.setEnabled(false);
         this.maKH = maKH;
         devInit();
         this.setVisible(true);
-        
+
     }
+
     public void devInit() {
 
         f = this;
@@ -58,17 +61,18 @@ public class FrmDangKiDichVu extends javax.swing.JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         txtNgayDangKi.setText((formatter.format(new Date())));
-
+        txtThue.setValue(10);
         hienThiThongTinKH();
         getThongTinDichvu();
         getThongTinKhuyenMai();
 
     }
+
     public void hienThiThongTinKH() {
 
         ResultSet rs = QLKH.csdlQLKH.selectKhachHang(this, maKH);
         try {
-            if (rs!= null & rs.next()) {
+            if (rs != null & rs.next()) {
 
                 DungChung.readImg(lbHinhAnhKhach, rs.getString("HINHANH"));
                 lbMaKhachHang.setText(rs.getString("MAKH"));
@@ -116,14 +120,14 @@ public class FrmDangKiDichVu extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(FrmDangKiDichVu.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
+
     }
 
     public void tinhTongTien() {
         Float giaGoc = Float.parseFloat(txtGia.getText());
-     
+
         Float tiLeKM = Float.parseFloat(cbTiLeKM.getSelectedItem().toString()) / 100;
-        
+
         Float tiLeThue = Float.parseFloat(txtThue.getValue().toString()) / 100;
         Float thanhTien = (giaGoc + giaGoc * tiLeThue) - (giaGoc + giaGoc * tiLeThue) * tiLeKM;// 
         txtThanhTien.setText(String.valueOf((thanhTien)));
@@ -142,6 +146,7 @@ public class FrmDangKiDichVu extends javax.swing.JFrame {
             txtNgayKetThuc.setText("");
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -658,13 +663,13 @@ public class FrmDangKiDichVu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDangKiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKiActionPerformed
-       String maDV = vecMaDV.get(cbGoiDichVu.getSelectedIndex());
+        String maDV = vecMaDV.get(cbGoiDichVu.getSelectedIndex());
         String ngayDK = txtNgayDangKi.getText();
         String tongTien = txtThanhTien.getText();
         String ghiChu = jGhichu.getText();
         String thue = txtThue.getValue().toString();
         String maPDK = csdlDK.maPDKtuTang();
-        if(Integer.parseInt(txtSoNgaySuDung.getText()) < 30 && !rbtnDaThanhToan.isSelected()) //dưới 30 ngày bắt buộc thanh toán luôn
+        if (Integer.parseInt(txtSoNgaySuDung.getText()) < 30 && !rbtnDaThanhToan.isSelected()) //dưới 30 ngày bắt buộc thanh toán luôn
         {
             JOptionPane.showMessageDialog(f, "Phiếu đăng kí dưới 30 ngày phải được thanh toán trước");
             return;
@@ -684,14 +689,24 @@ public class FrmDangKiDichVu extends javax.swing.JFrame {
                 if (FrmThanhToan.csdlTT.insertPTT(vec)) {
                     JOptionPane.showMessageDialog(this, "Đăng Kí Và Lập Phiếu Thanh Toán Thành Công");
                     DungChung.fillTable(com.raven.form.FrmPDK.dtblPDK, DKDV.csdlDKDV.selectAllPDK());
+                    this.setVisible(false);
+                    return;
                 } else {
                     JOptionPane.showMessageDialog(this, "Đăng Kí Thành Công, Lập Phiếu Thanh Toán Thất Bại");
+
                 }
                 this.setVisible(false);
+                return;
             }
             DungChung.fillTable(com.raven.form.FrmPDK.dtblPDK, DKDV.csdlDKDV.selectAllPDK());
-            JOptionPane.showMessageDialog(this, "Đăng Kí Thành Công");
+            int choose = JOptionPane.showConfirmDialog(this, "Đăng kí thành công, thanh toán ngay??");
+            this.setVisible(false);
+            if (choose == JOptionPane.YES_OPTION) {
 
+                FrmMain.formPDK.tblPDK.setRowSelected(FrmMain.formPDK.tblPDK.getRowCount());
+                FrmMain.formPDK.dkdv.thanhToan();
+            }
+            return;
         }
     }//GEN-LAST:event_btnDangKiActionPerformed
 
@@ -700,7 +715,7 @@ public class FrmDangKiDichVu extends javax.swing.JFrame {
     }//GEN-LAST:event_txtThanhTienActionPerformed
 
     private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
-         this.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_btnHuyActionPerformed
 
     private void rbtnDaThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnDaThanhToanActionPerformed
@@ -716,12 +731,15 @@ public class FrmDangKiDichVu extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNgayKetThucActionPerformed
 
     private void cbKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbKhuyenMaiActionPerformed
-     
+
         cbTiLeKM.setSelectedIndex(cbKhuyenMai.getSelectedIndex());
         tinhTongTien();
     }//GEN-LAST:event_cbKhuyenMaiActionPerformed
 
     private void txtThueStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_txtThueStateChanged
+        if ((int) txtThue.getValue() == -1) {
+            txtThue.setValue(0);
+        }
         tinhTongTien();
     }//GEN-LAST:event_txtThueStateChanged
 

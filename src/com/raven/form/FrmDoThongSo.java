@@ -38,6 +38,7 @@ import javax.swing.border.EmptyBorder;
  * @author anhtu
  */
 public class FrmDoThongSo extends javax.swing.JFrame {
+
     private MigLayout layout;
     public String maKH;
     private String hoTen;
@@ -46,10 +47,12 @@ public class FrmDoThongSo extends javax.swing.JFrame {
     private Connection conn = FrmMain.conn;
     private static CsdlDTS csdlDTS = new CsdlDTS();
     public static DefaultTableModel dtblThongSo;
+
     public FrmDoThongSo() {
     }
+
     public FrmDoThongSo(String maKH, String hoTen, String SDT, String imgURL) {
-        
+
         initComponents();
         this.maKH = maKH;
         this.hoTen = hoTen;
@@ -57,23 +60,23 @@ public class FrmDoThongSo extends javax.swing.JFrame {
         this.imgURL = imgURL;
         devInit();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-      
+
     }
+
     public void devInit() {
 
         lbMaKhachHang.setText(maKH);
         lbHoTen.setText(hoTen);
         lbSDT.setText(SDT);
-        
+
         dtblThongSo = (DefaultTableModel) tblThongSo.getModel();
         DungChung.readImg(lbHinhAnhKhach, imgURL);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setVisible(true);
-        
 
         lineChart.addLegend("BMI", new Color(12, 84, 175), new Color(0, 108, 247));
         startLineChart();
-           
+
         ResultSet rs = csdlDTS.selectAllThongSo(maKH);
         try {
             while (rs.next()) {
@@ -84,30 +87,32 @@ public class FrmDoThongSo extends javax.swing.JFrame {
         }
         fixTable(jScrollPane1);
     }
-    public void startLineChart(){
-   
-        ResultSet rs = csdlDTS.getBMI( maKH);
+
+    public void startLineChart() {
+
+        ResultSet rs = csdlDTS.getBMI(maKH);
         lineChart.clear();
         try {
-            while(rs.next()){
-                Double chiso= Double.parseDouble(rs.getString(2));
-                lineChart.addData(new ModelChart("Tháng "+rs.getString(1), new double[]{chiso}));
+            while (rs.next()) {
+                Double chiso = Double.parseDouble(rs.getString(2));
+                lineChart.addData(new ModelChart("Tháng " + rs.getString(1), new double[]{chiso}));
             }
             lineChart.start();
         } catch (SQLException ex) {
             Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
     }
-    public void fixTable(JScrollPane scroll){
+
+    public void fixTable(JScrollPane scroll) {
         scroll.getViewport().setBackground(Color.WHITE);
         scroll.setVerticalScrollBar(new ScrollBarCustom());
         JPanel p = new JPanel();
-        p.setBackground(new Color(245,245,245));
-        scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER,p);
-        scroll.setBorder(new EmptyBorder(5,10,5,10));
+        p.setBackground(new Color(245, 245, 245));
+        scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+        scroll.setBorder(new EmptyBorder(5, 10, 5, 10));
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -412,38 +417,30 @@ public class FrmDoThongSo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBatDauDoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatDauDoActionPerformed
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.0");
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
-        LocalDateTime now = LocalDateTime.now();  
-        
-        txtNgayDo.setText(formatter.format(new Date()));
-        btnLuu.setEnabled(true);
+        SimpleDateFormat formatter = new SimpleDateFormat("2020-MM-dd HH:mm:ss.0");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         ResultSet rs = csdlDTS.selectAllThongSo(maKH);
-//        try {
-//            while(rs.next()){
-//                if(rs.getString(2).equals(dtf.format(now).toString())){
-//                    if(JOptionPane.showConfirmDialog(this, "Hôm nay đã đo 1 lần,ấn yes để đo lại ")==JOptionPane.YES_OPTION){
-//                        csdlDTS.dolaiThongso(this,maKH,dtf.format(now));
-//                        startLineChart();
-//                    }else {
-//                        //btnBatDauDo.setEnabled(false);
-//                        btnLuu.setEnabled(false);
-//                        return;
-//                    }
-//                }
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+
         rs = csdlDTS.selectAllThongSo(maKH);
-        try {
-            if(rs.next()){ 
-                doLanTiepTheo(rs);
-            }else doLanDau();
-            btnLuu.setEnabled(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
-        }     
+        btnLuu.setEnabled(true);
+        String date = "2020-01-01";
+        for (int i = 0; i <= 12; i++) {
+            txtNgayDo.setText(date + " 01:00:00");
+            date = DungChung.dateAdd(date, 30);
+
+            try {
+                if (rs.next()) {
+                    doLanTiepTheo(rs);
+                } else {
+                    doLanDau();
+                }
+                btnLuuActionPerformed(evt);
+                btnLuu.setEnabled(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
     }//GEN-LAST:event_btnBatDauDoActionPerformed
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
@@ -455,7 +452,7 @@ public class FrmDoThongSo extends javax.swing.JFrame {
         vec.add(txtTiLeMo.getText());
         vec.add(txtTiLeNuoc.getText());
         if (csdlDTS.insertThongSo(vec)) {
-            JOptionPane.showMessageDialog(this, "Lưu thành công !");
+//            JOptionPane.showMessageDialog(this, "Lưu thành công !");
             btnLuu.setEnabled(false);
             vec.remove(0);
             startLineChart();
@@ -471,7 +468,7 @@ public class FrmDoThongSo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cbHangKHItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbHangKHItemStateChanged
-       
+
     }//GEN-LAST:event_cbHangKHItemStateChanged
     public void doLanDau() {
         txtCanNang.setText(getRand(40, 100));
@@ -481,13 +478,13 @@ public class FrmDoThongSo extends javax.swing.JFrame {
     }
 
     public void doLanTiepTheo(ResultSet rs) {
-        
-        double ChieuCao=0;
-        double canNang=0;
-        double tiLeMo=0;
-        double tiLeNuoc=0;
+
+        double ChieuCao = 0;
+        double canNang = 0;
+        double tiLeMo = 0;
+        double tiLeNuoc = 0;
         try {
-            while(rs.next()){
+            while (rs.next()) {
                 ChieuCao = Double.parseDouble(rs.getString(3));
                 canNang = Double.parseDouble(rs.getString(4));
                 tiLeMo = Double.parseDouble(rs.getString(5));
@@ -510,7 +507,7 @@ public class FrmDoThongSo extends javax.swing.JFrame {
     public String getRand(double min, double max) {
         return String.format("%.2f", ((Math.random()) * ((max - min) + 1)) + min);
     }
-    
+
     /**
      * @param args the command line arguments
      */

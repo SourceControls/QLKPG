@@ -21,12 +21,12 @@ public class CsdlDK {
 
     private static Connection conn = FrmMain.conn;
     
-    public boolean insertPDK(String maPDK,String ngaydk, String tongtien, String ghichu,String makh, String manv, String madv, String thue) {
+    public boolean insertPDK(String maPDK,String ngaydk, String tongtien, String ghichu,String makh, String manv, String madv, String thue, String khuyenMai) {
         //không cần set ngày bắt đầu, ngày kết thúc và trạng thái, trong db đã có trigger auto
         ResultSet rs = null;
         try {
 
-            PreparedStatement ps = conn.prepareStatement("insert into phieudk values (?,?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement ps = conn.prepareStatement("insert into phieudk values (?,?,?,?,?,?,?,?,?,?,?,?)");
             ps.setString(1, maPDK);
             ps.setString(2, ngaydk);
 
@@ -41,6 +41,7 @@ public class CsdlDK {
             ps.setString(9, manv);
             ps.setString(10, madv);
             ps.setString(11, thue);
+            ps.setString(12, khuyenMai);
             return ps.executeUpdate() > 0;
 
         } catch (Exception ex) {
@@ -77,7 +78,7 @@ public class CsdlDK {
             return pst.executeQuery();
         } catch (Exception ex) {
             System.out.println(ex.toString());
-            JOptionPane.showMessageDialog(com.raven.form.FrmDangKiDichVu.f, ex.toString());
+            JOptionPane.showMessageDialog(com.raven.form.FrmDangKiDichVu.f, ex.toString()); 
 
         }
         return null;

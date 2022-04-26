@@ -23,7 +23,7 @@ public class CsdlDKDV {
     private Connection conn = FrmMain.conn;
     public ResultSet selectAllPDK() {
       
-        String sql = "SELECT * FROM V_PDK order by NGAYBD desc";
+        String sql = "SELECT * FROM V_PDK";
        
         try {
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -51,6 +51,7 @@ public class CsdlDKDV {
 
     public boolean huyPDK(String maPDK) {
         String sql = "UPDATE PHIEUDK SET TRANGTHAI = N'ĐÃ HỦY' WHERE MAPDK = ?";
+        
 
         try {
             PreparedStatement pst = conn.prepareStatement(sql);

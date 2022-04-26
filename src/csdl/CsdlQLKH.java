@@ -30,10 +30,10 @@ public class CsdlQLKH {
     private static Connection conn = FrmMain.conn;
 
     public ResultSet selectAllKhachHang(Frame f) {
-        
+
         FrmKH.dtblDSKH.setRowCount(0);
-        
-        String selectAllKhachHang = "SELECT MAKH,HOTEN, SDT,GIOITINH,NGAYSINH,CMND,EMAIL,DIACHI FROM dbo.[KHACHHANG]";
+
+        String selectAllKhachHang = "SELECT MAKH,HOTEN, SDT,GIOITINH,NGAYSINH,CMND,EMAIL,DIACHI,HANGKH FROM dbo.[KHACHHANG]";
         Statement st;
         try {
             st = FrmMain.conn.createStatement();
@@ -110,8 +110,9 @@ public class CsdlQLKH {
         }
         return false;
     }
-    public ResultSet selectKHByHang(String hangKH){
-        String findById = " select *from  KHACHHANG WHERE HANGKH =?";
+
+    public ResultSet selectKHByHang(String hangKH) {
+        String findById = " select MAKH,HOTEN, SDT,GIOITINH,NGAYSINH,CMND,EMAIL,DIACHI,HANGKH from  KHACHHANG WHERE HANGKH =?";
         try {
             PreparedStatement sql = conn.prepareStatement(findById);
             sql.setObject(1, hangKH);
@@ -121,8 +122,9 @@ public class CsdlQLKH {
 
         }
 
-        return null;        
+        return null;
     }
+
     public boolean tonTaiEmail(Frame f, String email) {
         String select = "SELECT MAKH FROM KHACHHANG WHERE EMAIL=?";
         try {
@@ -137,17 +139,24 @@ public class CsdlQLKH {
     }
 
     public boolean updateKhachHang(Frame f, Vector vec) {
-        String update = "update KHACHHANG set HOTEN=?, CMND=?, GIOITINH=?, NGAYSINH=?, SDT=?, EMAIL=?, DIACHI=?,HINHANH = ? where MAKH=?";
+        String update = "update KHACHHANG set HOTEN=?, SDT=?, GIOITINH=?, NGAYSINH=?, CMND=?, EMAIL=?, DIACHI=?,HINHANH = ? where MAKH=?";
 
         try {
             PreparedStatement sql = conn.prepareStatement(update);
             for (int i = 1; i <= 9; i++) {
-                sql.setObject(i, vec.get(i-1));
+                sql.setObject(i, vec.get(i - 1));
             }
+            if (vec.get(3).toString().isEmpty()) {
+                sql.setNull(4, java.sql.Types.DATE);
+            }
+            for (int i = 4; i < vec.size()-1; i++) {
+                if (vec.get(i).toString().isEmpty()) 
+                    sql.setNull(i + 1, java.sql.Types.NVARCHAR);
+                }
             return sql.executeUpdate() > 0;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(f, ex.getMessage());
-        }   
+        }
         return false;
 
     }
@@ -157,14 +166,20 @@ public class CsdlQLKH {
         try {
             PreparedStatement sql = conn.prepareStatement(insertKhachHang);
             for (int i = 1; i <= 10; i++) {
-               
+
                 sql.setObject(i, vec.get(i - 1));
 
             }
-            if(vec.get(5).toString().isEmpty())
-                     sql.setNull(6, java.sql.Types.NVARCHAR);
-            if(vec.get(4).toString().isEmpty())
-                    sql.setNull(5, java.sql.Types.DATE);
+
+            if (vec.get(4).toString().isEmpty()) {
+                sql.setNull(5, java.sql.Types.DATE);
+            }
+            for (int i = 5; i < vec.size(); i++) {
+                if (vec.get(i).toString().isEmpty()) {
+                    sql.setNull(i + 1, java.sql.Types.NVARCHAR);
+                }
+
+            }
             return sql.executeUpdate() > 0;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(f, ex.getMessage());
@@ -186,7 +201,7 @@ public class CsdlQLKH {
         return null;
     }
 
-    public ResultSet findByKey(Frame f, String key){
+    public ResultSet findByKey(Frame f, String key) {
         String sql = "select makh,hoten,sdt,gioitinh,ngaysinh,cmnd,email,diachi from khachhang where hoten like N'%" + key + "%' or sdt like '%" + key + "%'";
         try {
 
@@ -198,6 +213,5 @@ public class CsdlQLKH {
         }
         return null;
     }
-    
 
 }

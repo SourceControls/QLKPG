@@ -243,7 +243,7 @@ public class FrmThanhToan1 extends javax.swing.JDialog {
         jLabel34.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel34.setText("SĐT:");
 
-        jButton1.setText("Hủy");
+        jButton1.setText("Thoát");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -420,6 +420,7 @@ public class FrmThanhToan1 extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed

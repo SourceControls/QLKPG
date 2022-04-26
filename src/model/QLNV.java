@@ -463,11 +463,12 @@ public class QLNV {
     }
 
     public void filterNV() {
-        if (cbLocNV.getSelectedItem().toString().toLowerCase().equals("none")) {
+        txtTimKiemNhanvien.setText("");
+        if (cbLocNV.getSelectedItem().toString().toLowerCase().equals("tất cả")) {
             getDataForTbDanhSachNV();
             return;
         }
-        DungChung.fillTable(FrmNV.dtblDSNV, csdlQLNV.selectNVByChucVu(cbLocNV.getSelectedIndex() == 1));
+        DungChung.fillTable(FrmNV.dtblDSNV, csdlQLNV.selectNVByChucVu(cbLocNV.getSelectedItem().toString()));
     }
 
     public QLNV(JTable tblNV, JTextField txtMaNhanVien, JTextField txtHoTen, JTextField txtCMND, JRadioButton rbtnNu, JRadioButton rbtnNam, JTextField txtNgaySinh, JTextField txtSDT, JTextField txtDiaChi, JTextField txtEmail,

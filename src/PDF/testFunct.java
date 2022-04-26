@@ -8,6 +8,9 @@ import com.raven.main.FrmMain;
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import model.DungChung;
 
 /**
  *
@@ -23,9 +26,7 @@ public class testFunct {
 //        PhieuDangKi pdk = new PhieuDangKi("PDK00001");
 //        PhieuThuTien ptt = new PhieuThuTien("PTT0001");
 
-
-      DoThongSoCoThe d = new DoThongSoCoThe("KH001","Bùi Tuấn Hùng","2021-05-09","NAM","2001-05-09");
-      
+//     DoThongSo d = new DoThongSo("KH001","Bùi Tuấn Hùng","2021-05-09","NAM","2001-05-09");
 
     }
 

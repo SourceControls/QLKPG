@@ -36,12 +36,11 @@ public class FrmMain extends javax.swing.JFrame {
     private MigLayout layout;
     private Animator animator;
     private boolean menuShow;
-    FrmKH formKH = new FrmKH();
-    FrmPDK formPDK = new FrmPDK();
-    FrmQVT formQVT = new FrmQVT();
-    FrmNV formNV = new FrmNV();
-    FrmTK formTK = new FrmTK();
-    FrmDoiMatKhau frmDoiMK=new FrmDoiMatKhau();
+    public static FrmKH formKH;
+    public static FrmPDK formPDK;
+    public static FrmQVT formQVT;
+    public static FrmNV formNV;
+    public static FrmDoiMatKhau frmDoiMK;
     public static final int DAY_PER_MONTH = 30;
 
     public static Connection conn;
@@ -49,21 +48,24 @@ public class FrmMain extends javax.swing.JFrame {
     public static FrmDoThongSo1 frmDoThongSo = null;
     public static FrmDangKiDichVu1 frmDangKiDichVu = null;
     public static FrmThanhToan1 frmThanhToan = null;
-    public FrmBaoCao frmBaoCao= new FrmBaoCao();
+    public FrmBaoCao frmBaoCao = new FrmBaoCao();
     public static ModelNV modelNV;
 
-    
-    
     public FrmMain(ModelNV modelNV) {
-        f=this;
-        this.modelNV = modelNV;
         initComponents();
         devInit();
+        f = this;
+        this.modelNV = modelNV;
         init();
-         
+
     }
 
     public void devInit() {
+        formKH = new FrmKH();
+        formPDK = new FrmPDK();
+        formQVT = new FrmQVT();
+        formNV = new FrmNV();
+        frmDoiMK = new FrmDoiMatKhau();
         showData();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
@@ -110,7 +112,7 @@ public class FrmMain extends javax.swing.JFrame {
                     showForm(formNV);
                 } else if (index == 4) {
                     showForm(frmDoiMK);
-                }else if (index == 5) {
+                } else if (index == 5) {
                     showForm(frmBaoCao);
                 }
 
@@ -154,8 +156,6 @@ public class FrmMain extends javax.swing.JFrame {
         animator.setDeceleration(0.5f);
         showForm(formKH);
 
-        
-     
     }
 
     public void showForm(Component com) {
@@ -176,9 +176,15 @@ public class FrmMain extends javax.swing.JFrame {
 
     public void thoat() {
         new Login(conn).setVisible(true);
-        if(frmDoThongSo!=null) frmDoThongSo.dispose();
-        if(frmThanhToan!=null) frmThanhToan.dispose();
-        if(frmDangKiDichVu!=null) frmDangKiDichVu.dispose();
+        if (frmDoThongSo != null) {
+            frmDoThongSo.dispose();
+        }
+        if (frmThanhToan != null) {
+            frmThanhToan.dispose();
+        }
+        if (frmDangKiDichVu != null) {
+            frmDangKiDichVu.dispose();
+        }
         this.dispose();
     }
 

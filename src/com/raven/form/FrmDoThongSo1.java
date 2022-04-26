@@ -39,6 +39,7 @@ import javax.swing.border.EmptyBorder;
  * @author anhtu
  */
 public class FrmDoThongSo1 extends javax.swing.JDialog {
+
     private MigLayout layout;
     public String maKH;
     private String hoTen;
@@ -47,8 +48,9 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
     private Connection conn = FrmMain.conn;
     private static CsdlDTS csdlDTS = new CsdlDTS();
     public static DefaultTableModel dtblThongSo;
+
     public FrmDoThongSo1(String maKH, String hoTen, String SDT, String imgURL) {
-        
+
         super(FrmMain.f, true); //java.awt.Frame parent, boolean modal
         this.maKH = maKH;
         this.hoTen = hoTen;
@@ -56,7 +58,7 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
         this.imgURL = imgURL;
         setMinYMaxY();
         initComponents();
-        
+
         devInit();
         this.setVisible(true);
     }
@@ -81,40 +83,42 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
         lbMaKhachHang.setText(maKH);
         lbHoTen.setText(hoTen);
         lbSDT.setText(SDT);
-        
+
         dtblThongSo = (DefaultTableModel) tblThongSo.getModel();
         DungChung.readImg(lbHinhAnhKhach, imgURL);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
+
         lineChart.addLegend("BMI", new Color(12, 84, 175), new Color(0, 108, 247));
         startLineChart();
         getDataTaBle();
         fixTable(jScrollPane1);
     }
-    public void startLineChart(){
-   
-        ResultSet rs = csdlDTS.getBMI( maKH);
+
+    public void startLineChart() {
+
+        ResultSet rs = csdlDTS.getBMI(maKH);
         lineChart.clear();
         try {
-            while(rs.next()){
-                Double chiso= Double.parseDouble(rs.getString(2));
-                lineChart.addData(new ModelChart("Tháng "+rs.getString(1), new double[]{chiso}));
+            while (rs.next()) {
+                Double chiso = Double.parseDouble(rs.getString(2));
+                lineChart.addData(new ModelChart("Tháng " + rs.getString(1), new double[]{chiso}));
             }
             lineChart.start();
         } catch (SQLException ex) {
             Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
     }
-    public void fixTable(JScrollPane scroll){
+
+    public void fixTable(JScrollPane scroll) {
         scroll.getViewport().setBackground(Color.WHITE);
         scroll.setVerticalScrollBar(new ScrollBarCustom());
         JPanel p = new JPanel();
-        p.setBackground(new Color(245,245,245));
-        scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER,p);
-        scroll.setBorder(new EmptyBorder(5,10,5,10));
+        p.setBackground(new Color(245, 245, 245));
+        scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+        scroll.setBorder(new EmptyBorder(5, 10, 5, 10));
     }
+
     public void doLanDau() {
         txtCanNang.setText(getRand(40, 100));
         txtTiLeMo.setText(getRand(10, 50));
@@ -123,13 +127,13 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
     }
 
     public void doLanTiepTheo(ResultSet rs) {
-        
-        double ChieuCao=0;
-        double canNang=0;
-        double tiLeMo=0;
-        double tiLeNuoc=0;
+
+        double ChieuCao = 0;
+        double canNang = 0;
+        double tiLeMo = 0;
+        double tiLeNuoc = 0;
         try {
-            while(rs.next()){
+            while (rs.next()) {
                 ChieuCao = Double.parseDouble(rs.getString(3));
                 canNang = Double.parseDouble(rs.getString(4));
                 tiLeMo = Double.parseDouble(rs.getString(5));
@@ -152,7 +156,8 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
     public String getRand(double min, double max) {
         return String.format("%.2f", ((Math.random()) * ((max - min) + 1)) + min);
     }
-    public void getDataTaBle(){
+
+    public void getDataTaBle() {
         dtblThongSo.setRowCount(0);
         ResultSet rs = csdlDTS.selectAllThongSo(maKH);
         try {
@@ -163,13 +168,15 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }
-    public void lamTrangText(){
+
+    public void lamTrangText() {
         txtNgayDo.setText("");
         txtChieuCao.setText("");
         txtCanNang.setText("");
         txtTiLeMo.setText("");
         txtTiLeNuoc.setText("");
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -480,14 +487,22 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
 
         txtNgayDo.setText(formatter.format(new Date()));
         btnLuu.setEnabled(true);
-        ResultSet rs = csdlDTS.selectAllThongSo(maKH);
-        try {
-            if(rs.next()){
-                doLanTiepTheo(rs);
-            }else doLanDau();
-            btnLuu.setEnabled(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
+        String date = "2020-01-01";
+        for (int i = 0; i <= 12; i++) {
+            txtNgayDo.setText(date + " 01:00:00");
+            date = DungChung.dateAdd(date, 30);
+            ResultSet rs = csdlDTS.selectAllThongSo(maKH);
+            try {
+                if (rs.next()) {
+                    doLanTiepTheo(rs);
+                } else {
+                    doLanDau();
+                }
+                      btnLuuActionPerformed(evt);
+                btnLuu.setEnabled(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnBatDauDoActionPerformed
 
@@ -500,7 +515,7 @@ public class FrmDoThongSo1 extends javax.swing.JDialog {
         vec.add(txtTiLeMo.getText());
         vec.add(txtTiLeNuoc.getText());
         if (csdlDTS.insertThongSo(vec)) {
-            JOptionPane.showMessageDialog(this, "Lưu thành công !");
+//            JOptionPane.showMessageDialog(this, "Lưu thành công !");
             btnLuu.setEnabled(false);
             vec.remove(0);
             startLineChart();

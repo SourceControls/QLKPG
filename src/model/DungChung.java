@@ -4,8 +4,8 @@
  */
 package model;
 
-import PDF.DoThongSoCoThe;
-import static PDF.DoThongSoCoThe.imgURL;
+import PDF.DoThongSo;
+import static PDF.DoThongSo.imgURL;
 import com.raven.main.FrmMain;
 import java.awt.AWTException;
 import java.awt.Component;
@@ -40,6 +40,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -111,7 +112,11 @@ public class DungChung {
     }
 
     public static String dateAdd(String date, int day) {
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        if (date.contains("-")) {
+            sdf = new SimpleDateFormat("yyyy-MM-dd");
+        }
         Calendar c = Calendar.getInstance();
         String output = "";
         try {
@@ -124,7 +129,7 @@ public class DungChung {
         return output;
     }
 
-    public static void componentToImg(Component com,String targetFile) {
+    public static void componentToImg(Component com, String targetFile) {
         Robot robot;
         try {
             TimeUnit.SECONDS.sleep(1);
@@ -133,16 +138,19 @@ public class DungChung {
             BufferedImage bi = robot.createScreenCapture(new Rectangle((int) p.getX(), (int) p.getY(), com.getWidth(), com.getHeight()));
             ImageIO.write(bi, "png", new File(targetFile));
         } catch (AWTException | IOException | InterruptedException ex) {
-            Logger.getLogger(DoThongSoCoThe.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DoThongSo.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-    
-    public static String selectTargetFile(String fileName){
+
+    public static String selectTargetFile(String fileName) {
         FileDialog fd;
         fd = new java.awt.FileDialog((java.awt.Frame) null, "Chọn Nơi Lưu Tệp", FileDialog.SAVE);
         fd.setFile(fileName);
         fd.setVisible(true);
         return fd.getDirectory() + fd.getFile();
     }
+
+
+
 }

@@ -109,12 +109,20 @@ public class CsdlQLNV {
         return false;
     }
 
-    public ResultSet selectNVByChucVu(boolean quanli) {
-        String findById = " select maNV,hoten,gioitinh,cmnd,ngaysinh,pt,quanly,nghilam from  NHANVIEN WHERE quanly =?";
+    public ResultSet selectNVByChucVu(String nghiepVu) {
+        String sql = "select maNV,hoten,gioitinh,cmnd,ngaysinh,pt,quanly,nghilam from  NHANVIEN WHERE quanly = 'true'";
+        if (nghiepVu.toLowerCase().equals("nhân viên")) {
+            sql = "select maNV,hoten,gioitinh,cmnd,ngaysinh,pt,quanly,nghilam from  NHANVIEN WHERE quanly = 'false'";
+        } else if (nghiepVu.toLowerCase().equals("huấn luyện viên")) {
+            sql = "select maNV,hoten,gioitinh,cmnd,ngaysinh,pt,quanly,nghilam from  NHANVIEN WHERE PT = 'true'";
+        } else if (nghiepVu.toLowerCase().equals("còn làm")) {
+            sql = "select maNV,hoten,gioitinh,cmnd,ngaysinh,pt,quanly,nghilam from  NHANVIEN WHERE nghilam = 'false'";
+        } else if (nghiepVu.toLowerCase().equals("đã nghỉ")) {
+            sql = "select maNV,hoten,gioitinh,cmnd,ngaysinh,pt,quanly,nghilam from  NHANVIEN WHERE nghilam = 'true'";
+        }
         try {
-            PreparedStatement sql = conn.prepareStatement(findById);
-            sql.setObject(1, quanli);
-            return sql.executeQuery();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            return pst.executeQuery();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(FrmMain.f, ex.getMessage());
 
@@ -157,18 +165,20 @@ public class CsdlQLNV {
         try {
             PreparedStatement sql = conn.prepareStatement(insertNV);
             for (int i = 1; i <= 12; i++) {
-               
+
                 sql.setObject(i, vec.get(i - 1));
 
             }
-            if(vec.get(3).toString().isEmpty()||vec.get(5).toString().isEmpty())
-                     sql.setNull(6, java.sql.Types.NVARCHAR);
-            if(vec.get(4).toString().isEmpty())
-                    sql.setNull(5, java.sql.Types.DATE);
+            if (vec.get(3).toString().isEmpty() || vec.get(5).toString().isEmpty()) {
+                sql.setNull(6, java.sql.Types.NVARCHAR);
+            }
+            if (vec.get(4).toString().isEmpty()) {
+                sql.setNull(5, java.sql.Types.DATE);
+            }
             return sql.executeUpdate() > 0;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(f, ex.toString());
-             Logger.getLogger(FrmNV.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrmNV.class.getName()).log(Level.SEVERE, null, ex);
 
         }
         return false;
@@ -178,8 +188,8 @@ public class CsdlQLNV {
     public void insertTaiKhoan(String tenDangNhap, String matKhau) throws SQLException {
         String sql = "exec sp_tao_tk_NV ?,?";
         PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setString(1,tenDangNhap);
-        pst.setString(2,matKhau);
+        pst.setString(1, tenDangNhap);
+        pst.setString(2, matKhau);
         pst.execute();
     }
 
@@ -206,7 +216,5 @@ public class CsdlQLNV {
         }
         return null;
     }
-
-
 
 }

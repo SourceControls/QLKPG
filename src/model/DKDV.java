@@ -45,7 +45,6 @@ import com.raven.swing.TableColumn;
  */
 public class DKDV {
 
-    
     private Connection conn = FrmMain.conn;
     public static CsdlDKDV csdlDKDV = new CsdlDKDV();
 
@@ -63,6 +62,13 @@ public class DKDV {
             JOptionPane.showMessageDialog(f, "Phiếu đã hết hạn hoặc đã hủy trước đó!");
             return;
         }
+        String ghiChu = JOptionPane.showInputDialog("Nhập Lý Do: ");
+        if (ghiChu.isEmpty()) {
+            JOptionPane.showMessageDialog(f, "Chưa Hủy Phiếu Đăng Kí!");
+            return;
+        }
+        txtGhiChuQLDK.setText(ghiChu);
+        luuGhiChuDangKi();
         if (csdlDKDV.huyPDK(tblPDK.getValueAt(row, 0).toString())) {
             JOptionPane.showMessageDialog(f, "Hủy Phiếu Đăng Kí Thành Công");
             getDataForTblDangKiDichVu();
@@ -84,7 +90,6 @@ public class DKDV {
         }
         return null;
     }
-
 
     public void dumpDataFromTblPDKToFields() {
         int row = tblPDK.getSelectedRow();
@@ -136,21 +141,26 @@ public class DKDV {
         lbHinhAnhKhachQLDK.setIcon(new ImageIcon(""));
     }
 
-    public void thanhToan() {
-        int row = tblPDK.getSelectedRow();
-        if(tblPDK.getValueAt(tblPDK.getSelectedRow(),10).toString().equals("ĐÃ HỦY")){
-            JOptionPane.showMessageDialog(FrmMain.frmThanhToan, "Phiếu đã hủy !");
-            return;
+    public void thanhToan(boolean fromFrmKH) {
+        if (!fromFrmKH) {  //nếu click từ form DSPDK
+            if (tblPDK.getValueAt(tblPDK.getSelectedRow(), 10).toString().equals("ĐÃ HỦY")) {
+                JOptionPane.showMessageDialog(FrmMain.frmThanhToan, "Phiếu đã hủy !");
+                return;
+            }
+        }else{  //nếu click từ form pdk sau khi thanh toán
+             
+            getDataForTblDangKiDichVu();
+             tblPDK.setRowSelectionInterval(FrmMain.formPDK.tblPDK.getRowCount() - 1, FrmMain.formPDK.tblPDK.getRowCount() - 1);
         }
+        int row = tblPDK.getSelectedRow();
         if (row != -1) {
-            if(FrmMain.frmThanhToan ==null || !FrmMain.frmThanhToan.maKH.equals(lbMaKhachHang.getText())){
-               FrmMain.frmThanhToan = new FrmThanhToan1(tblPDK.getValueAt(row, 0).toString(),
-                    tblPDK.getValueAt(row, 1).toString(),
-                    tblPDK.getValueAt(row, 10).toString());
+            if (FrmMain.frmThanhToan == null || !FrmMain.frmThanhToan.maKH.equals(lbMaKhachHang.getText())) {
+                FrmMain.frmThanhToan = new FrmThanhToan1(tblPDK.getValueAt(row, 0).toString(),
+                        tblPDK.getValueAt(row, 1).toString(),
+                        tblPDK.getValueAt(row, 10).toString());
             } else {
                 FrmMain.frmThanhToan.setVisible(true);
             }
-           
 
         }
     }
@@ -167,17 +177,16 @@ public class DKDV {
         }
     }
 
-
-
     public void filterPDK() {
-        if (cbTrangThaiPDK.getSelectedItem().toString().equals("None")) {
+        txtTimKiemDangKi.setText("");
+        if (cbTrangThaiPDK.getSelectedItem().toString().toLowerCase().equals("tất cả")) {
             getDataForTblDangKiDichVu();
             return;
         }
         DungChung.fillTable(FrmPDK.dtblPDK, csdlDKDV.selectPDKByTrangThai(cbTrangThaiPDK.getSelectedItem().toString()));
     }
     Frame f;
-    
+
     JTable tblPDK;
     JLabel lbHinhAnhKhachQLDK;
     JLabel lbMaKhachHang;
@@ -195,8 +204,8 @@ public class DKDV {
     JLabel lbLinkHinhAnh;
     JComboBox cbTrangThaiPDK;
 
-    public DKDV(TableColumn tblPDK, JLabel lbHinhAnhKhachQLDK, JLabel lbMaKhachHang, JLabel lbHoTen, JLabel lbCMND, JLabel lbGioiTinh, JLabel lbNgaySinh, JLabel lbEmail, JLabel lbSDT, JLabel lbDiaChi, JLabel lbHangKhachHang, JTextArea txtGhiChuQLDK,JTextField txtTimKiemDangKi, JLabel lbLinkHinhAnh, JComboBox cbTrangThaiPDK) { //JRadioButton rbtnNam, JRadioButton rbtnNu, JTextField txtSDT, JTextField txtDiaChi, JTextField txtEmail, JTextField txtHangKhachHang, JTable tblDSKH,
-        
+    public DKDV(TableColumn tblPDK, JLabel lbHinhAnhKhachQLDK, JLabel lbMaKhachHang, JLabel lbHoTen, JLabel lbCMND, JLabel lbGioiTinh, JLabel lbNgaySinh, JLabel lbEmail, JLabel lbSDT, JLabel lbDiaChi, JLabel lbHangKhachHang, JTextArea txtGhiChuQLDK, JTextField txtTimKiemDangKi, JLabel lbLinkHinhAnh, JComboBox cbTrangThaiPDK) { //JRadioButton rbtnNam, JRadioButton rbtnNu, JTextField txtSDT, JTextField txtDiaChi, JTextField txtEmail, JTextField txtHangKhachHang, JTable tblDSKH,
+
         this.tblPDK = tblPDK;
         this.lbHinhAnhKhachQLDK = lbHinhAnhKhachQLDK;
         this.lbLinkHinhAnh = lbLinkHinhAnh;

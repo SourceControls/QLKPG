@@ -33,18 +33,19 @@ public class FrmDoiMatKhau extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         txtMatKhauCu = new com.raven.swing.PasswordField();
         txtMatKhauMoi = new com.raven.swing.PasswordField();
         txtNhapLaiMatKhauMoi = new com.raven.swing.PasswordField();
         btnLuu = new com.raven.swing.KButton();
         jLabel6 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
 
-        setBackground(new java.awt.Color(245, 245, 245));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
+        add(jPanel2);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtMatKhauCu.setLabelText("Mật Khẩu Cũ");
         txtMatKhauCu.addActionListener(new java.awt.event.ActionListener() {
@@ -52,7 +53,6 @@ public class FrmDoiMatKhau extends javax.swing.JPanel {
                 txtMatKhauCuActionPerformed(evt);
             }
         });
-        jPanel1.add(txtMatKhauCu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 94, 330, -1));
 
         txtMatKhauMoi.setLabelText("Mật Khẩu Mới");
         txtMatKhauMoi.addActionListener(new java.awt.event.ActionListener() {
@@ -60,7 +60,6 @@ public class FrmDoiMatKhau extends javax.swing.JPanel {
                 txtMatKhauMoiActionPerformed(evt);
             }
         });
-        jPanel1.add(txtMatKhauMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 169, 330, -1));
 
         txtNhapLaiMatKhauMoi.setLabelText("Nhập Lại Mật Khẩu Mới");
         txtNhapLaiMatKhauMoi.addActionListener(new java.awt.event.ActionListener() {
@@ -68,7 +67,6 @@ public class FrmDoiMatKhau extends javax.swing.JPanel {
                 txtNhapLaiMatKhauMoiActionPerformed(evt);
             }
         });
-        jPanel1.add(txtNhapLaiMatKhauMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 244, 330, -1));
 
         btnLuu.setText("Lưu");
         btnLuu.setkEndColor(new java.awt.Color(153, 153, 255));
@@ -78,13 +76,46 @@ public class FrmDoiMatKhau extends javax.swing.JPanel {
                 btnLuuActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLuu, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 97, 36));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Đổi Mật Khẩu");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 31, -1, 26));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, 350, 410));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(txtMatKhauCu, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(txtMatKhauMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(txtNhapLaiMatKhauMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(txtMatKhauCu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addComponent(txtMatKhauMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addComponent(txtNhapLaiMatKhauMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        add(jPanel1);
+        add(jPanel3);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtMatKhauCuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatKhauCuActionPerformed
@@ -108,6 +139,7 @@ public class FrmDoiMatKhau extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Mật khẩu mới không khớp");
             return;
         }
+        if(JOptionPane.showConfirmDialog(this,"Xác Nhận Đổi Mật Khẩu?") == JOptionPane.YES_OPTION);
         try {
             dmk.doiMatKhau(matKhauCu, matKhauMoi);
             JOptionPane.showMessageDialog(this, "Đổi Mật Khẩu Thành Công");
@@ -123,6 +155,8 @@ public class FrmDoiMatKhau extends javax.swing.JPanel {
     private com.raven.swing.KButton btnLuu;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private com.raven.swing.PasswordField txtMatKhauCu;
     private com.raven.swing.PasswordField txtMatKhauMoi;
     private com.raven.swing.PasswordField txtNhapLaiMatKhauMoi;
