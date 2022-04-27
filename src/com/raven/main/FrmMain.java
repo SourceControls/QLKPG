@@ -14,20 +14,14 @@ import java.sql.Connection;
 import javax.swing.ImageIcon;
 //import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
-import old.FrmDangKiDichVu;
-
-import old.FrmDoThongSo;
+import com.raven.form.FrmDoThongSo;
 import static com.raven.main.FrmMain.conn;
-import old.FrmThanhToan;
-import com.raven.swing.MenuItem;
 import javax.swing.JFrame;
 import model.ModelNV;
-import static sun.audio.AudioDevice.device;
 
 public class FrmMain extends javax.swing.JFrame {
 

@@ -12,7 +12,6 @@ import javax.swing.JFrame;
 import com.raven.main.FrmMain;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import static old.FrmDangKiDichVu.f;
 import csdl.CsdlQLKH;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,13 +21,12 @@ import javax.swing.JOptionPane;
 import model.DKDV;
 import model.DungChung;
 import model.QLKH;
-import old.FrmThanhToan;
 
 /**
  *
  * @author anhtu
  */
-public class FrmDangKiDichVu extends javax.swing.JFrame {
+public class oldFrmDangKiDichVu extends javax.swing.JFrame {
 
     /**
      * Creates new form addNewCard2
@@ -42,10 +40,10 @@ public class FrmDangKiDichVu extends javax.swing.JFrame {
     private Vector<String> vecSoNgaySuDungDV = new Vector<>();
     private Vector<String> vecGia = new Vector<>();
 
-    public FrmDangKiDichVu() {
+    public oldFrmDangKiDichVu() {
     }
 
-    public FrmDangKiDichVu(String maKH) {
+    public oldFrmDangKiDichVu(String maKH) {
         initComponents();
         rootPane.setEnabled(false);
         this.maKH = maKH;
@@ -86,7 +84,7 @@ public class FrmDangKiDichVu extends javax.swing.JFrame {
                 lbHangKhachHang.setText(rs.getString("HANGKH"));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(FrmDangKiDichVu.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(oldFrmDangKiDichVu.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -104,7 +102,7 @@ public class FrmDangKiDichVu extends javax.swing.JFrame {
                 cbGoiDichVu.addItem(rs.getString(2));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(FrmDangKiDichVu.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(oldFrmDangKiDichVu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -118,7 +116,7 @@ public class FrmDangKiDichVu extends javax.swing.JFrame {
                 cbTiLeKM.addItem(rs.getString(3));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(FrmDangKiDichVu.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(oldFrmDangKiDichVu.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -674,11 +672,11 @@ public class FrmDangKiDichVu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(f, "Phiếu đăng kí dưới 30 ngày phải được thanh toán trước");
             return;
         }
-        if (csdlDK.insertPDK(maPDK, ngayDK, tongTien, ghiChu, maKH, FrmMain.modelNV.getManv(), maDV, thue));
+        if (csdlDK.insertPDK(maPDK, ngayDK, tongTien, ghiChu, maKH, FrmMain.modelNV.getManv(), maDV, thue,cbTiLeKM.getSelectedItem().toString()));
         {
             if (rbtnDaThanhToan.isSelected()) {
                 Vector vec = new Vector();
-                vec.add(FrmThanhToan.csdlTT.getMaPTT());
+                vec.add(oldFrmThanhToan.csdlTT.getMaPTT());
                 vec.add(ngayDK);
                 vec.add(tongTien);
                 vec.add("0");
@@ -686,7 +684,7 @@ public class FrmDangKiDichVu extends javax.swing.JFrame {
                 vec.add(ghiChu);
                 vec.add(maPDK);
                 vec.add(FrmMain.modelNV.getManv());
-                if (FrmThanhToan.csdlTT.insertPTT(vec)) {
+                if (oldFrmThanhToan.csdlTT.insertPTT(vec)) {
                     JOptionPane.showMessageDialog(this, "Đăng Kí Và Lập Phiếu Thanh Toán Thành Công");
                     DungChung.fillTable(com.raven.form.FrmPDK.dtblPDK, DKDV.csdlDKDV.selectAllPDK());
                     this.setVisible(false);
@@ -702,9 +700,7 @@ public class FrmDangKiDichVu extends javax.swing.JFrame {
             int choose = JOptionPane.showConfirmDialog(this, "Đăng kí thành công, thanh toán ngay??");
             this.setVisible(false);
             if (choose == JOptionPane.YES_OPTION) {
-
-                FrmMain.formPDK.tblPDK.setRowSelected(FrmMain.formPDK.tblPDK.getRowCount());
-                FrmMain.formPDK.dkdv.thanhToan();
+                FrmMain.formPDK.dkdv.thanhToan(true);
             }
             return;
         }
@@ -783,14 +779,18 @@ public class FrmDangKiDichVu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmDangKiDichVu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(oldFrmDangKiDichVu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmDangKiDichVu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(oldFrmDangKiDichVu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmDangKiDichVu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(oldFrmDangKiDichVu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmDangKiDichVu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(oldFrmDangKiDichVu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -799,7 +799,7 @@ public class FrmDangKiDichVu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //new FrmDangKiDichVu().setVisible(true);
+                //new oldFrmDangKiDichVu().setVisible(true);
             }
         });
     }

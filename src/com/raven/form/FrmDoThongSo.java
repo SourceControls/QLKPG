@@ -5,7 +5,6 @@
  */
 package com.raven.form;
 
-import old.FrmDoThongSo;
 import com.raven.chart.ModelChart;
 import com.raven.chart.blankchart.BlankPlotChart;
 import csdl.CsdlDTS;
@@ -20,12 +19,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import model.DungChung;
-import static old.FrmDoThongSo.dtblThongSo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import static old.FrmDoThongSo.dtblThongSo;
 import java.util.Vector;
-import static old.FrmDoThongSo.dtblThongSo;
 import com.raven.swing.ScrollBarCustom;
 import java.awt.Color;
 import java.time.LocalDateTime;
@@ -89,14 +85,13 @@ public class FrmDoThongSo extends javax.swing.JDialog {
         DungChung.readImg(lbHinhAnhKhach, imgURL);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        lineChart.addLegend("BMI", new Color(12, 84, 175), new Color(0, 108, 247));
         startLineChart();
         getDataTaBle();
         fixTable(jScrollPane1);
     }
 
     public void startLineChart() {
-
+        lineChart.addLegend("BMI", new Color(12, 84, 175), new Color(0, 108, 247));
         ResultSet rs = csdlDTS.getBMI(maKH);
         lineChart.clear();
         try {
@@ -124,7 +119,7 @@ public class FrmDoThongSo extends javax.swing.JDialog {
         txtCanNang.setText(getRand(40, 100));
         txtTiLeMo.setText(getRand(10, 50));
         txtTiLeNuoc.setText(getRand(50, 80));
-        txtChieuCao.setText(getRand(140, 200));
+        txtChieuCao.setText(getRand(140, 200)); 
     }
 
     public void doLanTiepTheo(ResultSet rs) {

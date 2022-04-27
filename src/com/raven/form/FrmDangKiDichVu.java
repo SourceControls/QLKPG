@@ -5,7 +5,6 @@
  */
 package com.raven.form;
 
-import old.FrmDangKiDichVu;
 import csdl.CsdlDK;
 import java.sql.Connection;
 import java.util.Vector;
@@ -13,7 +12,6 @@ import javax.swing.JFrame;
 import com.raven.main.FrmMain;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import static old.FrmDangKiDichVu.f;
 import csdl.CsdlQLKH;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,7 +21,6 @@ import javax.swing.JOptionPane;
 import model.DKDV;
 import model.DungChung;
 import model.QLKH;
-import old.FrmThanhToan;
 
 /**
  *

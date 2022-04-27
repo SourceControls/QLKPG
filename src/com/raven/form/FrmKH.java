@@ -1,7 +1,5 @@
 package com.raven.form;
 
-import old.FrmDangKiDichVu;
-import old.FrmThanhToan;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -32,7 +30,7 @@ public class FrmKH extends javax.swing.JPanel {
     private QLKH qlkh;
     public static DefaultTableModel dtblDSKH;
     public FrmDangKiDichVu frmDangKiDichVu = null;
-    public FrmThanhToan frmThanhToan = null;
+    public FrmDangKiDichVu frmThanhToan = null;
 
     public static String hoTenNV = "";
     public static String maNV = "NV01";

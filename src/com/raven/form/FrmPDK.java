@@ -11,7 +11,7 @@ public class FrmPDK extends javax.swing.JPanel {
     public  QLQVT qlqvt;
     public  QLKH qlkh;
     public DKDV dkdv;
-    public old.FrmThanhToan frmThanhToan = null;
+    public FrmThanhToan frmThanhToan = null;
     public FrmPDK() {
         initComponents();
         setOpaque(false);

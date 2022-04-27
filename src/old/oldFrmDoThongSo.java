@@ -18,12 +18,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import model.DungChung;
-import static old.FrmDoThongSo.dtblThongSo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import static old.FrmDoThongSo.dtblThongSo;
 import java.util.Vector;
-import static old.FrmDoThongSo.dtblThongSo;
 import com.raven.swing.ScrollBarCustom;
 import java.awt.Color;
 import java.time.LocalDateTime;
@@ -37,7 +34,7 @@ import javax.swing.border.EmptyBorder;
  *
  * @author anhtu
  */
-public class FrmDoThongSo extends javax.swing.JFrame {
+public class oldFrmDoThongSo extends javax.swing.JFrame {
 
     private MigLayout layout;
     public String maKH;
@@ -48,10 +45,10 @@ public class FrmDoThongSo extends javax.swing.JFrame {
     private static CsdlDTS csdlDTS = new CsdlDTS();
     public static DefaultTableModel dtblThongSo;
 
-    public FrmDoThongSo() {
+    public oldFrmDoThongSo() {
     }
 
-    public FrmDoThongSo(String maKH, String hoTen, String SDT, String imgURL) {
+    public oldFrmDoThongSo(String maKH, String hoTen, String SDT, String imgURL) {
 
         initComponents();
         this.maKH = maKH;
@@ -99,7 +96,7 @@ public class FrmDoThongSo extends javax.swing.JFrame {
             }
             lineChart.start();
         } catch (SQLException ex) {
-            Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(oldFrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -436,7 +433,7 @@ public class FrmDoThongSo extends javax.swing.JFrame {
                 btnLuuActionPerformed(evt);
                 btnLuu.setEnabled(true);
             } catch (SQLException ex) {
-                Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(oldFrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
@@ -490,7 +487,7 @@ public class FrmDoThongSo extends javax.swing.JFrame {
                 tiLeNuoc = Double.parseDouble(rs.getString(6));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(oldFrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
             return;
         }
         txtCanNang.setText(getRand(canNang - canNang * 0.02, canNang + canNang * 0.05));
@@ -524,14 +521,18 @@ public class FrmDoThongSo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmDoThongSo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(oldFrmDoThongSo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmDoThongSo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(oldFrmDoThongSo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmDoThongSo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(oldFrmDoThongSo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmDoThongSo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(oldFrmDoThongSo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -540,7 +541,7 @@ public class FrmDoThongSo extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //new FrmDoThongSo().setVisible(true);
+                //new oldFrmDoThongSo().setVisible(true);
             }
         });
     }

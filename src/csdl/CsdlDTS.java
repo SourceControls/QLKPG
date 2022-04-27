@@ -12,7 +12,6 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 import com.raven.main.FrmMain;
 import java.sql.Connection;
-import old.FrmDoThongSo;
 
 /**
  *

@@ -16,18 +16,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import model.DungChung;
 import model.QLKH;
-import static old.FrmThanhToan.csdlTT;
-import static old.FrmThanhToan.f;
+import static old.oldFrmThanhToan.csdlTT;
+import static old.oldFrmThanhToan.f;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import model.DKDV;
-import static old.FrmThanhToan.csdlTT;
+import static old.oldFrmThanhToan.csdlTT;
 
 /**
  *
  * @author anhtu
  */
-public class FrmThanhToan extends javax.swing.JFrame {
+public class oldFrmThanhToan extends javax.swing.JFrame {
     private Connection conn = FrmMain.conn;
 
     private String maPDK = "";
@@ -43,11 +43,11 @@ public class FrmThanhToan extends javax.swing.JFrame {
     /**
      * Creates new form paymentForm
      */
-    public FrmThanhToan() {
+    public oldFrmThanhToan() {
         
         
     }
-    public FrmThanhToan(String maPDK, String maKH, String trangThaiPDK) {
+    public oldFrmThanhToan(String maPDK, String maKH, String trangThaiPDK) {
         initComponents();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
@@ -492,21 +492,23 @@ public class FrmThanhToan extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmThanhToan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(oldFrmThanhToan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmThanhToan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(oldFrmThanhToan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmThanhToan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(oldFrmThanhToan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmThanhToan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(oldFrmThanhToan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               // new FrmThanhToan().setVisible(true);
+               // new oldFrmThanhToan().setVisible(true);
             }
         });
     }

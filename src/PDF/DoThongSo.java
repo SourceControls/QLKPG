@@ -4,7 +4,11 @@
  */
 package PDF;
 
+import com.raven.chart.ModelChart;
+import com.raven.chart.blankchart.BlankPlotChart;
+import com.raven.form.FrmDoThongSo;
 import com.raven.swing.KButton;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.io.IOException;
@@ -79,17 +83,36 @@ public class DoThongSo extends javax.swing.JFrame {
         initChartNgang(rulerCanNang, unitCanNang, barCanNang, lbCanNang, canNang, " kg");
         initChartNgang(rulerKhoiLuongCo, unitKhoiLuongCo, barKhoiLuongCo, lbKhoiLuongCo, klCo, " kg");
         initChartNgang(rulerTiLeMo, unitTiLeMo, barTiLeMo, lbTiLeMo, tiLeMo, " %");
-
-        //save
+        
+        chart();
+//        save
         DungChung.componentToImg(mainPanel, imgURL);
         try {
             PDF pdf = new PDF();
             pdf.insertImage(0, 0, imgURL, PDF.widthPage, PDF.heightPage);
             pdf.savePDF(hoTen + "_" + ngayDo + ".pdf");
         } catch (IOException ex) {
-            
+
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
+
+    }
+
+    private void chart() {
+        //chart
+        double minY = 0;
+        double maxY = 50;
+
+        BlankPlotChart.minY = Math.floor(minY);
+        BlankPlotChart.maxY = Math.ceil(maxY);
+        lineChart.addLegend("BMI", new Color(12, 84, 175), new Color(0, 108, 247));
+        lineChart.addData(new ModelChart("Tháng " + 1, new double[]{10}));
+        lineChart.addData(new ModelChart("Tháng " + 2, new double[]{15}));
+        lineChart.addData(new ModelChart("Tháng " + 3, new double[]{20}));
+        lineChart.addData(new ModelChart("Tháng " + 4, new double[]{35}));
+        lineChart.addData(new ModelChart("Tháng " + 5, new double[]{25}));
+        lineChart.addData(new ModelChart("Tháng " + 6, new double[]{20}));
+        lineChart.start();
 
     }
 
@@ -259,6 +282,7 @@ public class DoThongSo extends javax.swing.JFrame {
         lbTiLeMo = new javax.swing.JLabel();
         jLabel159 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
+        lineChart = new com.raven.chart.LineChart();
         jPanel8 = new javax.swing.JPanel();
 
         jLabel10.setBackground(new java.awt.Color(0, 0, 0));
@@ -322,7 +346,7 @@ public class DoThongSo extends javax.swing.JFrame {
                 .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -1370,7 +1394,7 @@ public class DoThongSo extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel126, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                    .addComponent(jLabel126, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
                     .addComponent(jLabel125, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel76, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel75, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1419,11 +1443,13 @@ public class DoThongSo extends javax.swing.JFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(lineChart, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addComponent(lineChart, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 5, Short.MAX_VALUE))
         );
 
         mainPanel.add(jPanel7);
@@ -1435,7 +1461,7 @@ public class DoThongSo extends javax.swing.JFrame {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 684, Short.MAX_VALUE)
+            .addGap(0, 688, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1622,6 +1648,7 @@ public class DoThongSo extends javax.swing.JFrame {
     private javax.swing.JLabel lbChieuCao;
     private javax.swing.JLabel lbKhoiLuongCo;
     private javax.swing.JLabel lbTiLeMo;
+    private com.raven.chart.LineChart lineChart;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel rulerBMI;
     private javax.swing.JPanel rulerCanNang;

@@ -4,13 +4,13 @@
  */
 package csdl;
 
+import com.raven.form.FrmDangKiDichVu;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import model.DKDV;
-import old.FrmDangKiDichVu;
 import com.raven.main.FrmMain;
 
 /**
@@ -78,7 +78,7 @@ public class CsdlDK {
             return pst.executeQuery();
         } catch (Exception ex) {
             System.out.println(ex.toString());
-            JOptionPane.showMessageDialog(old.FrmDangKiDichVu.f, ex.toString()); 
+            JOptionPane.showMessageDialog(FrmDangKiDichVu.f, ex.toString()); 
 
         }
         return null;

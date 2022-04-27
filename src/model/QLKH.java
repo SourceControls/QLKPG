@@ -1,5 +1,7 @@
 package model;
 
+import com.raven.form.FrmDangKiDichVu;
+import com.raven.form.FrmDoThongSo;
 import com.raven.form.FrmKH;
 import csdl.*;
 import java.awt.Component;
@@ -13,33 +15,23 @@ import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import model.DungChung;
-import old.FrmDangKiDichVu;
-import com.raven.form.FrmDangKiDichVu;
-import old.FrmDoThongSo;
-import com.raven.form.FrmDoThongSo;
-import com.raven.main.FrmMain;
 import com.raven.swing.TableColumn;
+import com.raven.form.FrmDangKiDichVu;
+import com.raven.main.FrmMain;
 import java.awt.FileDialog;
 import java.awt.Rectangle;
-import java.awt.image.ImageFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 /**
  *

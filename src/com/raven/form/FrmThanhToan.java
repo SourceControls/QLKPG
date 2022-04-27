@@ -15,19 +15,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import model.DungChung;
 import model.QLKH;
-import static old.FrmThanhToan.csdlTT;
-import static old.FrmThanhToan.f;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import model.DKDV;
-import static old.FrmThanhToan.csdlTT;
 /**
  *
  * @author anhtu
  */
 public class FrmThanhToan extends javax.swing.JDialog {
     private Connection conn = FrmMain.conn;
-
     private String maPDK = "";
     public String maKH = "";
     private String trangThaiPDK = "";
@@ -501,7 +497,7 @@ public class FrmThanhToan extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-//                FrmThanhToan dialog = new FrmThanhToan(new javax.swing.JFrame(), true);
+//                oldFrmThanhToan dialog = new oldFrmThanhToan(new javax.swing.JFrame(), true);
 //                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
 //                    @Override
 //                    public void windowClosing(java.awt.event.WindowEvent e) {

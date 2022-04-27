@@ -26,7 +26,7 @@ public class testFunct {
 //        PhieuDangKi pdk = new PhieuDangKi("PDK00001");
 //        PhieuThuTien ptt = new PhieuThuTien("PTT0001");
 
-//     DoThongSo d = new DoThongSo("KH001","Bùi Tuấn Hùng","2021-05-09","NAM","2001-05-09");
+     DoThongSo d = new DoThongSo("KH001","Bùi Tuấn Hùng","2021-05-09","NAM","2001-05-09");
 
     }
 

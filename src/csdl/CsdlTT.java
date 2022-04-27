@@ -4,6 +4,7 @@
  */
 package csdl;
 
+import com.raven.form.FrmThanhToan;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +13,7 @@ import java.util.Vector;
 import java.sql.Types;
 import javax.swing.JOptionPane;
 import com.raven.main.FrmMain;
-import old.FrmThanhToan;
+
 
 /**
  *
@@ -29,7 +30,7 @@ public class CsdlTT {
             pst.setString(1, maPDK);
             return pst.executeQuery();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(FrmThanhToan.f, ex.getMessage());
+            JOptionPane.showMessageDialog(FrmMain.f, ex.getMessage());
         }
         return null;
     }
@@ -41,7 +42,7 @@ public class CsdlTT {
             pst.setString(1, maPDK);
             return pst.executeQuery();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(FrmThanhToan.f, ex.getMessage());
+            JOptionPane.showMessageDialog(FrmMain.f, ex.getMessage());
         }
         return null;
     }
@@ -60,7 +61,7 @@ public class CsdlTT {
             }
             return pst.executeUpdate() > 0;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(FrmThanhToan.f, ex.getMessage());
+            JOptionPane.showMessageDialog(FrmMain.f, ex.getMessage());
         }
 
         return false;
@@ -76,7 +77,7 @@ public class CsdlTT {
                 return rs.getString(1);
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(FrmThanhToan.f, ex.getMessage());
+            JOptionPane.showMessageDialog(FrmMain.f, ex.getMessage());
         }
 
         return null;
