@@ -146,7 +146,7 @@
                       <Component id="jLabel12" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="583" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="742" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -362,7 +362,7 @@
         </Component>
         <Component class="com.raven.swing.KButton" name="btnBatDauDo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="B&#x1eaf;t &#x111;&#x1ea7;u &#x111;o"/>
+            <Property name="text" type="java.lang.String" value="Gi&#x1ea3; D&#x1eef; Li&#x1ec7;u"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="SansSerif" size="12" style="1"/>
             </Property>
@@ -448,17 +448,23 @@
               <Properties>
                 <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="5" rowCount="0">
-                    <Column editable="false" title="Ng&#xe0;y" type="java.lang.Object"/>
-                    <Column editable="false" title="Chi&#x1ec1;u cao" type="java.lang.Object"/>
-                    <Column editable="false" title="C&#xe2;n n&#x1eb7;ng" type="java.lang.Object"/>
-                    <Column editable="true" title="T&#x1ec9; l&#x1ec7; m&#x1ee1;" type="java.lang.Object"/>
-                    <Column editable="false" title="T&#x1ec9; l&#x1ec7; n&#x1b0;&#x1edb;c" type="java.lang.Object"/>
+                  <Table columnCount="6" rowCount="0">
+                    <Column editable="true" title="M&#xe3; KH" type="java.lang.Object"/>
+                    <Column editable="false" title="Ng&#xe0;y &#x110;o" type="java.lang.Object"/>
+                    <Column editable="false" title="Chi&#x1ec1;u cao (cm)" type="java.lang.Object"/>
+                    <Column editable="false" title="C&#xe2;n n&#x1eb7;ng (kg)" type="java.lang.Object"/>
+                    <Column editable="true" title="T&#x1ec9; l&#x1ec7; m&#x1ee1; (%)" type="java.lang.Object"/>
+                    <Column editable="false" title="Kh&#x1ed1;i L&#x1b0;&#x1ee3;ng C&#x1a1; (kg)" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
-                    <Column maxWidth="-1" minWidth="185" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="150" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>

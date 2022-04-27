@@ -564,7 +564,6 @@
                 <Component class="com.raven.swing.KButton" name="btnDoThongSo">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&#x110;o Ch&#x1ec9; S&#x1ed1;"/>
-                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="kEndColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="33" red="ff" type="rgb"/>
                     </Property>

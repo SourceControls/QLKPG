@@ -45,7 +45,7 @@ public class CsdlDTS {
             }
             return sql.executeUpdate() > 0;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(FrmMain.f, "Mỗi lần đo cách nhau ít nhất 1 phút");
+            JOptionPane.showMessageDialog(FrmMain.f, ex.getMessage());
         }
         return false;
 
@@ -66,7 +66,7 @@ public class CsdlDTS {
     }
 
      public ResultSet getBMI(String maKH){
-        String selectALLThongSo = "EXEC SP_LAY_BMI_CUA_KH_GROUP_BY_THANG ?";
+        String selectALLThongSo = "EXEC SP_GET_BMI ?";
 
         try {
             PreparedStatement sql = conn.prepareStatement(selectALLThongSo);

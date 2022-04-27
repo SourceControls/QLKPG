@@ -26,6 +26,7 @@ import com.raven.swing.ScrollBarCustom;
 import java.awt.Color;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JScrollPane;
@@ -55,26 +56,31 @@ public class FrmDoThongSo extends javax.swing.JDialog {
         this.imgURL = imgURL;
         setMinYMaxY();
         initComponents();
-
         devInit();
         this.setVisible(true);
     }
-    public void setMinYMaxY(){
-        double minY=100;
-        double maxY=0;
-        ResultSet rs = csdlDTS.getBMI( maKH);
+
+    public void setMinYMaxY() {
+        double minY = 100;
+        double maxY = 0;
+        ResultSet rs = csdlDTS.getBMI(maKH);
         try {
-            while(rs.next()){
-                if(Double.parseDouble(rs.getString(2)) < minY) minY=Double.parseDouble(rs.getString(2));
-                if(Double.parseDouble(rs.getString(2)) > maxY) maxY=Double.parseDouble(rs.getString(2));
+            while (rs.next()) {
+                if (Double.parseDouble(rs.getString(2)) < minY) {
+                    minY = Double.parseDouble(rs.getString(2));
+                }
+                if (Double.parseDouble(rs.getString(2)) > maxY) {
+                    maxY = Double.parseDouble(rs.getString(2));
+                }
             }
-            BlankPlotChart.minY=Math.floor(minY);
-            BlankPlotChart.maxY=Math.ceil(maxY);
+            BlankPlotChart.minY = Math.floor(minY);
+            BlankPlotChart.maxY = Math.ceil(maxY);
         } catch (SQLException ex) {
             Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
+
     public void devInit() {
 
         lbMaKhachHang.setText(maKH);
@@ -84,20 +90,19 @@ public class FrmDoThongSo extends javax.swing.JDialog {
         dtblThongSo = (DefaultTableModel) tblThongSo.getModel();
         DungChung.readImg(lbHinhAnhKhach, imgURL);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
+        DungChung.fillTable(dtblThongSo, csdlDTS.selectAllThongSo(maKH));
+        lineChart.addLegend("BMI", new Color(12, 84, 175), new Color(0, 108, 247));
         startLineChart();
-        getDataTaBle();
         fixTable(jScrollPane1);
     }
 
     public void startLineChart() {
-        lineChart.addLegend("BMI", new Color(12, 84, 175), new Color(0, 108, 247));
-        ResultSet rs = csdlDTS.getBMI(maKH);
         lineChart.clear();
+        ResultSet rs = csdlDTS.getBMI(maKH);
         try {
             while (rs.next()) {
                 Double chiso = Double.parseDouble(rs.getString(2));
-                lineChart.addData(new ModelChart("Tháng " + rs.getString(1), new double[]{chiso}));
+                lineChart.addData(new ModelChart(rs.getString(1), new double[]{chiso}));
             }
             lineChart.start();
         } catch (SQLException ex) {
@@ -115,34 +120,11 @@ public class FrmDoThongSo extends javax.swing.JDialog {
         scroll.setBorder(new EmptyBorder(5, 10, 5, 10));
     }
 
-    public void doLanDau() {
+    public void ranData() {
         txtCanNang.setText(getRand(40, 100));
         txtTiLeMo.setText(getRand(10, 50));
         txtTiLeNuoc.setText(getRand(50, 80));
-        txtChieuCao.setText(getRand(140, 200)); 
-    }
-
-    public void doLanTiepTheo(ResultSet rs) {
-
-        double ChieuCao = 0;
-        double canNang = 0;
-        double tiLeMo = 0;
-        double tiLeNuoc = 0;
-        try {
-            while (rs.next()) {
-                ChieuCao = Double.parseDouble(rs.getString(3));
-                canNang = Double.parseDouble(rs.getString(4));
-                tiLeMo = Double.parseDouble(rs.getString(5));
-                tiLeNuoc = Double.parseDouble(rs.getString(6));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
-            return;
-        }
-        txtCanNang.setText(getRand(canNang - canNang * 0.02, canNang + canNang * 0.05));
-        txtTiLeMo.setText(getRand(tiLeMo - tiLeMo * 0.03, tiLeMo));
-        txtTiLeNuoc.setText(getRand(tiLeNuoc - tiLeNuoc * 0.02, tiLeNuoc + tiLeNuoc * 0.03));
-        txtChieuCao.setText(getRand(ChieuCao - ChieuCao * 0.005, ChieuCao + ChieuCao * 0.005));
+        txtChieuCao.setText(getRand(140, 200));
     }
 
     public String getRand(int max, int min) {
@@ -151,18 +133,6 @@ public class FrmDoThongSo extends javax.swing.JDialog {
 
     public String getRand(double min, double max) {
         return String.format("%.2f", ((Math.random()) * ((max - min) + 1)) + min);
-    }
-
-    public void getDataTaBle() {
-        dtblThongSo.setRowCount(0);
-        ResultSet rs = csdlDTS.selectAllThongSo(maKH);
-        try {
-            while (rs.next()) {
-                dtblThongSo.addRow(new Object[]{rs.getObject(2), rs.getObject(3), rs.getObject(4), rs.getObject(5), rs.getObject(6)});
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
     }
 
     public void lamTrangText() {
@@ -269,7 +239,7 @@ public class FrmDoThongSo extends javax.swing.JDialog {
         lbHinhAnhKhach.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         lbHinhAnhKhach.setOpaque(true);
 
-        btnBatDauDo.setText("Bắt đầu đo");
+        btnBatDauDo.setText("Giả Dữ Liệu");
         btnBatDauDo.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         btnBatDauDo.setkEndColor(new java.awt.Color(153, 153, 255));
         btnBatDauDo.setkStartColor(new java.awt.Color(104, 109, 224));
@@ -319,11 +289,11 @@ public class FrmDoThongSo extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Ngày", "Chiều cao", "Cân nặng", "Tỉ lệ mỡ", "Tỉ lệ nước"
+                "Mã KH", "Ngày Đo", "Chiều cao (cm)", "Cân nặng (kg)", "Tỉ lệ mỡ (%)", "Khối Lượng Cơ (kg)"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false
+                true, false, false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -333,7 +303,7 @@ public class FrmDoThongSo extends javax.swing.JDialog {
         tblThongSo.setHasBtn(false);
         jScrollPane1.setViewportView(tblThongSo);
         if (tblThongSo.getColumnModel().getColumnCount() > 0) {
-            tblThongSo.getColumnModel().getColumn(0).setMinWidth(185);
+            tblThongSo.getColumnModel().getColumn(1).setMinWidth(150);
         }
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
@@ -388,7 +358,7 @@ public class FrmDoThongSo extends javax.swing.JDialog {
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelRound1Layout.setVerticalGroup(
@@ -481,25 +451,29 @@ public class FrmDoThongSo extends javax.swing.JDialog {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
 
-        txtNgayDo.setText(formatter.format(new Date()));
-        btnLuu.setEnabled(true);
         String date = "2020-01-01";
-        for (int i = 0; i <= 12; i++) {
-            txtNgayDo.setText(date + " 01:00:00");
+        Vector vec;
+        for (int i = 1; i <= 6; i++) {
+            vec = new Vector();
             date = DungChung.dateAdd(date, 30);
-            ResultSet rs = csdlDTS.selectAllThongSo(maKH);
-            try {
-                if (rs.next()) {
-                    doLanTiepTheo(rs);
-                } else {
-                    doLanDau();
-                }
-                      btnLuuActionPerformed(evt);
-                btnLuu.setEnabled(true);
-            } catch (SQLException ex) {
-                Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
+            vec.add(lbMaKhachHang.getText());
+            vec.add(date + " 01:00:00.0");  //ngaydo
+            vec.add(getRand(165, 170));   //chieu cao
+            vec.add(getRand(40, 100));  //can nang
+            vec.add(getRand(25, 50));  //khoi luong co
+            vec.add(getRand(50, 80));   //ti le nuoc
+            if (csdlDTS.insertThongSo(vec)) {
+                dtblThongSo.addRow(vec);
             }
         }
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        tblThongSo.repaint();
+        startLineChart();
+
     }//GEN-LAST:event_btnBatDauDoActionPerformed
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
@@ -515,7 +489,6 @@ public class FrmDoThongSo extends javax.swing.JDialog {
             btnLuu.setEnabled(false);
             vec.remove(0);
             startLineChart();
-            getDataTaBle();
             lamTrangText();
         }
     }//GEN-LAST:event_btnLuuActionPerformed

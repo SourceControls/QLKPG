@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Vector;
 import model.DungChung;
 
 /**
@@ -26,8 +27,14 @@ public class testFunct {
 //        PhieuDangKi pdk = new PhieuDangKi("PDK00001");
 //        PhieuThuTien ptt = new PhieuThuTien("PTT0001");
 
-     DoThongSo d = new DoThongSo("KH001","Bùi Tuấn Hùng","2021-05-09","NAM","2001-05-09");
+//     DoThongSo d = new DoThongSo("KH001","Bùi Tuấn Hùng","2021-05-09","NAM","2001-05-09");
 
+     
+             String date = "2020-01-01";
+        for (int i = 1; i <= 6; i++) {
+            date = DungChung.dateAdd(date, 30);
+            System.out.println(date);
+        }
     }
 
     public static void connectDatabase() {

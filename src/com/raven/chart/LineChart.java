@@ -156,6 +156,7 @@ public class LineChart extends javax.swing.JPanel {
         if (!animator.isRunning()) {
             animator.start();
         }
+        this.repaint();
     }
 
     private Dimension getLabelWidth(String text, Graphics2D g2) {

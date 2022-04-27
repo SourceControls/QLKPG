@@ -424,7 +424,6 @@ public class FrmKH extends javax.swing.JPanel {
         });
 
         btnDoThongSo.setText("Đo Chỉ Số");
-        btnDoThongSo.setEnabled(false);
         btnDoThongSo.setkEndColor(new java.awt.Color(255, 51, 255));
         btnDoThongSo.setkHoverForeGround(new java.awt.Color(255, 255, 255));
         btnDoThongSo.setkStartColor(new java.awt.Color(224, 86, 253));
