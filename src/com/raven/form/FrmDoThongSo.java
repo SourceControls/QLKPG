@@ -54,32 +54,31 @@ public class FrmDoThongSo extends javax.swing.JDialog {
         this.hoTen = hoTen;
         this.SDT = SDT;
         this.imgURL = imgURL;
-        setMinYMaxY();
         initComponents();
         devInit();
         this.setVisible(true);
     }
 
-    public void setMinYMaxY() {
-        double minY = 0;
-        double maxY = 100;
-        ResultSet rs = csdlDTS.getBMI(maKH);
-        try {
-            while (rs.next()) {
-                if (Double.parseDouble(rs.getString(2)) < minY) {
-                    minY = Double.parseDouble(rs.getString(2));
-                }
-                if (Double.parseDouble(rs.getString(2)) > maxY) {
-                    maxY = Double.parseDouble(rs.getString(2));
-                }
-            }
-            BlankPlotChart.minY = Math.floor(minY);
-            BlankPlotChart.maxY = Math.ceil(maxY);
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
+//    public void setMinYMaxY() {
+//        double minY = 0;
+//        double maxY = 100;
+//        ResultSet rs = csdlDTS.getBMI(maKH);
+//        try {
+//            while (rs.next()) {
+//                if (Double.parseDouble(rs.getString(2)) < minY) {
+//                    minY = Double.parseDouble(rs.getString(2));
+//                }
+//                if (Double.parseDouble(rs.getString(2)) > maxY) {
+//                    maxY = Double.parseDouble(rs.getString(2));
+//                }
+//            }
+//            BlankPlotChart.minY = Math.floor(minY);
+//            BlankPlotChart.maxY = Math.ceil(maxY);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//    }
 
     public void devInit() {
 
@@ -472,6 +471,7 @@ public class FrmDoThongSo extends javax.swing.JDialog {
             Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
         }
         tblThongSo.repaint();
+        //setMinYMaxY();
         startLineChart();
 
     }//GEN-LAST:event_btnBatDauDoActionPerformed
@@ -488,7 +488,7 @@ public class FrmDoThongSo extends javax.swing.JDialog {
 //            JOptionPane.showMessageDialog(this, "Lưu thành công !");
             btnLuu.setEnabled(false);
             vec.remove(0);
-            startLineChart();
+            //startLineChart();
             lamTrangText();
         }
     }//GEN-LAST:event_btnLuuActionPerformed

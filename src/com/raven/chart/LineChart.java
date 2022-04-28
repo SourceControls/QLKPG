@@ -33,7 +33,7 @@ public class LineChart extends javax.swing.JPanel {
     private float animate;
     private String showLabel;
     private Point labelLocation = new Point();
-
+    private Color color;
     public LineChart() {
         initComponents();
         setOpaque(false);
@@ -76,6 +76,11 @@ public class LineChart extends javax.swing.JPanel {
                     } else {
                         gra.get(i).lineTo(size.getX() + x + ss, size.getY() + size.getHeight() - seriesValues);
                     }
+                    g2.setColor(color);
+                    g2.fillOval((int) (size.getX() + x + ss)-5, (int)(size.getY() + size.getHeight() - seriesValues) -5, 10, 10);
+                    double data = model.get(index).getValues()[i];
+                    String value = df.format(data);
+                    g2.drawString(value,(int) (size.getX() + x + ss) -15, (int)(size.getY() + size.getHeight() - seriesValues) -15);
                     x += seriesSpace + seriesSize;
                 }
                 if (showLabel != null) {
@@ -102,27 +107,27 @@ public class LineChart extends javax.swing.JPanel {
                 }
             }
 
-            @Override
-            public boolean mouseMoving(BlankPlotChart chart, MouseEvent evt, Graphics2D g2, SeriesSize size, int index) {
-                double totalSeriesWidth = (seriesSize * legends.size()) + (seriesSpace * (legends.size() - 1));
-                double x = (size.getWidth() - totalSeriesWidth) / 2;
-                for (int i = 0; i < legends.size(); i++) {
-                    double seriesValues = chart.getSeriesValuesOf(model.get(index).getValues()[i], size.getHeight()) * animate;
-                    int s = seriesSize / 2;
-                    int sy = seriesSize / 3;
-                    int px[] = {(int) (size.getX() + x), (int) (size.getX() + x + s), (int) (size.getX() + x + seriesSize), (int) (size.getX() + x + seriesSize), (int) (size.getX() + x + s), (int) (size.getX() + x)};
-                    int py[] = {(int) (size.getY() + size.getHeight() - seriesValues), (int) (size.getY() + size.getHeight() - seriesValues - sy), (int) (size.getY() + size.getHeight() - seriesValues), (int) (size.getY() + size.getHeight()), (int) (size.getY() + size.getHeight() + sy), (int) (size.getY() + size.getHeight())};
-                    if (new Polygon(px, py, px.length).contains(evt.getPoint())) {
-                        double data = model.get(index).getValues()[i];
-                        showLabel = df.format(data);
-                        labelLocation.setLocation((int) (size.getX() + x + s), (int) (size.getY() + size.getHeight() - seriesValues - sy));
-                        chart.repaint();
-                        return true;
-                    }
-                    x += seriesSpace + seriesSize;
-                }
-                return false;
-            }
+//            @Override
+//            public boolean mouseMoving(BlankPlotChart chart, MouseEvent evt, Graphics2D g2, SeriesSize size, int index) {
+//                double totalSeriesWidth = (seriesSize * legends.size()) + (seriesSpace * (legends.size() - 1));
+//                double x = (size.getWidth() - totalSeriesWidth) / 2;
+//                for (int i = 0; i < legends.size(); i++) {
+//                    double seriesValues = chart.getSeriesValuesOf(model.get(index).getValues()[i], size.getHeight()) * animate;
+//                    int s = seriesSize / 2;
+//                    int sy = seriesSize / 3;
+//                    int px[] = {(int) (size.getX() + x), (int) (size.getX() + x + s), (int) (size.getX() + x + seriesSize), (int) (size.getX() + x + seriesSize), (int) (size.getX() + x + s), (int) (size.getX() + x)};
+//                    int py[] = {(int) (size.getY() + size.getHeight() - seriesValues), (int) (size.getY() + size.getHeight() - seriesValues - sy), (int) (size.getY() + size.getHeight() - seriesValues), (int) (size.getY() + size.getHeight()), (int) (size.getY() + size.getHeight() + sy), (int) (size.getY() + size.getHeight())};
+//                    if (new Polygon(px, py, px.length).contains(evt.getPoint())) {
+//                        double data = model.get(index).getValues()[i];
+//                        showLabel = df.format(data);
+//                        labelLocation.setLocation((int) (size.getX() + x + s), (int) (size.getY() + size.getHeight() - seriesValues - sy));
+//                        chart.repaint();
+//                        return true;
+//                    }
+//                    x += seriesSpace + seriesSize;
+//                }
+//                return false;
+//            }
         });
     }
 
@@ -132,6 +137,7 @@ public class LineChart extends javax.swing.JPanel {
         panelLegend.add(new LegendItem(data));
         panelLegend.repaint();
         panelLegend.revalidate();
+        this.color=color;
     }
 
     public void addData(ModelChart data) {

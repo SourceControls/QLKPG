@@ -17,8 +17,8 @@ import javax.swing.JComponent;
 import javax.swing.border.EmptyBorder;
 
 public class BlankPlotChart extends JComponent {
-    public static double minY;///Math.floor(FrmDoThongSo1.minY);
-    public static double maxY;
+    public static double minY=10;///Math.floor(FrmDoThongSo1.minY);
+    public static double maxY=30;
     private final DecimalFormat format = new DecimalFormat("#,##0.##");
     private NiceScale niceScale;
     private double maxValues;
@@ -204,22 +204,22 @@ public class BlankPlotChart extends JComponent {
     }
 
     private void mouseMove(Graphics2D g2, MouseEvent evt) {
-        if (blankPlotChatRender != null) {
-            Insets insets = getInsets();
-            double textWidth = getMaxValuesTextWidth(g2);
-            double textHeight = getLabelTextHeight(g2);
-            double spaceText = 5;
-            double width = getWidth() - insets.left - insets.right - textWidth - spaceText;
-            double height = getHeight() - insets.top - insets.bottom - textHeight;
-            double space = width / labelCount;
-            double locationX = insets.left + textWidth + spaceText;
-            for (int i = 0; i < labelCount; i++) {
-                boolean stop = blankPlotChatRender.mouseMoving(this, evt, g2, getRectangle(i, height, space, locationX, insets.top), i);
-                if (stop) {
-                    break;
-                }
-            }
-        }
+//        if (blankPlotChatRender != null) {
+//            Insets insets = getInsets();
+//            double textWidth = getMaxValuesTextWidth(g2);
+//            double textHeight = getLabelTextHeight(g2);
+//            double spaceText = 5;
+//            double width = getWidth() - insets.left - insets.right - textWidth - spaceText;
+//            double height = getHeight() - insets.top - insets.bottom - textHeight;
+//            double space = width / labelCount;
+//            double locationX = insets.left + textWidth + spaceText;
+//            for (int i = 0; i < labelCount; i++) {
+//                boolean stop = blankPlotChatRender.mouseMoving(this, evt, g2, getRectangle(i, height, space, locationX, insets.top), i);
+//                if (stop) {
+//                    break;
+//                }
+//            }
+//        }
     }
 
     private double getMaxValuesTextWidth(Graphics2D g2) {

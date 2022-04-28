@@ -141,6 +141,9 @@ public class QLKH {
                 return false;
             }
         }
+         if (txtNgaySinh.getText().equals("")) {
+            JOptionPane.showMessageDialog(f, "Ngày sinh không để trống");// để trống thì lỗi ở cái bảng quét vân tay 
+        }
         String SDT = txtSDT.getText().trim();
         if (SDT.length() != 10) {
             JOptionPane.showMessageDialog(f, "SDT có 10 số");

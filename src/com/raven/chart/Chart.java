@@ -105,27 +105,27 @@ public class Chart extends javax.swing.JPanel {
 
             }
 
-            @Override
-            public boolean mouseMoving(BlankPlotChart chart, MouseEvent evt, Graphics2D g2, SeriesSize size, int index) {
-                double totalSeriesWidth = (seriesSize * legends.size()) + (seriesSpace * (legends.size() - 1));
-                double x = (size.getWidth() - totalSeriesWidth) / 2;
-                for (int i = 0; i < legends.size(); i++) {
-                    double seriesValues = chart.getSeriesValuesOf(model.get(index).getValues()[i], size.getHeight()) * animate;
-                    int s = seriesSize / 2;
-                    int sy = seriesSize / 3;
-                    int px[] = {(int) (size.getX() + x), (int) (size.getX() + x + s), (int) (size.getX() + x + seriesSize), (int) (size.getX() + x + seriesSize), (int) (size.getX() + x + s), (int) (size.getX() + x)};
-                    int py[] = {(int) (size.getY() + size.getHeight() - seriesValues), (int) (size.getY() + size.getHeight() - seriesValues - sy), (int) (size.getY() + size.getHeight() - seriesValues), (int) (size.getY() + size.getHeight()), (int) (size.getY() + size.getHeight() + sy), (int) (size.getY() + size.getHeight())};
-                    if (new Polygon(px, py, px.length).contains(evt.getPoint())) {
-                        double data = model.get(index).getValues()[i];
-                        showLabel = df.format(data);
-                        labelLocation.setLocation((int) (size.getX() + x + s), (int) (size.getY() + size.getHeight() - seriesValues - sy));
-                        chart.repaint();
-                        return true;
-                    }
-                    x += seriesSpace + seriesSize;
-                }
-                return false;
-            }
+//            @Override
+//            public boolean mouseMoving(BlankPlotChart chart, MouseEvent evt, Graphics2D g2, SeriesSize size, int index) {
+//                double totalSeriesWidth = (seriesSize * legends.size()) + (seriesSpace * (legends.size() - 1));
+//                double x = (size.getWidth() - totalSeriesWidth) / 2;
+//                for (int i = 0; i < legends.size(); i++) {
+//                    double seriesValues = chart.getSeriesValuesOf(model.get(index).getValues()[i], size.getHeight()) * animate;
+//                    int s = seriesSize / 2;
+//                    int sy = seriesSize / 3;
+//                    int px[] = {(int) (size.getX() + x), (int) (size.getX() + x + s), (int) (size.getX() + x + seriesSize), (int) (size.getX() + x + seriesSize), (int) (size.getX() + x + s), (int) (size.getX() + x)};
+//                    int py[] = {(int) (size.getY() + size.getHeight() - seriesValues), (int) (size.getY() + size.getHeight() - seriesValues - sy), (int) (size.getY() + size.getHeight() - seriesValues), (int) (size.getY() + size.getHeight()), (int) (size.getY() + size.getHeight() + sy), (int) (size.getY() + size.getHeight())};
+//                    if (new Polygon(px, py, px.length).contains(evt.getPoint())) {
+//                        double data = model.get(index).getValues()[i];
+//                        showLabel = df.format(data);
+//                        labelLocation.setLocation((int) (size.getX() + x + s), (int) (size.getY() + size.getHeight() - seriesValues - sy));
+//                        chart.repaint();
+//                        return true;
+//                    }
+//                    x += seriesSpace + seriesSize;
+//                }
+//                return false;
+//            }
         });
     }
 
