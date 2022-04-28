@@ -1,8 +1,14 @@
 package com.raven.form;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import model.DungChung;
 import model.QLQVT;
 
 
@@ -26,12 +32,47 @@ public class FrmQVT extends javax.swing.JPanel {
       
         
     }
+        private void addListener() {
+        txtTuNgay.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+qlqvt.loc();
+            }
+
+        });
+        txtDenNgay.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                qlqvt.loc();
+            }
+        });
+        
+    }
+
+
     public void showData() {
         dtblLSQVT = (DefaultTableModel) tblLSQVT.getModel();
         qlqvt = new QLQVT(lbCMNDQLQVT, lbDiaChiQLQVT, lbEmailQLQVT, lbGioiTinhQLQVT, lbHangKhachHangQLQVT, lbHoTenQLQVT,
                 lbMaKhachHangQLQVT, lbNgaySinhQLQVT, lbSDTQLQVT, lbHinhAnhKhachQLQVT, lbDichVuQLQVT, lbNgayBatDauQLQVT,
                 lbNgayDangKiQLQVT, lbNgayKetThucQLQVT, btnGiaLapVaoRa, tblLSQVT, btnLocQLQVT, txtTuNgay, txtDenNgay);
         qlqvt.getDataForTblLichSuQuetVanTay();
+        txtTuNgay.setText("1900-01-01");
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -464,7 +505,7 @@ public class FrmQVT extends javax.swing.JPanel {
             }
         });
 
-        btnLocQLQVT.setText("Lọc");
+        btnLocQLQVT.setText("Hủy Lọc");
         btnLocQLQVT.setkEndColor(new java.awt.Color(255, 51, 255));
         btnLocQLQVT.setkStartColor(new java.awt.Color(224, 86, 253));
         btnLocQLQVT.addActionListener(new java.awt.event.ActionListener() {
@@ -507,7 +548,7 @@ public class FrmQVT extends javax.swing.JPanel {
                 .addComponent(txtDenNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnLocQLQVT, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addContainerGap(205, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -5,6 +5,8 @@
 package model;
 
 import com.raven.form.FrmQVT;
+import static com.raven.form.FrmQVT.dtblLSQVT;
+import com.raven.form.FrmThongKe;
 import csdl.*;
 import java.awt.Frame;
 import java.awt.HeadlessException;
@@ -150,12 +152,17 @@ public class QLQVT {
 
     public void huyLoc() {
 
-            txtTuNgay.setText("");
-            txtDenNgay.setText("");
+            txtTuNgay.setText("1900-01-01");
+            txtDenNgay.setText(java.time.LocalDate.now().toString());
             DungChung.fillTable(FrmQVT.dtblLSQVT, csdlQLQVT.selectAllQuetVanTay(f));
 
 
 
+    }
+    public  void loc(){
+        String tuNgay = txtTuNgay.getText();
+        String denNgay = txtDenNgay.getText();
+        DungChung.fillTable(dtblLSQVT, csdlQLQVT.selectKhachQuetVanTayTrongKhoang(f, tuNgay, denNgay));
     }
 
     private Connection conn;
