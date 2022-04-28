@@ -125,8 +125,9 @@ public class QLQVT {
         int count = 0;
         try {
             while (rs.next()) {
-                if (csdlQLQVT.insertKhachQuetVanTay(f, randTimeOfCurrentDay(), rs.getObject(1).toString()))
+                if (csdlQLQVT.insertKhachQuetVanTay(f, randTimeOfCurrentDay(), rs.getObject(1).toString())) {
                     count += 1;
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(QLQVT.class.getName()).log(Level.SEVERE, null, ex);
@@ -147,27 +148,14 @@ public class QLQVT {
         return formatter.format(new Date());
     }
 
-    public void locLichSuQuetVanTay() {
-        if (btnLoc.getText().toLowerCase().equals("hủy lọc")) {
-            btnLoc.setText("Lọc");
+    public void huyLoc() {
+
             txtTuNgay.setText("");
             txtDenNgay.setText("");
             DungChung.fillTable(FrmQVT.dtblLSQVT, csdlQLQVT.selectAllQuetVanTay(f));
-            return;
-        }
-        String tuNgay = txtTuNgay.getText();
-        String denNgay = txtDenNgay.getText();
-        if (tuNgay.isEmpty() | denNgay.isEmpty()) {
-            JOptionPane.showMessageDialog(f, "Các Field Ngày Không Được Để Trống!");
-            return;
-        }
-//        if (!DungChung.checkDateFormat(denNgay) | !DungChung.checkDateFormat(tuNgay)) {
-//            JOptionPane.showMessageDialog(f, "Sai Định Dạng 'YYYY/MM/DD'!");
-//            return;
-//        }
-        btnLoc.setText("Hủy Lọc");
-        DungChung.fillTable(FrmQVT.dtblLSQVT, csdlQLQVT.selectKhachQuetVanTayTrongKhoang(f, tuNgay, denNgay));
-       
+
+
+
     }
 
     private Connection conn;

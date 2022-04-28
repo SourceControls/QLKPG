@@ -13,7 +13,7 @@ import com.raven.main.FrmMain;
  *
  * @author TuanHung
  */
-public class csdlDoiMatKhau {
+public class CsdlDoiMatKhau {
     Connection conn = FrmMain.conn;
     public void doiMatKhau(String matKhauCu, String matKhauMoi) throws SQLException{
         String sql = "exec sp_doi_MK ?,?,?";

@@ -22,6 +22,7 @@ public class testFunct {
      */
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
+        System.out.println("1900-01-01".compareTo(" "));
 
     }
 

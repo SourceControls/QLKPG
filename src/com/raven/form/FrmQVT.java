@@ -1,16 +1,8 @@
 package com.raven.form;
 
-import java.awt.Color;
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.*;
-import com.raven.*;
-import java.awt.Cursor;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import model.QLKH;
 import model.QLQVT;
 
 
@@ -21,7 +13,6 @@ public class FrmQVT extends javax.swing.JPanel {
         initComponents();
         setOpaque(false);
         init();
-        
     }
 
     private void init() {
@@ -589,7 +580,7 @@ public class FrmQVT extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTuNgayActionPerformed
 
     private void txtTuNgayMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTuNgayMousePressed
-        if(btnLocQLQVT.getText().equals("Lọc")) dateChooserTuNgay.showPopup();
+        dateChooserTuNgay.showPopup();
     }//GEN-LAST:event_txtTuNgayMousePressed
 
     private void txtTuNgayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTuNgayMouseClicked
@@ -597,7 +588,7 @@ public class FrmQVT extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTuNgayMouseClicked
 
     private void btnLocQLQVTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocQLQVTActionPerformed
-        qlqvt.locLichSuQuetVanTay();
+        qlqvt.huyLoc();
     }//GEN-LAST:event_btnLocQLQVTActionPerformed
 
     private void txtDenNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDenNgayActionPerformed
@@ -605,7 +596,7 @@ public class FrmQVT extends javax.swing.JPanel {
     }//GEN-LAST:event_txtDenNgayActionPerformed
 
     private void txtDenNgayMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDenNgayMousePressed
-        if(btnLocQLQVT.getText().equals("Lọc")) dateChooserDenNgay.showPopup();
+       dateChooserDenNgay.showPopup();
     }//GEN-LAST:event_txtDenNgayMousePressed
 
     private void tblLSQVTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLSQVTMouseClicked

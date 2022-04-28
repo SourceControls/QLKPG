@@ -61,8 +61,8 @@ public class FrmDoThongSo extends javax.swing.JDialog {
     }
 
     public void setMinYMaxY() {
-        double minY = 100;
-        double maxY = 0;
+        double minY = 0;
+        double maxY = 100;
         ResultSet rs = csdlDTS.getBMI(maKH);
         try {
             while (rs.next()) {

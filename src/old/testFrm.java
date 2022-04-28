@@ -4,6 +4,10 @@
  */
 package old;
 
+import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 /**
  *
  * @author TuanHung
@@ -15,19 +19,11 @@ public class testFrm extends javax.swing.JFrame {
      */
     public testFrm() {
         initComponents();
-        //khoang trang
-                if (txt.getText().contains("  ")) {
-            txt.setText(txt.getText().trim());
-            
-            
-            
-        }
-                //do dai
-                        int doDai = 10;
-        if (txt.getText().length() > doDai)
-            txt.setText(txt.getText().substring(0, doDai));
-        
+        addListener();
+
     }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,19 +34,30 @@ public class testFrm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txt = new javax.swing.JTextField();
+        txtTuNgay = new com.raven.swing.TextFieldRound();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        txt.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtKeyPressed(evt);
+        txtTuNgay.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtTuNgay.setOpaque(true);
+        txtTuNgay.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtTuNgayMouseClicked(evt);
             }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtKeyReleased(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtTuNgayMousePressed(evt);
             }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtKeyTyped(evt);
+        });
+        txtTuNgay.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                txtTuNgayInputMethodTextChanged(evt);
+            }
+        });
+        txtTuNgay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTuNgayActionPerformed(evt);
             }
         });
 
@@ -58,37 +65,41 @@ public class testFrm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(300, 300, 300)
-                .addComponent(txt, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(532, Short.MAX_VALUE))
+            .addGap(0, 961, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(406, 406, 406)
+                    .addComponent(txtTuNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(406, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addComponent(txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(285, Short.MAX_VALUE))
+            .addGap(0, 385, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(176, 176, 176)
+                    .addComponent(txtTuNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(176, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKeyPressed
+    private void txtTuNgayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTuNgayMouseClicked
+
+    }//GEN-LAST:event_txtTuNgayMouseClicked
+
+    private void txtTuNgayMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTuNgayMousePressed
+    }//GEN-LAST:event_txtTuNgayMousePressed
+
+    private void txtTuNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTuNgayActionPerformed
+
+    }//GEN-LAST:event_txtTuNgayActionPerformed
+
+    private void txtTuNgayInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtTuNgayInputMethodTextChanged
         // TODO add your handling code here:
-
-
-    }//GEN-LAST:event_txtKeyPressed
-
-    private void txtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKeyReleased
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_txtKeyReleased
-
-    private void txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKeyTyped
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_txtKeyTyped
+        txtTuNgay.setText("0");
+    }//GEN-LAST:event_txtTuNgayInputMethodTextChanged
 
     /**
      * @param args the command line arguments
@@ -127,6 +138,6 @@ public class testFrm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField txt;
+    private com.raven.swing.TextFieldRound txtTuNgay;
     // End of variables declaration//GEN-END:variables
 }

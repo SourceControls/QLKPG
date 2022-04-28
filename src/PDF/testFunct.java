@@ -4,6 +4,7 @@
  */
 package PDF;
 
+import com.raven.form.FrmThongKe;
 import com.raven.main.FrmMain;
 import java.io.IOException;
 import java.sql.DriverManager;
@@ -30,27 +31,24 @@ public class testFunct {
 //     DoThongSo d = new DoThongSo("KH001","Bùi Tuấn Hùng","2021-05-09","NAM","2001-05-09");
 
      
-             String date = "2020-01-01";
-        for (int i = 1; i <= 6; i++) {
-            date = DungChung.dateAdd(date, 30);
-            System.out.println(date);
-        }
+        FrmThongKe frmThongKe = new FrmThongKe();
+        
     }
 
-    public static void connectDatabase() {
-        String host = "jdbc:sqlserver://localhost:1433; databasename = QLKPG";
-        String uname = "sa";
-        String upass = "123";
-        try {
-            FrmMain.conn = (java.sql.Connection) DriverManager.getConnection(host, uname, upass);
-            //conn = conn;
-            if (FrmMain.conn != null) {
-                System.out.println("Ket noi server thanh cong !");
-            }
-
-        } catch (Exception ex) {
-            System.out.println("connectDatabase: " + ex.toString());
-        }
-    }
+//    public static void connectDatabase() {
+//        String host = "jdbc:sqlserver://localhost:1433; databasename = QLKPG";
+//        String uname = "sa";
+//        String upass = "123";
+//        try {
+//            FrmMain.conn = (java.sql.Connection) DriverManager.getConnection(host, uname, upass);
+//            //conn = conn;
+//            if (FrmMain.conn != null) {
+//                System.out.println("Ket noi server thanh cong !");
+//            }
+//
+//        } catch (Exception ex) {
+//            System.out.println("connectDatabase: " + ex.toString());
+//        }
+//    }
 
 }

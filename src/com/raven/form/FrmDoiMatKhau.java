@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package com.raven.form;
-import csdl.csdlDoiMatKhau;
+import csdl.CsdlDoiMatKhau;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  * @author anhtu
  */
 public class FrmDoiMatKhau extends javax.swing.JPanel {
-    public static csdlDoiMatKhau dmk = new csdlDoiMatKhau();
+    public static CsdlDoiMatKhau dmk = new CsdlDoiMatKhau();
     /**
      * Creates new form FrmDoiMatKhau
      */

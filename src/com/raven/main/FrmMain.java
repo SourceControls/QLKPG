@@ -19,6 +19,7 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import com.raven.form.FrmDoThongSo;
+import com.raven.main.Login;
 import static com.raven.main.FrmMain.conn;
 import javax.swing.JFrame;
 import model.ModelNV;
@@ -42,7 +43,7 @@ public class FrmMain extends javax.swing.JFrame {
     public static FrmDoThongSo frmDoThongSo = null;
     public static FrmDangKiDichVu frmDangKiDichVu = null;
     public static FrmThanhToan frmThanhToan = null;
-    public FrmBaoCao frmBaoCao = new FrmBaoCao();
+    public FrmThongKe frmBaoCao = new FrmThongKe();
     public static ModelNV modelNV;
 
     public FrmMain(ModelNV modelNV) {
@@ -190,7 +191,6 @@ public class FrmMain extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1740, 759));
-        setPreferredSize(new java.awt.Dimension(1740, 759));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 formComponentResized(evt);
