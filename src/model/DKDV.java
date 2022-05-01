@@ -47,10 +47,8 @@ public class DKDV {
             return;
         }
         String ghiChu = JOptionPane.showInputDialog("Nhập Lý Do: ");
-        if (ghiChu.isEmpty()) {
-            JOptionPane.showMessageDialog(f, "Chưa Hủy Phiếu Đăng Kí!");
+        if(ghiChu == null)
             return;
-        }
         txtGhiChuQLDK.setText(ghiChu);
         luuGhiChuDangKi();
         if (csdlDKDV.huyPDK(tblPDK.getValueAt(row, 0).toString())) {
@@ -108,8 +106,11 @@ public class DKDV {
     }
 
     public void txtTimKiemDangKiKeyReleased() {
+                String key =   txtTimKiemDangKi.getText().trim();
+        while(key.contains("  "))
+            key = key.replace("  ", " ");
         lamTrangTextPDK();
-        DungChung.fillTable(FrmPDK.dtblPDK, csdlDKDV.selectPDKByKey(txtTimKiemDangKi.getText()));
+        DungChung.fillTable(FrmPDK.dtblPDK, csdlDKDV.selectPDKByKey(key));
     }
 
     public void lamTrangTextPDK() {

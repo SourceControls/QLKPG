@@ -4,9 +4,24 @@
  */
 package old;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.KeyEvent;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.PieChart.Data;
+import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import model.CheckInput;
+import org.jfree.chart.ChartPanel;
+import org.knowm.xchart.PieChartBuilder;
+import org.knowm.xchart.SwingWrapper;
+import org.knowm.xchart.XChartPanel;
+import org.knowm.xchart.style.Styler;
 
 /**
  *
@@ -19,11 +34,12 @@ public class testFrm extends javax.swing.JFrame {
      */
     public testFrm() {
         initComponents();
-        addListener();
 
+//        txt2.setDocument(new CheckInput(10, true, false, false));
+        txt2.setDocument(new CheckInput(50, false, true, false));
+
+        // Show it
     }
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,30 +50,15 @@ public class testFrm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtTuNgay = new com.raven.swing.TextFieldRound();
+        txt2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 204, 204));
 
-        txtTuNgay.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        txtTuNgay.setOpaque(true);
-        txtTuNgay.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtTuNgayMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtTuNgayMousePressed(evt);
-            }
-        });
-        txtTuNgay.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                txtTuNgayInputMethodTextChanged(evt);
-            }
-        });
-        txtTuNgay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTuNgayActionPerformed(evt);
+        txt2.setToolTipText("Alo");
+        txt2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt2KeyPressed(evt);
             }
         });
 
@@ -65,41 +66,47 @@ public class testFrm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 961, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(406, 406, 406)
-                    .addComponent(txtTuNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(406, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(320, 320, 320)
+                .addComponent(txt2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(422, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 385, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(176, 176, 176)
-                    .addComponent(txtTuNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(176, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(162, 162, 162)
+                .addComponent(txt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(204, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtTuNgayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTuNgayMouseClicked
-
-    }//GEN-LAST:event_txtTuNgayMouseClicked
-
-    private void txtTuNgayMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTuNgayMousePressed
-    }//GEN-LAST:event_txtTuNgayMousePressed
-
-    private void txtTuNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTuNgayActionPerformed
-
-    }//GEN-LAST:event_txtTuNgayActionPerformed
-
-    private void txtTuNgayInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtTuNgayInputMethodTextChanged
-        // TODO add your handling code here:
-        txtTuNgay.setText("0");
-    }//GEN-LAST:event_txtTuNgayInputMethodTextChanged
+    private void txt2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt2KeyPressed
+//        // TODO add your handling code here:
+//            Object txt=evt.getSource();
+//            if(evt.getKeyCode() == KeyEvent.VK_BACK_SPACE | evt.getKeyCode() == KeyEvent.VK_DELETE)
+//                return;
+//            if(txt==txt)
+//            {
+//                char ch=evt.getKeyChar();       
+//                String specialchar="!@#$%^&*()~?>'<:{}|+_/\".,;'][=-` \\";
+//             
+//                if (txt2.getText().trim().length() <= 10)
+//                {
+//                    if (specialchar.indexOf(ch)>-1)
+//                    {
+////                        JOptionPane.showMessageDialog(null, "SPECIAL CHARACTER IS NOT ALLOWED","Title",JOptionPane.WARNING_MESSAGE);
+//                        txt2.setText(txt2.getText().substring(0, txt2.getText().length()-1));
+//                    }
+//                }
+//                else
+//                {
+////                    JOptionPane.showMessageDialog(null, "MAXIMUM 10 CHARACTERS","Title",JOptionPane.WARNING_MESSAGE);
+//                    txt2.setText(txt2.getText().substring(0, txt2.getText().length()-1));       
+//                }
+//            }        
+    }//GEN-LAST:event_txt2KeyPressed
 
     /**
      * @param args the command line arguments
@@ -138,6 +145,6 @@ public class testFrm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.raven.swing.TextFieldRound txtTuNgay;
+    private javax.swing.JTextField txt2;
     // End of variables declaration//GEN-END:variables
 }

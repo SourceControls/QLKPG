@@ -52,7 +52,6 @@ public class FrmMain extends javax.swing.JFrame {
         f = this;
         this.modelNV = modelNV;
         init();
-
     }
 
     public void devInit() {
@@ -120,7 +119,7 @@ public class FrmMain extends javax.swing.JFrame {
         if (modelNV.isQuanli()) {
             menu.addMenu(new ModelMenu("Nhân viên", new ImageIcon(getClass().getResource("/com/raven/icon/staff.png"))));
             menu.addMenu(new ModelMenu("Đổi mật khẩu", new ImageIcon(getClass().getResource("/com/raven/icon/key2.png"))));
-            menu.addMenu(new ModelMenu("Báo cáo", new ImageIcon(getClass().getResource("/com/raven/icon/report2.png"))));
+            menu.addMenu(new ModelMenu("Thống Kê", new ImageIcon(getClass().getResource("/com/raven/icon/report2.png"))));
         }
         menu.addMenu(new ModelMenu("Cài đặt", new ImageIcon(getClass().getResource("/com/raven/icon/setting.png"))));
         body.add(menu, "w 50!");

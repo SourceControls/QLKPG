@@ -66,6 +66,8 @@ public class PDF {
 
     public void savePDF(String fileName) throws IOException {
         contentStream.close();
+        if(!fileName.contains(".pdf"))
+            fileName += ".pdf";
         document.save(DungChung.selectTargetFile(fileName));
         document.close();
         System.out.println("Lưu Thành Công");

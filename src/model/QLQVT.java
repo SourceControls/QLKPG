@@ -6,38 +6,22 @@ package model;
 
 import com.raven.form.FrmQVT;
 import static com.raven.form.FrmQVT.dtblLSQVT;
-import com.raven.form.FrmThongKe;
 import csdl.*;
 import java.awt.Frame;
-import java.awt.HeadlessException;
-import java.io.File;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import java.sql.ResultSetMetaData;
-import com.raven.main.FrmMain;
 
 /**
  *
@@ -89,7 +73,7 @@ public class QLQVT {
                 lbHoTen.setText((String) rs.getObject(2));
                 lbCMND.setText((String) rs.getObject(3));
                 lbGioiTinh.setText((String) rs.getObject(4));
-                lbNgaySinh.setText(rs.getObject(5).toString());
+                lbNgaySinh.setText((String)rs.getObject(5));
                 lbSDT.setText((String) rs.getObject(6));
                 lbEmail.setText((String) rs.getObject(7));
                 lbDiaChi.setText((String) rs.getObject(8));

@@ -17,6 +17,7 @@ import javax.swing.event.ListSelectionListener;
 import model.DungChung;
 import com.raven.main.FrmMain;
 import javax.swing.JOptionPane;
+import model.CheckInput;
 
 public class FrmKH extends javax.swing.JPanel {
 
@@ -55,7 +56,11 @@ public class FrmKH extends javax.swing.JPanel {
                 qlkh.dumpDataFromTblDSKHToFields();
             }
         });
-        
+        txtHoTen.setDocument(new CheckInput(50, false, true, false));
+        txtSDT.setDocument(new CheckInput(10 ,true, false, false));
+        txtCMND.setDocument(new CheckInput(12, true, false, false));
+        txtEmail.setDocument(new CheckInput(50, true, true, true));
+        txtDiaChi.setDocument(new CheckInput(200, true, true, true));
     }
 
     public void setEnableText(boolean a) {
@@ -817,7 +822,7 @@ public class FrmKH extends javax.swing.JPanel {
         } else {
             qlkh.luuChinhSuaKhachHang();
         }
- 
+
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void btnChonAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonAnhActionPerformed

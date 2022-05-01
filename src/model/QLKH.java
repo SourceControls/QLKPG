@@ -141,9 +141,9 @@ public class QLKH {
                 return false;
             }
         }
-         if (txtNgaySinh.getText().equals("")) {
-            JOptionPane.showMessageDialog(f, "Ngày sinh không để trống");// để trống thì lỗi ở cái bảng quét vân tay 
-        }
+//         if (txtNgaySinh.getText().equals("")) {  //tại bên kia dùng toString nên nó bị null á, dùng ép kiểu nên hết bị rồi
+//            JOptionPane.showMessageDialog(f, "Ngày sinh không để trống");// để trống thì lỗi ở cái bảng quét vân tay 
+//        }
         String SDT = txtSDT.getText().trim();
         if (SDT.length() != 10) {
             JOptionPane.showMessageDialog(f, "SDT có 10 số");
@@ -333,9 +333,11 @@ public class QLKH {
     }
 
     public void txtTimKiemKhachHangKeyReleased() {
-
+        String key =   txtTimKiemKhachHang.getText().trim();
+        while(key.contains("  "))
+            key = key.replace("  ", " ");
         lamTrangTextKH();
-        DungChung.fillTable(FrmKH.dtblDSKH, csdlQLKH.findByKey(f, txtTimKiemKhachHang.getText()));
+        DungChung.fillTable(FrmKH.dtblDSKH, csdlQLKH.findByKey(f,key));
     }
 
     public void btnThemMoiKhachClicked() {
@@ -357,8 +359,10 @@ public class QLKH {
             JOptionPane.showMessageDialog(f, "Chọn khách hàng ở bảng trên");
             return;
         }
-
-        FrmMain.frmDoThongSo = new FrmDoThongSo(txtMaKhachHang.getText(), txtHoTen.getText(), txtSDT.getText(), lbLinkHinhAnh.getText());
+        String gioiTinh = "NAM";
+        if(rbtnNu.isSelected())
+            gioiTinh = "NỮ";
+        FrmMain.frmDoThongSo = new FrmDoThongSo(txtMaKhachHang.getText(), txtHoTen.getText(), txtSDT.getText(),gioiTinh, txtNgaySinh.getText(), lbLinkHinhAnh.getText());
 
     }
 

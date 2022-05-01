@@ -45,6 +45,7 @@ public class CsdlQLKH {
 
     }
 
+
     public boolean tonTaiCMND(Frame f, String cmnd) {
         String select = "SELECT MAKH FROM KHACHHANG WHERE CMND=?";
 
@@ -149,10 +150,11 @@ public class CsdlQLKH {
             if (vec.get(3).toString().isEmpty()) {
                 sql.setNull(4, java.sql.Types.DATE);
             }
-            for (int i = 4; i < vec.size()-1; i++) {
-                if (vec.get(i).toString().isEmpty()) 
+            for (int i = 4; i < vec.size() - 1; i++) {
+                if (vec.get(i).toString().isEmpty()) {
                     sql.setNull(i + 1, java.sql.Types.NVARCHAR);
                 }
+            }
             return sql.executeUpdate() > 0;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(f, ex.getMessage());

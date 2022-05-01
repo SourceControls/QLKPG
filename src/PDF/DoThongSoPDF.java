@@ -1,12 +1,16 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package PDF;
 
 import com.raven.chart.ModelChart;
 import com.raven.chart.blankchart.BlankPlotChart;
+import com.raven.form.FrmDoThongSo;
+import static com.raven.form.FrmDoThongSo.dtblThongSo;
+import com.raven.main.FrmMain;
 import com.raven.swing.KButton;
+import com.raven.swing.ScrollBarCustom;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -14,102 +18,96 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Vector;
-import javax.swing.table.DefaultTableModel;
-import model.DungChung;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import model.DungChung;
 
 /**
  *
  * @author TuanHung
  */
-public class DoThongSo extends javax.swing.JFrame {
+public class DoThongSoPDF extends javax.swing.JDialog {
 
     /**
-     * Creates new form DoThongSo
+     * Creates new form DoThongSoPDF
      */
     DefaultTableModel dtblTTKH;
     public static String imgURL = "testimg.png";
-
-    private String maKH;
-    private String hoTen;
     private String ngayDo;
-    private String gioiTinh;
-    private String ngaySinh;
-
-    public ResultSet getPDF() throws SQLException {
-        String sql = "EXEC SP_DTS_TO_PDF ?";
-        PreparedStatement pst = com.raven.main.FrmMain.conn.prepareStatement(sql);
-        pst.setString(1, maKH);
-        return pst.executeQuery();
-    }
-
-    public DoThongSo(String maKH, String hoTen, String ngayDo, String gioiTinh, String ngaySinh) {
+    
+    public DoThongSoPDF(String ngayDo) {
+        super(FrmMain.f, true);
         initComponents();
-        this.maKH = maKH;
-        this.hoTen = hoTen;
+        lineChart.addLegend("BMI", new Color(12, 84, 175), new Color(0, 108, 247));
         this.ngayDo = ngayDo;
-        this.gioiTinh = gioiTinh;
-        this.ngaySinh = ngaySinh;
-        devInit();
+        try {
+            devInit();
+        } catch (SQLException ex) {
+            Logger.getLogger(DoThongSoPDF.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
-
-    private void devInit() {
-        this.setVisible(true);
-        this.setResizable(false);
-        this.setAlwaysOnTop(true);
-        this.setSize(PDF.widthPage + 150, PDF.heightPage + 150);
+    
+    private void devInit() throws SQLException {
+        this.setSize(PDF.widthPage + 200, PDF.heightPage + 200 + jPanel2.getHeight());
         dtblTTKH = (DefaultTableModel) tblThongTinKhachHang.getModel();
 
         //body
-        dtblTTKH.addRow(new Object[]{maKH, hoTen, gioiTinh, ngaySinh, ngayDo});
-        double chieuCao = 178;
-        double canNang = 70;
-        double klCo = 25;
-        double tiLeMo = 15;
-        initChartNgang(rulerBMI, unitBMI, barBMI, lbBMI, canNang / (chieuCao * 2 / 100), " kg/m2");
-        initChartNgang(rulerChieuCao, unitChieuCao, barChieuCao, lbChieuCao, chieuCao, " cm");
-        initChartNgang(rulerCanNang, unitCanNang, barCanNang, lbCanNang, canNang, " kg");
-        initChartNgang(rulerKhoiLuongCo, unitKhoiLuongCo, barKhoiLuongCo, lbKhoiLuongCo, klCo, " kg");
-        initChartNgang(rulerTiLeMo, unitTiLeMo, barTiLeMo, lbTiLeMo, tiLeMo, " %");
-        
-        chart();
-//        save
-        DungChung.componentToImg(mainPanel, imgURL);
-        try {
-            PDF pdf = new PDF();
-            pdf.insertImage(0, 0, imgURL, PDF.widthPage, PDF.heightPage);
-            pdf.savePDF(hoTen + "_" + ngayDo + ".pdf");
-        } catch (IOException ex) {
-
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+        String tuoi = "";
+        if (!FrmDoThongSo.ngaySinh.isEmpty()) {
+            tuoi = String.valueOf(Integer.parseInt(java.time.LocalDate.now().toString().split("-")[0]) - Integer.parseInt(FrmDoThongSo.ngaySinh.split("-")[0]));
         }
-
+        dtblTTKH.addRow(new Object[]{FrmDoThongSo.maKH, FrmDoThongSo.hoTen, FrmDoThongSo.gioiTinh, tuoi, ngayDo});
+        ResultSet rs = FrmDoThongSo.csdlDTS.selectThongSo(FrmDoThongSo.maKH);
+        if (rs.next()) {
+            double chieuCao = rs.getDouble(3);
+            double canNang = rs.getDouble(4);
+            double klCo = rs.getDouble(6);
+            double tiLeMo = rs.getDouble(5);
+            initChartNgang(rulerBMI, unitBMI, barBMI, lbBMI, canNang / (chieuCao * 2 / 100), " kg/m2");
+            initChartNgang(rulerChieuCao, unitChieuCao, barChieuCao, lbChieuCao, chieuCao, " cm");
+            initChartNgang(rulerCanNang, unitCanNang, barCanNang, lbCanNang, canNang, " kg");
+            initChartNgang(rulerKhoiLuongCo, unitKhoiLuongCo, barKhoiLuongCo, lbKhoiLuongCo, klCo, " kg");
+            initChartNgang(rulerTiLeMo, unitTiLeMo, barTiLeMo, lbTiLeMo, tiLeMo, " %");
+        }
+        
+        startLineChart();
+        fixTable(jScrollPane1);
+        this.setVisible(true);
+        
     }
-
-    private void chart() {
-        //chart
-        double minY = 0;
-        double maxY = 50;
-
-        BlankPlotChart.minY = Math.floor(minY);
-        BlankPlotChart.maxY = Math.ceil(maxY);
-        lineChart.addLegend("BMI", new Color(12, 84, 175), new Color(0, 108, 247));
-        lineChart.addData(new ModelChart("Tháng " + 1, new double[]{10}));
-        lineChart.addData(new ModelChart("Tháng " + 2, new double[]{15}));
-        lineChart.addData(new ModelChart("Tháng " + 3, new double[]{20}));
-        lineChart.addData(new ModelChart("Tháng " + 4, new double[]{35}));
-        lineChart.addData(new ModelChart("Tháng " + 5, new double[]{25}));
-        lineChart.addData(new ModelChart("Tháng " + 6, new double[]{20}));
-        lineChart.start();
-
+    
+    public void fixTable(JScrollPane scroll) {
+        scroll.getViewport().setBackground(Color.WHITE);
+        scroll.setVerticalScrollBar(new ScrollBarCustom());
+        JPanel p = new JPanel();
+        p.setBackground(new Color(245, 245, 245));
+        scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+        scroll.setBorder(new EmptyBorder(5, 10, 5, 10));
     }
-
+    
+    public void startLineChart() {
+        lineChart.clear();
+        ResultSet rs = FrmDoThongSo.csdlDTS.getBMI(FrmDoThongSo.maKH);
+        try {
+            while (rs.next()) {
+                Double chiso = Double.parseDouble(rs.getString(2));
+                lineChart.addData(new ModelChart(rs.getString(1), new double[]{chiso}));
+            }
+            lineChart.start();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
     private void initChartNgang(JPanel ruler, JPanel unit, KButton bar, JLabel label, double mainData, String donVi) {
         //đổ dữ liêu vào unit
         int min = 0;
@@ -142,6 +140,13 @@ public class DoThongSo extends javax.swing.JFrame {
         bar.setSize(new Dimension(sizeBar, 10));
         label.setText("  " + String.format(" %.1f", mainData) + donVi);    //hiển thị sau thanh bar
     }
+    
+    public ResultSet getPDF() throws SQLException {
+        String sql = "EXEC SP_DTS_TO_PDF ?";
+        PreparedStatement pst = com.raven.main.FrmMain.conn.prepareStatement(sql);
+        pst.setString(1, FrmDoThongSo.maKH);
+        return pst.executeQuery();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -152,7 +157,6 @@ public class DoThongSo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel10 = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         imageAvatar1 = new com.raven.swing.ImageAvatar();
@@ -276,19 +280,12 @@ public class DoThongSo extends javax.swing.JFrame {
         lbTiLeMo = new javax.swing.JLabel();
         jLabel159 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        lineChart = new com.raven.chart.LineChart();
         jLabel9 = new javax.swing.JLabel();
+        lineChart = new com.raven.chart.LineChart();
         jPanel2 = new javax.swing.JPanel();
-        btnBatDauDo = new com.raven.swing.KButton();
+        btnXuatFile = new com.raven.swing.KButton();
 
-        jLabel10.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel10.setOpaque(true);
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(612, 798));
-        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.Y_AXIS));
-
-        mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.Y_AXIS));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -332,6 +329,12 @@ public class DoThongSo extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tblThongTinKhachHang);
+        if (tblThongTinKhachHang.getColumnModel().getColumnCount() > 0) {
+            tblThongTinKhachHang.getColumnModel().getColumn(0).setMaxWidth(100);
+            tblThongTinKhachHang.getColumnModel().getColumn(2).setMaxWidth(100);
+            tblThongTinKhachHang.getColumnModel().getColumn(3).setMinWidth(50);
+            tblThongTinKhachHang.getColumnModel().getColumn(3).setMaxWidth(50);
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -342,7 +345,7 @@ public class DoThongSo extends javax.swing.JFrame {
                 .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -358,8 +361,6 @@ public class DoThongSo extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
-
-        mainPanel.add(jPanel1);
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1387,10 +1388,10 @@ public class DoThongSo extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+            .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel126, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                    .addComponent(jLabel126, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel125, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel76, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel75, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1427,70 +1428,84 @@ public class DoThongSo extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel159, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
-
-        mainPanel.add(jPanel6);
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setMinimumSize(new java.awt.Dimension(0, 200));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Lịch Sử Đo BMI");
+        jLabel9.setText("Lịch Sử BMI 6 Lần Đo Gần Nhất");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lineChart, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lineChart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lineChart, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        mainPanel.add(jPanel7);
-
-        getContentPane().add(mainPanel);
-
-        btnBatDauDo.setText("Xuất Ra File PDF");
-        btnBatDauDo.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        btnBatDauDo.setkEndColor(new java.awt.Color(153, 153, 255));
-        btnBatDauDo.setkStartColor(new java.awt.Color(104, 109, 224));
-        btnBatDauDo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBatDauDoActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(274, 274, 274)
-                .addComponent(btnBatDauDo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(294, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnBatDauDo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lineChart, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel2);
+        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
+        mainPanel.setLayout(mainPanelLayout);
+        mainPanelLayout.setHorizontalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        mainPanelLayout.setVerticalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        btnXuatFile.setText("Xuất Ra File PDF");
+        btnXuatFile.setToolTipText("");
+        btnXuatFile.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        btnXuatFile.setkEndColor(new java.awt.Color(153, 153, 255));
+        btnXuatFile.setkHoverEndColor(new java.awt.Color(204, 102, 255));
+        btnXuatFile.setkHoverStartColor(new java.awt.Color(204, 102, 255));
+        btnXuatFile.setkStartColor(new java.awt.Color(104, 109, 224));
+        btnXuatFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXuatFileActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnXuatFile, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1519,9 +1534,17 @@ public class DoThongSo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_barTiLeMoActionPerformed
 
-    private void btnBatDauDoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatDauDoActionPerformed
-
-    }//GEN-LAST:event_btnBatDauDoActionPerformed
+    private void btnXuatFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFileActionPerformed
+//        save
+        DungChung.componentToImg(mainPanel, imgURL);
+        try {
+            PDF pdf = new PDF();
+            pdf.insertImage(0, 0, imgURL, PDF.widthPage, PDF.heightPage);
+            pdf.savePDF(FrmDoThongSo.maKH + "_" + ngayDo.split(" ")[0] + ".pdf");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnXuatFileActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1540,20 +1563,28 @@ public class DoThongSo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DoThongSo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DoThongSoPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DoThongSo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DoThongSoPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DoThongSo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DoThongSoPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DoThongSo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DoThongSoPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+//                DoThongSoPDF dialog = new DoThongSoPDF(ngayDo);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
             }
         });
     }
@@ -1564,10 +1595,9 @@ public class DoThongSo extends javax.swing.JFrame {
     private com.raven.swing.KButton barChieuCao;
     private com.raven.swing.KButton barKhoiLuongCo;
     private com.raven.swing.KButton barTiLeMo;
-    private com.raven.swing.KButton btnBatDauDo;
+    private com.raven.swing.KButton btnXuatFile;
     private com.raven.swing.ImageAvatar imageAvatar1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel100;
     private javax.swing.JLabel jLabel101;
     private javax.swing.JLabel jLabel102;

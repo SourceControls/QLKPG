@@ -5,11 +5,13 @@
 package old;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.util.Calendar;
-import java.util.Date;
-import org.apache.pdfbox.pdmodel.*;
+import org.knowm.xchart.PieChart;
+import org.knowm.xchart.PieChartBuilder;
+import org.knowm.xchart.SwingWrapper;
+import org.knowm.xchart.style.Styler.ChartTheme;
+import sun.reflect.annotation.AnnotationType;
+
+
 
 /**
  *
@@ -20,19 +22,18 @@ public class testFunct {
     /**
      * @param args the command line arguments
      */
+
+
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
-        System.out.println("1900-01-01".compareTo(" "));
+        devInit();
 
     }
 
-    public static void savePDF() throws IOException {
-        //create and save pdf
-        PDDocument document = new PDDocument();
-        PDPage page = new PDPage();
-        document.addPage(page);
-        document.save("G:\\My Drive\\All Tai Lieu\\CNPM-Project\\QLKPG\\testPDF.pdf");
-        document.close();
+    private static void devInit() {
+
+
+
     }
 
 }

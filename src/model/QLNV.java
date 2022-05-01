@@ -395,9 +395,11 @@ public class QLNV {
     }
 
     public void txtTimKiemNhanVienKeyReleased() {
-
+        String key =   txtTimKiemNhanvien.getText().trim();
+        while(key.contains("  "))
+            key = key.replace("  ", " ");
         lamTrangTextNV();
-        DungChung.fillTable(FrmNV.dtblDSNV, csdlQLNV.findByKey(f, txtTimKiemNhanvien.getText()));
+        DungChung.fillTable(FrmNV.dtblDSNV, csdlQLNV.findByKey(f,key));
     }
 
     public void btnThemMoiNVClicked() {

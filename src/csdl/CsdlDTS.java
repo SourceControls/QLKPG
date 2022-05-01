@@ -18,12 +18,11 @@ import java.sql.Connection;
  * @author TuanHung
  */
 public class CsdlDTS {
-    
+
     private Connection conn = FrmMain.conn;
-    
-    
-       public ResultSet selectAllThongSo( String maKH) {
-        String selectALLThongSo = "SELECT * FROM DOTHONGSOCOTHE WHERE MAKH = ?";
+
+    public ResultSet selectAllThongSo(String maKH) {
+        String selectALLThongSo = "SELECT * FROM DOTHONGSOCOTHE WHERE MAKH = ? order by ngay desc";
 
         try {
             PreparedStatement sql = conn.prepareStatement(selectALLThongSo);
@@ -35,6 +34,20 @@ public class CsdlDTS {
         }
         return null;
     }
+
+    public ResultSet selectThongSo(String maKH) {
+        String selectALLThongSo = "SELECT * FROM DOTHONGSOCOTHE WHERE MAKH = ?";
+        try {
+            PreparedStatement sql = conn.prepareStatement(selectALLThongSo);
+            sql.setObject(1, maKH);
+            ResultSet rs = sql.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(FrmMain.f, ex.getMessage());
+        }
+        return null;
+    }
+
     public boolean insertThongSo(Vector vec) {
         String insertThongSo = "INSERT INTO DOTHONGSOCOTHE VALUES(?,?,?,?,?,?)";
 
@@ -50,7 +63,8 @@ public class CsdlDTS {
         return false;
 
     }
-    public boolean dolaiThongso( String makh,String ngay) {
+
+    public boolean dolaiThongso(String makh, String ngay) {
         String insertThongSo = "delete DOTHONGSOCOTHE where makh=? and ngay=?";
         try {
             PreparedStatement sql = conn.prepareStatement(insertThongSo);
@@ -65,7 +79,7 @@ public class CsdlDTS {
 
     }
 
-     public ResultSet getBMI(String maKH){
+    public ResultSet getBMI(String maKH) {
         String selectALLThongSo = "EXEC SP_GET_BMI ?";
 
         try {
@@ -76,9 +90,10 @@ public class CsdlDTS {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(FrmMain.f, ex.getMessage());
         }
-        return null;         
-     }
-          public ResultSet getBMI(Frame f,String maKH,int thang, int nam){
+        return null;
+    }
+
+    public ResultSet getBMI(Frame f, String maKH, int thang, int nam) {
         String selectALLThongSo = "EXEC SP_LAY_BMI_CUA_KH_GROUP_BY_TUAN ?,?,?";
 
         try {
@@ -91,7 +106,7 @@ public class CsdlDTS {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(FrmMain.f, ex.getMessage());
         }
-        return null;         
-     }
-          
+        return null;
+    }
+
 }

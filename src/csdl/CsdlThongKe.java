@@ -27,6 +27,17 @@ public class CsdlThongKe {
         return st.executeQuery(sql);
 
     }
+    public ResultSet thongKeGioiTinh() throws SQLException {
+        String sql = "EXEC SP_THONG_KE_GIOI_TINH";
+        Statement st = FrmMain.conn.createStatement();
+        return st.executeQuery(sql);
+    }
+
+    public ResultSet thongKeDoTuoi() throws SQLException {
+        String sql = "EXEC SP_THONG_KE_DO_TUOI";
+        Statement st = FrmMain.conn.createStatement();
+        return st.executeQuery(sql);
+    }
 
     public ResultSet selectAllThongKeKhachHang() throws SQLException {
         String sql = "exec SP_THONG_KE_KHACH_HANG";

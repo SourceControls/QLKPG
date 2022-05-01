@@ -7,3 +7,7 @@ nullnull
 build/classes/com/raven/main/FrmMain.form
 nbproject/private/private.properties
 nbproject/private/private.xml
+*.xml
+*.xml
+nbproject/private/private.xml
+nbproject/private/private.properties

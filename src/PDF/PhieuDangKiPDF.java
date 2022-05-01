@@ -15,7 +15,7 @@ import java.util.Vector;
  *
  * @author TuanHung
  */
-public class PhieuDangKi {
+public class PhieuDangKiPDF {
 
     public ResultSet getPDF() throws SQLException {
         String sql = "EXEC SP_PDK_TO_PDF ?";
@@ -26,7 +26,7 @@ public class PhieuDangKi {
     String maPDK = "";
     String hoTen = "";
     String ngayDK = "";
-    public PhieuDangKi(String maPDK) throws IOException, SQLException {
+    public PhieuDangKiPDF(String maPDK) throws IOException, SQLException {
         PDF pdf = new PDF();
         this.maPDK = maPDK;
         if (this.maPDK.isEmpty()) {

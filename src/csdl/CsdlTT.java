@@ -36,7 +36,7 @@ public class CsdlTT {
     }
 
     public ResultSet selectAllPTT(String maPDK) {
-        String sql = "select NGAYTHU,TIENKHACHTRA,TIENCONNO,HANLANTOI from phieuthutien where mapdk = ? ORDER BY MAPTT DESC";
+        String sql = "select MAPTT, NGAYTHU,TIENKHACHTRA,TIENCONNO,HANLANTOI from phieuthutien where mapdk = ? ORDER BY MAPTT DESC";
         try {
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, maPDK);

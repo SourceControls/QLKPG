@@ -4,24 +4,31 @@
  * and open the template in the editor.
  */
 package com.raven.form;
+
 import csdl.CsdlDoiMatKhau;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import model.CheckInput;
 
 /**
  *
  * @author anhtu
  */
 public class FrmDoiMatKhau extends javax.swing.JPanel {
+
     public static CsdlDoiMatKhau dmk = new CsdlDoiMatKhau();
+
     /**
      * Creates new form FrmDoiMatKhau
      */
     public FrmDoiMatKhau() {
         initComponents();
+        txtMatKhauCu.setDocument(new CheckInput(20, true, true, true));
+        txtMatKhauMoi.setDocument(new CheckInput(20, true, true, true));
+        txtNhapLaiMatKhauMoi.setDocument(new CheckInput(20, true, true, true));
     }
 
     /**
@@ -134,14 +141,24 @@ public class FrmDoiMatKhau extends javax.swing.JPanel {
         String matKhauCu = new String(txtMatKhauCu.getPassword());
         String matKhauMoi = new String(txtMatKhauMoi.getPassword());
         String nhapLaiMK = new String(txtNhapLaiMatKhauMoi.getPassword());
-        System.out.println(matKhauMoi + " " + nhapLaiMK);
-        if(!matKhauMoi.equals(nhapLaiMK)){
+        if (matKhauCu.isEmpty() | matKhauMoi.isEmpty() | nhapLaiMK.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Các trường thông tin không được để trống");
+            return;
+        }
+        if (matKhauMoi.contains(" ")) {
+            JOptionPane.showMessageDialog(this, "Mật Khẩu Không Chứa Kí Tự Khoảng Cách");
+            return;
+        }
+        if (!matKhauMoi.equals(nhapLaiMK)) {
             JOptionPane.showMessageDialog(this, "Mật khẩu mới không khớp");
             return;
         }
-        if(JOptionPane.showConfirmDialog(this,"Xác Nhận Đổi Mật Khẩu?") == JOptionPane.YES_OPTION);
+        if (JOptionPane.showConfirmDialog(this, "Xác Nhận Đổi Mật Khẩu?") == JOptionPane.YES_OPTION);
         try {
             dmk.doiMatKhau(matKhauCu, matKhauMoi);
+            txtMatKhauCu.setText("");
+            txtMatKhauMoi.setText("");
+            txtNhapLaiMatKhauMoi.setText("");
             JOptionPane.showMessageDialog(this, "Đổi Mật Khẩu Thành Công");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Đổi Mật Khẩu Thất Bại\n" + ex.getMessage());

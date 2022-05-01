@@ -4,8 +4,7 @@
  */
 package model;
 
-import PDF.DoThongSo;
-import static PDF.DoThongSo.imgURL;
+
 import com.raven.main.FrmMain;
 import java.awt.AWTException;
 import java.awt.Component;
@@ -138,12 +137,12 @@ public class DungChung {
             BufferedImage bi = robot.createScreenCapture(new Rectangle((int) p.getX(), (int) p.getY(), com.getWidth(), com.getHeight()));
             ImageIO.write(bi, "png", new File(targetFile));
         } catch (AWTException | IOException | InterruptedException ex) {
-            Logger.getLogger(DoThongSo.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
     public static String selectTargetFile(String fileName) {
+        System.out.println(fileName);
         FileDialog fd;
         fd = new java.awt.FileDialog((java.awt.Frame) null, "Chọn Nơi Lưu Tệp", FileDialog.SAVE);
         fd.setFile(fileName);

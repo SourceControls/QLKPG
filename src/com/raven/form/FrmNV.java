@@ -1,17 +1,14 @@
 package com.raven.form;
-import com.raven.chart.ModelChart;
-import static com.raven.form.FrmKH.f;
+
 import com.raven.swing.ScrollBarCustom;
 import javax.swing.table.DefaultTableModel;
-
 import java.awt.Color;
-import java.awt.Frame;
-import java.sql.Connection;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import model.CheckInput;
 import model.DungChung;
 import model.QLNV;
 
@@ -19,21 +16,22 @@ public class FrmNV extends javax.swing.JPanel {
 //
 
     //public static final int DAY_PER_MONTH = 30;
-
-   // public static Connection conn;
+    // public static Connection conn;
     public static DefaultTableModel dtblDSNV;
     private QLNV qlnv;
-   // public static String hoTenNV = "";
+    // public static String hoTenNV = "";
     //public static String maNV = "NV01";
     //public static boolean quanLy = false;
 
     public static boolean themMoi = false;
+
     public FrmNV() {
         initComponents();
         setOpaque(false);
         init();
         fixTable(jScrollPane3);
     }
+
     private void init() {
         setEnableText(false);
         DefaultTableModel model = (DefaultTableModel) tblNV.getModel();
@@ -43,17 +41,24 @@ public class FrmNV extends javax.swing.JPanel {
                 qlnv.dumpDataFromTblDSNVToFields();
             }
         });
+
+        txtHoTen.setDocument(new CheckInput(50, false, true, false));
+        txtSDT.setDocument(new CheckInput(10, true, false, false));
+        txtCMND.setDocument(new CheckInput(12, true, false, false));
+        txtEmail.setDocument(new CheckInput(50, true, true, true));
+        txtDiaChi.setDocument(new CheckInput(200, true, true, true));
     }
 
-    public void showData(){
+    public void showData() {
         dtblDSNV = (DefaultTableModel) tblNV.getModel();
-        qlnv = new QLNV(tblNV, txtMaNhanVien, txtHoTen, txtCMND, rbtnNu, rbtnNam, txtNgaySinh, txtSDT, 
-                txtDiaChi, txtEmail,lbHinhAnhNV, btnChonAnh, btnHuy,btnSua,btnLuu, txtTimKiemNhanvien,cbLocNV
-                ,rbtnConLam,rbtnKhongPT,rbtnKhongQuanLi,rbtnLaPT,rbtnLaQuanLi,rbtnNghilam,lbLinkHinhAnh,
-                panelMainTextFieldQLNV,panelMainBtnQLNV,panelBtnLuuQLNV);
+        qlnv = new QLNV(tblNV, txtMaNhanVien, txtHoTen, txtCMND, rbtnNu, rbtnNam, txtNgaySinh, txtSDT,
+                txtDiaChi, txtEmail, lbHinhAnhNV, btnChonAnh, btnHuy, btnSua, btnLuu, txtTimKiemNhanvien, cbLocNV,
+                 rbtnConLam, rbtnKhongPT, rbtnKhongQuanLi, rbtnLaPT, rbtnLaQuanLi, rbtnNghilam, lbLinkHinhAnh,
+                panelMainTextFieldQLNV, panelMainBtnQLNV, panelBtnLuuQLNV);
         qlnv.getDataForTbDanhSachNV();
     }
-    public void setEnableText(boolean a){
+
+    public void setEnableText(boolean a) {
         txtHoTen.setEnabled(a);
         txtSDT.setEnabled(a);
         txtEmail.setEnabled(a);
@@ -70,14 +75,16 @@ public class FrmNV extends javax.swing.JPanel {
         txtDiaChi.setEnabled(a);
         btnChonAnh.setEnabled(a);
     }
-    public void fixTable(JScrollPane scroll){
+
+    public void fixTable(JScrollPane scroll) {
         scroll.getViewport().setBackground(Color.WHITE);
         scroll.setVerticalScrollBar(new ScrollBarCustom());
         JPanel p = new JPanel();
-        p.setBackground(new Color(245,245,245));
-        scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER,p);
-        scroll.setBorder(new EmptyBorder(5,10,5,10));
+        p.setBackground(new Color(245, 245, 245));
+        scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+        scroll.setBorder(new EmptyBorder(5, 10, 5, 10));
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -698,12 +705,12 @@ public class FrmNV extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimKiemNhanvienActionPerformed
 
     private void txtTimKiemNhanvienKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemNhanvienKeyReleased
-       qlnv.txtTimKiemNhanVienKeyReleased();
+        qlnv.txtTimKiemNhanVienKeyReleased();
         cbLocNV.setSelectedIndex(0);
     }//GEN-LAST:event_txtTimKiemNhanvienKeyReleased
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-      qlnv.unlockPanelBtnLuu();
+        qlnv.unlockPanelBtnLuu();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void txtNgaySinhKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNgaySinhKeyPressed
@@ -723,9 +730,9 @@ public class FrmNV extends javax.swing.JPanel {
     }//GEN-LAST:event_btnChonAnhActionPerformed
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-            if (themMoi) {
+        if (themMoi) {
             qlnv.addNhanvien();
-            
+
         } else {
             qlnv.luuChinhSuaNhanVien();
         }
@@ -740,7 +747,8 @@ public class FrmNV extends javax.swing.JPanel {
         qlnv.lamTrangTextNV();
         themMoi = false;
         System.out.println(tblNV.getSelectedRow());
-        if(tblNV.getSelectedRow()>=0)  qlnv.dumpDataFromTblDSNVToFields();
+        if (tblNV.getSelectedRow() >= 0)
+            qlnv.dumpDataFromTblDSNVToFields();
     }//GEN-LAST:event_btnHuyActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
@@ -766,7 +774,7 @@ public class FrmNV extends javax.swing.JPanel {
 
     private void btnCapTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapTaiKhoanActionPerformed
         // TODO add your handling code here:
-       qlnv.capTaiKhoan();
+        qlnv.capTaiKhoan();
     }//GEN-LAST:event_btnCapTaiKhoanActionPerformed
     private void tblNVMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNVMouseReleased
         if (btnLuu.isEnabled()) {

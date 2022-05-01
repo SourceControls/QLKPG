@@ -34,6 +34,7 @@ public class LineChart extends javax.swing.JPanel {
     private String showLabel;
     private Point labelLocation = new Point();
     private Color color;
+
     public LineChart() {
         initComponents();
         setOpaque(false);
@@ -70,17 +71,19 @@ public class LineChart extends javax.swing.JPanel {
                 g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
                 int ss = seriesSize / 2;
                 for (int i = 0; i < legends.size(); i++) {
-                    double seriesValues = chart.getSeriesValuesOf(model.get(index).getValues()[i], size.getHeight()) * animate;
+                    double seriesValues = 0;
+                       seriesValues = chart.getSeriesValuesOf(model.get(index).getValues()[i], size.getHeight()) * animate;
+
                     if (index == 0) {
-                        gra.get(i).moveTo(size.getX() + x + ss, size.getY() + size.getHeight()- seriesValues);
+                        gra.get(i).moveTo(size.getX() + x + ss, size.getY() + size.getHeight() - seriesValues);
                     } else {
                         gra.get(i).lineTo(size.getX() + x + ss, size.getY() + size.getHeight() - seriesValues);
                     }
                     g2.setColor(color);
-                    g2.fillOval((int) (size.getX() + x + ss)-5, (int)(size.getY() + size.getHeight() - seriesValues) -5, 10, 10);
+                    g2.fillOval((int) (size.getX() + x + ss) - 5, (int) (size.getY() + size.getHeight() - seriesValues) - 5, 10, 10);
                     double data = model.get(index).getValues()[i];
                     String value = df.format(data);
-                    g2.drawString(value,(int) (size.getX() + x + ss) -15, (int)(size.getY() + size.getHeight() - seriesValues) -15);
+                    g2.drawString(value, (int) (size.getX() + x + ss) - 15, (int) (size.getY() + size.getHeight() - seriesValues) - 15);
                     x += seriesSpace + seriesSize;
                 }
                 if (showLabel != null) {
@@ -89,7 +92,7 @@ public class LineChart extends javax.swing.JPanel {
                     int space = 3;
                     int spaceTop = 0;
                     g2.setColor(new Color(30, 30, 30));
-                    g2.fillRoundRect(labelLocation.x - s.width / 2 - 3, labelLocation.y - s.height - space * 2 - spaceTop , s.width + space * 2, s.height + space * 2, 10, 10);
+                    g2.fillRoundRect(labelLocation.x - s.width / 2 - 3, labelLocation.y - s.height - space * 2 - spaceTop, s.width + space * 2, s.height + space * 2, 10, 10);
                     g2.setColor(new Color(255, 255, 255));
                     g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
                     g2.drawString(showLabel, labelLocation.x - s.width / 2, labelLocation.y - spaceTop - space * 2);
@@ -137,7 +140,7 @@ public class LineChart extends javax.swing.JPanel {
         panelLegend.add(new LegendItem(data));
         panelLegend.repaint();
         panelLegend.revalidate();
-        this.color=color;
+        this.color = color;
     }
 
     public void addData(ModelChart data) {

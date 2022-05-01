@@ -1,39 +1,46 @@
 package com.raven.form;
 
+import PDF.PhieuDangKiPDF;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import model.QLKH;
 import model.DKDV;
 import model.QLQVT;
+
 public class FrmPDK extends javax.swing.JPanel {
+
     public static DefaultTableModel dtblPDK;
-    public  QLQVT qlqvt;
-    public  QLKH qlkh;
+    public QLQVT qlqvt;
+    public QLKH qlkh;
     public DKDV dkdv;
     public FrmThanhToan frmThanhToan = null;
+
     public FrmPDK() {
         initComponents();
         setOpaque(false);
         init();
-        
-        
     }
 
     private void init() {
-        
+
         DefaultTableModel model = (DefaultTableModel) tblPDK.getModel();
-      
+
         tblPDK.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int row = tblPDK.rowAtPoint(evt.getPoint());
                 int col = tblPDK.columnAtPoint(evt.getPoint());
-                if (row >= 0 && (col == 8 || col==9) ) {
-                    System.out.println(row+" "+ col);
+                if (row >= 0 && (col == 8 || col == 9)) {
+                    System.out.println(row + " " + col);
 
                 }
-            }   
+            }
         });
         tblPDK.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -41,16 +48,16 @@ public class FrmPDK extends javax.swing.JPanel {
                 dkdv.dumpDataFromTblPDKToFields();
             }
         });
-        
 
     }
-    public void showData(){
+
+    public void showData() {
         dtblPDK = (DefaultTableModel) tblPDK.getModel();
-        dkdv = new DKDV(tblPDK, lbHinhAnhKhachQLDK, lbMaKhachHang, lbHoTen ,lbCMND, lbGioiTinh, lbNgaySinh, lbEmail, lbSDT,
-            lbDiaChi, lbHangKhachHang, txtGhiChuQLDK, txtTimKiemDangKi, lbLinkHinhAnh,cbTrangThaiPDK);
+        dkdv = new DKDV(tblPDK, lbHinhAnhKhachQLDK, lbMaKhachHang, lbHoTen, lbCMND, lbGioiTinh, lbNgaySinh, lbEmail, lbSDT,
+                lbDiaChi, lbHangKhachHang, txtGhiChuQLDK, txtTimKiemDangKi, lbLinkHinhAnh, cbTrangThaiPDK);
         dkdv.getDataForTblDangKiDichVu();
     }
-  
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -96,6 +103,7 @@ public class FrmPDK extends javax.swing.JPanel {
         btnHuyDangKi = new com.raven.swing.KButton();
         btnThanhToan = new com.raven.swing.KButton();
         btnLuuGhiChuDangKi = new com.raven.swing.KButton();
+        btnThanhToan1 = new com.raven.swing.KButton();
 
         btnLamMoi.setText("Làm mới");
         btnLamMoi.setkEndColor(new java.awt.Color(153, 153, 255));
@@ -429,6 +437,15 @@ public class FrmPDK extends javax.swing.JPanel {
             }
         });
 
+        btnThanhToan1.setText("Xuất ra File PDF");
+        btnThanhToan1.setkEndColor(new java.awt.Color(153, 153, 255));
+        btnThanhToan1.setkStartColor(new java.awt.Color(104, 109, 224));
+        btnThanhToan1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThanhToan1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -437,15 +454,16 @@ public class FrmPDK extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnHuyDangKi, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btnLuuGhiChuDangKi, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnThanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                            .addComponent(btnLuuGhiChuDangKi, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnHuyDangKi, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                            .addComponent(btnThanhToan1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -453,9 +471,11 @@ public class FrmPDK extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLuuGhiChuDangKi, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnThanhToan1, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                    .addComponent(btnLuuGhiChuDangKi, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHuyDangKi, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -521,11 +541,11 @@ public class FrmPDK extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimKiemDangKiActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
-            dkdv.thanhToan(false);
+        dkdv.thanhToan(false);
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void tblPDKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPDKMouseClicked
-        
+
     }//GEN-LAST:event_tblPDKMouseClicked
 
     private void btnLuuGhiChuDangKiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuGhiChuDangKiActionPerformed
@@ -553,11 +573,30 @@ public class FrmPDK extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel4FocusGained
 
+    private void btnThanhToan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToan1ActionPerformed
+        // TODO add your handling code here:
+        int row = tblPDK.getSelectedRow();
+
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Chọn phiếu đăng kí ở trên");
+            return;
+        }
+        String maPDK = (String) dtblPDK.getValueAt(row, 0);
+        try {
+            PhieuDangKiPDF pdk = new PhieuDangKiPDF(maPDK);
+        } catch (IOException ex) {
+            Logger.getLogger(FrmPDK.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPDK.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnThanhToan1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.raven.swing.KButton btnHuyDangKi;
     private com.raven.swing.KButton btnLamMoi;
     private com.raven.swing.KButton btnLuuGhiChuDangKi;
     public com.raven.swing.KButton btnThanhToan;
+    public com.raven.swing.KButton btnThanhToan1;
     private javax.swing.ButtonGroup buttonGroup1;
     private com.raven.swing.ComboBoxSuggestion cbTrangThaiPDK;
     private javax.swing.JLabel jLabel1;
