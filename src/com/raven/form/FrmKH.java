@@ -149,6 +149,7 @@ public class FrmKH extends javax.swing.JPanel {
         panelMainBtnQLKH = new javax.swing.JPanel();
         btnThemMoi = new com.raven.swing.KButton();
         btnDoThongSo = new com.raven.swing.KButton();
+        btnGiaVanTay = new com.raven.swing.KButton();
         panelRound2 = new com.raven.swing.PanelRound();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -429,12 +430,25 @@ public class FrmKH extends javax.swing.JPanel {
         });
 
         btnDoThongSo.setText("Đo Chỉ Số");
-        btnDoThongSo.setkEndColor(new java.awt.Color(255, 51, 255));
+        btnDoThongSo.setkAllowGradient(false);
+        btnDoThongSo.setkBackGroundColor(new java.awt.Color(104, 109, 224));
+        btnDoThongSo.setkEndColor(new java.awt.Color(104, 109, 224));
         btnDoThongSo.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        btnDoThongSo.setkStartColor(new java.awt.Color(224, 86, 253));
+        btnDoThongSo.setkHoverStartColor(new java.awt.Color(104, 109, 224));
+        btnDoThongSo.setkSelectedColor(new java.awt.Color(104, 109, 224));
+        btnDoThongSo.setkStartColor(new java.awt.Color(104, 109, 224));
         btnDoThongSo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDoThongSoActionPerformed(evt);
+            }
+        });
+
+        btnGiaVanTay.setText("Giả Vân Tay");
+        btnGiaVanTay.setkEndColor(new java.awt.Color(153, 153, 255));
+        btnGiaVanTay.setkStartColor(new java.awt.Color(104, 109, 224));
+        btnGiaVanTay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGiaVanTayActionPerformed(evt);
             }
         });
 
@@ -448,7 +462,9 @@ public class FrmKH extends javax.swing.JPanel {
                 .addGap(129, 129, 129))
             .addGroup(panelMainBtnQLKHLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnThemMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelMainBtnQLKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnThemMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGiaVanTay, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelMainBtnQLKHLayout.setVerticalGroup(
@@ -456,8 +472,10 @@ public class FrmKH extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMainBtnQLKHLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(btnThemMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addGap(46, 46, 46)
                 .addComponent(btnDoThongSo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(btnGiaVanTay, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(44, Short.MAX_VALUE))
         );
 
@@ -892,9 +910,15 @@ public class FrmKH extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbHangKHActionPerformed
 
+    private void btnGiaVanTayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiaVanTayActionPerformed
+        qlkh.giaVanTay();
+        
+    }//GEN-LAST:event_btnGiaVanTayActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.raven.swing.KButton btnChonAnh;
     private com.raven.swing.KButton btnDoThongSo;
+    private com.raven.swing.KButton btnGiaVanTay;
     private com.raven.swing.KButton btnHuyDangKi;
     private com.raven.swing.KButton btnLamMoi;
     private com.raven.swing.KButton btnLuu;

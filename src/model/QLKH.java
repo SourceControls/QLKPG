@@ -43,6 +43,24 @@ public class QLKH {
     private Connection conn = FrmMain.conn;
     private Frame f = FrmMain.f;
 
+    public void giaVanTay() {
+        int row = tblDSKH.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(f, "Chọn khách ở trên");
+            return;
+        }
+        String maKH = (String) FrmKH.dtblDSKH.getValueAt(row, 0);
+        try {
+            System.out.println(maKH);
+            ResultSet rs = csdlQLKH.insertVanTay(maKH);
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(f, "Thêm vân tay thành công, mã vân tay: " + rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(QLKH.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public void getDataForTbDanhSachKhachHang() {
         DungChung.fillTable(FrmKH.dtblDSKH, csdlQLKH.selectAllKhachHang(f));
     }
@@ -333,11 +351,12 @@ public class QLKH {
     }
 
     public void txtTimKiemKhachHangKeyReleased() {
-        String key =   txtTimKiemKhachHang.getText().trim();
-        while(key.contains("  "))
+        String key = txtTimKiemKhachHang.getText().trim();
+        while (key.contains("  ")) {
             key = key.replace("  ", " ");
+        }
         lamTrangTextKH();
-        DungChung.fillTable(FrmKH.dtblDSKH, csdlQLKH.findByKey(f,key));
+        DungChung.fillTable(FrmKH.dtblDSKH, csdlQLKH.findByKey(f, key));
     }
 
     public void btnThemMoiKhachClicked() {
@@ -360,9 +379,10 @@ public class QLKH {
             return;
         }
         String gioiTinh = "NAM";
-        if(rbtnNu.isSelected())
+        if (rbtnNu.isSelected()) {
             gioiTinh = "NỮ";
-        FrmMain.frmDoThongSo = new FrmDoThongSo(txtMaKhachHang.getText(), txtHoTen.getText(), txtSDT.getText(),gioiTinh, txtNgaySinh.getText(), lbLinkHinhAnh.getText());
+        }
+        FrmMain.frmDoThongSo = new FrmDoThongSo(txtMaKhachHang.getText(), txtHoTen.getText(), txtSDT.getText(), gioiTinh, txtNgaySinh.getText(), lbLinkHinhAnh.getText());
 
     }
 

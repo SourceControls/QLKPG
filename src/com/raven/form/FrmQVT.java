@@ -11,10 +11,11 @@ import javax.swing.event.ListSelectionListener;
 import model.DungChung;
 import model.QLQVT;
 
-
 public class FrmQVT extends javax.swing.JPanel {
+
     public static DefaultTableModel dtblLSQVT;
     private QLQVT qlqvt;
+
     public FrmQVT() {
         initComponents();
         setOpaque(false);
@@ -22,17 +23,12 @@ public class FrmQVT extends javax.swing.JPanel {
     }
 
     private void init() {
-        tblLSQVT.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                qlqvt.getDataForLabelThongTinKhachHang();
-            }
-        });
-        
-      
-        
+
+        FrmQVT.dtblLSQVT = (DefaultTableModel) tblLSQVT.getModel();
+        addListener();
     }
-        private void addListener() {
+
+    private void addListener() {
         txtTuNgay.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void changedUpdate(DocumentEvent e) {
@@ -44,7 +40,7 @@ public class FrmQVT extends javax.swing.JPanel {
 
             @Override
             public void insertUpdate(DocumentEvent e) {
-qlqvt.loc();
+                qlqvt.loc();
             }
 
         });
@@ -62,18 +58,18 @@ qlqvt.loc();
                 qlqvt.loc();
             }
         });
-        
-    }
 
+    }
 
     public void showData() {
         dtblLSQVT = (DefaultTableModel) tblLSQVT.getModel();
         qlqvt = new QLQVT(lbCMNDQLQVT, lbDiaChiQLQVT, lbEmailQLQVT, lbGioiTinhQLQVT, lbHangKhachHangQLQVT, lbHoTenQLQVT,
                 lbMaKhachHangQLQVT, lbNgaySinhQLQVT, lbSDTQLQVT, lbHinhAnhKhachQLQVT, lbDichVuQLQVT, lbNgayBatDauQLQVT,
-                lbNgayDangKiQLQVT, lbNgayKetThucQLQVT, btnGiaLapVaoRa, tblLSQVT, btnLocQLQVT, txtTuNgay, txtDenNgay);
+                lbNgayDangKiQLQVT, lbNgayKetThucQLQVT, btnGiaNhieuVanTay, tblLSQVT, btnLocQLQVT, txtTuNgay, txtDenNgay);
         qlqvt.getDataForTblLichSuQuetVanTay();
         txtTuNgay.setText("1900-01-01");
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -92,7 +88,8 @@ qlqvt.loc();
         jLabel26 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         lbDichVuQLQVT = new javax.swing.JLabel();
-        btnGiaLapVaoRa = new com.raven.swing.KButton();
+        btnGiaNhieuVanTay = new com.raven.swing.KButton();
+        btnGia1MauTin = new com.raven.swing.KButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
@@ -166,12 +163,21 @@ qlqvt.loc();
         lbDichVuQLQVT.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbDichVuQLQVT.setText("NULL");
 
-        btnGiaLapVaoRa.setText("Giả lập vào ra");
-        btnGiaLapVaoRa.setkEndColor(new java.awt.Color(104, 109, 224));
-        btnGiaLapVaoRa.setkStartColor(new java.awt.Color(153, 153, 255));
-        btnGiaLapVaoRa.addActionListener(new java.awt.event.ActionListener() {
+        btnGiaNhieuVanTay.setText("Giả Nhiều Mẩu Tin");
+        btnGiaNhieuVanTay.setkEndColor(new java.awt.Color(104, 109, 224));
+        btnGiaNhieuVanTay.setkStartColor(new java.awt.Color(153, 153, 255));
+        btnGiaNhieuVanTay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGiaLapVaoRaActionPerformed(evt);
+                btnGiaNhieuVanTayActionPerformed(evt);
+            }
+        });
+
+        btnGia1MauTin.setText("Giả 1 Mẩu Tin");
+        btnGia1MauTin.setkEndColor(new java.awt.Color(104, 109, 224));
+        btnGia1MauTin.setkStartColor(new java.awt.Color(153, 153, 255));
+        btnGia1MauTin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGia1MauTinActionPerformed(evt);
             }
         });
 
@@ -203,8 +209,10 @@ qlqvt.loc();
                             .addComponent(jlabelx))
                         .addGap(212, 212, 212))))
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(223, 223, 223)
-                .addComponent(btnGiaLapVaoRa, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(114, 114, 114)
+                .addComponent(btnGiaNhieuVanTay, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100)
+                .addComponent(btnGia1MauTin, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -231,9 +239,11 @@ qlqvt.loc();
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlabelx)
                     .addComponent(lbNgayKetThucQLQVT))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnGiaLapVaoRa, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGiaNhieuVanTay, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGia1MauTin, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
@@ -548,7 +558,7 @@ qlqvt.loc();
                 .addComponent(txtDenNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnLocQLQVT, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -587,7 +597,7 @@ qlqvt.loc();
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(scrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -612,9 +622,9 @@ qlqvt.loc();
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGiaLapVaoRaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiaLapVaoRaActionPerformed
-        qlqvt.giaLapVaoRa();
-    }//GEN-LAST:event_btnGiaLapVaoRaActionPerformed
+    private void btnGiaNhieuVanTayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiaNhieuVanTayActionPerformed
+        qlqvt.giaLapNhieuMauTin();
+    }//GEN-LAST:event_btnGiaNhieuVanTayActionPerformed
 
     private void txtTuNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTuNgayActionPerformed
 
@@ -637,15 +647,23 @@ qlqvt.loc();
     }//GEN-LAST:event_txtDenNgayActionPerformed
 
     private void txtDenNgayMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDenNgayMousePressed
-       dateChooserDenNgay.showPopup();
+        dateChooserDenNgay.showPopup();
     }//GEN-LAST:event_txtDenNgayMousePressed
 
     private void tblLSQVTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLSQVTMouseClicked
+        qlqvt.getDataForLabelThongTinKhachHang();
 
     }//GEN-LAST:event_tblLSQVTMouseClicked
 
+    private void btnGia1MauTinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGia1MauTinActionPerformed
+        // TODO add your handling code here:
+        qlqvt.gia1VanTay();
+
+    }//GEN-LAST:event_btnGia1MauTinActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.raven.swing.KButton btnGiaLapVaoRa;
+    private com.raven.swing.KButton btnGia1MauTin;
+    private com.raven.swing.KButton btnGiaNhieuVanTay;
     private com.raven.swing.KButton btnLocQLQVT;
     private javax.swing.ButtonGroup buttonGroup1;
     private com.raven.datechooser.DateChooser dateChooserDenNgay;

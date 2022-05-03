@@ -7,18 +7,13 @@ package csdl;
 import com.raven.form.FrmKH;
 import java.awt.Frame;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import com.raven.main.FrmMain;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 /**
@@ -45,6 +40,18 @@ public class CsdlQLKH {
 
     }
 
+    public ResultSet insertVanTay(String maKH) throws SQLException {
+        String sql = "INSERT INTO VANTAYKHACH(MAKH) VALUES(?)";
+
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setObject(1, maKH);
+        if (pst.executeUpdate() > 0) {
+            sql = "select max(IDVANTAY) from VANTAYKHACH";
+            pst = conn.prepareStatement(sql);
+            return pst.executeQuery();
+        }
+        return null;
+    }
 
     public boolean tonTaiCMND(Frame f, String cmnd) {
         String select = "SELECT MAKH FROM KHACHHANG WHERE CMND=?";

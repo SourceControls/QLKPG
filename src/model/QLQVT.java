@@ -8,6 +8,7 @@ import com.raven.form.FrmQVT;
 import static com.raven.form.FrmQVT.dtblLSQVT;
 import csdl.*;
 import java.awt.Frame;
+import java.awt.Rectangle;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -55,8 +56,27 @@ public class QLQVT {
         this.txtDenNgay = txtDenNgay;
     }
 
+    public void gia1VanTay() {
+        String maVT = JOptionPane.showInputDialog(this, "Nhập Mã Vân Tay");
+
+        if (maVT == null | maVT.isEmpty()) {
+            return;
+        }
+        int maVanTay = Integer.parseInt(maVT);
+        try {
+            csdlQLQVT.insert1KhachQuetVanTay(maVanTay);
+            getDataForTblLichSuQuetVanTay();
+            tblLSQVT.getSelectionModel().setSelectionInterval(0, 0);
+            tblLSQVT.scrollRectToVisible(new Rectangle(tblLSQVT.getCellRect(0, 0, true)));
+            getDataForLabelThongTinKhachHang();
+            JOptionPane.showMessageDialog(f, "Quẹt Vân Tay Thành Công");
+        } catch (SQLException ex) {
+            Logger.getLogger(QLQVT.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     public void getDataForTblLichSuQuetVanTay() {
-        FrmQVT.dtblLSQVT = (DefaultTableModel) tblLSQVT.getModel();
         DungChung.fillTable(FrmQVT.dtblLSQVT, csdlQLQVT.selectAllQuetVanTay(f));
     }
 
@@ -73,15 +93,19 @@ public class QLQVT {
                 lbHoTen.setText((String) rs.getObject(2));
                 lbCMND.setText((String) rs.getObject(3));
                 lbGioiTinh.setText((String) rs.getObject(4));
-                lbNgaySinh.setText((String)rs.getObject(5));
+                if (rs.getObject(5) != null) {
+                    lbNgaySinh.setText(rs.getObject(5).toString());
+                }
                 lbSDT.setText((String) rs.getObject(6));
                 lbEmail.setText((String) rs.getObject(7));
                 lbDiaChi.setText((String) rs.getObject(8));
                 lbHangKhachHang.setText((String) rs.getObject(9));
                 DungChung.readImg(lbHinhAnhKhach, (String) rs.getObject(10));
+
             }
         } catch (SQLException ex) {
-            Logger.getLogger(QLQVT.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(QLQVT.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
         getDataForLabelThongTinDichVuKhachDK(STT, row);
@@ -98,30 +122,26 @@ public class QLQVT {
                 lbNgayDangKi.setText(rs.getObject(2).toString());
                 lbNgayBatDau.setText(rs.getObject(3).toString());
                 lbNgayKetThuc.setText(rs.getObject(4).toString());
+
             }
         } catch (SQLException ex) {
-            Logger.getLogger(QLQVT.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(QLQVT.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    public void giaLapVaoRa() {
-        ResultSet rs = csdlQLQVT.selectKHCoPDKHopLe(f);
-        Vector vec = new Vector();
-        int count = 0;
+    public void giaLapNhieuMauTin() {
+        ResultSet rs;
         try {
-            while (rs.next()) {
-                if (csdlQLQVT.insertKhachQuetVanTay(f, randTimeOfCurrentDay(), rs.getObject(1).toString())) {
-                    count += 1;
-                }
+            rs = csdlQLQVT.insertNhieuKhachQuetVanTay();
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(f, "Có " + rs.getString(1)
+                        + " người vừa quẹt vân tay!");
             }
+            getDataForTblLichSuQuetVanTay();
         } catch (SQLException ex) {
             Logger.getLogger(QLQVT.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        JOptionPane.showMessageDialog(f, "Có " + count + " người quẹt vân tay!");
-        if (count != 0) {
-            FrmQVT.dtblLSQVT.setRowCount(0);
-            DungChung.fillTable(FrmQVT.dtblLSQVT, csdlQLQVT.selectAllQuetVanTay(f));
         }
     }
 
@@ -136,14 +156,13 @@ public class QLQVT {
 
     public void huyLoc() {
 
-            txtTuNgay.setText("1900-01-01");
-            txtDenNgay.setText(java.time.LocalDate.now().toString());
-            DungChung.fillTable(FrmQVT.dtblLSQVT, csdlQLQVT.selectAllQuetVanTay(f));
-
-
+        txtTuNgay.setText("1900-01-01");
+        txtDenNgay.setText(java.time.LocalDate.now().toString());
+        DungChung.fillTable(FrmQVT.dtblLSQVT, csdlQLQVT.selectAllQuetVanTay(f));
 
     }
-    public  void loc(){
+
+    public void loc() {
         String tuNgay = txtTuNgay.getText();
         String denNgay = txtDenNgay.getText();
         DungChung.fillTable(dtblLSQVT, csdlQLQVT.selectKhachQuetVanTayTrongKhoang(f, tuNgay, denNgay));

@@ -131,13 +131,15 @@
                                   <Component id="jLabel25" linkSize="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="jlabelx" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="212" pref="212" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="212" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="223" max="-2" attributes="0"/>
-                      <Component id="btnGiaLapVaoRa" min="-2" pref="135" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
+                      <Component id="btnGiaNhieuVanTay" min="-2" pref="135" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="btnGia1MauTin" min="-2" pref="135" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -164,9 +166,12 @@
                           <Component id="jlabelx" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lbNgayKetThucQLQVT" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnGiaLapVaoRa" min="-2" pref="27" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnGiaNhieuVanTay" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                          <Component id="btnGia1MauTin" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="55" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -245,9 +250,9 @@
                 <Property name="text" type="java.lang.String" value="NULL"/>
               </Properties>
             </Component>
-            <Component class="com.raven.swing.KButton" name="btnGiaLapVaoRa">
+            <Component class="com.raven.swing.KButton" name="btnGiaNhieuVanTay">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Gi&#x1ea3; l&#x1ead;p v&#xe0;o ra"/>
+                <Property name="text" type="java.lang.String" value="Gi&#x1ea3; Nhi&#x1ec1;u M&#x1ea9;u Tin"/>
                 <Property name="kEndColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="e0" green="6d" red="68" type="rgb"/>
                 </Property>
@@ -256,7 +261,21 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGiaLapVaoRaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGiaNhieuVanTayActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="com.raven.swing.KButton" name="btnGia1MauTin">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Gi&#x1ea3; 1 M&#x1ea9;u Tin"/>
+                <Property name="kEndColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="e0" green="6d" red="68" type="rgb"/>
+                </Property>
+                <Property name="kStartColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="99" red="99" type="rgb"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGia1MauTinActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -638,7 +657,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="scrollBar1" max="32767" attributes="0"/>
-                      <Component id="jScrollPane1" pref="604" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -758,7 +777,7 @@
                       <Component id="txtDenNgay" min="-2" pref="149" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnLocQLQVT" min="-2" pref="104" max="-2" attributes="0"/>
-                      <EmptySpace pref="205" max="32767" attributes="0"/>
+                      <EmptySpace pref="175" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
