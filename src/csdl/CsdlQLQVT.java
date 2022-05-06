@@ -85,7 +85,7 @@ public class CsdlQLQVT {
     }
 
     public ResultSet selectKhachQuetVanTayTrongKhoang(Frame f, String tuNgay, String denNgay) {
-        String sql = "SELECT * FROM V_KHACHQUETVANTAY WHERE NGAYGIO between ? AND ?  orderby stt decs";
+        String sql = "SELECT * FROM V_KHACHQUETVANTAY WHERE NGAYGIO between ? AND ?  order by stt desc";
         ResultSet rs = null;
         try {
             PreparedStatement pst = conn.prepareStatement(sql);

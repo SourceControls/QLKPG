@@ -13,11 +13,13 @@ import java.awt.event.ActionListener;
 import java.awt.geom.Path2D;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import model.ModelNV;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
@@ -132,8 +134,7 @@ public class PanelSlide extends javax.swing.JLayeredPane {
                         String ten = (String) r.getObject(1);
                         String chucvu;
                         boolean quanli =  r.getBoolean(2);
-//                        if(cv) chucvu= "Quản lí" ;
-//                        else chucvu= "Nhân viên";
+                        FrmMain.quanLi = quanli;
                         Icon profile;
                         try{
                             profile = new ImageIcon(getClass().getResource(r.getString(3)));
@@ -149,12 +150,11 @@ public class PanelSlide extends javax.swing.JLayeredPane {
                     }
                     r.close();
                     //p.close();
-                } catch (InterruptedException e) {
-                    
-                } catch(Exception ex){
-                    loading.showError("Lỗi kết nối database !");
-                    Logger.getLogger(com.raven.main.Login.class.getName()).log(Level.SEVERE, null, ex);
-                   //System.out.println(ex.toString());
+                } catch(SQLException ex){
+                    JOptionPane.showMessageDialog(fram, ex.getMessage());
+                    loading.showError(ex.getMessage());
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(PanelSlide.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });

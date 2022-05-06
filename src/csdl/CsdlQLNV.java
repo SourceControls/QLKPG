@@ -29,9 +29,8 @@ public class CsdlQLNV {
 
     public ResultSet selectAllNhanVien(Frame f) {
 
-        FrmNV.dtblDSNV.setRowCount(0);
-
-        String selectAllKhachHang = "SELECT MANV,HOTEN,GIOITINH,CMND,NGAYSINH,PT,QUANLY,NGHILAM FROM dbo.[NHANVIEN]";
+        
+        String selectAllKhachHang = "SELECT *FROM v_nhan_vien";
         Statement st;
         try {
             st = FrmMain.conn.createStatement();
@@ -42,6 +41,7 @@ public class CsdlQLNV {
         return null;
 
     }
+
 
     public boolean tonTaiCMND(Frame f, String cmnd) {
         String select = "SELECT MANV FROM NHANVIEN WHERE CMND=?";
@@ -110,15 +110,15 @@ public class CsdlQLNV {
     }
 
     public ResultSet selectNVByChucVu(String nghiepVu) {
-        String sql = "select maNV,hoten,gioitinh,cmnd,ngaysinh,pt,quanly,nghilam from  NHANVIEN WHERE quanly = 'true'";
+        String sql = "SELECT * FROM V_NHAN_VIEN WHERE quanly = 'true'";
         if (nghiepVu.toLowerCase().equals("nhân viên")) {
-            sql = "select maNV,hoten,gioitinh,cmnd,ngaysinh,pt,quanly,nghilam from  NHANVIEN WHERE quanly = 'false'";
+            sql = "SELECT * FROM V_NHAN_VIEN WHERE quanly = 'false'";
         } else if (nghiepVu.toLowerCase().equals("huấn luyện viên")) {
-            sql = "select maNV,hoten,gioitinh,cmnd,ngaysinh,pt,quanly,nghilam from  NHANVIEN WHERE PT = 'true'";
+            sql = "SELECT * FROM V_NHAN_VIEN WHERE PT = 'true'";
         } else if (nghiepVu.toLowerCase().equals("còn làm")) {
-            sql = "select maNV,hoten,gioitinh,cmnd,ngaysinh,pt,quanly,nghilam from  NHANVIEN WHERE nghilam = 'false'";
+            sql = "SELECT * FROM V_NHAN_VIEN WHERE nghilam = 'false'";
         } else if (nghiepVu.toLowerCase().equals("đã nghỉ")) {
-            sql = "select maNV,hoten,gioitinh,cmnd,ngaysinh,pt,quanly,nghilam from  NHANVIEN WHERE nghilam = 'true'";
+            sql = "SELECT * FROM V_NHAN_VIEN WHERE nghilam = 'true'";
         }
         try {
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -194,7 +194,7 @@ public class CsdlQLNV {
     }
 
     public ResultSet selectNhanVien(Frame f, String MAKH) {
-        String findById = " select * from  NHANVIEN WHERE MANV =?";
+        String findById = " select * from  v_NHAN_VIEN WHERE MANV =?";
         try {
             PreparedStatement sql = conn.prepareStatement(findById);
             sql.setObject(1, MAKH);
@@ -206,8 +206,8 @@ public class CsdlQLNV {
     }
 
     public ResultSet findByKey(Frame f, String key) {
-        String sql = "select maNV,hoten,gioitinh,cmnd,ngaysinh,pt,quanly,nghilam from "
-                + "nhanvien where hoten like N'%" + key + "%' or sdt like '%" + key + "%'";
+        String sql = "select * from "
+                + "V_nhan_vien where hoten like N'%" + key + "%' or sdt like '%" + key + "%'";
         try {
             Statement st = conn.createStatement();
             return st.executeQuery(sql);
@@ -215,6 +215,20 @@ public class CsdlQLNV {
             JOptionPane.showMessageDialog(f, ex.getMessage());
         }
         return null;
+    }
+    public void moKhoaTaiKhoan(String maNV) throws SQLException{
+          String sql = "Exec SP_MO_KHOA_TK_NV ?";
+        PreparedStatement pst;
+        pst = conn.prepareStatement(sql);
+        pst.setObject(1, maNV);
+        pst.executeQuery();      
+    }
+        public void khoaTaiKhoan(String maNV) throws SQLException {
+        String sql = "Exec SP_KHOA_TK_NV ?";
+        PreparedStatement pst;
+        pst = conn.prepareStatement(sql);
+        pst.setObject(1, maNV);
+        pst.executeQuery();
     }
 
 }

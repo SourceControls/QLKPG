@@ -176,7 +176,7 @@
                                   <Component id="jLabel6" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
                                   <Component id="txtCMND" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="149" max="-2" attributes="0"/>
+                              <EmptySpace pref="174" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="108" max="32767" attributes="0"/>
@@ -543,7 +543,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="panelBtnLuuQLNV" min="-2" max="-2" attributes="0"/>
-                          <Component id="panelMainBtnQLNV" min="-2" max="-2" attributes="0"/>
+                          <Component id="panelMainBtnQLNV" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="35" max="32767" attributes="0"/>
                   </Group>
@@ -629,17 +629,25 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnThem" alignment="1" min="-2" pref="128" max="-2" attributes="0"/>
-                              <Component id="btnSua" alignment="1" min="-2" pref="128" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="btnThem" alignment="1" min="-2" pref="128" max="-2" attributes="0"/>
+                                      <Component id="btnSua" alignment="1" min="-2" pref="128" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Component id="btnCapTaiKhoan" pref="0" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="btnKhoaTaiKhoan" min="-2" pref="128" max="-2" attributes="0"/>
+                                      <Component id="btnKhoaTaiKhoan1" min="-2" pref="128" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnCapTaiKhoan" min="-2" pref="128" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -652,7 +660,11 @@
                           <Component id="btnSua" min="-2" pref="36" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnCapTaiKhoan" min="-2" pref="36" max="-2" attributes="0"/>
-                          <EmptySpace pref="26" max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="btnKhoaTaiKhoan" min="-2" pref="36" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="btnKhoaTaiKhoan1" min="-2" pref="36" max="-2" attributes="0"/>
+                          <EmptySpace pref="74" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -674,7 +686,7 @@
                 </Component>
                 <Component class="com.raven.swing.KButton" name="btnSua">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
+                    <Property name="text" type="java.lang.String" value="S&#x1eed;a Th&#xf4;ng Tin"/>
                     <Property name="kEndColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="99" red="99" type="rgb"/>
                     </Property>
@@ -698,6 +710,34 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCapTaiKhoanActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="com.raven.swing.KButton" name="btnKhoaTaiKhoan">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Kh&#xf3;a T&#xe0;i Kho&#x1ea3;n"/>
+                    <Property name="kEndColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="99" red="99" type="rgb"/>
+                    </Property>
+                    <Property name="kStartColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="e0" green="6d" red="68" type="rgb"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKhoaTaiKhoanActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="com.raven.swing.KButton" name="btnKhoaTaiKhoan1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="M&#x1edf; Kh&#xf3;a T&#xe0;i Kho&#x1ea3;n"/>
+                    <Property name="kEndColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="99" red="99" type="rgb"/>
+                    </Property>
+                    <Property name="kStartColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="e0" green="6d" red="68" type="rgb"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKhoaTaiKhoan1ActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -731,19 +771,43 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="8" rowCount="0">
+              <Table columnCount="12" rowCount="0">
                 <Column editable="false" title="M&#xe3; NV" type="java.lang.Object"/>
-                <Column editable="true" title="H&#x1ecd; t&#xea;n" type="java.lang.Object"/>
-                <Column editable="true" title="Gi&#x1edb;i t&#xed;nh" type="java.lang.Object"/>
-                <Column editable="true" title="CMND" type="java.lang.Object"/>
-                <Column editable="true" title="Ng&#xe0;y sinh" type="java.lang.Object"/>
-                <Column editable="true" title="PT" type="java.lang.Object"/>
-                <Column editable="true" title="Qu&#x1ea3;n l&#xed;" type="java.lang.Object"/>
-                <Column editable="true" title="Ngh&#x1ec9; l&#xe0;m" type="java.lang.Object"/>
+                <Column editable="false" title="H&#x1ecd; t&#xea;n" type="java.lang.Object"/>
+                <Column editable="false" title="Gi&#x1edb;i t&#xed;nh" type="java.lang.Object"/>
+                <Column editable="false" title="SDT" type="java.lang.Object"/>
+                <Column editable="false" title="CMND" type="java.lang.Object"/>
+                <Column editable="false" title="EMAIL" type="java.lang.Object"/>
+                <Column editable="false" title="Ng&#xe0;y sinh" type="java.lang.Object"/>
+                <Column editable="false" title="&#x110;&#x1ecb;a Ch&#x1ec9;" type="java.lang.Object"/>
+                <Column editable="false" title="PT" type="java.lang.Object"/>
+                <Column editable="false" title="Qu&#x1ea3;n l&#xed;" type="java.lang.Object"/>
+                <Column editable="false" title="Ngh&#x1ec9; l&#xe0;m" type="java.lang.Object"/>
+                <Column editable="false" title="T&#xe0;i Kho&#x1ea3;n" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>

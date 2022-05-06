@@ -35,11 +35,11 @@ public class PDF {
     public PDType0Font fontB;
     public PDType0Font fontI;
     public PDType0Font fontIB;
-    
+
     private void init() throws IOException {
         //setup document, page
         document = new PDDocument();
-        firstPage = new PDPage(new PDRectangle(widthPage,heightPage));
+        firstPage = new PDPage(new PDRectangle(widthPage, heightPage));
         document.addPage(firstPage);
         contentStream = new PDPageContentStream(document, document.getPage(0));
         //setup font, width, height
@@ -66,8 +66,9 @@ public class PDF {
 
     public void savePDF(String fileName) throws IOException {
         contentStream.close();
-        if(!fileName.contains(".pdf"))
+        if (!fileName.contains(".pdf")) {
             fileName += ".pdf";
+        }
         document.save(DungChung.selectTargetFile(fileName));
         document.close();
         System.out.println("Lưu Thành Công");
@@ -100,9 +101,13 @@ public class PDF {
     }
 
     public void insertText(int x, int y, String text, PDFont font, Float fontSize, Color color, String align) throws IOException {
-        if (align.equals("center")) {
+        if (align.equals("center")) { //center page
             float fW = font.getStringWidth(text) / 1000 * fontSize;
             x = (int) (widthPage - fW) / 2;
+        }
+        if (align.equals("centerX")) { //center page
+            float fW = font.getStringWidth(text) / 1000 * fontSize;
+            x = (int) (x - fW) / 2;
         }
         if (align.equals("right")) {   //nếu insert right thì x = margin right
             float fW = font.getStringWidth(text) / 1000 * fontSize;
@@ -174,8 +179,7 @@ public class PDF {
             for (int j = 0; j < headers.get(i).size(); j++) {
                 //header
                 insertText(x, y + 20, headers.get(i).get(j).toString(), fontB, fontSizeN, Color.black, "");
-                 //content
-//                float fW = fontB.getStringWidth(datas.get(i).get(j).toString()) / 1000 * fontSizeN;
+                //content
                 int xData = (int) (fontB.getStringWidth(headers.get(i).get(j).toString()) / 1000 * fontSizeN) + x + 20;
                 insertText(xData, y + 15, datas.get(i).get(j).toString(), fontN, fontSizeN, Color.black, "");
                 //dot.............

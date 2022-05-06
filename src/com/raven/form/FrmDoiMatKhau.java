@@ -145,6 +145,10 @@ public class FrmDoiMatKhau extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Các trường thông tin không được để trống");
             return;
         }
+        if(matKhauMoi.length() <= 6 | matKhauMoi.length() >=20){
+                JOptionPane.showMessageDialog(this, "Mật Khẩu Có Độ Dài Từ 6 đến 20 kí tự");
+            return;        
+        }
         if (matKhauMoi.contains(" ")) {
             JOptionPane.showMessageDialog(this, "Mật Khẩu Không Chứa Kí Tự Khoảng Cách");
             return;

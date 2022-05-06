@@ -23,32 +23,33 @@ public class testFunct {
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String[] args) throws IOException, SQLException {
 //        connectDatabase();
-//        PhieuDangKi pdk = new PhieuDangKi("PDK00001");
-//        PhieuThuTien ptt = new PhieuThuTien("PTT0001");
+//        PhieuDangKiPDF pdk = new PhieuDangKiPDF("PDK00001");
+//        PhieuThuTienPDF ptt = new PhieuThuTienPDF("PTT0001");
 
 //     DoThongSo d = new DoThongSo("KH001","Bùi Tuấn Hùng","2021-05-09","NAM","2001-05-09");
 
      
-        FrmThongKe frmThongKe = new FrmThongKe();
+//        FrmThongKe frmThongKe = new FrmThongKe();
         
     }
 
-//    public static void connectDatabase() {
-//        String host = "jdbc:sqlserver://localhost:1433; databasename = QLKPG";
-//        String uname = "sa";
-//        String upass = "123";
-//        try {
-//            FrmMain.conn = (java.sql.Connection) DriverManager.getConnection(host, uname, upass);
-//            //conn = conn;
-//            if (FrmMain.conn != null) {
-//                System.out.println("Ket noi server thanh cong !");
-//            }
-//
-//        } catch (Exception ex) {
-//            System.out.println("connectDatabase: " + ex.toString());
-//        }
-//    }
+    public static void connectDatabase() {
+        String host = "jdbc:sqlserver://localhost:1433; databasename = QLKPG";
+        String uname = "sa";
+        String upass = "123";
+        try {
+            FrmMain.conn = (java.sql.Connection) DriverManager.getConnection(host, uname, upass);
+            //conn = conn;
+            if (FrmMain.conn != null) {
+                System.out.println("Ket noi server thanh cong !");
+            }
+
+        } catch (Exception ex) {
+            System.out.println("connectDatabase: " + ex.toString());
+        }
+    }
 
 }

@@ -26,6 +26,7 @@ public class PhieuDangKiPDF {
     String maPDK = "";
     String hoTen = "";
     String ngayDK = "";
+    String hotenNV = "";
     public PhieuDangKiPDF(String maPDK) throws IOException, SQLException {
         PDF pdf = new PDF();
         this.maPDK = maPDK;
@@ -49,8 +50,9 @@ public class PhieuDangKiPDF {
         pdf.drawTable(40, 550, 30, headers, datas, colW);
         //footer
         pdf.insertText(80, 650, "Chữ Kí Người Đăng Kí", pdf.fontB, pdf.fontSizeN, Color.black, "right");
-
-        pdf.savePDF(hoTen + "_" + ngayDK);
+        pdf.insertText(80, 650, "Chữ Kí Người Lập Phiếu Đăng Kí", pdf.fontB, pdf.fontSizeN, Color.black, "");
+        pdf.insertText(110, 720, hotenNV, pdf.fontB, pdf.fontSizeN, Color.black, "");
+        pdf.savePDF(hoTen + "_" + ngayDK);  
     }
 
     private Vector<Vector> getHeaders() throws SQLException {
@@ -126,7 +128,7 @@ public class PhieuDangKiPDF {
         
         hoTen = rs.getString("HOTEN");
         ngayDK = rs.getString("NGAYDK");
-        
+        hotenNV = rs.getString("hotennv");
         Vector vec = new Vector<>();
         vec = new Vector<>();
         vec.add(rs.getString("MAPDK"));

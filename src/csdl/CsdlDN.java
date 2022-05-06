@@ -24,17 +24,11 @@ public class CsdlDN {
     public CsdlDN() {
     }
 
-    public static ResultSet dangNhap(String tenDangNhap, String matKhau) {
+    public static ResultSet dangNhap(String tenDangNhap, String matKhau) throws SQLException {
         String sql = "EXEC SP_NV_DANGNHAP ?, ?";
-        try {
-            PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setObject(1, tenDangNhap);
-            pst.setObject(2, matKhau);
-            return pst.executeQuery();
-        } catch (SQLException ex) {
-            System.out.println("dangNhap : " + ex.toString());
-        }
-        return null;
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setObject(1, tenDangNhap);
+        pst.setObject(2, matKhau);
+        return pst.executeQuery();
     }
-    /////////tutest
 }

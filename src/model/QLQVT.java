@@ -71,7 +71,8 @@ public class QLQVT {
             getDataForLabelThongTinKhachHang();
             JOptionPane.showMessageDialog(f, "Quẹt Vân Tay Thành Công");
         } catch (SQLException ex) {
-            Logger.getLogger(QLQVT.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(f, ex.getMessage());
+
         }
 
     }

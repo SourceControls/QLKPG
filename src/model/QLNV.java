@@ -75,6 +75,28 @@ public class QLNV {
         DungChung.fillTable(FrmNV.dtblDSNV, csdlQLNV.selectAllNhanVien(f));
     }
 
+    public void khoaTaiKhoan() {
+        int row = tblNV.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(f, "Chọn nhân viên ở trên");
+            return;
+        }
+        String maNV = (String) FrmNV.dtblDSNV.getValueAt(row, 0);
+        String tenNV = (String) FrmNV.dtblDSNV.getValueAt(row, 1);
+        int option = JOptionPane.showConfirmDialog(f, "Khóa Tài Khoản Của Nhân Viên: " + tenNV);
+        if (option != JOptionPane.YES_OPTION) {
+            return;
+        }
+        try {
+            System.out.println(maNV);
+            csdlQLNV.khoaTaiKhoan(maNV);
+            JOptionPane.showMessageDialog(f, "Khóa tài khoản thành công");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(f, ex.getMessage());
+        }
+    }
+
     public void dumpDataFromTblDSNVToFields() {
         int row = tblNV.getSelectedRow();
         if (row >= 0) {
@@ -119,9 +141,12 @@ public class QLNV {
             }
             try {
                 String imgURL = rs.getString("HINHANH");
-                 lbLinkHinhAnh.setText(imgURL);
-                if(imgURL !=null && !imgURL.isEmpty() ) DungChung.readImg(lbHinhAnhNV, imgURL);
-                else DungChung.readImg(lbHinhAnhNV,"/anhNV/default.png");
+                lbLinkHinhAnh.setText(imgURL);
+                if (imgURL != null && !imgURL.isEmpty()) {
+                    DungChung.readImg(lbHinhAnhNV, imgURL);
+                } else {
+                    DungChung.readImg(lbHinhAnhNV, "/anhNV/default.png");
+                }
             } catch (Exception ex) {
                 lbHinhAnhNV.removeAll();
             }
@@ -156,20 +181,20 @@ public class QLNV {
             return false;
         }
         String SDT = txtSDT.getText().trim();
-        if (SDT.length() != 10  ) {
+        if (SDT.length() != 10) {
             JOptionPane.showMessageDialog(f, "SDT có 10 số");
             return false;
         }
-        if ( !SDT.matches("0[0-9]{9}")) {
+        if (!SDT.matches("0[0-9]{9}")) {
             JOptionPane.showMessageDialog(f, "Số điện thoại không đúng định dạng");
             return false;
         }
         String CMND = txtCMND.getText().trim();
-        if ( !CMND.matches("[0-9]{9}") && !CMND.matches("[0-9]{12}") && CMND.length()!=0) {
+        if (!CMND.matches("[0-9]{9}") && !CMND.matches("[0-9]{12}") && CMND.length() != 0) {
             JOptionPane.showMessageDialog(f, "CMND không đúng");
             return false;
         }
-        
+
         String email = txtEmail.getText().trim();
         if (email.length() == 0) {
             JOptionPane.showMessageDialog(f, "Nhập email");
@@ -179,7 +204,7 @@ public class QLNV {
             JOptionPane.showMessageDialog(f, "Email không đúng định dạng");
             return false;
         }
-        if(txtNgaySinh.getText().equals("")){
+        if (txtNgaySinh.getText().equals("")) {
             JOptionPane.showMessageDialog(f, "Chọn ngày sinh");
             return false;
         }
@@ -312,11 +337,12 @@ public class QLNV {
         }
         try {
             csdlQLNV.insertTaiKhoan(maNV, matKhau);
+            JOptionPane.showMessageDialog(f, "Tạo tài khoản thành công");
+            getDataForTbDanhSachNV();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(f, "Tạo tài khoản thất bại! \n" + ex.getMessage());
         }
-        
-        
+
     }
 
     public void luuChinhSuaNhanVien() {
@@ -389,17 +415,18 @@ public class QLNV {
         fd.setVisible(true);
         if (fd.getFile() != null) {
             String fileName = fd.getDirectory() + fd.getFile();
-            DungChung.readImg( lbHinhAnhNV, fileName);
+            DungChung.readImg(lbHinhAnhNV, fileName);
             lbLinkHinhAnh.setText(fileName);
         }
     }
 
     public void txtTimKiemNhanVienKeyReleased() {
-        String key =   txtTimKiemNhanvien.getText().trim();
-        while(key.contains("  "))
+        String key = txtTimKiemNhanvien.getText().trim();
+        while (key.contains("  ")) {
             key = key.replace("  ", " ");
+        }
         lamTrangTextNV();
-        DungChung.fillTable(FrmNV.dtblDSNV, csdlQLNV.findByKey(f,key));
+        DungChung.fillTable(FrmNV.dtblDSNV, csdlQLNV.findByKey(f, key));
     }
 
     public void btnThemMoiNVClicked() {
@@ -472,10 +499,26 @@ public class QLNV {
         }
         DungChung.fillTable(FrmNV.dtblDSNV, csdlQLNV.selectNVByChucVu(cbLocNV.getSelectedItem().toString()));
     }
+    public void moKhoaTaiKhoan(){
+                int row = tblNV.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(f, "Chọn nhân viên ở trên");
+            return;
+        }
+        String maNV = (String) FrmNV.dtblDSNV.getValueAt(row, 0);
+        try {
+            System.out.println(maNV);
+            csdlQLNV.moKhoaTaiKhoan(maNV);
+            JOptionPane.showMessageDialog(f, "Mở Khóa tài khoản thành công");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(f, ex.getMessage());
+        }
+    }
 
     public QLNV(JTable tblNV, JTextField txtMaNhanVien, JTextField txtHoTen, JTextField txtCMND, JRadioButton rbtnNu, JRadioButton rbtnNam, JTextField txtNgaySinh, JTextField txtSDT, JTextField txtDiaChi, JTextField txtEmail,
             JLabel lbHinhAnhNV, JButton btnChonAnh, JButton btnHuy, JButton btnThem, JButton btnLuu, JTextField txtTimKiemNhanvien, JComboBox cbLocNV,
-             JRadioButton rbtnConLam, JRadioButton rbtnKhongPT, JRadioButton rbtnKhongQuanLi, JRadioButton rbtnLaPT, JRadioButton rbtnLaQuanLi, JRadioButton rbtnNghilam, JLabel lbLinkHinhAnh,
+            JRadioButton rbtnConLam, JRadioButton rbtnKhongPT, JRadioButton rbtnKhongQuanLi, JRadioButton rbtnLaPT, JRadioButton rbtnLaQuanLi, JRadioButton rbtnNghilam, JLabel lbLinkHinhAnh,
             JPanel panelMainTextFieldQLNV, JPanel panelMainBtnQLNV, JPanel panelBtnLuuQLNV) {
         this.tblNV = tblNV;
         this.txtMaNhanVien = txtMaNhanVien;

@@ -127,13 +127,7 @@ public class DKDV {
     }
 
     public void thanhToan(boolean fromFrmKH) {
-        if (!fromFrmKH) {  //nếu click từ form DSPDK
-            if (tblPDK.getValueAt(tblPDK.getSelectedRow(), 10).toString().equals("ĐÃ HỦY")) {
-                JOptionPane.showMessageDialog(FrmMain.frmThanhToan, "Phiếu đã hủy !");
-                return;
-            }
-        }else{  //nếu click từ form pdk sau khi thanh toán
-             
+        if (fromFrmKH){
             getDataForTblDangKiDichVu();
              tblPDK.setRowSelectionInterval(FrmMain.formPDK.tblPDK.getRowCount() - 1, FrmMain.formPDK.tblPDK.getRowCount() - 1);
         }

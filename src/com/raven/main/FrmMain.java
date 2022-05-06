@@ -46,6 +46,8 @@ public class FrmMain extends javax.swing.JFrame {
     public FrmThongKe frmBaoCao = new FrmThongKe();
     public static ModelNV modelNV;
 
+    public static boolean quanLi = false;
+
     public FrmMain(ModelNV modelNV) {
         initComponents();
         devInit();
@@ -114,13 +116,13 @@ public class FrmMain extends javax.swing.JFrame {
         });
 
         menu.addMenu(new ModelMenu("Khách hàng", new ImageIcon(getClass().getResource("/com/raven/icon/user.png"))));
-        menu.addMenu(new ModelMenu("Thẻ đăng kí", new ImageIcon(getClass().getResource("/com/raven/icon/card.png"))));
-        menu.addMenu(new ModelMenu("Quản lí vào ra", new ImageIcon(getClass().getResource("/com/raven/icon/door.png"))));
+        menu.addMenu(new ModelMenu("Phiếu đăng kí", new ImageIcon(getClass().getResource("/com/raven/icon/card.png"))));
+        menu.addMenu(new ModelMenu("Khách vào phòng tập", new ImageIcon(getClass().getResource("/com/raven/icon/door.png"))));
         if (modelNV.isQuanli()) {
             menu.addMenu(new ModelMenu("Nhân viên", new ImageIcon(getClass().getResource("/com/raven/icon/staff.png"))));
-            menu.addMenu(new ModelMenu("Đổi mật khẩu", new ImageIcon(getClass().getResource("/com/raven/icon/key2.png"))));
             menu.addMenu(new ModelMenu("Thống Kê", new ImageIcon(getClass().getResource("/com/raven/icon/report2.png"))));
         }
+        menu.addMenu(new ModelMenu("Đổi mật khẩu", new ImageIcon(getClass().getResource("/com/raven/icon/key2.png"))));
         menu.addMenu(new ModelMenu("Cài đặt", new ImageIcon(getClass().getResource("/com/raven/icon/setting.png"))));
         body.add(menu, "w 50!");
         body.add(main, "w 100%");

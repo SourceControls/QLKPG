@@ -13,6 +13,7 @@ import java.util.Vector;
 import java.sql.Types;
 import javax.swing.JOptionPane;
 import com.raven.main.FrmMain;
+import static com.sun.corba.se.impl.util.Utility.printStackTrace;
 
 
 /**
@@ -30,13 +31,13 @@ public class CsdlTT {
             pst.setString(1, maPDK);
             return pst.executeQuery();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(FrmMain.f, ex.getMessage());
+            printStackTrace();
         }
         return null;
     }
 
     public ResultSet selectAllPTT(String maPDK) {
-        String sql = "select MAPTT, NGAYTHU,TIENKHACHTRA,TIENCONNO,HANLANTOI from phieuthutien where mapdk = ? ORDER BY MAPTT DESC";
+        String sql = "select * FROM V_PTT where mapdk = ? ORDER BY MAPTT DESC";
         try {
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, maPDK);

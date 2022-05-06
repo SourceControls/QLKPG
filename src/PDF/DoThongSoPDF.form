@@ -316,7 +316,7 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="jPanel16" min="-2" pref="475" max="-2" attributes="0"/>
+                          <Component id="jPanel16" min="-2" pref="473" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -700,7 +700,7 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="jPanel18" min="-2" pref="474" max="-2" attributes="0"/>
+                          <Component id="jPanel18" min="-2" pref="472" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -1068,7 +1068,7 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="jPanel20" min="-2" pref="474" max="-2" attributes="0"/>
+                          <Component id="jPanel20" min="-2" pref="473" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -1468,7 +1468,7 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="jPanel22" min="-2" pref="474" max="-2" attributes="0"/>
+                          <Component id="jPanel22" min="-2" pref="473" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -1836,7 +1836,7 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="jPanel24" min="-2" pref="474" max="-2" attributes="0"/>
+                          <Component id="jPanel24" min="-2" pref="473" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>

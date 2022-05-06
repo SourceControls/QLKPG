@@ -1,6 +1,7 @@
 package com.raven.form;
 
 import PDF.PhieuDangKiPDF;
+import com.raven.main.FrmMain;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -9,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableColumn;
 import model.QLKH;
 import model.DKDV;
 import model.QLQVT;
@@ -55,6 +57,14 @@ public class FrmPDK extends javax.swing.JPanel {
         dtblPDK = (DefaultTableModel) tblPDK.getModel();
         dkdv = new DKDV(tblPDK, lbHinhAnhKhachQLDK, lbMaKhachHang, lbHoTen, lbCMND, lbGioiTinh, lbNgaySinh, lbEmail, lbSDT,
                 lbDiaChi, lbHangKhachHang, txtGhiChuQLDK, txtTimKiemDangKi, lbLinkHinhAnh, cbTrangThaiPDK);
+        if (FrmMain.quanLi) {
+            TableColumn col = new TableColumn(dtblPDK.getColumnCount());
+         col.setHeaderValue("Người Lập");
+        tblPDK.addColumn(col);
+        dtblPDK.addColumn("Người Lập");
+        }
+    
+
         dkdv.getDataForTblDangKiDichVu();
     }
 

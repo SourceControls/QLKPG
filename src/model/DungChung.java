@@ -99,7 +99,7 @@ public class DungChung {
             rsmd = rs.getMetaData();
             while (rs.next()) {
                 vec = new Vector();
-                for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+                for (int i = 1; i <= dtbl.getColumnCount() & i <= rsmd.getColumnCount() ; i++) {
                     vec.add(rs.getObject(i));
                 }
                 dtbl.addRow(vec);
@@ -122,7 +122,7 @@ public class DungChung {
             c.setTime(sdf.parse(date));
             c.add(Calendar.DATE, day);  // number of days to add
             output = sdf.format(c.getTime());  // dt is now the new date
-        } catch (Exception ex) {
+        } catch (ParseException ex) {
             System.out.println(ex.toString());
         }
         return output;

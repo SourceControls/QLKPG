@@ -3,6 +3,7 @@ package com.raven.form;
 import com.raven.swing.ScrollBarCustom;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
@@ -134,6 +135,8 @@ public class FrmNV extends javax.swing.JPanel {
         btnThem = new com.raven.swing.KButton();
         btnSua = new com.raven.swing.KButton();
         btnCapTaiKhoan = new com.raven.swing.KButton();
+        btnKhoaTaiKhoan = new com.raven.swing.KButton();
+        btnKhoaTaiKhoan1 = new com.raven.swing.KButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblNV = new com.raven.swing.TableColumn();
         jPanel1 = new javax.swing.JPanel();
@@ -285,7 +288,7 @@ public class FrmNV extends javax.swing.JPanel {
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCMND, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(108, Short.MAX_VALUE))
         );
         panelMainTextFieldQLNVLayout.setVerticalGroup(
@@ -447,7 +450,7 @@ public class FrmNV extends javax.swing.JPanel {
             }
         });
 
-        btnSua.setText("Sửa");
+        btnSua.setText("Sửa Thông Tin");
         btnSua.setkEndColor(new java.awt.Color(153, 153, 255));
         btnSua.setkStartColor(new java.awt.Color(104, 109, 224));
         btnSua.addActionListener(new java.awt.event.ActionListener() {
@@ -465,20 +468,43 @@ public class FrmNV extends javax.swing.JPanel {
             }
         });
 
+        btnKhoaTaiKhoan.setText("Khóa Tài Khoản");
+        btnKhoaTaiKhoan.setkEndColor(new java.awt.Color(153, 153, 255));
+        btnKhoaTaiKhoan.setkStartColor(new java.awt.Color(104, 109, 224));
+        btnKhoaTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKhoaTaiKhoanActionPerformed(evt);
+            }
+        });
+
+        btnKhoaTaiKhoan1.setText("Mở Khóa Tài Khoản");
+        btnKhoaTaiKhoan1.setkEndColor(new java.awt.Color(153, 153, 255));
+        btnKhoaTaiKhoan1.setkStartColor(new java.awt.Color(104, 109, 224));
+        btnKhoaTaiKhoan1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKhoaTaiKhoan1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelMainBtnQLNVLayout = new javax.swing.GroupLayout(panelMainBtnQLNV);
         panelMainBtnQLNV.setLayout(panelMainBtnQLNVLayout);
         panelMainBtnQLNVLayout.setHorizontalGroup(
             panelMainBtnQLNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMainBtnQLNVLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelMainBtnQLNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnThem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSua, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-            .addGroup(panelMainBtnQLNVLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnCapTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(panelMainBtnQLNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelMainBtnQLNVLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(panelMainBtnQLNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnThem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSua, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnCapTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(panelMainBtnQLNVLayout.createSequentialGroup()
+                        .addGroup(panelMainBtnQLNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnKhoaTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnKhoaTaiKhoan1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         panelMainBtnQLNVLayout.setVerticalGroup(
             panelMainBtnQLNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -489,7 +515,11 @@ public class FrmNV extends javax.swing.JPanel {
                 .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnCapTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnKhoaTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnKhoaTaiKhoan1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -550,11 +580,11 @@ public class FrmNV extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã NV", "Họ tên", "Giới tính", "CMND", "Ngày sinh", "PT", "Quản lí", "Nghỉ làm"
+                "Mã NV", "Họ tên", "Giới tính", "SDT", "CMND", "EMAIL", "Ngày sinh", "Địa Chỉ", "PT", "Quản lí", "Nghỉ làm", "Tài Khoản"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, true, true, true
+                false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -782,10 +812,25 @@ public class FrmNV extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tblNVMouseReleased
 
+    private void btnKhoaTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhoaTaiKhoanActionPerformed
+        // TODO add your handling code here:
+
+        qlnv.khoaTaiKhoan();
+        qlnv.getDataForTbDanhSachNV();
+    }//GEN-LAST:event_btnKhoaTaiKhoanActionPerformed
+
+    private void btnKhoaTaiKhoan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhoaTaiKhoan1ActionPerformed
+        // TODO add your handling code here:
+        qlnv.moKhoaTaiKhoan();
+        qlnv.getDataForTbDanhSachNV();
+    }//GEN-LAST:event_btnKhoaTaiKhoan1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.raven.swing.KButton btnCapTaiKhoan;
     private com.raven.swing.KButton btnChonAnh;
     private com.raven.swing.KButton btnHuy;
+    private com.raven.swing.KButton btnKhoaTaiKhoan;
+    private com.raven.swing.KButton btnKhoaTaiKhoan1;
     private com.raven.swing.KButton btnLamMoi;
     private com.raven.swing.KButton btnLuu;
     private com.raven.swing.KButton btnSua;

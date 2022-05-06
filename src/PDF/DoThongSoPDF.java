@@ -41,7 +41,7 @@ public class DoThongSoPDF extends javax.swing.JDialog {
     DefaultTableModel dtblTTKH;
     public static String imgURL = "testimg.png";
     private String ngayDo;
-    
+
     public DoThongSoPDF(String ngayDo) {
         super(FrmMain.f, true);
         initComponents();
@@ -52,9 +52,9 @@ public class DoThongSoPDF extends javax.swing.JDialog {
         } catch (SQLException ex) {
             Logger.getLogger(DoThongSoPDF.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
+
     private void devInit() throws SQLException {
         this.setSize(PDF.widthPage + 200, PDF.heightPage + 200 + jPanel2.getHeight());
         dtblTTKH = (DefaultTableModel) tblThongTinKhachHang.getModel();
@@ -77,13 +77,13 @@ public class DoThongSoPDF extends javax.swing.JDialog {
             initChartNgang(rulerKhoiLuongCo, unitKhoiLuongCo, barKhoiLuongCo, lbKhoiLuongCo, klCo, " kg");
             initChartNgang(rulerTiLeMo, unitTiLeMo, barTiLeMo, lbTiLeMo, tiLeMo, " %");
         }
-        
+
         startLineChart();
         fixTable(jScrollPane1);
         this.setVisible(true);
-        
+
     }
-    
+
     public void fixTable(JScrollPane scroll) {
         scroll.getViewport().setBackground(Color.WHITE);
         scroll.setVerticalScrollBar(new ScrollBarCustom());
@@ -92,7 +92,7 @@ public class DoThongSoPDF extends javax.swing.JDialog {
         scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
         scroll.setBorder(new EmptyBorder(5, 10, 5, 10));
     }
-    
+
     public void startLineChart() {
         lineChart.clear();
         ResultSet rs = FrmDoThongSo.csdlDTS.getBMI(FrmDoThongSo.maKH);
@@ -105,9 +105,9 @@ public class DoThongSoPDF extends javax.swing.JDialog {
         } catch (SQLException ex) {
             Logger.getLogger(FrmDoThongSo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
+
     private void initChartNgang(JPanel ruler, JPanel unit, KButton bar, JLabel label, double mainData, String donVi) {
         //đổ dữ liêu vào unit
         int min = 0;
@@ -140,7 +140,7 @@ public class DoThongSoPDF extends javax.swing.JDialog {
         bar.setSize(new Dimension(sizeBar, 10));
         label.setText("  " + String.format(" %.1f", mainData) + donVi);    //hiển thị sau thanh bar
     }
-    
+
     public ResultSet getPDF() throws SQLException {
         String sql = "EXEC SP_DTS_TO_PDF ?";
         PreparedStatement pst = com.raven.main.FrmMain.conn.prepareStatement(sql);
@@ -555,7 +555,7 @@ public class DoThongSoPDF extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel15Layout.setVerticalGroup(
@@ -759,7 +759,7 @@ public class DoThongSoPDF extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel17Layout.setVerticalGroup(
@@ -956,7 +956,7 @@ public class DoThongSoPDF extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel19Layout.setVerticalGroup(
@@ -1167,7 +1167,7 @@ public class DoThongSoPDF extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel21Layout.setVerticalGroup(
@@ -1364,7 +1364,7 @@ public class DoThongSoPDF extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel23Layout.setVerticalGroup(
@@ -1536,6 +1536,7 @@ public class DoThongSoPDF extends javax.swing.JDialog {
 
     private void btnXuatFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFileActionPerformed
 //        save
+        this.setSize(PDF.widthPage + 200, PDF.heightPage + 200 + jPanel2.getHeight());
         DungChung.componentToImg(mainPanel, imgURL);
         try {
             PDF pdf = new PDF();

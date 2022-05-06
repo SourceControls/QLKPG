@@ -26,6 +26,7 @@ public class PhieuThuTienPDF {
     String MAPTT = "";
     String hoTen = "";
     String ngayThu = "";
+    String hotenNV = "";
     public PhieuThuTienPDF(String MAPTT) throws IOException, SQLException {
         PDF pdf = new PDF();
         this.MAPTT = MAPTT;
@@ -48,8 +49,10 @@ public class PhieuThuTienPDF {
 
         pdf.drawTable(40, 450, 30, headers, datas, colW);
         //footer
-        pdf.insertText(80, 550, "Chữ Kí Người Đăng Kí", pdf.fontB, pdf.fontSizeN, Color.black, "right");
+        pdf.insertText(80, 550, "Chữ Kí Người Nộp Tiền", pdf.fontB, pdf.fontSizeN, Color.black, "right");
         pdf.insertText(80, 550, "Chữ Kí Người Lập Phiếu Thu", pdf.fontB, pdf.fontSizeN, Color.black, "");
+        pdf.insertText(110, 620, hotenNV, pdf.fontB, pdf.fontSizeN, Color.black, "");
+
         pdf.savePDF(hoTen + "_" + ngayThu);
     }
 
@@ -111,6 +114,7 @@ public class PhieuThuTienPDF {
         }
         hoTen = rs.getString("HOTEN");
         ngayThu = rs.getString("NGAYTHU");
+        hotenNV = rs.getString("HOTENNV");
         Vector vec = new Vector<>();
         vec = new Vector<>();
         vec.add(rs.getString("MAPTT"));
