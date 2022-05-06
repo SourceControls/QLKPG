@@ -258,6 +258,11 @@ public class FrmThanhToan extends javax.swing.JDialog {
         jLabel34.setText("SĐT:");
 
         jButton1.setText("Thoát");
+        jButton1.setkEndColor(new java.awt.Color(255, 51, 255));
+        jButton1.setkHoverEndColor(new java.awt.Color(153, 153, 255));
+        jButton1.setkHoverForeGround(new java.awt.Color(255, 0, 255));
+        jButton1.setkHoverStartColor(new java.awt.Color(104, 109, 224));
+        jButton1.setkStartColor(new java.awt.Color(224, 86, 253));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -265,6 +270,8 @@ public class FrmThanhToan extends javax.swing.JDialog {
         });
 
         btnThanhToan.setText("Thanh Toán");
+        btnThanhToan.setkEndColor(new java.awt.Color(153, 153, 255));
+        btnThanhToan.setkStartColor(new java.awt.Color(104, 109, 224));
         btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThanhToanActionPerformed(evt);
@@ -282,6 +289,8 @@ public class FrmThanhToan extends javax.swing.JDialog {
         jLabel8.setText("Số tháng");
 
         btnThanhToan1.setText("In Phiếu Thanh Toán");
+        btnThanhToan1.setkEndColor(new java.awt.Color(153, 153, 255));
+        btnThanhToan1.setkStartColor(new java.awt.Color(104, 109, 224));
         btnThanhToan1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThanhToan1ActionPerformed(evt);

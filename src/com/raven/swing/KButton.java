@@ -37,7 +37,7 @@ public class KButton extends JButton {
     public Color kHoverStartColor = new Color(255, 0, 255);
     public Color kHoverEndColor = Color.green;
     public Color kHoverColor = Color.white;
-    public Color kHoverForeGround = Color.magenta;
+    public Color kHoverForeGround = new Color(104,109,224);
     public boolean kAllowGradient = true;
     public int kBorderRadius = 10;
     private boolean mouseExited = false;

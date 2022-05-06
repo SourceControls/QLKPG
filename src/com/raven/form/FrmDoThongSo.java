@@ -147,6 +147,7 @@ public class FrmDoThongSo extends javax.swing.JDialog {
         btnBatDauDo.setText("Giả Dữ Liệu");
         btnBatDauDo.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         btnBatDauDo.setkEndColor(new java.awt.Color(153, 153, 255));
+        btnBatDauDo.setkHoverEndColor(new java.awt.Color(255, 51, 255));
         btnBatDauDo.setkStartColor(new java.awt.Color(104, 109, 224));
         btnBatDauDo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,6 +158,7 @@ public class FrmDoThongSo extends javax.swing.JDialog {
         btnInLichSu.setText("Xem Ở Dạng Biểu Đồ");
         btnInLichSu.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         btnInLichSu.setkEndColor(new java.awt.Color(153, 153, 255));
+        btnInLichSu.setkHoverEndColor(new java.awt.Color(255, 51, 255));
         btnInLichSu.setkStartColor(new java.awt.Color(104, 109, 224));
         btnInLichSu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,6 +169,9 @@ public class FrmDoThongSo extends javax.swing.JDialog {
         jButton1.setText("Thoát");
         jButton1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jButton1.setkEndColor(new java.awt.Color(255, 51, 255));
+        jButton1.setkHoverEndColor(new java.awt.Color(153, 153, 255));
+        jButton1.setkHoverForeGround(new java.awt.Color(255, 0, 255));
+        jButton1.setkHoverStartColor(new java.awt.Color(104, 109, 224));
         jButton1.setkStartColor(new java.awt.Color(224, 86, 253));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,8 +260,7 @@ public class FrmDoThongSo extends javax.swing.JDialog {
                                 .addGap(30, 30, 30)
                                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel5)
-                                    .addComponent(lbGioiTinh))))
-                        .addGap(93, 191, Short.MAX_VALUE))
+                                    .addComponent(lbGioiTinh)))))
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbHinhAnhKhach, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -265,8 +269,8 @@ public class FrmDoThongSo extends javax.swing.JDialog {
                             .addComponent(btnBatDauDo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnInLichSu, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(btnInLichSu, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -361,7 +365,7 @@ public class FrmDoThongSo extends javax.swing.JDialog {
             vec.add(getRand(15, 80));   //khoiluongco
             if (csdlDTS.insertThongSo(vec)) {
                 dtblThongSo.addRow(vec);
-            }
+            }else return;
         }
         try {
             TimeUnit.SECONDS.sleep(1);

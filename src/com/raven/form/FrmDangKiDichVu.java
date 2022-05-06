@@ -394,6 +394,9 @@ public class FrmDangKiDichVu extends javax.swing.JDialog {
 
         btnHuy.setText("Hủy");
         btnHuy.setkEndColor(new java.awt.Color(255, 51, 255));
+        btnHuy.setkHoverEndColor(new java.awt.Color(153, 153, 255));
+        btnHuy.setkHoverForeGround(new java.awt.Color(255, 0, 255));
+        btnHuy.setkHoverStartColor(new java.awt.Color(104, 109, 224));
         btnHuy.setkStartColor(new java.awt.Color(224, 86, 253));
         btnHuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

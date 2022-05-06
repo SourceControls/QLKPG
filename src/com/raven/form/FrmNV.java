@@ -399,6 +399,9 @@ public class FrmNV extends javax.swing.JPanel {
         btnLuu.setText("Lưu");
         btnLuu.setEnabled(false);
         btnLuu.setkEndColor(new java.awt.Color(255, 51, 255));
+        btnLuu.setkHoverEndColor(new java.awt.Color(153, 153, 255));
+        btnLuu.setkHoverForeGround(new java.awt.Color(255, 0, 255));
+        btnLuu.setkHoverStartColor(new java.awt.Color(104, 109, 224));
         btnLuu.setkStartColor(new java.awt.Color(224, 86, 253));
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -409,6 +412,9 @@ public class FrmNV extends javax.swing.JPanel {
         btnHuy.setText("Hủy");
         btnHuy.setEnabled(false);
         btnHuy.setkEndColor(new java.awt.Color(255, 51, 255));
+        btnHuy.setkHoverEndColor(new java.awt.Color(153, 153, 255));
+        btnHuy.setkHoverForeGround(new java.awt.Color(255, 0, 255));
+        btnHuy.setkHoverStartColor(new java.awt.Color(104, 109, 224));
         btnHuy.setkStartColor(new java.awt.Color(224, 86, 253));
         btnHuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

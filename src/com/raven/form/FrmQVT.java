@@ -58,7 +58,13 @@ public class FrmQVT extends javax.swing.JPanel {
                 qlqvt.loc();
             }
         });
-
+        DefaultTableModel model = (DefaultTableModel) tblLSQVT.getModel();
+        tblLSQVT.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                qlqvt.getDataForLabelThongTinKhachHang();
+            }
+        });
     }
 
     public void showData() {
@@ -470,7 +476,7 @@ public class FrmQVT extends javax.swing.JPanel {
 
             },
             new String [] {
-                "STT", "Ngày giờ", "Họ tên", "Tên DV", "Trạng thái"
+                "Mã KH", "Ngày giờ", "Họ tên", "Tên DV", "Trạng thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -493,8 +499,8 @@ public class FrmQVT extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblLSQVT);
         if (tblLSQVT.getColumnModel().getColumnCount() > 0) {
             tblLSQVT.getColumnModel().getColumn(0).setMinWidth(55);
-            tblLSQVT.getColumnModel().getColumn(0).setPreferredWidth(50);
-            tblLSQVT.getColumnModel().getColumn(0).setMaxWidth(60);
+            tblLSQVT.getColumnModel().getColumn(0).setPreferredWidth(80);
+            tblLSQVT.getColumnModel().getColumn(0).setMaxWidth(120);
         }
 
         scrollBar1.setBackground(new java.awt.Color(245, 245, 245));
@@ -517,6 +523,9 @@ public class FrmQVT extends javax.swing.JPanel {
 
         btnLocQLQVT.setText("Hủy Lọc");
         btnLocQLQVT.setkEndColor(new java.awt.Color(255, 51, 255));
+        btnLocQLQVT.setkHoverEndColor(new java.awt.Color(153, 153, 255));
+        btnLocQLQVT.setkHoverForeGround(new java.awt.Color(255, 0, 255));
+        btnLocQLQVT.setkHoverStartColor(new java.awt.Color(104, 109, 224));
         btnLocQLQVT.setkStartColor(new java.awt.Color(224, 86, 253));
         btnLocQLQVT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

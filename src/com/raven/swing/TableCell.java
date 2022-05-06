@@ -197,10 +197,12 @@ public class TableCell extends JLabel {
             g2.fillRoundRect(-5, 2, width, height, 6, 6);
             setHorizontalAlignment(SwingConstants.CENTER);
             setVerticalAlignment(SwingConstants.CENTER);
-            setForeground(Color.white);
+            setForeground(new Color(153,153,255));
             setFont(new Font("sansserif", Font.BOLD, 14));
-            g2.setColor(new Color(12,112,92));
+            g2.setColor(new Color(153,153,255));
             g2.fillRoundRect(5, 7, width-20, height-10,10,10);
+            g2.setColor(new Color(255,255,255));
+            g2.fillRoundRect(8, 10, width-25, height-15,10,10);
             if (selected) {
                 g2.setColor(new Color(137, 215, 255));
                 g2.setStroke(new BasicStroke(2f));
@@ -210,10 +212,12 @@ public class TableCell extends JLabel {
             g2.fillRoundRect(-5, 2, width, height, 6, 6);
             setHorizontalAlignment(SwingConstants.CENTER);
             setVerticalAlignment(SwingConstants.CENTER);
-            setForeground(Color.white);
+            setForeground(new Color(224,86,253));
             setFont(new Font("sansserif", Font.BOLD, 14));
-            g2.setColor(new Color(12,112,92));
+            g2.setColor(new Color(224,86,253));
             g2.fillRoundRect(5, 7, width-20, height-10,10,10);
+            g2.setColor(new Color(255,255,255));
+            g2.fillRoundRect(7, 10, width-25, height-15,10,10);
             if (selected) {
                 g2.setColor(new Color(137, 215, 255));
                 g2.setStroke(new BasicStroke(2f));

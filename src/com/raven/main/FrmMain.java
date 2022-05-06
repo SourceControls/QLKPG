@@ -45,9 +45,7 @@ public class FrmMain extends javax.swing.JFrame {
     public static FrmThanhToan frmThanhToan = null;
     public FrmThongKe frmBaoCao = new FrmThongKe();
     public static ModelNV modelNV;
-
     public static boolean quanLi = false;
-
     public FrmMain(ModelNV modelNV) {
         initComponents();
         devInit();
@@ -105,11 +103,13 @@ public class FrmMain extends javax.swing.JFrame {
                 } else if (index == 2) {
                     showForm(formQVT);
                 } else if (index == 3) {
-                    showForm(formNV);
+                    if(modelNV.isQuanli())
+                        showForm(formNV);
+                    else showForm(frmDoiMK);
                 } else if (index == 4) {
-                    showForm(frmDoiMK);
-                } else if (index == 5) {
                     showForm(frmBaoCao);
+                } else if (index == 5) {
+                    showForm(frmDoiMK);
                 }
 
             }
@@ -123,7 +123,7 @@ public class FrmMain extends javax.swing.JFrame {
             menu.addMenu(new ModelMenu("Thống Kê", new ImageIcon(getClass().getResource("/com/raven/icon/report2.png"))));
         }
         menu.addMenu(new ModelMenu("Đổi mật khẩu", new ImageIcon(getClass().getResource("/com/raven/icon/key2.png"))));
-        menu.addMenu(new ModelMenu("Cài đặt", new ImageIcon(getClass().getResource("/com/raven/icon/setting.png"))));
+        //menu.addMenu(new ModelMenu("Cài đặt", new ImageIcon(getClass().getResource("/com/raven/icon/setting.png"))));
         body.add(menu, "w 50!");
         body.add(main, "w 100%");
         TimingTarget target = new TimingTargetAdapter() {

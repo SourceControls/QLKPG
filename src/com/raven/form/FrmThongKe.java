@@ -370,7 +370,7 @@ public class FrmThongKe extends javax.swing.JPanel {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, Short.MAX_VALUE))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -524,6 +524,9 @@ public class FrmThongKe extends javax.swing.JPanel {
 
         btnHuyLoc.setText("Hủy Lọc");
         btnHuyLoc.setkEndColor(new java.awt.Color(255, 51, 255));
+        btnHuyLoc.setkHoverEndColor(new java.awt.Color(153, 153, 255));
+        btnHuyLoc.setkHoverForeGround(new java.awt.Color(255, 0, 255));
+        btnHuyLoc.setkHoverStartColor(new java.awt.Color(104, 109, 224));
         btnHuyLoc.setkStartColor(new java.awt.Color(224, 86, 253));
         btnHuyLoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -552,6 +555,9 @@ public class FrmThongKe extends javax.swing.JPanel {
 
         btnLamMoi.setText("Làm Mới");
         btnLamMoi.setkEndColor(new java.awt.Color(255, 51, 255));
+        btnLamMoi.setkHoverEndColor(new java.awt.Color(153, 153, 255));
+        btnLamMoi.setkHoverForeGround(new java.awt.Color(255, 0, 255));
+        btnLamMoi.setkHoverStartColor(new java.awt.Color(104, 109, 224));
         btnLamMoi.setkStartColor(new java.awt.Color(224, 86, 253));
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

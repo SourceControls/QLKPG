@@ -148,8 +148,8 @@ public class FrmKH extends javax.swing.JPanel {
         btnHuyDangKi = new com.raven.swing.KButton();
         panelMainBtnQLKH = new javax.swing.JPanel();
         btnThemMoi = new com.raven.swing.KButton();
-        btnDoThongSo = new com.raven.swing.KButton();
         btnGiaVanTay = new com.raven.swing.KButton();
+        btnDoThongSo = new com.raven.swing.KButton();
         panelRound2 = new com.raven.swing.PanelRound();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -376,7 +376,6 @@ public class FrmKH extends javax.swing.JPanel {
         btnLuu.setText("Lưu");
         btnLuu.setEnabled(false);
         btnLuu.setkEndColor(new java.awt.Color(153, 153, 255));
-        btnLuu.setkHoverForeGround(new java.awt.Color(255, 255, 255));
         btnLuu.setkStartColor(new java.awt.Color(104, 109, 224));
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -387,7 +386,9 @@ public class FrmKH extends javax.swing.JPanel {
         btnHuyDangKi.setText("Hủy");
         btnHuyDangKi.setEnabled(false);
         btnHuyDangKi.setkEndColor(new java.awt.Color(255, 51, 255));
-        btnHuyDangKi.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        btnHuyDangKi.setkHoverEndColor(new java.awt.Color(153, 153, 255));
+        btnHuyDangKi.setkHoverForeGround(new java.awt.Color(255, 0, 255));
+        btnHuyDangKi.setkHoverStartColor(new java.awt.Color(104, 109, 224));
         btnHuyDangKi.setkStartColor(new java.awt.Color(224, 86, 253));
         btnHuyDangKi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -429,21 +430,7 @@ public class FrmKH extends javax.swing.JPanel {
             }
         });
 
-        btnDoThongSo.setText("Đo Chỉ Số");
-        btnDoThongSo.setkAllowGradient(false);
-        btnDoThongSo.setkBackGroundColor(new java.awt.Color(104, 109, 224));
-        btnDoThongSo.setkEndColor(new java.awt.Color(104, 109, 224));
-        btnDoThongSo.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        btnDoThongSo.setkHoverStartColor(new java.awt.Color(104, 109, 224));
-        btnDoThongSo.setkSelectedColor(new java.awt.Color(104, 109, 224));
-        btnDoThongSo.setkStartColor(new java.awt.Color(104, 109, 224));
-        btnDoThongSo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDoThongSoActionPerformed(evt);
-            }
-        });
-
-        btnGiaVanTay.setText("Giả Vân Tay");
+        btnGiaVanTay.setText("Giả vân tay");
         btnGiaVanTay.setkEndColor(new java.awt.Color(153, 153, 255));
         btnGiaVanTay.setkStartColor(new java.awt.Color(104, 109, 224));
         btnGiaVanTay.addActionListener(new java.awt.event.ActionListener() {
@@ -452,29 +439,35 @@ public class FrmKH extends javax.swing.JPanel {
             }
         });
 
+        btnDoThongSo.setText("Đo thông số");
+        btnDoThongSo.setkEndColor(new java.awt.Color(153, 153, 255));
+        btnDoThongSo.setkStartColor(new java.awt.Color(104, 109, 224));
+        btnDoThongSo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDoThongSoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelMainBtnQLKHLayout = new javax.swing.GroupLayout(panelMainBtnQLKH);
         panelMainBtnQLKH.setLayout(panelMainBtnQLKHLayout);
         panelMainBtnQLKHLayout.setHorizontalGroup(
             panelMainBtnQLKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMainBtnQLKHLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnDoThongSo, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(129, 129, 129))
-            .addGroup(panelMainBtnQLKHLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelMainBtnQLKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnThemMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGiaVanTay, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnGiaVanTay, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDoThongSo, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         panelMainBtnQLKHLayout.setVerticalGroup(
             panelMainBtnQLKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMainBtnQLKHLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(btnThemMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
+                .addGap(43, 43, 43)
                 .addComponent(btnDoThongSo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(38, 38, 38)
                 .addComponent(btnGiaVanTay, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(44, Short.MAX_VALUE))
         );
@@ -485,7 +478,7 @@ public class FrmKH extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelMainBtnQLKH, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelMainBtnQLKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelBtnLuuQLKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -851,22 +844,6 @@ public class FrmKH extends javax.swing.JPanel {
         // setCusor2Btn(isAddingCus);
     }//GEN-LAST:event_formComponentResized
 
-    private void btnDoThongSoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoThongSoActionPerformed
-        if (tblDSKH.getSelectedRow() > -1) {
-            if (FrmMain.frmDoThongSo == null || !FrmMain.frmDoThongSo.maKH.equals(txtMaKhachHang.getText())) {
-
-                qlkh.openDoThongSo();
-            } else {
-                FrmMain.frmDoThongSo.setVisible(true);
-            }
-
-            //sf.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(this, "Chọn Khách hàng để đo BMI");
-        }
-
-    }//GEN-LAST:event_btnDoThongSoActionPerformed
-
     private void btnHuyDangKiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyDangKiActionPerformed
         qlkh.lockPanelBtnLuu();
         btnThemMoi.setEnabled(true);
@@ -914,6 +891,21 @@ public class FrmKH extends javax.swing.JPanel {
         qlkh.giaVanTay();
         
     }//GEN-LAST:event_btnGiaVanTayActionPerformed
+
+    private void btnDoThongSoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoThongSoActionPerformed
+    if (tblDSKH.getSelectedRow() > -1) {
+            if (FrmMain.frmDoThongSo == null || !FrmMain.frmDoThongSo.maKH.equals(txtMaKhachHang.getText())) {
+
+                qlkh.openDoThongSo();
+            } else {
+                FrmMain.frmDoThongSo.setVisible(true);
+            }
+
+            //sf.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Chọn Khách hàng để đo BMI");
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDoThongSoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.raven.swing.KButton btnChonAnh;

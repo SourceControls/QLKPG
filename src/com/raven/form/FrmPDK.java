@@ -422,6 +422,9 @@ public class FrmPDK extends javax.swing.JPanel {
 
         btnHuyDangKi.setText("Hủy đăng kí");
         btnHuyDangKi.setkEndColor(new java.awt.Color(255, 51, 255));
+        btnHuyDangKi.setkHoverEndColor(new java.awt.Color(153, 153, 255));
+        btnHuyDangKi.setkHoverForeGround(new java.awt.Color(255, 0, 255));
+        btnHuyDangKi.setkHoverStartColor(new java.awt.Color(104, 109, 224));
         btnHuyDangKi.setkStartColor(new java.awt.Color(224, 86, 253));
         btnHuyDangKi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
