@@ -100,11 +100,11 @@ public class PanelLogin extends javax.swing.JPanel {
         if (txtUser.getText().trim().equals("")) {
             txtUser.setHelperText("Nhập tài khoản");
             action = false;
-        }
+        }else txtUser.setHelperText("");
         if (String.valueOf(txtPass.getPassword()).trim().equals("")) {
             txtPass.setHelperText("Nhập mật khẩu");
             action = false;
-        }
+        }else txtPass.setHelperText("");
         return action;
     }
 

@@ -69,7 +69,7 @@ public class FrmThanhToan extends javax.swing.JDialog {
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        if (FrmMain.quanLi) {
+        if (FrmMain.modelNV.isQuanli()) {
             TableColumn col = new TableColumn(dtblPTT.getColumnCount());
             col.setHeaderValue("Người Lập");
             tblLichSuThanhToan.addColumn(col);

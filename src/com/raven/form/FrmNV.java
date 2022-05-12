@@ -55,7 +55,7 @@ public class FrmNV extends javax.swing.JPanel {
         qlnv = new QLNV(tblNV, txtMaNhanVien, txtHoTen, txtCMND, rbtnNu, rbtnNam, txtNgaySinh, txtSDT,
                 txtDiaChi, txtEmail, lbHinhAnhNV, btnChonAnh, btnHuy, btnSua, btnLuu, txtTimKiemNhanvien, cbLocNV,
                  rbtnConLam, rbtnKhongPT, rbtnKhongQuanLi, rbtnLaPT, rbtnLaQuanLi, rbtnNghilam, lbLinkHinhAnh,
-                panelMainTextFieldQLNV, panelMainBtnQLNV, panelBtnLuuQLNV);
+                panelMainTextFieldQLNV, panelMainBtnQLNV, panelBtnLuuQLNV,btnCapTaiKhoan,btnKhoaTaiKhoan,btnMoKhoaTK);
         qlnv.getDataForTbDanhSachNV();
     }
 
@@ -136,7 +136,7 @@ public class FrmNV extends javax.swing.JPanel {
         btnSua = new com.raven.swing.KButton();
         btnCapTaiKhoan = new com.raven.swing.KButton();
         btnKhoaTaiKhoan = new com.raven.swing.KButton();
-        btnKhoaTaiKhoan1 = new com.raven.swing.KButton();
+        btnMoKhoaTK = new com.raven.swing.KButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblNV = new com.raven.swing.TableColumn();
         jPanel1 = new javax.swing.JPanel();
@@ -483,12 +483,12 @@ public class FrmNV extends javax.swing.JPanel {
             }
         });
 
-        btnKhoaTaiKhoan1.setText("Mở Khóa Tài Khoản");
-        btnKhoaTaiKhoan1.setkEndColor(new java.awt.Color(153, 153, 255));
-        btnKhoaTaiKhoan1.setkStartColor(new java.awt.Color(104, 109, 224));
-        btnKhoaTaiKhoan1.addActionListener(new java.awt.event.ActionListener() {
+        btnMoKhoaTK.setText("Mở Khóa Tài Khoản");
+        btnMoKhoaTK.setkEndColor(new java.awt.Color(153, 153, 255));
+        btnMoKhoaTK.setkStartColor(new java.awt.Color(104, 109, 224));
+        btnMoKhoaTK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKhoaTaiKhoan1ActionPerformed(evt);
+                btnMoKhoaTKActionPerformed(evt);
             }
         });
 
@@ -508,7 +508,7 @@ public class FrmNV extends javax.swing.JPanel {
                     .addGroup(panelMainBtnQLNVLayout.createSequentialGroup()
                         .addGroup(panelMainBtnQLNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnKhoaTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnKhoaTaiKhoan1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnMoKhoaTK, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -524,7 +524,7 @@ public class FrmNV extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(btnKhoaTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnKhoaTaiKhoan1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnMoKhoaTK, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(74, Short.MAX_VALUE))
         );
 
@@ -568,10 +568,10 @@ public class FrmNV extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(panelMainTextFieldQLNV, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(13, 13, 13)))
+                        .addGap(13, 13, 13))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -770,7 +770,9 @@ public class FrmNV extends javax.swing.JPanel {
             qlnv.addNhanvien();
 
         } else {
+            int row=tblNV.getSelectedRow();
             qlnv.luuChinhSuaNhanVien();
+            tblNV.setRowSelectionInterval(0, row);
         }
     }//GEN-LAST:event_btnLuuActionPerformed
 
@@ -809,8 +811,10 @@ public class FrmNV extends javax.swing.JPanel {
     }//GEN-LAST:event_cbLocNVActionPerformed
 
     private void btnCapTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapTaiKhoanActionPerformed
-        // TODO add your handling code here:
-        qlnv.capTaiKhoan();
+        int row=tblNV.getSelectedRow();
+             qlnv.capTaiKhoan();
+        tblNV.setRowSelectionInterval(0, row);
+       
     }//GEN-LAST:event_btnCapTaiKhoanActionPerformed
     private void tblNVMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNVMouseReleased
         if (btnLuu.isEnabled()) {
@@ -820,25 +824,28 @@ public class FrmNV extends javax.swing.JPanel {
 
     private void btnKhoaTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhoaTaiKhoanActionPerformed
         // TODO add your handling code here:
-
+        int row=tblNV.getSelectedRow();
         qlnv.khoaTaiKhoan();
         qlnv.getDataForTbDanhSachNV();
+        tblNV.setRowSelectionInterval(0, row);
     }//GEN-LAST:event_btnKhoaTaiKhoanActionPerformed
 
-    private void btnKhoaTaiKhoan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhoaTaiKhoan1ActionPerformed
+    private void btnMoKhoaTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoKhoaTKActionPerformed
         // TODO add your handling code here:
+        int row=tblNV.getSelectedRow();
         qlnv.moKhoaTaiKhoan();
         qlnv.getDataForTbDanhSachNV();
-    }//GEN-LAST:event_btnKhoaTaiKhoan1ActionPerformed
+        tblNV.setRowSelectionInterval(0, row);
+    }//GEN-LAST:event_btnMoKhoaTKActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.raven.swing.KButton btnCapTaiKhoan;
     private com.raven.swing.KButton btnChonAnh;
     private com.raven.swing.KButton btnHuy;
     private com.raven.swing.KButton btnKhoaTaiKhoan;
-    private com.raven.swing.KButton btnKhoaTaiKhoan1;
     private com.raven.swing.KButton btnLamMoi;
     private com.raven.swing.KButton btnLuu;
+    private com.raven.swing.KButton btnMoKhoaTK;
     private com.raven.swing.KButton btnSua;
     private com.raven.swing.KButton btnThem;
     private javax.swing.ButtonGroup buttonGroup1;

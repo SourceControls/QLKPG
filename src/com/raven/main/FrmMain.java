@@ -45,12 +45,13 @@ public class FrmMain extends javax.swing.JFrame {
     public static FrmThanhToan frmThanhToan = null;
     public FrmThongKe frmBaoCao = new FrmThongKe();
     public static ModelNV modelNV;
-    public static boolean quanLi = false;
+    //public static boolean quanLi = false;
     public FrmMain(ModelNV modelNV) {
         initComponents();
+        this.modelNV = modelNV;
         devInit();
         f = this;
-        this.modelNV = modelNV;
+        
         init();
     }
 

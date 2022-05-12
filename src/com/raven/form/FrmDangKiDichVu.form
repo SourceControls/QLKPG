@@ -664,6 +664,9 @@
               </Properties>
             </Component>
             <Component class="com.raven.swing.TextFieldRound" name="txtNgayDangKi">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="com.raven.swing.TextFieldRound" name="txtNgayBatDau">
               <Properties>

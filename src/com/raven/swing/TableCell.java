@@ -20,10 +20,10 @@ public class TableCell extends JLabel {
 
     private final CellType cellType;
     private boolean selected;
-    public static Color startColorBtnFix = new Color(186, 220, 88);
-    public static Color startColorBtnSignUp = new Color(249,177,143);
-    public static Color endColorBtnFix = new Color(240,147,43);
-    public static Color endColorBtnSignUp = new Color(240,147,43);
+    public static Color startColorBtnFix = new Color(104,109,224);
+    public static Color startColorBtnSignUp = new Color(224,86,253);
+    public static Color endColorBtnFix = new Color(153,153,255);
+    public static Color endColorBtnSignUp = new Color(255,51,255);
     public TableCell(Object obj) {
         //  This for column header jtable
         setFont(new Font("sansserif", 1, 12));

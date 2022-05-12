@@ -132,19 +132,23 @@ public class PanelSlide extends javax.swing.JLayeredPane {
                     ResultSet r=CsdlDN.dangNhap(userName, password);
                     if (r.next()) {
                         String ten = (String) r.getObject(1);
-                        String chucvu;
                         boolean quanli =  r.getBoolean(2);
-                        FrmMain.quanLi = quanli;
-                        Icon profile;
-                        try{
-                            profile = new ImageIcon(getClass().getResource(r.getString(3)));
-                        }catch(Exception ex){
-                            System.out.println("Nhân viên chưa có hình ảnh !");
-                            profile = new ImageIcon(getClass().getResource("/anhNV/default.png"));
+                        boolean daKhoa =  r.getBoolean(4);
+                        boolean nghiLam =  r.getBoolean(5);
+                        if(daKhoa || nghiLam) loading.showError("Tài khoản đã bị khóa !");
+                        else {
+                            Icon profile;
+                            try{
+                                profile = new ImageIcon(getClass().getResource(r.getString(3)));
+                            }catch(Exception ex){
+                                System.out.println("Nhân viên chưa có hình ảnh !");
+                                profile = new ImageIcon(getClass().getResource("/anhNV/default.png"));
+                            }
+
+                            ModelNV data = new ModelNV(userName,ten, quanli, profile);
+                            loading.doneLogin(data);
                         }
                         
-                        ModelNV data = new ModelNV(userName,ten, quanli, profile);
-                        loading.doneLogin(data);
                     } else {
                         loading.showError("Sai tên đăng nhập hoặc mật khẩu !");
                     }

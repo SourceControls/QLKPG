@@ -443,6 +443,8 @@ public class FrmDangKiDichVu extends javax.swing.JDialog {
         jLabel35.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel35.setText("Ngày kết thúc");
 
+        txtNgayDangKi.setEditable(false);
+
         txtNgayBatDau.setEditable(false);
         txtNgayBatDau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

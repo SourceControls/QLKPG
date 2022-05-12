@@ -94,11 +94,11 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
                       <Component id="panelMainTextFieldQLNV" alignment="2" min="-2" pref="296" max="-2" attributes="0"/>
-                      <Component id="jPanel3" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="jPanel3" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -660,7 +660,7 @@
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="btnKhoaTaiKhoan" min="-2" pref="128" max="-2" attributes="0"/>
-                                      <Component id="btnKhoaTaiKhoan1" min="-2" pref="128" max="-2" attributes="0"/>
+                                      <Component id="btnMoKhoaTK" min="-2" pref="128" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
@@ -681,7 +681,7 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnKhoaTaiKhoan" min="-2" pref="36" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnKhoaTaiKhoan1" min="-2" pref="36" max="-2" attributes="0"/>
+                          <Component id="btnMoKhoaTK" min="-2" pref="36" max="-2" attributes="0"/>
                           <EmptySpace pref="74" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -744,7 +744,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKhoaTaiKhoanActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="com.raven.swing.KButton" name="btnKhoaTaiKhoan1">
+                <Component class="com.raven.swing.KButton" name="btnMoKhoaTK">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="M&#x1edf; Kh&#xf3;a T&#xe0;i Kho&#x1ea3;n"/>
                     <Property name="kEndColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -755,7 +755,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKhoaTaiKhoan1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMoKhoaTKActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>

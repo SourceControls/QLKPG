@@ -57,7 +57,7 @@ public class FrmPDK extends javax.swing.JPanel {
         dtblPDK = (DefaultTableModel) tblPDK.getModel();
         dkdv = new DKDV(tblPDK, lbHinhAnhKhachQLDK, lbMaKhachHang, lbHoTen, lbCMND, lbGioiTinh, lbNgaySinh, lbEmail, lbSDT,
                 lbDiaChi, lbHangKhachHang, txtGhiChuQLDK, txtTimKiemDangKi, lbLinkHinhAnh, cbTrangThaiPDK);
-        if (FrmMain.quanLi) {
+        if (FrmMain.modelNV.isQuanli()) {
             TableColumn col = new TableColumn(dtblPDK.getColumnCount());
          col.setHeaderValue("Người Lập");
         tblPDK.addColumn(col);

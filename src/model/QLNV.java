@@ -7,6 +7,7 @@ package model;
 
 import com.raven.form.FrmNV;
 import com.raven.main.FrmMain;
+import com.raven.swing.KButton;
 import csdl.CsdlQLNV;
 import java.awt.Component;
 import java.awt.FileDialog;
@@ -30,6 +31,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -67,6 +69,9 @@ public class QLNV {
     JPanel panelMainTextFieldQLNV;
     JPanel panelMainBtnQLNV;
     JPanel panelBtnLuuQLNV;
+    KButton btnCapTK;
+    KButton btnKhoaTK;
+    KButton btnMoKhoaTK;
     public static CsdlQLNV csdlQLNV = new CsdlQLNV();
     private Connection conn = FrmMain.conn;
     private Frame f = FrmMain.f;
@@ -83,15 +88,15 @@ public class QLNV {
         }
         String maNV = (String) FrmNV.dtblDSNV.getValueAt(row, 0);
         String tenNV = (String) FrmNV.dtblDSNV.getValueAt(row, 1);
-        int option = JOptionPane.showConfirmDialog(f, "Khóa Tài Khoản Của Nhân Viên: " + tenNV);
-        if (option != JOptionPane.YES_OPTION) {
-            return;
-        }
+        int result = JOptionPane.showConfirmDialog(f,"Khóa Tài Khoản Của Nhân Viên ?", "Thông báo",
+               JOptionPane.YES_NO_OPTION,
+               JOptionPane.QUESTION_MESSAGE);
+        if(result!=JOptionPane.YES_OPTION) return;
         try {
             System.out.println(maNV);
             csdlQLNV.khoaTaiKhoan(maNV);
             JOptionPane.showMessageDialog(f, "Khóa tài khoản thành công");
-
+            getDataForTbDanhSachNV();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(f, ex.getMessage());
         }
@@ -150,7 +155,24 @@ public class QLNV {
             } catch (Exception ex) {
                 lbHinhAnhNV.removeAll();
             }
+            if(tblNV.getValueAt(row, 10).toString().equals("true")){
+                btnCapTK.setEnabled(false);
+                btnMoKhoaTK.setEnabled(false);
+                btnKhoaTK.setEnabled(false);
+            }else if(tblNV.getValueAt(row, 11).toString().indexOf("Khóa") >0) {
+                btnCapTK.setEnabled(false);
+                btnMoKhoaTK.setEnabled(true);
+                btnKhoaTK.setEnabled(false);
+            }else {
+                 btnCapTK.setEnabled(true);
+                btnMoKhoaTK.setEnabled(false);
+                btnKhoaTK.setEnabled(true);
+            }
         }
+        
+        
+       
+        
     }
 
     public boolean inputThemNhanvienHopLe() {
@@ -328,20 +350,45 @@ public class QLNV {
             JOptionPane.showMessageDialog(f, "Chọn Nhân Viên ở bảng trên");
             return;
         }
-
-        String maNV = txtMaNhanVien.getText();
-        String matKhau = JOptionPane.showInputDialog("Nhập Mật Khẩu");
-        if (matKhau.isEmpty()) {
-            JOptionPane.showMessageDialog(f, "Mật Khẩu Không Được Để Trống");
+        System.out.println(tblNV.getValueAt(row, 11));
+        if(tblNV.getValueAt(row, 10).toString().equals("true")){
+            JOptionPane.showMessageDialog(f, "Nhân viên đã nghỉ làm");
             return;
         }
-        try {
-            csdlQLNV.insertTaiKhoan(maNV, matKhau);
-            JOptionPane.showMessageDialog(f, "Tạo tài khoản thành công");
-            getDataForTbDanhSachNV();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(f, "Tạo tài khoản thất bại! \n" + ex.getMessage());
+        if(!tblNV.getValueAt(row, 11).toString().equals("")){
+            int result = JOptionPane.showConfirmDialog(f,"Nhân viên đã có tài khoản, đổi mật khẩu ?", "Thông báo",
+               JOptionPane.YES_NO_OPTION,
+               JOptionPane.QUESTION_MESSAGE);
+            if(result!=JOptionPane.YES_OPTION) return;
         }
+        String maNV = txtMaNhanVien.getText();
+                String matKhau="";
+                String[] options = {"OK"};
+                JPanel panel = new JPanel();
+                JLabel lbl = new JLabel("Nhập Mật Khẩu: ");
+                JPasswordField txt = new JPasswordField(50);
+                panel.add(lbl);
+                panel.add(txt);
+                int selectedOption = JOptionPane.showOptionDialog(null, panel, "", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
+
+                if(selectedOption == 0)
+                {
+                    matKhau = String.valueOf(txt.getPassword()).trim();
+                    System.out.println(matKhau);
+                    if(matKhau.equals("")) {
+                        JOptionPane.showMessageDialog(f, "Mật Khẩu Không Được Để Trống");
+                        return;
+                    }
+                }else return;
+
+
+                try {
+                    csdlQLNV.insertTaiKhoan(maNV, matKhau);
+                    JOptionPane.showMessageDialog(f, "Cấp tài khoản thành công");
+                    getDataForTbDanhSachNV();
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(f, "Cấp tài khoản thất bại! \n" + ex.getMessage());
+                }
 
     }
 
@@ -510,7 +557,7 @@ public class QLNV {
             System.out.println(maNV);
             csdlQLNV.moKhoaTaiKhoan(maNV);
             JOptionPane.showMessageDialog(f, "Mở Khóa tài khoản thành công");
-
+            getDataForTbDanhSachNV();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(f, ex.getMessage());
         }
@@ -519,7 +566,7 @@ public class QLNV {
     public QLNV(JTable tblNV, JTextField txtMaNhanVien, JTextField txtHoTen, JTextField txtCMND, JRadioButton rbtnNu, JRadioButton rbtnNam, JTextField txtNgaySinh, JTextField txtSDT, JTextField txtDiaChi, JTextField txtEmail,
             JLabel lbHinhAnhNV, JButton btnChonAnh, JButton btnHuy, JButton btnThem, JButton btnLuu, JTextField txtTimKiemNhanvien, JComboBox cbLocNV,
             JRadioButton rbtnConLam, JRadioButton rbtnKhongPT, JRadioButton rbtnKhongQuanLi, JRadioButton rbtnLaPT, JRadioButton rbtnLaQuanLi, JRadioButton rbtnNghilam, JLabel lbLinkHinhAnh,
-            JPanel panelMainTextFieldQLNV, JPanel panelMainBtnQLNV, JPanel panelBtnLuuQLNV) {
+            JPanel panelMainTextFieldQLNV, JPanel panelMainBtnQLNV, JPanel panelBtnLuuQLNV,KButton btnCapTK,KButton btnKhoaTK,KButton btnMoKhoaTK) {
         this.tblNV = tblNV;
         this.txtMaNhanVien = txtMaNhanVien;
         this.txtHoTen = txtHoTen;
@@ -548,5 +595,8 @@ public class QLNV {
         this.panelBtnLuuQLNV = panelBtnLuuQLNV;
         this.panelMainBtnQLNV = panelMainBtnQLNV;
         this.panelMainTextFieldQLNV = panelMainTextFieldQLNV;
+        this.btnCapTK=btnCapTK;
+        this.btnKhoaTK=btnKhoaTK;
+        this.btnMoKhoaTK=btnMoKhoaTK;
     }
 }

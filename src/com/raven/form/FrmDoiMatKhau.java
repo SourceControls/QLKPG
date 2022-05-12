@@ -117,8 +117,9 @@ public class FrmDoiMatKhau extends javax.swing.JPanel {
                 .addComponent(txtMatKhauMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19)
                 .addComponent(txtNhapLaiMatKhauMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         add(jPanel1);
@@ -145,10 +146,10 @@ public class FrmDoiMatKhau extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Các trường thông tin không được để trống");
             return;
         }
-        if(matKhauMoi.length() <= 6 | matKhauMoi.length() >=20){
-                JOptionPane.showMessageDialog(this, "Mật Khẩu Có Độ Dài Từ 6 đến 20 kí tự");
-            return;        
-        }
+//        if(matKhauMoi.length() <= 6 | matKhauMoi.length() >=20){
+//                JOptionPane.showMessageDialog(this, "Mật Khẩu Có Độ Dài Từ 6 đến 20 kí tự");
+//            return;        
+//        }
         if (matKhauMoi.contains(" ")) {
             JOptionPane.showMessageDialog(this, "Mật Khẩu Không Chứa Kí Tự Khoảng Cách");
             return;
@@ -157,17 +158,22 @@ public class FrmDoiMatKhau extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Mật khẩu mới không khớp");
             return;
         }
-        if (JOptionPane.showConfirmDialog(this, "Xác Nhận Đổi Mật Khẩu?") == JOptionPane.YES_OPTION);
-        try {
+        int result = JOptionPane.showConfirmDialog(this,"Xác Nhận Đổi Mật Khẩu?", "Thông báo",
+               JOptionPane.YES_NO_OPTION,
+               JOptionPane.QUESTION_MESSAGE);
+        if (result == JOptionPane.YES_OPTION){
+            try {
             dmk.doiMatKhau(matKhauCu, matKhauMoi);
             txtMatKhauCu.setText("");
             txtMatKhauMoi.setText("");
             txtNhapLaiMatKhauMoi.setText("");
             JOptionPane.showMessageDialog(this, "Đổi Mật Khẩu Thành Công");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Đổi Mật Khẩu Thất Bại\n" + ex.getMessage());
-            return;
-        }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Đổi Mật Khẩu Thất Bại\n" + ex.getMessage());
+                return;
+            }
+        };
+        
 
     }//GEN-LAST:event_btnLuuActionPerformed
 
