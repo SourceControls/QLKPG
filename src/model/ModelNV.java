@@ -7,12 +7,21 @@ public class ModelNV {
     private String ten;
     private boolean quanli;
     private Icon anh;
-    
-    public ModelNV(String manv,String ten, boolean quanli, Icon anh) {
+    private String password;
+    public ModelNV(String manv,String ten, boolean quanli, Icon anh,String pass) {
         this.manv=manv;
         this.ten = ten;
         this.quanli = quanli;
         this.anh = anh;
+        password=pass;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getTen() {

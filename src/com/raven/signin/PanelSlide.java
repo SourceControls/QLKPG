@@ -145,7 +145,7 @@ public class PanelSlide extends javax.swing.JLayeredPane {
                                 profile = new ImageIcon(getClass().getResource("/anhNV/default.png"));
                             }
 
-                            ModelNV data = new ModelNV(userName,ten, quanli, profile);
+                            ModelNV data = new ModelNV(userName,ten, quanli, profile,password);
                             loading.doneLogin(data);
                         }
                         

@@ -5,6 +5,7 @@
  */
 package com.raven.form;
 
+import com.raven.main.FrmMain;
 import csdl.CsdlDoiMatKhau;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -142,8 +143,21 @@ public class FrmDoiMatKhau extends javax.swing.JPanel {
         String matKhauCu = new String(txtMatKhauCu.getPassword());
         String matKhauMoi = new String(txtMatKhauMoi.getPassword());
         String nhapLaiMK = new String(txtNhapLaiMatKhauMoi.getPassword());
+        
+        txtMatKhauCu.setHelperText("");
+        txtMatKhauCu.repaint();
+        txtMatKhauMoi.setHelperText("");
+        txtNhapLaiMatKhauMoi.setHelperText("");
+        
+        
         if (matKhauCu.isEmpty() | matKhauMoi.isEmpty() | nhapLaiMK.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Các trường thông tin không được để trống");
+            if(matKhauMoi.isEmpty()) txtMatKhauMoi.setHelperText("Nhập mật khẩu mới");
+            if(nhapLaiMK.isEmpty()) txtNhapLaiMatKhauMoi.setHelperText("Nhập lại mật khẩu mới");
+            if(matKhauCu.isEmpty()) txtMatKhauCu.setHelperText("Nhập mật khẩu cũ");
+            return;
+        }
+        if(!matKhauCu.equals(FrmMain.getModelNV().getPassword()))  {
+            txtMatKhauCu.setHelperText("Mật khẩu cũ không đúng");
             return;
         }
 //        if(matKhauMoi.length() <= 6 | matKhauMoi.length() >=20){
@@ -151,13 +165,14 @@ public class FrmDoiMatKhau extends javax.swing.JPanel {
 //            return;        
 //        }
         if (matKhauMoi.contains(" ")) {
-            JOptionPane.showMessageDialog(this, "Mật Khẩu Không Chứa Kí Tự Khoảng Cách");
+            txtMatKhauMoi.setHelperText("Mật khẩu không chứa kí tự khoảng trắng");
             return;
-        }
+        }else txtMatKhauMoi.setHelperText("");
         if (!matKhauMoi.equals(nhapLaiMK)) {
-            JOptionPane.showMessageDialog(this, "Mật khẩu mới không khớp");
+            txtNhapLaiMatKhauMoi.setHelperText("Mật khẩu nhập lại không khớp");
             return;
-        }
+        }else txtNhapLaiMatKhauMoi.setHelperText("");
+        
         int result = JOptionPane.showConfirmDialog(this,"Xác Nhận Đổi Mật Khẩu?", "Thông báo",
                JOptionPane.YES_NO_OPTION,
                JOptionPane.QUESTION_MESSAGE);
@@ -168,6 +183,7 @@ public class FrmDoiMatKhau extends javax.swing.JPanel {
             txtMatKhauMoi.setText("");
             txtNhapLaiMatKhauMoi.setText("");
             JOptionPane.showMessageDialog(this, "Đổi Mật Khẩu Thành Công");
+            FrmMain.getModelNV().setPassword(matKhauMoi);
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this, "Đổi Mật Khẩu Thất Bại\n" + ex.getMessage());
                 return;
