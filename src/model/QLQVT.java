@@ -135,11 +135,13 @@ public class QLQVT {
     public void giaLapNhieuMauTin() {
         ResultSet rs;
         try {
-            rs = csdlQLQVT.insertNhieuKhachQuetVanTay();
-            if (rs.next()) {
-                JOptionPane.showMessageDialog(f, "Có " + rs.getString(1)
-                        + " người vừa quẹt vân tay!");
+            for (int i = 0; i < 10000000; i++) {
+                rs = csdlQLQVT.insertNhieuKhachQuetVanTay();
             }
+//            if (rs.next()) {
+//                JOptionPane.showMessageDialog(f, "Có " + rs.getString(1)
+//                        + " người vừa quẹt vân tay!");
+//            }
             getDataForTblLichSuQuetVanTay();
         } catch (SQLException ex) {
             Logger.getLogger(QLQVT.class.getName()).log(Level.SEVERE, null, ex);

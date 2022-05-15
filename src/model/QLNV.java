@@ -145,15 +145,16 @@ public class QLNV {
                 return;
             }
             try {
-                String imgURL = rs.getString("HINHANH");
+                String imgURL = rs.getString("HINHANHNV");
                 lbLinkHinhAnh.setText(imgURL);
                 if (imgURL != null && !imgURL.isEmpty()) {
                     DungChung.readImg(lbHinhAnhNV, imgURL);
                 } else {
                     DungChung.readImg(lbHinhAnhNV, "/anhNV/default.png");
                 }
-            } catch (Exception ex) {
+            } catch (SQLException ex) {
                 lbHinhAnhNV.removeAll();
+                System.out.println(ex.getMessage());
             }
             if(tblNV.getValueAt(row, 10).toString().equals("true")){
                 btnCapTK.setEnabled(false);
