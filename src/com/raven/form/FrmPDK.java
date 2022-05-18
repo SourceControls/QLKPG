@@ -50,6 +50,8 @@ public class FrmPDK extends javax.swing.JPanel {
                 dkdv.dumpDataFromTblPDKToFields();
             }
         });
+                if(!FrmMain.modelNV.isQuanli())
+                    btnHuyDangKi.setEnabled(false);
 
     }
 
