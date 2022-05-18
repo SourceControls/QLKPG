@@ -476,11 +476,11 @@ public class FrmQVT extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã KH", "Ngày giờ", "Họ tên", "Tên DV", "Trạng thái"
+                "STT", "Ngày giờ", "Họ tên", "Tên DV", "Trạng thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, true, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -498,9 +498,7 @@ public class FrmQVT extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblLSQVT);
         if (tblLSQVT.getColumnModel().getColumnCount() > 0) {
-            tblLSQVT.getColumnModel().getColumn(0).setMinWidth(55);
             tblLSQVT.getColumnModel().getColumn(0).setPreferredWidth(80);
-            tblLSQVT.getColumnModel().getColumn(0).setMaxWidth(120);
         }
 
         scrollBar1.setBackground(new java.awt.Color(245, 245, 245));
