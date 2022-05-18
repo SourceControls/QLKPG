@@ -150,8 +150,9 @@ public class FrmMain extends javax.swing.JFrame {
         animator.setResolution(0);
         animator.setAcceleration(0.5f);
         animator.setDeceleration(0.5f);
+        if(!modelNV.isQuanli())
         showForm(formKH);
-
+        else showForm(formNV);
     }
 
     public void showForm(Component com) {

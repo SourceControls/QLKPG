@@ -827,12 +827,14 @@ public class FrmKH extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
+        
         if (themMoi) {
             qlkh.addKhachHang();
 
         } else {
             qlkh.luuChinhSuaKhachHang();
         }
+        
 
     }//GEN-LAST:event_btnLuuActionPerformed
 

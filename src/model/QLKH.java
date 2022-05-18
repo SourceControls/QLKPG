@@ -289,7 +289,7 @@ public class QLKH {
     }
 
     public void luuChinhSuaKhachHang() {
-
+        int row=tblDSKH.getSelectedRow();
         if (!inputThongTinKhachHangHopLe() || !inputChinhSuaThongTinKhachHangHopLe()) {
             return;
         }
@@ -319,7 +319,9 @@ public class QLKH {
             JOptionPane.showMessageDialog(f, "Cập nhật thành công");
         } else {
             JOptionPane.showMessageDialog(f, "Cập nhật thất bại");
+            tblDSKH.getSelectionModel().setSelectionInterval(row, row);
         }
+        tblDSKH.getSelectionModel().setSelectionInterval(row, row);
     }
 
     public String getAutoMaKH() {

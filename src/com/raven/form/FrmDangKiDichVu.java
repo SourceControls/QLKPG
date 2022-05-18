@@ -699,10 +699,18 @@ public class FrmDangKiDichVu extends javax.swing.JDialog {
                 return;
 
             }
-            int choose = JOptionPane.showConfirmDialog(this, "Đăng kí thành công, thanh toán ngay??");
-            this.setVisible(false);
-            if (choose == JOptionPane.YES_OPTION) {
+//            int choose = JOptionPane.showConfirmDialog(this, "Đăng kí thành công, thanh toán ngay??");
+//            
+//            if (choose == JOptionPane.YES_OPTION) {
+//               
+//            }
+           
+            int result = JOptionPane.showConfirmDialog(this,"Đăng kí thành công, thanh toán ngay??", "Thông báo",
+               JOptionPane.YES_NO_OPTION,
+               JOptionPane.QUESTION_MESSAGE);
+            if (result == JOptionPane.YES_OPTION) {
                 FrmMain.formPDK.dkdv.thanhToan(true);
+                 this.setVisible(false);
             }
             return;
 

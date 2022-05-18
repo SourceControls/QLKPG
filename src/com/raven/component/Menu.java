@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import model.ModelNV;
 import net.miginfocom.swing.MigLayout;
-
+import com.raven.main.FrmMain;
 public class Menu extends javax.swing.JPanel {
 
     public void setEvent(EventMenuSelected event) {
@@ -54,8 +54,9 @@ public class Menu extends javax.swing.JPanel {
         add(panelMenu);
         add(bottom);
     }
-
+    int i=0;
     public void addMenu(ModelMenu menu) {
+        i++;
         MenuItem item = new MenuItem(menu.getIcon(), menu.getMenuName(), panelMenu.getComponentCount());
         item.addEvent(new EventMenuSelected() {
             @Override
@@ -64,6 +65,10 @@ public class Menu extends javax.swing.JPanel {
             }
         });
         item.addEvent(event);
+        if(FrmMain.modelNV.isQuanli() && i==4){
+            clearMenu(-1);
+                if(i==4)  item.setSelected(true);
+        }else if(!FrmMain.modelNV.isQuanli() &&i==1) item.setSelected(true);
         panelMenu.add(item);
     }
 
@@ -111,6 +116,7 @@ public class Menu extends javax.swing.JPanel {
             if (item.getIndex() != exceptIndex) {
                 item.setSelected(false);
             }
+            
         }
     }
 

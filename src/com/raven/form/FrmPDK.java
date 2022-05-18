@@ -554,7 +554,9 @@ public class FrmPDK extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimKiemDangKiActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
+        int row=tblPDK.getSelectedRow();
         dkdv.thanhToan(false);
+        tblPDK.getSelectionModel().setSelectionInterval(row, row);
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void tblPDKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPDKMouseClicked

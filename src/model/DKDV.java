@@ -42,6 +42,10 @@ public class DKDV {
             return;
         }
         String trangThaiPDK = tblPDK.getValueAt(row, 10).toString();
+        if (!trangThaiPDK.equals("CHỜ KÍCH HOẠT")) {
+            JOptionPane.showMessageDialog(f, "Chỉ hủy phiếu đang chờ kích hoạt!");
+            return;
+        }
         if (trangThaiPDK.equals("ĐÃ HỦY") | trangThaiPDK.equals("HẾT HẠN")) {
             JOptionPane.showMessageDialog(f, "Phiếu đã hết hạn hoặc đã hủy trước đó!");
             return;

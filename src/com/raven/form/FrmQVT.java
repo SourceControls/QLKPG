@@ -630,7 +630,7 @@ public class FrmQVT extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGiaNhieuVanTayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiaNhieuVanTayActionPerformed
-        qlqvt.giaLapNhieuMauTin();
+//        qlqvt.giaLapNhieuMauTin();
     }//GEN-LAST:event_btnGiaNhieuVanTayActionPerformed
 
     private void txtTuNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTuNgayActionPerformed

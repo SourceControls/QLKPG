@@ -135,7 +135,7 @@ public class QLQVT {
     public void giaLapNhieuMauTin() {
         ResultSet rs;
         try {
-            for (int i = 0; i < 10000000; i++) {
+            for (int i = 0; i < 10; i++) {
                 rs = csdlQLQVT.insertNhieuKhachQuetVanTay();
             }
 //            if (rs.next()) {

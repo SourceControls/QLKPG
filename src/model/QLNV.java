@@ -145,7 +145,7 @@ public class QLNV {
                 return;
             }
             try {
-                String imgURL = rs.getString("HINHANHNV");
+                String imgURL = rs.getString("HINHANH");
                 lbLinkHinhAnh.setText(imgURL);
                 if (imgURL != null && !imgURL.isEmpty()) {
                     DungChung.readImg(lbHinhAnhNV, imgURL);
