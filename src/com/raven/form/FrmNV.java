@@ -12,7 +12,7 @@ import javax.swing.event.ListSelectionListener;
 import model.CheckInput;
 import model.DungChung;
 import model.QLNV;
-
+import com.raven.main.FrmMain;
 public class FrmNV extends javax.swing.JPanel {
 //
 
@@ -746,7 +746,22 @@ public class FrmNV extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimKiemNhanvienKeyReleased
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+       int row= tblNV.getSelectedRow();
+       String manvSelected= tblNV.getValueAt(row,0).toString();
+        System.out.println(manvSelected);
+        if(FrmMain.modelNV.getManv().equals(manvSelected)){
+            rbtnConLam.setEnabled(false);
+            rbtnNghilam.setEnabled(false);
+            rbtnLaQuanLi.setEnabled(false);
+            rbtnKhongQuanLi.setEnabled(false);
+            rbtnLaPT.setEnabled(false);
+            rbtnKhongPT.setEnabled(false);
+            btnCapTaiKhoan.setEnabled(false);
+            btnKhoaTaiKhoan.setEnabled(false);
+            btnMoKhoaTK.setEnabled(false);
+        }
         qlnv.unlockPanelBtnLuu();
+        
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void txtNgaySinhKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNgaySinhKeyPressed
