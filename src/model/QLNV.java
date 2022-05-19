@@ -156,24 +156,53 @@ public class QLNV {
                 lbHinhAnhNV.removeAll();
                 System.out.println(ex.getMessage());
             }
-            if(tblNV.getValueAt(row, 10).toString().equals("true")){
+            
+//            if(tblNV.getValueAt(row, 11).toString().indexOf("Khóa") >0) {
+//                System.out.println("aaa");
+//                btnCapTK.setEnabled(false);
+//                btnMoKhoaTK.setEnabled(true);
+//                btnKhoaTK.setEnabled(false);
+//            }else {
+//                 btnCapTK.setEnabled(true);
+//                btnMoKhoaTK.setEnabled(false);
+//                btnKhoaTK.setEnabled(true);
+//            }
+//            
+//            if(row >0){
+//                    
+//                    if(FrmMain.modelNV.getManv().toLowerCase().trim().equals(manv.toLowerCase().trim())){
+//                        btnCapTK.setEnabled(false);
+//                        btnKhoaTK.setEnabled(false);
+//                        btn
+//                    }else if(tblNV.getValueAt(row, 11).toString().indexOf("Khóa") >0){
+//                       
+//                    }else{
+//                        btnCapTK.setEnabled(true);
+//                        btnMoKhoaTK.setEnabled(false);
+//                        btnKhoaTK.setEnabled(true);
+//                    }
+//                }
+            String manv=tblNV.getValueAt(tblNV.getSelectedRow(), 0).toString();
+            if(tblNV.getValueAt(row, 10).toString().equals("true") || FrmMain.modelNV.getManv().toLowerCase().trim().equals(manv.toLowerCase().trim())){
                 btnCapTK.setEnabled(false);
                 btnMoKhoaTK.setEnabled(false);
                 btnKhoaTK.setEnabled(false);
-            }else if(tblNV.getValueAt(row, 11).toString().indexOf("Khóa") >0) {
-                btnCapTK.setEnabled(false);
-                btnMoKhoaTK.setEnabled(true);
-                btnKhoaTK.setEnabled(false);
-            }else {
-                 btnCapTK.setEnabled(true);
+            }else if(tblNV.getValueAt(row, 11).toString().indexOf("Khóa") >0){
+                        btnCapTK.setEnabled(false);
+                        btnMoKhoaTK.setEnabled(true);
+                        btnKhoaTK.setEnabled(false);
+            }else if(!tblNV.getValueAt(row, 11).toString().isEmpty()){
+                btnCapTK.setEnabled(true);
                 btnMoKhoaTK.setEnabled(false);
                 btnKhoaTK.setEnabled(true);
+            }else{
+                btnCapTK.setEnabled(true);
+                btnMoKhoaTK.setEnabled(false);
+                btnKhoaTK.setEnabled(false);
             }
-        }
         
         
-       
-        
+        }   
     }
 
     public boolean inputThemNhanvienHopLe() {
@@ -519,6 +548,7 @@ public class QLNV {
         //tblDSKH.setEnabled(false);
         btnChonAnh.setEnabled(true);
         txtMaNhanVien.setEnabled(false);
+        
     }
 
     public void lockPanelBtnLuu() {

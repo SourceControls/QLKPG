@@ -206,7 +206,6 @@ public class CsdlQLNV {
     }
 
     public ResultSet findByKey(String key,String filterKey) {
-        System.out.println(key+ " " + filterKey);
         String sql ;
         System.out.println(filterKey==null);
         if(filterKey==null){

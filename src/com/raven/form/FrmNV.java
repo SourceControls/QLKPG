@@ -40,7 +40,8 @@ public class FrmNV extends javax.swing.JPanel {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 qlnv.dumpDataFromTblDSNVToFields();
- 
+                
+                
             }
         });
 
@@ -761,7 +762,21 @@ public class FrmNV extends javax.swing.JPanel {
             rbtnKhongPT.setEnabled(false);
 
         }
+        //String manv=tblNV.getValueAt(tblNV.getSelectedRow(), 0).toString();
         
+//        else{
+//            rbtnConLam.setEnabled(true);
+//            rbtnNghilam.setEnabled(true);
+//            rbtnLaQuanLi.setEnabled(true);            
+//            rbtnKhongQuanLi.setEnabled(true);
+//        }
+        String manv=tblNV.getValueAt(tblNV.getSelectedRow(), 0).toString();
+        if(FrmMain.modelNV.getManv().toLowerCase().trim().equals(manv.toLowerCase().trim())){
+            rbtnConLam.setEnabled(false);
+            rbtnNghilam.setEnabled(false);
+            rbtnLaQuanLi.setEnabled(false);            
+            rbtnKhongQuanLi.setEnabled(false);
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void txtNgaySinhKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNgaySinhKeyPressed
@@ -802,6 +817,12 @@ public class FrmNV extends javax.swing.JPanel {
         System.out.println(tblNV.getSelectedRow());
         if (tblNV.getSelectedRow() >= 0)
             qlnv.dumpDataFromTblDSNVToFields();
+        String manv=tblNV.getValueAt(tblNV.getSelectedRow(), 0).toString();
+        if(FrmMain.modelNV.getManv().toLowerCase().trim().equals(manv.toLowerCase().trim())){
+            btnCapTaiKhoan.setEnabled(false);
+            btnKhoaTaiKhoan.setEnabled(false);
+            btnMoKhoaTK.setEnabled(false);
+        }
     }//GEN-LAST:event_btnHuyActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
