@@ -40,6 +40,7 @@ public class FrmNV extends javax.swing.JPanel {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 qlnv.dumpDataFromTblDSNVToFields();
+ 
             }
         });
 
@@ -290,7 +291,7 @@ public class FrmNV extends javax.swing.JPanel {
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCMND, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         panelMainTextFieldQLNVLayout.setVerticalGroup(
             panelMainTextFieldQLNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -747,20 +748,19 @@ public class FrmNV extends javax.swing.JPanel {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
        int row= tblNV.getSelectedRow();
-       String manvSelected= tblNV.getValueAt(row,0).toString();
-        System.out.println(manvSelected);
-        if(FrmMain.modelNV.getManv().equals(manvSelected)){
+       String manvSelected= tblNV.getValueAt(row,0).toString().trim().toUpperCase();
+
+
+        qlnv.unlockPanelBtnLuu();
+                if(FrmMain.modelNV.getManv().trim().toUpperCase().equals(manvSelected)){
             rbtnConLam.setEnabled(false);
             rbtnNghilam.setEnabled(false);
             rbtnLaQuanLi.setEnabled(false);
             rbtnKhongQuanLi.setEnabled(false);
             rbtnLaPT.setEnabled(false);
             rbtnKhongPT.setEnabled(false);
-            btnCapTaiKhoan.setEnabled(false);
-            btnKhoaTaiKhoan.setEnabled(false);
-            btnMoKhoaTK.setEnabled(false);
+
         }
-        qlnv.unlockPanelBtnLuu();
         
     }//GEN-LAST:event_btnSuaActionPerformed
 
@@ -846,6 +846,11 @@ public class FrmNV extends javax.swing.JPanel {
         qlnv.khoaTaiKhoan();
         qlnv.getDataForTbDanhSachNV();
         tblNV.setRowSelectionInterval(0, row);
+        
+//              String manvSelected= tblNV.getValueAt(row,0).toString().trim().toUpperCase();
+
+
+//        qlnv.unlockPanelBtnLuu();
     }//GEN-LAST:event_btnKhoaTaiKhoanActionPerformed
 
     private void btnMoKhoaTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoKhoaTKActionPerformed

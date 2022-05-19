@@ -661,6 +661,10 @@ public class FrmDangKiDichVu extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtThueStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_txtThueStateChanged
+        if((int)txtThue.getValue() == -1){
+           txtThue.setValue(0);
+           return;
+        }
         tinhTongTien();
     }//GEN-LAST:event_txtThueStateChanged
 

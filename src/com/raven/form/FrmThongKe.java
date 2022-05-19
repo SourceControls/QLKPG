@@ -486,7 +486,7 @@ public class FrmThongKe extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã KH", "Họ Tên", "SĐT", "Hạng Khách", "Tổng Doanh Thu"
+                "Mã KH", "Họ Tên", "SĐT", "Hạng Khách", "Tổng Doanh Thu(VNĐ)"
             }
         ) {
             boolean[] canEdit = new boolean [] {

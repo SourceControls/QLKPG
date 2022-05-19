@@ -169,7 +169,7 @@ public class FrmThanhToan extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Mã PTT", "Ngày thu", "Tiền khách trả", "Còn nợ", "Hạn lần tới", "Ghi chú"
+                "Mã PTT", "Ngày thu", "Tiền khách trả(VNĐ)", "Tiền Còn Nợ(VNĐ)", "Hạn lần tới", "Ghi chú"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -212,7 +212,7 @@ public class FrmThanhToan extends javax.swing.JDialog {
         jLabel2.setText("Thanh Toán");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("Số tiền cần trả");
+        jLabel6.setText("Số tiền cần trả (VNĐ)");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Hạn Lần Tới");
@@ -220,7 +220,7 @@ public class FrmThanhToan extends javax.swing.JDialog {
         txtHanLanToi.setEditable(false);
 
         lbTienConNo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbTienConNo.setText("Tiền Còn Nợ");
+        lbTienConNo.setText("Tiền Còn Nợ (VNĐ)");
 
         txtTienKhachPhaiTra.setEditable(false);
 
@@ -323,11 +323,11 @@ public class FrmThanhToan extends javax.swing.JDialog {
                         .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)
-                            .addComponent(lbTienConNo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTienKhachPhaiTra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtTienConNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel8)
-                            .addComponent(cbSoThang, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
+                            .addComponent(cbSoThang, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                            .addComponent(lbTienConNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()

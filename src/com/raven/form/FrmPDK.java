@@ -238,7 +238,7 @@ public class FrmPDK extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã PĐK", "Mã KH", "Họ tên", "SĐT", "Dịch vụ", "Ngày đăng kí", "Ngày bắt đầu", "Ngày kết thúc", "Thuế", "Tổng tiền", "Trạng thái"
+                "Mã PĐK", "Mã KH", "Họ tên", "SĐT", "Dịch vụ", "Ngày đăng kí", "Ngày bắt đầu", "Ngày kết thúc", "Thuế(%)", "Tổng tiền(VNĐ)", "Trạng thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {

@@ -275,8 +275,8 @@
                     <Column editable="false" title="Ng&#xe0;y &#x111;&#x103;ng k&#xed;" type="java.lang.Object"/>
                     <Column editable="false" title="Ng&#xe0;y b&#x1eaf;t &#x111;&#x1ea7;u" type="java.lang.Object"/>
                     <Column editable="false" title="Ng&#xe0;y k&#x1ebf;t th&#xfa;c" type="java.lang.Object"/>
-                    <Column editable="false" title="Thu&#x1ebf;" type="java.lang.Object"/>
-                    <Column editable="true" title="T&#x1ed5;ng ti&#x1ec1;n" type="java.lang.Object"/>
+                    <Column editable="false" title="Thu&#x1ebf;(%)" type="java.lang.Object"/>
+                    <Column editable="true" title="T&#x1ed5;ng ti&#x1ec1;n(VN&#x110;)" type="java.lang.Object"/>
                     <Column editable="true" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.Object"/>
                   </Table>
                 </Property>
