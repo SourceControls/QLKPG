@@ -74,6 +74,7 @@ public class FrmQVT extends javax.swing.JPanel {
                 lbNgayDangKiQLQVT, lbNgayKetThucQLQVT, btnGiaNhieuVanTay, tblLSQVT, btnLocQLQVT, txtTuNgay, txtDenNgay);
         qlqvt.getDataForTblLichSuQuetVanTay();
         txtTuNgay.setText("1900-01-01");
+        tblLSQVT.getSelectionModel().setSelectionInterval(0, 0);
     }
 
     @SuppressWarnings("unchecked")

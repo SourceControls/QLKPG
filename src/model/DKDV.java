@@ -109,13 +109,7 @@ public class DKDV {
 
     }
 
-    public void txtTimKiemDangKiKeyReleased() {
-                String key =   txtTimKiemDangKi.getText().trim();
-        while(key.contains("  "))
-            key = key.replace("  ", " ");
-        lamTrangTextPDK();
-        DungChung.fillTable(FrmPDK.dtblPDK, csdlDKDV.selectPDKByKey(key));
-    }
+  
 
     public void lamTrangTextPDK() {
         lbMaKhachHang.setText("");
@@ -161,12 +155,15 @@ public class DKDV {
     }
 
     public void filterPDK() {
-        txtTimKiemDangKi.setText("");
-        if (cbTrangThaiPDK.getSelectedItem().toString().toLowerCase().equals("tất cả")) {
-            getDataForTblDangKiDichVu();
-            return;
-        }
-        DungChung.fillTable(FrmPDK.dtblPDK, csdlDKDV.selectPDKByTrangThai(cbTrangThaiPDK.getSelectedItem().toString()));
+        String key =   txtTimKiemDangKi.getText().trim();
+        while(key.contains("  "))
+            key = key.replace("  ", " ");
+        lamTrangTextPDK();
+        if(cbTrangThaiPDK.getSelectedIndex()==0){
+            DungChung.fillTable(FrmPDK.dtblPDK, csdlDKDV.findAndFilter(key,null));
+        }else DungChung.fillTable(FrmPDK.dtblPDK, csdlDKDV.findAndFilter(key,cbTrangThaiPDK.getSelectedItem().toString()));
+        if(tblPDK.getRowCount()>0)
+        tblPDK.getSelectionModel().setSelectionInterval(0, 0);
     }
     Frame f;
 

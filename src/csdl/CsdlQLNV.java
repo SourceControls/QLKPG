@@ -30,7 +30,7 @@ public class CsdlQLNV {
     public ResultSet selectAllNhanVien(Frame f) {
 
         
-        String selectAllKhachHang = "SELECT *FROM v_nhan_vien";
+        String selectAllKhachHang = "SELECT *FROM v_nhan_vien order by manv desc";
         Statement st;
         try {
             st = FrmMain.conn.createStatement();
@@ -109,27 +109,27 @@ public class CsdlQLNV {
         return false;
     }
 
-    public ResultSet selectNVByChucVu(String nghiepVu) {
-        String sql = "SELECT * FROM V_NHAN_VIEN WHERE quanly = 'true'";
-        if (nghiepVu.toLowerCase().equals("nhân viên")) {
-            sql = "SELECT * FROM V_NHAN_VIEN WHERE quanly = 'false'";
-        } else if (nghiepVu.toLowerCase().equals("huấn luyện viên")) {
-            sql = "SELECT * FROM V_NHAN_VIEN WHERE PT = 'true'";
-        } else if (nghiepVu.toLowerCase().equals("còn làm")) {
-            sql = "SELECT * FROM V_NHAN_VIEN WHERE nghilam = 'false'";
-        } else if (nghiepVu.toLowerCase().equals("đã nghỉ")) {
-            sql = "SELECT * FROM V_NHAN_VIEN WHERE nghilam = 'true'";
-        }
-        try {
-            PreparedStatement pst = conn.prepareStatement(sql);
-            return pst.executeQuery();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(FrmMain.f, ex.getMessage());
-
-        }
-
-        return null;
-    }
+//    public ResultSet selectNVByChucVu(String nghiepVu) {
+//        String sql = "SELECT * FROM V_NHAN_VIEN WHERE quanly = 'true'";
+//        if (nghiepVu.toLowerCase().equals("nhân viên")) {
+//            sql = "SELECT * FROM V_NHAN_VIEN WHERE quanly = 'false'";
+//        } else if (nghiepVu.toLowerCase().equals("huấn luyện viên")) {
+//            sql = "SELECT * FROM V_NHAN_VIEN WHERE PT = 'true'";
+//        } else if (nghiepVu.toLowerCase().equals("còn làm")) {
+//            sql = "SELECT * FROM V_NHAN_VIEN WHERE nghilam = 'false'";
+//        } else if (nghiepVu.toLowerCase().equals("đã nghỉ")) {
+//            sql = "SELECT * FROM V_NHAN_VIEN WHERE nghilam = 'true'";
+//        }
+//        try {
+//            PreparedStatement pst = conn.prepareStatement(sql);
+//            return pst.executeQuery();
+//        } catch (Exception ex) {
+//            JOptionPane.showMessageDialog(FrmMain.f, ex.getMessage());
+//
+//        }
+//
+//        return null;
+//    }
 
     public boolean tonTaiEmail(Frame f, String email) {
         String select = "SELECT MANV FROM NHANVIEN WHERE EMAIL=?";
@@ -205,16 +205,44 @@ public class CsdlQLNV {
         return null;
     }
 
-    public ResultSet findByKey(Frame f, String key) {
-        String sql = "select * from "
-                + "V_nhan_vien where hoten like N'%" + key + "%' or sdt like '%" + key + "%'";
-        try {
-            Statement st = conn.createStatement();
-            return st.executeQuery(sql);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(f, ex.getMessage());
+    public ResultSet findByKey(String key,String filterKey) {
+        System.out.println(key+ " " + filterKey);
+        String sql ;
+        System.out.println(filterKey==null);
+        if(filterKey==null){
+            sql = "SELECT * FROM V_NHAN_VIEN WHERE hoten like N'%" + key + "%' or sdt like '%" + key + "%' order by manv desc";
+            
+        }else{
+             sql = "SELECT * FROM V_NHAN_VIEN WHERE quanly = 'true' and  (hoten like N'%" + key + "%' or sdt like '%" + key + "%') order by manv desc";
+            if (filterKey.toLowerCase().equals("nhân viên")) {
+                sql = "SELECT * FROM V_NHAN_VIEN WHERE quanly = 'false' and  (hoten like N'%" + key + "%' or sdt like '%" + key + "%') order by manv desc";
+            } else if (filterKey.toLowerCase().equals("huấn luyện viên")) {
+                sql = "SELECT * FROM V_NHAN_VIEN WHERE PT = 'true'  and  (hoten like N'%" + key + "%' or sdt like '%" + key + "%') order by manv desc";
+            } else if (filterKey.toLowerCase().equals("còn làm")) {
+                sql = "SELECT * FROM V_NHAN_VIEN WHERE nghilam = 'false' and (hoten like N'%" + key + "%' or sdt like '%" + key + "%') order by manv desc";
+            } else if (filterKey.toLowerCase().equals("đã nghỉ")) {
+                sql = "SELECT * FROM V_NHAN_VIEN WHERE nghilam = 'true' and  (hoten like N'%" + key + "%' or sdt like '%" + key + "%') order by manv desc";
+            }
         }
+        try {
+            PreparedStatement pst = conn.prepareStatement(sql);
+            return pst.executeQuery();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(FrmMain.f, ex.getMessage());
+
+        }
+
         return null;
+        
+//        String sql = "select * from "
+//                + "V_nhan_vien where hoten like N'%" + key + "%' or sdt like '%" + key + "%' order by manv desc";
+//        try {
+//            Statement st = conn.createStatement();
+//            return st.executeQuery(sql);
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(f, ex.getMessage());
+//        }
+//        return null;
     }
     public void moKhoaTaiKhoan(String maNV) throws SQLException{
           String sql = "Exec SP_MO_KHOA_TK_NV ?";

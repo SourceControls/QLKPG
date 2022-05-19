@@ -23,7 +23,7 @@ public class CsdlDKDV {
     private Connection conn = FrmMain.conn;
     public ResultSet selectAllPDK() {
       
-        String sql = "SELECT * FROM V_PDK";
+        String sql = "SELECT * FROM V_PDK order by mapdk desc";
        
         try {
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -36,18 +36,18 @@ public class CsdlDKDV {
         return null;
     }
 
-    public ResultSet selectPDKByTrangThai(String trangThai) {
-        String sql = "SELECT * FROM V_PDK WHERE TRANGTHAI = ?";
-        try {
-            PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setObject(1, trangThai);
-            return pst.executeQuery();
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(FrmMain.f, ex.getMessage());
-        }
-        return null;
-    }
+//    public ResultSet selectPDKByTrangThai(String trangThai) {
+//        String sql = "SELECT * FROM V_PDK WHERE TRANGTHAI = ? order by mapdk desc";
+//        try {
+//            PreparedStatement pst = conn.prepareStatement(sql);
+//            pst.setObject(1, trangThai);
+//            return pst.executeQuery();
+//
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(FrmMain.f, ex.getMessage());
+//        }
+//        return null;
+//    }
 
     public boolean huyPDK(String maPDK) {
         String sql = "UPDATE PHIEUDK SET TRANGTHAI = N'ĐÃ HỦY' WHERE MAPDK = ?";
@@ -92,11 +92,24 @@ public class CsdlDKDV {
         return null;
     }
 
-    public ResultSet selectPDKByKey(String key) {
-        String sql = "exec SP_TIMKIEM_PDK_BY_KEY ?";
+    public ResultSet findAndFilter(String key,String trangthai) {
+        String sql;
+        
+        
         try {
-            PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setString(1, key);
+            PreparedStatement pst;
+            if(trangthai==null){
+                sql = "select V_PDK.* " +
+                "from V_PDK inner join " +
+                "	(select MAKH from khachhang where hoten like Concat('%','"+key+"','%') or sdt like Concat('%','"+key+"','%')) KH" +
+                "	on V_PDK.MAKH = kh.MAKH order by mapdk desc";
+            }else {
+                sql= "select V_PDK.* " +
+                "from V_PDK inner join " +
+                "	(select MAKH from khachhang where hoten like Concat('%','"+key+"','%') or sdt like Concat('%','"+key+"','%')) KH" +
+                "	on V_PDK.MAKH = kh.MAKH and trangthai=N'"+trangthai+"' order by mapdk desc" ;
+            }
+            pst = conn.prepareStatement(sql);
             return pst.executeQuery();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(FrmMain.f, ex.getMessage());

@@ -89,21 +89,21 @@ public class TableCell extends JLabel {
         setBorder(new EmptyBorder(10, 10, 10, 10));
         setForeground(new Color(80, 80, 80));
     }
-    public void setStartColorBtnFix(Color startColorBtnFix) {
-        this.startColorBtnFix = startColorBtnFix;
-    }
-
-    public void setStartColorBtnSignUp(Color startColorBtnSignUp) {
-        this.startColorBtnSignUp = startColorBtnSignUp;
-    }
-
-    public static void setEndColorBtnFix(Color endColorBtnFix) {
-        TableCell.endColorBtnFix = endColorBtnFix;
-    }
-
-    public static void setEndColorBtnSignUp(Color endColorBtnSignUp) {
-        TableCell.endColorBtnSignUp = endColorBtnSignUp;
-    }
+//    public void setStartColorBtnFix(Color startColorBtnFix) {
+//        this.startColorBtnFix = startColorBtnFix;
+//    }
+//
+//    public void setStartColorBtnSignUp(Color startColorBtnSignUp) {
+//        this.startColorBtnSignUp = startColorBtnSignUp;
+//    }
+//
+//    public static void setEndColorBtnFix(Color endColorBtnFix) {
+//        TableCell.endColorBtnFix = endColorBtnFix;
+//    }
+//
+//    public static void setEndColorBtnSignUp(Color endColorBtnSignUp) {
+//        TableCell.endColorBtnSignUp = endColorBtnSignUp;
+//    }
 
     @Override
     protected void paintComponent(Graphics grphcs) {

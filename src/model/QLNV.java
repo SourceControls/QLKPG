@@ -281,6 +281,7 @@ public class QLNV {
             lamTrangTextNV();
 
             JOptionPane.showMessageDialog(f, "Thêm mới nhân viên thành công!");
+            tblNV.getSelectionModel().setSelectionInterval(0, 0);
         } else {
             JOptionPane.showMessageDialog(f, "Thêm mới nhân viên thất bại!");
         }
@@ -468,14 +469,14 @@ public class QLNV {
         }
     }
 
-    public void txtTimKiemNhanVienKeyReleased() {
-        String key = txtTimKiemNhanvien.getText().trim();
-        while (key.contains("  ")) {
-            key = key.replace("  ", " ");
-        }
-        lamTrangTextNV();
-        DungChung.fillTable(FrmNV.dtblDSNV, csdlQLNV.findByKey(f, key));
-    }
+//    public void txtTimKiemNhanVienKeyReleased() {
+//        String key = txtTimKiemNhanvien.getText().trim();
+//        while (key.contains("  ")) {
+//            key = key.replace("  ", " ");
+//        }
+//        lamTrangTextNV();
+//        DungChung.fillTable(FrmNV.dtblDSNV, csdlQLNV.findByKey(key,String filterKey));
+//    }
 
     public void btnThemMoiNVClicked() {
         txtMaNhanVien.setText(getAutoMaNV());
@@ -540,12 +541,18 @@ public class QLNV {
     }
 
     public void filterNV() {
-        txtTimKiemNhanvien.setText("");
-        if (cbLocNV.getSelectedItem().toString().toLowerCase().equals("tất cả")) {
-            getDataForTbDanhSachNV();
-            return;
+        String key = txtTimKiemNhanvien.getText().trim();
+        while (key.contains("  ")) {
+            key = key.replace("  ", " ");
         }
-        DungChung.fillTable(FrmNV.dtblDSNV, csdlQLNV.selectNVByChucVu(cbLocNV.getSelectedItem().toString()));
+//        if (cbLocNV.getSelectedItem().toString().toLowerCase().equals("tất cả")) {
+//            getDataForTbDanhSachNV();
+//            return;
+//        }
+        if(cbLocNV.getSelectedIndex()==0)
+            DungChung.fillTable(FrmNV.dtblDSNV, csdlQLNV.findByKey(key,null));
+        else DungChung.fillTable(FrmNV.dtblDSNV, csdlQLNV.findByKey(key,cbLocNV.getSelectedItem().toString()));
+        if(tblNV.getRowCount()>0) tblNV.setRowSelectionInterval(0, 0);
     }
     public void moKhoaTaiKhoan(){
                 int row = tblNV.getSelectedRow();

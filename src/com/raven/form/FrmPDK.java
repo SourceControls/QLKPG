@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -22,7 +23,7 @@ public class FrmPDK extends javax.swing.JPanel {
     public QLKH qlkh;
     public DKDV dkdv;
     public FrmThanhToan frmThanhToan = null;
-
+    public static JTable tbl;
     public FrmPDK() {
         initComponents();
         setOpaque(false);
@@ -44,6 +45,7 @@ public class FrmPDK extends javax.swing.JPanel {
                 }
             }
         });
+        tblPDK.getSelectionModel().setSelectionInterval(0,0);
         tblPDK.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -68,6 +70,8 @@ public class FrmPDK extends javax.swing.JPanel {
     
 
         dkdv.getDataForTblDangKiDichVu();
+        tblPDK.getSelectionModel().setSelectionInterval(0, 0);
+        tbl=tblPDK;
     }
 
     @SuppressWarnings("unchecked")
@@ -570,8 +574,7 @@ public class FrmPDK extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLuuGhiChuDangKiActionPerformed
 
     private void txtTimKiemDangKiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemDangKiKeyReleased
-        dkdv.txtTimKiemDangKiKeyReleased();
-        cbTrangThaiPDK.setSelectedIndex(0);
+        dkdv.filterPDK();
     }//GEN-LAST:event_txtTimKiemDangKiKeyReleased
 
     private void btnHuyDangKiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyDangKiActionPerformed
@@ -583,7 +586,10 @@ public class FrmPDK extends javax.swing.JPanel {
     }//GEN-LAST:event_cbTrangThaiPDKItemStateChanged
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
+        txtTimKiemDangKi.setText("");
+        cbTrangThaiPDK.setSelectedIndex(0);
         dkdv.getDataForTblDangKiDichVu();
+        tblPDK.getSelectionModel().setSelectionInterval(0, 0);
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
     private void jPanel4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel4FocusGained

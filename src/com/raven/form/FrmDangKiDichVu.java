@@ -59,7 +59,7 @@ public class FrmDangKiDichVu extends javax.swing.JDialog {
         hienThiThongTinKH();
         getThongTinDichvu();
         getThongTinKhuyenMai();
-
+        txtThue.setValue(10);
     }
 
     public void hienThiThongTinKH() {
@@ -690,28 +690,25 @@ public class FrmDangKiDichVu extends javax.swing.JDialog {
                 vec.add(FrmMain.modelNV.getManv());
                 if (FrmThanhToan.csdlTT.insertPTT(vec)) {
                     JOptionPane.showMessageDialog(this, "Đăng Kí Và Lập Phiếu Thanh Toán Thành Công");
-                    DungChung.fillTable(com.raven.form.FrmPDK.dtblPDK, DKDV.csdlDKDV.selectAllPDK());
-
+                    
                 } else {
                     JOptionPane.showMessageDialog(this, "Đăng Kí Thành Công, Lập Phiếu Thanh Toán Thất Bại");
                 }
+                DungChung.fillTable(com.raven.form.FrmPDK.dtblPDK, DKDV.csdlDKDV.selectAllPDK());
+                FrmPDK.tbl.getSelectionModel().setSelectionInterval(0,0);
                 this.setVisible(false);
                 return;
-
             }
-//            int choose = JOptionPane.showConfirmDialog(this, "Đăng kí thành công, thanh toán ngay??");
-//            
-//            if (choose == JOptionPane.YES_OPTION) {
-//               
-//            }
-           
             int result = JOptionPane.showConfirmDialog(this,"Đăng kí thành công, thanh toán ngay??", "Thông báo",
                JOptionPane.YES_NO_OPTION,
                JOptionPane.QUESTION_MESSAGE);
             if (result == JOptionPane.YES_OPTION) {
                 FrmMain.formPDK.dkdv.thanhToan(true);
-                 this.setVisible(false);
+               
             }
+            DungChung.fillTable(com.raven.form.FrmPDK.dtblPDK, DKDV.csdlDKDV.selectAllPDK());
+            FrmPDK.tbl.getSelectionModel().setSelectionInterval(0,0);
+            this.setVisible(false);
             return;
 
         }
@@ -746,7 +743,8 @@ public class FrmDangKiDichVu extends javax.swing.JDialog {
 
     private void cbGoiDichVuItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbGoiDichVuItemStateChanged
         int i = cbGoiDichVu.getSelectedIndex();
-        if (i != -1) {
+        if (i >=0) {
+            rbtnDaThanhToan.setSelected(true);
             txtSoNgaySuDung.setText(vecSoNgaySuDungDV.get(i));
             txtGia.setText(vecGia.get(i));
             tinhTongTien();

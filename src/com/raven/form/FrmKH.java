@@ -109,6 +109,7 @@ public class FrmKH extends javax.swing.JPanel {
                 btnThemMoi, btnDoThongSo, btnChonAnh, panelMainTextFieldQLKH, panelMainBtnQLKH, panelBtnLuuQLKH,
                 txtTimKiemKhachHang, cbHangKH);
         qlkh.getDataForTbDanhSachKhachHang();
+        tblDSKH.getSelectionModel().setSelectionInterval(0, 0);
     }
 
     @SuppressWarnings("unchecked")
@@ -792,6 +793,7 @@ public class FrmKH extends javax.swing.JPanel {
             ////////////////////////////////////////////////////////
             qlkh.unlockPanelBtnLuu();
             themMoi = false;
+            
         } else if (row >= 0 && col == tblDSKH.getColumnCount() - 1) { //an vao nut dk
 
             tblDSKH.setBtn2Selected(true);
@@ -813,6 +815,7 @@ public class FrmKH extends javax.swing.JPanel {
         if (btnLuu.isEnabled() && col != tblDSKH.getColumnCount() - 2) {
             qlkh.lockPanelBtnLuu();
         }
+        this.row= tblDSKH.getSelectedRow();
     }//GEN-LAST:event_tblDSKHMouseReleased
     public void resetBtnFix() {
         tblDSKH.setBtn2Selected(false);
@@ -822,6 +825,7 @@ public class FrmKH extends javax.swing.JPanel {
         tblDSKH.repaint();
     }
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
+           row= tblDSKH.getSelectedRow();
         qlkh.btnThemMoiKhachClicked();
 
     }//GEN-LAST:event_btnThemMoiActionPerformed
@@ -845,8 +849,9 @@ public class FrmKH extends javax.swing.JPanel {
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
         // setCusor2Btn(isAddingCus);
     }//GEN-LAST:event_formComponentResized
-
+    int row;
     private void btnHuyDangKiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyDangKiActionPerformed
+     
         qlkh.lockPanelBtnLuu();
         btnThemMoi.setEnabled(true);
         if (tblDSKH.getSelectedRow() >= 0) {
@@ -856,17 +861,17 @@ public class FrmKH extends javax.swing.JPanel {
         tblDSKH.setRowSelected(-1);
         tblDSKH.repaint();
         themMoi = false;
-        if (tblDSKH.getSelectedRow() > -1)
-            qlkh.dumpDataFromTblDSKHToFields();
+        if (row == -1) tblDSKH.getSelectionModel().setSelectionInterval(0, 0);
+        else  tblDSKH.getSelectionModel().setSelectionInterval(row, row);
     }//GEN-LAST:event_btnHuyDangKiActionPerformed
 
     private void txtTimKiemKhachHangKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKhachHangKeyReleased
-        qlkh.txtTimKiemKhachHangKeyReleased();
-        cbHangKH.setSelectedIndex(0);
+        qlkh.filterKH();
     }//GEN-LAST:event_txtTimKiemKhachHangKeyReleased
 
     private void cbHangKHItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbHangKHItemStateChanged
         qlkh.filterKH();
+        
     }//GEN-LAST:event_cbHangKHItemStateChanged
 
     private void txtDiaChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiaChiActionPerformed
@@ -882,7 +887,10 @@ public class FrmKH extends javax.swing.JPanel {
     }//GEN-LAST:event_txtNgaySinhActionPerformed
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
+        txtTimKiemKhachHang.setText("");
+        cbHangKH.setSelectedIndex(0);
         qlkh.getDataForTbDanhSachKhachHang();
+        tblDSKH.getSelectionModel().setSelectionInterval(0, 0);
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
     private void cbHangKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbHangKHActionPerformed

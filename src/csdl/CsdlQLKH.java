@@ -28,7 +28,7 @@ public class CsdlQLKH {
 
         FrmKH.dtblDSKH.setRowCount(0);
 
-        String selectAllKhachHang = "SELECT MAKH,HOTEN, SDT,GIOITINH,NGAYSINH,CMND,EMAIL,DIACHI,HANGKH FROM dbo.[KHACHHANG]";
+        String selectAllKhachHang = "SELECT MAKH,HOTEN, SDT,GIOITINH,NGAYSINH,CMND,EMAIL,DIACHI,HANGKH FROM dbo.[KHACHHANG] order by makh desc";
         Statement st;
         try {
             st = FrmMain.conn.createStatement();
@@ -119,19 +119,19 @@ public class CsdlQLKH {
         return false;
     }
 
-    public ResultSet selectKHByHang(String hangKH) {
-        String findById = " select MAKH,HOTEN, SDT,GIOITINH,NGAYSINH,CMND,EMAIL,DIACHI,HANGKH from  KHACHHANG WHERE HANGKH =?";
-        try {
-            PreparedStatement sql = conn.prepareStatement(findById);
-            sql.setObject(1, hangKH);
-            return sql.executeQuery();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(FrmMain.f, ex.getMessage());
-
-        }
-
-        return null;
-    }
+//    public ResultSet selectKHByHang(String hangKH) {
+//        String findById = " select MAKH,HOTEN, SDT,GIOITINH,NGAYSINH,CMND,EMAIL,DIACHI,HANGKH from  KHACHHANG WHERE HANGKH =? order by makh desc";
+//        try {
+//            PreparedStatement sql = conn.prepareStatement(findById);
+//            sql.setObject(1, hangKH);
+//            return sql.executeQuery();
+//        } catch (Exception ex) {
+//            JOptionPane.showMessageDialog(FrmMain.f, ex.getMessage());
+//
+//        }
+//
+//        return null;
+//    }
 
     public boolean tonTaiEmail(Frame f, String email) {
         String select = "SELECT MAKH FROM KHACHHANG WHERE EMAIL=?";
@@ -210,10 +210,13 @@ public class CsdlQLKH {
         return null;
     }
 
-    public ResultSet findByKey(Frame f, String key) {
-        String sql = "select makh,hoten,sdt,gioitinh,ngaysinh,cmnd,email,diachi from khachhang where hoten like N'%" + key + "%' or sdt like '%" + key + "%'";
+    public ResultSet findAndFilter(Frame f, String key,String hang) {
+        String sql;
+        if(hang != null)
+            sql = "select makh,hoten,sdt,gioitinh,ngaysinh,cmnd,email,diachi,hangkh from khachhang where (hoten like N'%" + key + "%' or sdt like '%" + key + "%') and hangkh=N'"+hang+"'order by makh desc";
+        else  
+            sql="select makh,hoten,sdt,gioitinh,ngaysinh,cmnd,email,diachi,hangkh from khachhang where hoten like N'%" + key + "%' or sdt like '%" + key + "%' order by makh desc";
         try {
-
             Statement st = conn.createStatement();
             return st.executeQuery(sql);
 

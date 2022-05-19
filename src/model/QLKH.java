@@ -22,6 +22,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import com.raven.swing.TableColumn;
 import com.raven.form.FrmDangKiDichVu;
+import com.raven.form.FrmPDK;
 import com.raven.main.FrmMain;
 import java.awt.FileDialog;
 import java.awt.Rectangle;
@@ -113,8 +114,7 @@ public class QLKH {
                 lbLinkHinhAnh.setText(imgURL);
                 DungChung.readImg(lbHinhAnhKhachQLKH, imgURL);
             } catch (Exception ex) {
-                lbHinhAnhKhachQLKH.removeAll();
-                lbLinkHinhAnh.setText("");
+                System.out.println(ex.toString());
             }
         }
     }
@@ -221,9 +221,11 @@ public class QLKH {
             FrmKH.themMoi = false;
             lockPanelBtnLuu();
             lamTrangTextKH();
-            tblDSKH.getSelectionModel().setSelectionInterval(tblDSKH.getRowCount() - 1, tblDSKH.getRowCount() - 1);
-            tblDSKH.scrollRectToVisible(new Rectangle(tblDSKH.getCellRect(tblDSKH.getRowCount() - 1, 0, true)));
+            
+            tblDSKH.scrollRectToVisible(new Rectangle(tblDSKH.getCellRect(0, 0, true)));
             JOptionPane.showMessageDialog(f, "Thêm mới khách thành công!");
+            tblDSKH.getSelectionModel().setSelectionInterval(0, 0);
+           
         } else {
             JOptionPane.showMessageDialog(f, "Thêm mới khách thất bại!");
         }
@@ -352,14 +354,18 @@ public class QLKH {
         }
     }
 
-    public void txtTimKiemKhachHangKeyReleased() {
-        String key = txtTimKiemKhachHang.getText().trim();
-        while (key.contains("  ")) {
-            key = key.replace("  ", " ");
-        }
-        lamTrangTextKH();
-        DungChung.fillTable(FrmKH.dtblDSKH, csdlQLKH.findByKey(f, key));
-    }
+//    public void txtTimKiemKhachHangKeyReleased() {
+//        String key = txtTimKiemKhachHang.getText().trim();
+//        while (key.contains("  ")) {
+//            key = key.replace("  ", " ");
+//        }
+//        lamTrangTextKH();
+//        if(cbHangKhachHang.getSelectedIndex()==0)
+//            DungChung.fillTable(FrmKH.dtblDSKH, csdlQLKH.findAndFilter(f, key,null));
+//        else DungChung.fillTable(FrmKH.dtblDSKH, csdlQLKH.findAndFilter(f, key,cbHangKhachHang.getSelectedItem().toString()));
+//        if(tblDSKH.getRowCount()>0)
+//        tblDSKH.getSelectionModel().setSelectionInterval(0, 0);
+//    }
 
     public void btnThemMoiKhachClicked() {
         lamTrangTextKH();
@@ -445,12 +451,21 @@ public class QLKH {
     }
 
     public void filterKH() {
-        txtTimKiemKhachHang.setText("");
-        if (cbHangKhachHang.getSelectedItem().toString().toLowerCase().equals("tất cả")) {
-            getDataForTbDanhSachKhachHang();
-            return;
+        //txtTimKiemKhachHang.setText("");
+//        if (cbHangKhachHang.getSelectedItem().toString().toLowerCase().equals("tất cả")) {
+//            getDataForTbDanhSachKhachHang();
+//            return;
+//        }
+        String key = txtTimKiemKhachHang.getText().trim();
+        while (key.contains("  ")) {
+            key = key.replace("  ", " ");
         }
-        DungChung.fillTable(FrmKH.dtblDSKH, csdlQLKH.selectKHByHang(cbHangKhachHang.getSelectedItem().toString()));
+        if(cbHangKhachHang.getSelectedIndex()==0)
+            DungChung.fillTable(FrmKH.dtblDSKH, csdlQLKH.findAndFilter(f, key,null));
+        else DungChung.fillTable(FrmKH.dtblDSKH, csdlQLKH.findAndFilter(f, key,cbHangKhachHang.getSelectedItem().toString()));
+        //DungChung.fillTable(FrmKH.dtblDSKH, csdlQLKH.findAndFilter(cbHangKhachHang.getSelectedItem().toString()));
+        if(tblDSKH.getRowCount()>0)
+        tblDSKH.getSelectionModel().setSelectionInterval(0, 0);
     }
 
     public void dangKiDichVu() {

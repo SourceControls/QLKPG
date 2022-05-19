@@ -48,7 +48,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DungChung {
 
-    public static void readImg(JLabel lbHinhAnh, String imgURL) {
+    public static void readImg(JLabel lbHinhAnh, String imgURL){
         int width = 190;
         int height = 255;
         if (imgURL.isEmpty() || imgURL == null) {
@@ -64,8 +64,14 @@ public class DungChung {
             }
             lbHinhAnh.setIcon(new ImageIcon(img.getScaledInstance(width, height, Image.SCALE_SMOOTH)));
 
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(FrmMain.f, ex.getMessage());
+        } catch (Exception ex) {
+            BufferedImage img;
+            try {
+                img = ImageIO.read(DungChung.class.getResource("/anhKH/default.png"));
+                lbHinhAnh.setIcon(new ImageIcon(img.getScaledInstance(width, height, Image.SCALE_SMOOTH)));
+            } catch (IOException ex1) {
+                Logger.getLogger(DungChung.class.getName()).log(Level.SEVERE, null, ex1);
+            }
         }
     }
 

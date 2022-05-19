@@ -57,6 +57,7 @@ public class FrmNV extends javax.swing.JPanel {
                  rbtnConLam, rbtnKhongPT, rbtnKhongQuanLi, rbtnLaPT, rbtnLaQuanLi, rbtnNghilam, lbLinkHinhAnh,
                 panelMainTextFieldQLNV, panelMainBtnQLNV, panelBtnLuuQLNV,btnCapTaiKhoan,btnKhoaTaiKhoan,btnMoKhoaTK);
         qlnv.getDataForTbDanhSachNV();
+        tblNV.getSelectionModel().setSelectionInterval(0, 0);
     }
 
     public void setEnableText(boolean a) {
@@ -741,8 +742,7 @@ public class FrmNV extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimKiemNhanvienActionPerformed
 
     private void txtTimKiemNhanvienKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemNhanvienKeyReleased
-        qlnv.txtTimKiemNhanVienKeyReleased();
-        cbLocNV.setSelectedIndex(0);
+        qlnv.filterNV();
     }//GEN-LAST:event_txtTimKiemNhanvienKeyReleased
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
@@ -818,7 +818,10 @@ public class FrmNV extends javax.swing.JPanel {
     }//GEN-LAST:event_tblNVMouseClicked
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
+        txtTimKiemNhanvien.setText("");
+        cbLocNV.setSelectedIndex(0);
         qlnv.getDataForTbDanhSachNV();
+        tblNV.getSelectionModel().setSelectionInterval(0,0);
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
     private void cbLocNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbLocNVActionPerformed
