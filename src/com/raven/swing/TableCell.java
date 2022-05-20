@@ -65,7 +65,9 @@ public class TableCell extends JLabel {
         }
         
         setBorder(new EmptyBorder(10, 10, 10, 10));
-        setForeground(new Color(80, 80, 80));
+        if(obj != null && (obj.toString().equals("SẮP HẾT HẠN") ||obj.toString().equals("SẮP TỚI HẠN NỘP TIỀN")))
+            setForeground(Color.red);
+        else setForeground(new Color(80, 80, 80));
         
     }
     public TableCell(Object obj, boolean selected, CellType cellType,int col) {
