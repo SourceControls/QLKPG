@@ -55,7 +55,7 @@ public class QLKH {
             System.out.println(maKH);
             ResultSet rs = csdlQLKH.insertVanTay(maKH);
             if (rs.next()) {
-                JOptionPane.showMessageDialog(f, "Thêm vân tay thành công, mã vân tay: " + rs.getString(1));
+                JOptionPane.showMessageDialog(f, "Thêm vân tay thành công,họ tên: " + (String) FrmKH.dtblDSKH.getValueAt(row, 1)+"\nMã vân tay: " + rs.getString(1));
             }
         } catch (SQLException ex) {
             Logger.getLogger(QLKH.class.getName()).log(Level.SEVERE, null, ex);

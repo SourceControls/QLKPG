@@ -703,13 +703,14 @@ public class FrmDangKiDichVu extends javax.swing.JDialog {
                 this.setVisible(false);
                 return;
             }
-            int result = JOptionPane.showConfirmDialog(this,"Đăng kí thành công, thanh toán ngay??", "Thông báo",
-               JOptionPane.YES_NO_OPTION,
-               JOptionPane.QUESTION_MESSAGE);
-            if (result == JOptionPane.YES_OPTION) {
-                FrmMain.formPDK.dkdv.thanhToan(true);
-               
-            }
+            
+//            int result = JOptionPane.showConfirmDialog(this,"Đăng kí thành công, thanh toán ngay??", "Thông báo",
+//               JOptionPane.YES_NO_OPTION,
+//               JOptionPane.QUESTION_MESSAGE);
+//            if (result == JOptionPane.YES_OPTION) {
+//                FrmMain.formPDK.dkdv.thanhToan(true);
+//               
+//            }
             DungChung.fillTable(com.raven.form.FrmPDK.dtblPDK, DKDV.csdlDKDV.selectAllPDK());
             FrmPDK.tbl.getSelectionModel().setSelectionInterval(0,0);
             this.setVisible(false);

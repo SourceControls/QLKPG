@@ -125,7 +125,7 @@
                               <Component id="jLabel27" linkSize="1" min="-2" pref="62" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="lbDichVuQLQVT" linkSize="2" min="-2" pref="128" max="-2" attributes="0"/>
-                              <EmptySpace pref="36" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel24" linkSize="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel25" linkSize="1" min="-2" max="-2" attributes="0"/>
@@ -136,10 +136,11 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
-                      <Component id="btnGiaNhieuVanTay" min="-2" pref="135" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-                      <Component id="btnGia1MauTin" min="-2" pref="135" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="226" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnGiaNhieuVanTay" min="-2" pref="135" max="-2" attributes="0"/>
+                          <Component id="btnGia1MauTin" min="-2" pref="135" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -166,12 +167,11 @@
                           <Component id="jlabelx" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lbNgayKetThucQLQVT" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnGiaNhieuVanTay" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="btnGia1MauTin" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="55" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="btnGiaNhieuVanTay" min="-2" pref="27" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnGia1MauTin" min="-2" pref="27" max="-2" attributes="0"/>
+                      <EmptySpace pref="18" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -777,7 +777,7 @@
                       <Component id="txtDenNgay" min="-2" pref="149" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnLocQLQVT" min="-2" pref="104" max="-2" attributes="0"/>
-                      <EmptySpace pref="175" max="32767" attributes="0"/>
+                      <EmptySpace pref="153" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

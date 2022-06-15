@@ -5,17 +5,11 @@
 package csdl;
 
 import java.awt.Frame;
-import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
-import java.sql.Statement;
 import com.raven.main.FrmMain;
 
 /**

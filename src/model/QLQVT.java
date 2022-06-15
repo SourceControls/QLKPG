@@ -59,7 +59,10 @@ public class QLQVT {
     public void gia1VanTay() {
         String maVT = JOptionPane.showInputDialog(this, "Nhập Mã Vân Tay");
 
-        if (maVT == null | maVT.isEmpty()) {
+        if (maVT == null) {
+            return;
+        }
+        if(maVT.isEmpty()){
             return;
         }
         int maVanTay = Integer.parseInt(maVT);
@@ -168,6 +171,7 @@ public class QLQVT {
     public void loc() {
         String tuNgay = txtTuNgay.getText();
         String denNgay = txtDenNgay.getText();
+        denNgay = DungChung.dateAdd(denNgay, 1);
         DungChung.fillTable(dtblLSQVT, csdlQLQVT.selectKhachQuetVanTayTrongKhoang(f, tuNgay, denNgay));
     }
 
