@@ -4,6 +4,7 @@
  */
 package PDF;
 
+import PDF.PDF;
 import java.awt.Color;
 import java.io.IOException;
 import java.sql.PreparedStatement;

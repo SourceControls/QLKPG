@@ -175,13 +175,18 @@ public class PDF {
         for (int i = 0; i < headers.get(0).size(); i++) {
             sumW += colW[i];
         }
+        String data = "";
         for (int i = headers.size() - 1; i >= 0; i--) {
             for (int j = 0; j < headers.get(i).size(); j++) {
                 //header
                 insertText(x, y + 20, headers.get(i).get(j).toString(), fontB, fontSizeN, Color.black, "");
                 //content
                 int xData = (int) (fontB.getStringWidth(headers.get(i).get(j).toString()) / 1000 * fontSizeN) + x + 20;
-                insertText(xData, y + 15, datas.get(i).get(j).toString(), fontN, fontSizeN, Color.black, "");
+                if( datas.get(i).get(j) != null)
+                    data = datas.get(i).get(j).toString();
+                else 
+                    data = "";
+                insertText(xData, y + 15,data, fontN, fontSizeN, Color.black, "");
                 //dot.............
                 int xDot = x + (int) (fontN.getStringWidth(headers.get(i).get(j).toString()) / 1000 * fontSizeN);
                 x += colW[j];

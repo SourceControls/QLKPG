@@ -4,6 +4,7 @@
  */
 package PDF;
 
+import PDF.PDF;
 import java.awt.Color;
 import java.io.IOException;
 import java.sql.PreparedStatement;
@@ -46,7 +47,7 @@ public class PhieuDangKiPDF {
         Vector<Vector> datas = getDatas();
 
         int[] colW = {270, 250};
-
+        System.out.println(headers.size() + " " + datas.size());
         pdf.drawTable(40, 550, 30, headers, datas, colW);
         //footer
         pdf.insertText(80, 650, "Chữ Kí Người Đăng Kí", pdf.fontB, pdf.fontSizeN, Color.black, "right");
