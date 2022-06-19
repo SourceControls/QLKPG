@@ -65,7 +65,7 @@ public class DoThongSoPDF extends javax.swing.JDialog {
             tuoi = String.valueOf(Integer.parseInt(java.time.LocalDate.now().toString().split("-")[0]) - Integer.parseInt(FrmDoThongSo.ngaySinh.split("-")[0]));
         }
         dtblTTKH.addRow(new Object[]{FrmDoThongSo.maKH, FrmDoThongSo.hoTen, FrmDoThongSo.gioiTinh, tuoi, ngayDo});
-        ResultSet rs = FrmDoThongSo.csdlDTS.selectThongSo(FrmDoThongSo.maKH);
+        ResultSet rs = FrmDoThongSo.csdlDTS.selectThongSo(FrmDoThongSo.maKH,ngayDo);
         if (rs.next()) {
             double chieuCao = rs.getDouble(3);
             double canNang = rs.getDouble(4);
@@ -1436,7 +1436,7 @@ public class DoThongSoPDF extends javax.swing.JDialog {
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Lịch Sử BMI 6 Lần Đo Gần Nhất");
+        jLabel9.setText("Lịch Sử BMI 6 Ngày Đo Gần Nhất");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);

@@ -463,7 +463,7 @@ public class FrmDangKiDichVu extends javax.swing.JDialog {
         jLabel36.setText("Khuyến mại");
 
         jLabel37.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jLabel37.setText("Só Ngày Sử Dụng");
+        jLabel37.setText("Số Ngày Sử Dụng");
 
         cbTiLeKM.setBackground(new java.awt.Color(240, 240, 240));
         cbTiLeKM.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0" }));
@@ -661,7 +661,7 @@ public class FrmDangKiDichVu extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtThueStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_txtThueStateChanged
-        if((int)txtThue.getValue() == -1){
+        if((int)txtThue.getValue() <= -1){
            txtThue.setValue(0);
            return;
         }

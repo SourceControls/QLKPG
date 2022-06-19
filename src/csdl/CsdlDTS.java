@@ -35,11 +35,13 @@ public class CsdlDTS {
         return null;
     }
 
-    public ResultSet selectThongSo(String maKH) {
-        String selectALLThongSo = "SELECT * FROM DOTHONGSOCOTHE WHERE MAKH = ?";
+    public ResultSet selectThongSo(String maKH, String ngay) {
+        String selectALLThongSo = "SELECT * FROM DOTHONGSOCOTHE WHERE MAKH = ? AND NGAY = ?";
         try {
             PreparedStatement sql = conn.prepareStatement(selectALLThongSo);
             sql.setObject(1, maKH);
+                        sql.setObject(2, ngay);
+
             ResultSet rs = sql.executeQuery();
             return rs;
         } catch (SQLException ex) {

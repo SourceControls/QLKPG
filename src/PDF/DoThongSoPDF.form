@@ -2234,7 +2234,7 @@
                   <Font name="Tahoma" size="24" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="L&#x1ecb;ch S&#x1eed; BMI 6 L&#x1ea7;n &#x110;o G&#x1ea7;n Nh&#x1ea5;t"/>
+                <Property name="text" type="java.lang.String" value="L&#x1ecb;ch S&#x1eed; BMI 6 Ng&#xe0;y &#x110;o G&#x1ea7;n Nh&#x1ea5;t"/>
               </Properties>
             </Component>
             <Component class="com.raven.chart.LineChart" name="lineChart">

@@ -697,7 +697,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="SansSerif" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="S&#xf3; Ng&#xe0;y S&#x1eed; D&#x1ee5;ng"/>
+                <Property name="text" type="java.lang.String" value="S&#x1ed1; Ng&#xe0;y S&#x1eed; D&#x1ee5;ng"/>
               </Properties>
             </Component>
             <Component class="com.raven.swing.ComboBoxSuggestion" name="cbTiLeKM">
